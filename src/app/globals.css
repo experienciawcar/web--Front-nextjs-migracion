@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* Design tokens del rediseño 2026.
+   Fuente: variables del archivo de Figma "Wcar Website - 2026" (7ndc02TbteM7uS512k3nKS).
+   El comentario de cada línea es el nombre original de la variable en Figma. */
+@theme {
+  --color-orange: #ec671b; /* Orange — naranja de marca 2026, NO el #FF7300 del sitio anterior */
+  --color-yellow: #fdb649; /* Yellow */
+  --color-blue: #00fefe; /* Blue */
+  --color-label-green: #c5f466; /* Label green */
+  --color-label-yellow: #fcff5c; /* Label yellow */
+  --color-dark-gray: #1e1e1e; /* Dark gray — texto principal */
+  --color-gray-1: #666c89; /* Gray 100 — texto secundario */
+  --color-gray-2: #90a3bf; /* Gray 200 — texto terciario */
+  --color-light-gray: #f6f7f9; /* Light gray — fondos de sección */
+
+  /* Escala tipográfica. Los estilos de texto de Figma usan Urbanist en dos pesos:
+     Medium (500) para cuerpo y Bold (700) para títulos y énfasis. */
+  --text-caption: 12px;
+  --text-caption--line-height: 22px;
+  --text-small: 14px; /* Descriptions/Small Description (bold y regular) */
+  --text-small--line-height: 22px;
+  --text-body: 16px; /* Descriptions/Description Regular 2 */
+  --text-body--line-height: 24px;
+  --text-heading-1: 22px; /* Headings/Heading Bold 1 */
+  --text-heading-1--line-height: 30px;
+  --text-subheadline-1: 36px; /* Subheadlines/Subheadline Bold 1 */
+  --text-subheadline-1--line-height: 44px;
+}
+
+/* `inline` es necesario para que la variable que inyecta next/font se resuelva
+   correctamente en las utilidades de Tailwind. */
+@theme inline {
+  --font-sans: var(--font-urbanist), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Ancho de contenido del diseño: 1192px centrados en el canvas de 1440px
+   (margen de 124px a cada lado) y 32px de margen lateral en el canvas mobile
+   de 393px. El padding de 2rem cubre el caso mobile y el max-width lo compensa
+   para que en desktop el contenido siga midiendo exactamente 1192px. */
+@utility container-wcar {
+  margin-inline: auto;
+  width: 100%;
+  max-width: calc(1192px + 4rem);
+  padding-inline: 2rem;
+}
+
+/* Animación de brillo de los botones (ver ButtonComponent): una franja de tres
+   rayas diagonales cruza el botón de izquierda a derecha y vuelve, cambiando de
+   escala y de opacidad por el camino. */
+@keyframes button-shine {
+  0% {
+    transform: translateX(-100%) scale(1);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateX(10%) scale(2);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateX(120%) scale(1);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translateX(10%) scale(2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateX(-100%) scale(1);
+    opacity: 0.3;
+  }
+}
+
+/* Pone el brillo en un elemento: aparece al pasar el mouse, o siempre si además
+   lleva la clase `is-shining`. El elemento tiene que recortar lo que se sale
+   (por eso `overflow: hidden`) y las franjas usan `--shine-color`, que cada
+   botón puede cambiar (cian por defecto). Con "reducir movimiento" no se pinta:
+   sin la animación quedaría una franja quieta pegada a la esquina. */
+@utility button-shine {
+  position: relative;
+  overflow: hidden;
+
+  &:hover::before,
+  &.is-shining::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 5em;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(
+      145deg,
+      transparent 0%,
+      transparent 40%,
+      var(--shine-color, var(--color-blue)) 40%,
+      var(--shine-color, var(--color-blue)) 43%,
+      transparent 43%,
+      transparent 46%,
+      var(--shine-color, var(--color-blue)) 46%,
+      var(--shine-color, var(--color-blue)) 49%,
+      transparent 49%,
+      transparent 52%,
+      var(--shine-color, var(--color-blue)) 52%,
+      var(--shine-color, var(--color-blue)) 55%,
+      transparent 55%
+    );
+    animation: button-shine 2s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:hover::before,
+    &.is-shining::before {
+      display: none;
+    }
+  }
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-dark-gray);
+}
