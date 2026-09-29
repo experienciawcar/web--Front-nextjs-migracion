@@ -13,7 +13,7 @@ const SOMBRA = "drop-shadow-[0px_7px_7px_rgba(211,218,226,0.4)]";
 function RatingCard({ stat }: { stat: RatingStat }) {
   return (
     <div
-      className={`flex flex-col justify-center gap-4 rounded-lg bg-white py-6 pr-[29px] pl-7 xl:h-[187px] xl:w-[200px] ${SOMBRA}`}
+      className={`reveal flex flex-col justify-center gap-4 rounded-lg bg-white py-6 pr-[29px] pl-7 xl:h-[187px] xl:w-[200px] ${SOMBRA}`}
     >
       <div className="flex flex-col justify-center">
         {/* 32px no está en la escala tipográfica del proyecto: en Figma es un
@@ -22,13 +22,13 @@ function RatingCard({ stat }: { stat: RatingStat }) {
         <StarRatingComponent value={stat.stars} className="mt-1" />
       </div>
 
-      <span aria-hidden className="border-t border-gray-2" />
+      <span aria-hidden className="border-t border-gray" />
 
       <p className="opacity-90">
         <span className="block text-[22px] leading-6 font-semibold text-dark-gray">
           {stat.source}
         </span>
-        <span className="block text-body leading-6 text-gray-1">{stat.detail}</span>
+        <span className="block text-body leading-6 text-gray-dark">{stat.detail}</span>
       </p>
     </div>
   );
@@ -54,14 +54,14 @@ function FigureCard({ stat }: { stat: FigureStat }) {
     // efectivos en vez de 24. Con `min-width` en lugar de `width` la tarjeta
     // crecía 18px y se despegaba del diseño.
     <div
-      className={`flex items-center rounded-lg bg-white px-6 py-4 xl:h-[82px] xl:w-[313px] xl:justify-center ${cifraLarga ? "gap-3" : "gap-4"} ${SOMBRA}`}
+      className={`reveal flex items-center rounded-lg bg-white px-6 py-4 xl:h-[82px] xl:w-[313px] xl:justify-center ${cifraLarga ? "gap-3" : "gap-4"} ${SOMBRA}`}
     >
       <p
         className={`shrink-0 leading-none font-bold whitespace-nowrap text-dark-gray ${cifraLarga ? "text-[28px] tracking-[-1px]" : "text-[32px]"}`}
       >
         {stat.value}
       </p>
-      <span aria-hidden className="self-stretch border-l border-gray-2" />
+      <span aria-hidden className="self-stretch border-l border-gray" />
       {/* Sin cortar: en el diseño cada renglón va en una línea. Con el ancho
           fijo de 313px del nodo, "Vehículos vendidos / y reservados en 3 años"
           se partía en cuatro renglones y estiraba la tarjeta. */}
@@ -69,7 +69,7 @@ function FigureCard({ stat }: { stat: FigureStat }) {
         <span className="block text-[20px] leading-6 font-semibold text-dark-gray">
           {stat.title}
         </span>
-        <span className="block text-body leading-6 text-gray-1">{stat.detail}</span>
+        <span className="block text-body leading-6 text-gray-dark">{stat.detail}</span>
       </p>
     </div>
   );
@@ -107,7 +107,7 @@ export default async function StatsComponent() {
           la página). */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-light-gray xl:right-[calc(50%-50vw)] xl:left-[303px]"
+        className="absolute inset-0 bg-gray-light xl:right-[calc(50%-50vw)] xl:left-[303px]"
       />
 
       <div className="relative px-8 py-16 xl:px-0 xl:pt-9 xl:pb-[59px] xl:pl-[435px]">
@@ -117,7 +117,7 @@ export default async function StatsComponent() {
         <SideLabelComponent
           regular="Nuestros"
           italic="Datos"
-          className="xl:absolute xl:top-9 xl:left-[111px]"
+          className="reveal reveal-left xl:absolute xl:top-9 xl:left-[111px]"
         />
 
         <div className="mt-6 xl:mt-0">
@@ -125,11 +125,12 @@ export default async function StatsComponent() {
             icon={iconCar}
             title="¿Qué estadísticas tenemos en el mercado?"
             titleAs="h3"
+            className="reveal"
           />
 
           {/* El texto abre comilla y no la cierra: así está en Figma.
               TODO: confirmar con diseño, parece un error de copy. */}
-          <p className="mt-3 max-w-[793px] text-body leading-[22px] font-medium text-gray-1 opacity-80 xl:ml-14">
+          <p className="reveal mt-3 max-w-[793px] text-body leading-[22px] font-medium text-gray-dark opacity-80 xl:ml-14">
             {`"Con años de experiencia en el sector, WCAR se ha posicionado como una plataforma de prestigio y confianza. Nuestro mayor aval es nuestro historial de éxito; a continuación, compartimos una muestra de ello`}
           </p>
 

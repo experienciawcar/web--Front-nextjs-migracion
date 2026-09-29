@@ -31,7 +31,7 @@ export default function NavLinkContentComponent({ item }: { item: NavLink }) {
         />
       )}
       <span>{item.label}</span>
-      {item.count !== undefined && <span className="text-gray-2">({item.count})</span>}
+      {item.count !== undefined && <span className="text-gray">({item.count})</span>}
     </>
   );
 }

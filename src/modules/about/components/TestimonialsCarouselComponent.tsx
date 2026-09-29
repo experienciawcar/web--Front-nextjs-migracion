@@ -32,7 +32,7 @@ export default function TestimonialsCarouselComponent({ reviews }: { reviews: Re
   const [listRef, carousel] = useCarousel<HTMLUListElement>();
 
   return (
-    <div className="mt-8 xl:mt-0">
+    <div className="reveal mt-8 xl:mt-0">
       <ul
         ref={listRef}
         className={`-mr-8 flex snap-x snap-mandatory gap-[25px] overflow-x-auto pr-8 xl:mr-[calc(50%-50vw)] xl:ml-[429px] ${SIN_SCROLLBAR}`}
@@ -63,7 +63,7 @@ export default function TestimonialsCarouselComponent({ reviews }: { reviews: Re
               className="flex h-6 min-w-0 flex-1 items-center"
             >
               <span
-                className={`block w-full ${index === carousel.position ? "h-[3px] bg-gray-2" : "h-px bg-gray-2/30"}`}
+                className={`block w-full ${index === carousel.position ? "h-[3px] bg-gray" : "h-px bg-gray/30"}`}
               />
             </button>
           ))}

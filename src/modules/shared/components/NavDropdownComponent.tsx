@@ -12,12 +12,12 @@ type Placement = "bottom" | "side";
 
 /** Mismo estilo que los enlaces sueltos del navbar (ver NavbarComponent). */
 const TRIGGER_CLASS =
-  "flex items-center whitespace-nowrap text-small font-bold text-gray-1 transition-colors hover:text-orange";
+  "flex items-center whitespace-nowrap text-small font-bold text-gray-dark transition-colors hover:text-orange";
 
 /** El fondo al pasar el ratón lo pone la fila (el `<li>`), no el enlace: así
  *  cubre también el chevron de las filas con submenú. */
 const ROW_CLASS =
-  "flex flex-1 items-center gap-2 whitespace-nowrap px-4 py-3 text-small font-medium text-gray-1 transition-colors hover:text-orange";
+  "flex flex-1 items-center gap-2 whitespace-nowrap px-4 py-3 text-small font-medium text-gray-dark transition-colors hover:text-orange";
 const ROW_HOVER_BG = "hover:bg-orange/10";
 
 /**
@@ -163,7 +163,7 @@ export default function NavDropdownComponent({
         hidden={!isOpen}
         className={`absolute z-50 ${isSide ? "top-0 left-full pl-1" : "top-full left-0 pt-3"}`}
       >
-        <ul className="min-w-[220px] rounded-lg border border-light-gray bg-white py-2 shadow-lg">
+        <ul className="min-w-[220px] rounded-lg border border-gray-light bg-white py-2 shadow-lg">
           {item.children.map((child) =>
             child.children ? (
               <NavDropdownComponent

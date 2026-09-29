@@ -1,0 +1,16 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="804.32" height="642.503" viewBox="0 0 804.32 642.503" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Rectangle 4252" filter="url(#filter0_f_0_37)">
+<path d="M495.105 355.76L681.208 100L691.549 260.92C691.549 260.92 717.501 324.446 695.415 441.894C673.33 559.343 637.425 543.073 601.916 540.029C566.408 536.986 100 533.936 100 533.936L495.105 355.76Z" fill="url(#paint0_linear_0_37)"/>
+</g>
+<defs>
+<filter id="filter0_f_0_37" x="0" y="0" width="804.32" height="642.503" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_0_37"/>
+</filter>
+<linearGradient id="paint0_linear_0_37" x1="599.046" y1="463.243" x2="463.71" y2="297.006" gradientUnits="userSpaceOnUse">
+<stop stop-color="#CE39C5"/>
+<stop offset="1" stop-color="#5F3299" stop-opacity="0.6"/>
+</linearGradient>
+</defs>
+</svg>

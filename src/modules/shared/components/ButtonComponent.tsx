@@ -14,7 +14,7 @@ const VARIANTS: Record<Variant, string> = {
   tertiary: "w-[221px] justify-center border-orange bg-dark-gray text-white",
   // Las franjas del brillo son cian por defecto; sobre un botón cian no se
   // verían, así que ahí van naranjas.
-  cyan: "justify-center border-transparent bg-blue text-black [--shine-color:var(--color-orange)]",
+  cyan: "justify-center border-transparent bg-blue-neon text-black [--shine-color:var(--color-orange)]",
   black: "justify-center border-transparent bg-black text-white",
 };
 
@@ -32,6 +32,8 @@ type CommonProps = {
   size?: keyof typeof SIZES;
   /** Ícono a la derecha del texto (una caja de 32px con el glifo de 26px). */
   icon?: StaticImageData;
+  /** Clases de la caja del ícono, p. ej. `xl:hidden` para que solo se vea en mobile. */
+  iconClassName?: string;
   /** Sin borde: para las variantes que lo traen (`secondary`, `tertiary`). */
   withoutBorder?: boolean;
   /** Deja el brillo siempre activo, no solo al pasar el mouse. */
@@ -42,6 +44,8 @@ type CommonProps = {
 
 type LinkProps = CommonProps & {
   href: string;
+  /** Abre el enlace en otra pestaña (mapas, apps de navegación): con `rel="noopener noreferrer"`. */
+  newTab?: boolean;
   type?: never;
   disabled?: never;
   onClick?: never;
@@ -49,6 +53,7 @@ type LinkProps = CommonProps & {
 
 type NativeProps = CommonProps & {
   href?: undefined;
+  newTab?: never;
   type?: "button" | "submit";
   disabled?: boolean;
   onClick?: () => void;
@@ -86,9 +91,11 @@ export default function ButtonComponent({
   variant = "primary",
   size = "big",
   icon,
+  iconClassName = "",
   withoutBorder = false,
   shine = false,
   href,
+  newTab = false,
   type = "button",
   disabled,
   onClick,
@@ -112,7 +119,7 @@ export default function ButtonComponent({
       {children}
       {icon && (
         // La caja es de 32px pero el glifo mide 26: la caja define el espaciado.
-        <span className="flex size-8 shrink-0 items-center justify-center">
+        <span className={`flex size-8 shrink-0 items-center justify-center ${iconClassName}`}>
           <Image
             src={icon}
             alt=""
@@ -126,7 +133,7 @@ export default function ButtonComponent({
 
   if (href !== undefined) {
     return (
-      <AppLinkComponent href={href} className={classes}>
+      <AppLinkComponent href={href} target={newTab ? "_blank" : undefined} className={classes}>
         {content}
       </AppLinkComponent>
     );

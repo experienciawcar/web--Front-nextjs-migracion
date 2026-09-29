@@ -1,12 +1,12 @@
 import Image from "next/image";
 
+import logoSantander from "@/modules/shared/assets/hero/logo-santander.png";
+import logoWcarWhite from "@/modules/shared/assets/hero/logo-wcar-white.svg";
+import heroWatermark from "@/modules/shared/assets/hero/watermark.svg";
 import DiagonalLinesComponent from "@/modules/shared/components/DiagonalLinesComponent";
 
-import logoSantander from "../assets/hero/logo-santander.png";
 import logoWcarWhiteMobile from "../assets/hero/logo-wcar-white-mobile.svg";
-import logoWcarWhite from "../assets/hero/logo-wcar-white.svg";
 import heroShape from "../assets/hero/shape.svg";
-import heroWatermark from "../assets/hero/watermark.svg";
 
 /**
  * Gradiente del diseño, con su ángulo y paradas exactas. Solo hace falta en

@@ -10,7 +10,7 @@ import type { Sede, TeamMember } from "../types/team";
 import TeamCardComponent from "./TeamCardComponent";
 
 /** Naranja y gris azulado de los sliders del diseño, los mismos de CarouselDots. */
-const ACTIVO = "bg-[#ff8000]";
+const ACTIVO = "bg-orange";
 const INACTIVO = "bg-[#c7d1df]";
 
 /** Ancho de la columna de flechas en desktop: las pestañas y las rayas arrancan después. */
@@ -61,7 +61,7 @@ export default function TeamCarouselComponent({
   const shown = hasTabs ? members.filter((member) => member.sedeId === selectedId) : members;
 
   return (
-    <div className={hasTabs ? "mt-8" : "mt-10 xl:mt-12"}>
+    <div className={hasTabs ? "reveal mt-8" : "reveal mt-10 xl:mt-12"}>
       {hasTabs && (
         <div className="flex items-end">
           {/* Mide lo que la raya de las pestañas (2px) y centra las flechas
@@ -96,7 +96,7 @@ export default function TeamCarouselComponent({
                 >
                   <span className="block font-bold text-dark-gray">Sede</span>
                   <span
-                    className={`block font-medium italic ${active ? "text-dark-gray" : "text-gray-1"}`}
+                    className={`block font-medium italic ${active ? "text-dark-gray" : "text-gray-dark"}`}
                   >
                     wcar {sede.name}
                   </span>

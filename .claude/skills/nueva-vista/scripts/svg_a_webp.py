@@ -2,16 +2,24 @@
 """Convierte los SVG que exporta Figma con fotos PNG/JPEG incrustadas (en base64,
 de 1 a 30 MB) en WebP livianos, con el recorte EXACTO que hizo el diseñador.
 
-Dos modos:
+Tres modos:
 
   extraer   SVG de UNA foto (o varias capas de fotos apiladas): saca la foto
             original, le aplica el recorte del diseño y la guarda en WebP.
+  originales  TODAS las fotos incrustadas de cada SVG, enteras y sin recorte
+            (también las capas ocultas y las que no usa ningún patrón). Sirve
+            cuando la foto se va a recortar con CSS en otra proporción (el
+            marco del SVG es vertical y la tarjeta nueva es horizontal), o
+            cuando `extraer` dice "SIN FOTOS con patrón" o saca la foto
+            equivocada: en el sitio anterior `vitrina-wcar.svg` trae la foto
+            del café encima y la de la vitrina, oculta, debajo.
   renderizar  SVG COMPUESTO (fondo + foto + degradado + trazos): lo dibuja con
             Chrome, opcionalmente sin los <path> (logo y texto), y guarda el
             resultado en WebP.
 
 Uso:
   svg_a_webp.py extraer  a.svg b.svg ... --salida DIR [--ancho-max 1000] [--calidad 82] [--hoja]
+  svg_a_webp.py originales a.svg b.svg ... --salida DIR [--ancho-max 800] [--calidad 82] [--hoja]
   svg_a_webp.py renderizar marco.svg --salida panel.webp [--sin-trazos] [--escala 2]
 
 Cómo lee el recorte (ver la guía, sección "Imágenes"): cada capa es un
@@ -224,6 +232,49 @@ def extraer(rutas, salida, ancho_max, calidad, hoja):
         print(f"\nhoja de contacto para identificar las fotos: {hoja_png}")
 
 
+def originales(rutas, salida, ancho_max, calidad, hoja):
+    """Guarda cada imagen incrustada (base64) de los SVG, entera y sin recorte."""
+    os.makedirs(salida, exist_ok=True)
+    resultados = []
+    for ruta in rutas:
+        nombre = os.path.splitext(os.path.basename(ruta))[0]
+        texto = open(ruta, encoding="utf8").read()
+        fotos = list(re.finditer(
+            r'<image\b[^>]*?(?:xlink:)?href="data:image/(?:png|jpe?g|webp);base64,([A-Za-z0-9+/=]+)"', texto))
+        print(f"== {os.path.basename(ruta)}  ({os.path.getsize(ruta) / 1048576:.1f} MB, {len(fotos)} foto(s) incrustada(s))")
+        if not fotos:
+            print("   no trae fotos incrustadas: si es un marco compuesto, usar `renderizar`.")
+        for n, m in enumerate(fotos):
+            foto = ImageOps.exif_transpose(Image.open(io.BytesIO(base64.b64decode(m.group(1))))).convert("RGB")
+            w, h = foto.size
+            if w > ancho_max:
+                foto = foto.resize((ancho_max, round(h * ancho_max / w)), Image.LANCZOS)
+            destino = os.path.join(salida, f"{nombre}-{n}.webp")
+            foto.save(destino, "WEBP", quality=calidad, method=6)
+            print(f"   -> {os.path.basename(destino)}  {foto.width}x{foto.height}  "
+                  f"{os.path.getsize(destino) / 1024:.0f} KB   (original {w}x{h})")
+            resultados.append(destino)
+    if hoja and resultados:
+        hoja_contacto(resultados, os.path.join(salida, "hoja-contacto.jpg"))
+
+
+def hoja_contacto(rutas, destino):
+    """Hoja de contacto con el nombre de cada foto, para identificarlas a ojo."""
+    from PIL import ImageDraw
+    cols, cw, ch = 4, 430, 340
+    filas = (len(rutas) + cols - 1) // cols
+    sheet = Image.new("RGB", (cols * cw, filas * (ch + 20)), (240, 240, 240))
+    d = ImageDraw.Draw(sheet)
+    for n, r in enumerate(rutas):
+        im = Image.open(r).convert("RGB")
+        im.thumbnail((cw - 10, ch - 10))
+        x, y = (n % cols) * cw + 5, (n // cols) * (ch + 20) + 20
+        d.text((x, y - 16), f"{os.path.basename(r)} {im.width}x{im.height}", fill=(0, 0, 0))
+        sheet.paste(im, (x, y))
+    sheet.save(destino, quality=80)
+    print(f"\nhoja de contacto para identificar las fotos: {destino}")
+
+
 def renderizar(ruta, salida, sin_trazos, escala):
     texto = open(ruta, encoding="utf8").read()
     W, H = (float(v) for v in re.search(r'<svg[^>]*width="([\d.]+)"[^>]*height="([\d.]+)"', texto).groups())
@@ -256,6 +307,12 @@ def main():
     e.add_argument("--ancho-max", type=int, default=1000, help="no se amplía nunca; solo se reduce (1000 por defecto)")
     e.add_argument("--calidad", type=int, default=82)
     e.add_argument("--hoja", action="store_true", help="genera hoja-contacto.jpg para identificar las fotos")
+    o = sub.add_parser("originales")
+    o.add_argument("svg", nargs="+")
+    o.add_argument("--salida", required=True)
+    o.add_argument("--ancho-max", type=int, default=800, help="no se amplía nunca; solo se reduce (800 por defecto)")
+    o.add_argument("--calidad", type=int, default=82)
+    o.add_argument("--hoja", action="store_true", help="genera hoja-contacto.jpg para identificar las fotos")
     r = sub.add_parser("renderizar")
     r.add_argument("svg")
     r.add_argument("--salida", required=True)
@@ -264,6 +321,8 @@ def main():
     a = ap.parse_args()
     if a.modo == "extraer":
         extraer(a.svg, a.salida, a.ancho_max, a.calidad, a.hoja)
+    elif a.modo == "originales":
+        originales(a.svg, a.salida, a.ancho_max, a.calidad, a.hoja)
     else:
         renderizar(a.svg, a.salida, a.sin_trazos, a.escala)
 

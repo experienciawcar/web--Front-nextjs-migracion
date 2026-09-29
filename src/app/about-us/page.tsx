@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import AboutHeroComponent from "@/modules/about/components/AboutHeroComponent";
-import AlliesComponent from "@/modules/about/components/AlliesComponent";
+import AlliesComponent from "@/modules/shared/components/AlliesComponent";
 import CompanyIntroComponent from "@/modules/about/components/CompanyIntroComponent";
 import FootprintComponent from "@/modules/about/components/FootprintComponent";
 import FounderComponent from "@/modules/about/components/FounderComponent";

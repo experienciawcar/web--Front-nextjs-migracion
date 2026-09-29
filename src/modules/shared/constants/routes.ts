@@ -28,8 +28,34 @@ export const ROUTES = {
   workshop: "/taller",
   blog: "/blog",
   contact: "/contacto",
+  /** Formulario "Contactar a la empresa" de Contacto (URL del sitio anterior). */
+  contactCompany: "/contacta-a-la-empresa",
+  /** "Contacta un asesor" / cotizar la venta de un vehículo (URL del sitio anterior). */
+  quote: "/cotizar",
   signIn: "/sign-in",
 } as const;
+
+/** Texto en minúsculas, sin tildes y con guiones ("Camioneta - SUV" → "camioneta-suv"). */
+function slugify(text: string): string {
+  return text
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+/**
+ * Enlace al detalle de un vehículo: `/compra-tu-carro/<tipo>/<nombre>/<id>`, la
+ * misma estructura del sitio anterior (que armaba `tipo/nombre/id` con guiones y
+ * minúsculas, sin quitar tildes ni símbolos: aquí sí, para no romper la URL).
+ * Solo el `id` cuenta para encontrar el vehículo.
+ * TODO: la página de detalle todavía no existe en este proyecto; hasta entonces
+ * el enlace da 404.
+ */
+export function vehicleHref({ id, type, name }: { id: number; type: string; name: string }): string {
+  return `${ROUTES.buyCar}/${slugify(type) || "vehiculo"}/${slugify(name) || "vehiculo"}/${id}`;
+}
 
 /** Un href absoluto va como <a>: next/link no tiene nada que precargar fuera. */
 export function isExternalHref(href: string): boolean {

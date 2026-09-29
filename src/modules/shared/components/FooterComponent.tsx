@@ -139,14 +139,14 @@ const SEDES = [
  */
 export default function FooterComponent() {
   return (
-    <footer className="bg-light-gray pt-10 xl:pt-16">
+    <footer className="bg-gray-light pt-10 xl:pt-16">
       <div className="container-wcar">
         <div className="flex flex-col gap-12 xl:flex-row xl:justify-between xl:gap-[100px]">
           {/* Marca, redes y contacto. */}
           <div className="order-last flex flex-col items-center gap-4 xl:order-none xl:flex-1 xl:items-start">
             <div className="flex flex-col items-center gap-6 xl:mt-[11px] xl:items-start">
               <Image src={logoWcar} alt="WCAR" className="h-11 w-[136px]" />
-              <p className="text-body font-medium text-gray-1">{SLOGAN}</p>
+              <p className="text-body font-medium text-gray-dark">{SLOGAN}</p>
             </div>
 
             <div className="flex items-center gap-4">
@@ -159,7 +159,7 @@ export default function FooterComponent() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${social.label} de WCAR`}
-                      className="flex size-[38px] items-center justify-center rounded-full border border-gray-2 transition-colors hover:border-orange"
+                      className="flex size-[38px] items-center justify-center rounded-full border border-gray transition-colors hover:border-orange"
                     >
                       <Image src={social.icon} alt="" aria-hidden className={social.iconClass} />
                     </a>
@@ -197,10 +197,10 @@ export default function FooterComponent() {
           contenido en desktop, como en el sitio anterior. */}
       <section
         aria-labelledby="sedes-titulo"
-        className="mt-12 border-y border-gray-2 xl:mt-[59px] xl:border-0"
+        className="mt-12 border-y border-gray xl:mt-[59px] xl:border-0"
       >
         <div className="container-wcar">
-          <div className="py-6 xl:border-y xl:border-gray-2">
+          <div className="py-6 xl:border-y xl:border-gray">
             <div className="flex flex-col items-center xl:items-start">
               <span aria-hidden className="block h-1 w-20 bg-orange" />
               <h2
@@ -231,9 +231,9 @@ export default function FooterComponent() {
                     className="h-[90px] w-[110px] shrink-0 rounded-[10px] object-cover"
                   />
                   <div className="flex flex-col gap-2">
-                    <p className="text-small leading-5 font-bold text-gray-1">{sede.title}</p>
-                    <p className="text-caption leading-[19px] font-bold text-gray-2">{sede.phone}</p>
-                    <p className="text-caption leading-[19px] font-medium text-gray-1">
+                    <p className="text-small leading-5 font-bold text-gray-dark">{sede.title}</p>
+                    <p className="text-caption leading-[19px] font-bold text-gray">{sede.phone}</p>
+                    <p className="text-caption leading-[19px] font-medium text-gray-dark">
                       {sede.address}
                     </p>
                   </div>
@@ -267,7 +267,7 @@ export default function FooterComponent() {
                 <Link
                   href={link.href}
                   rel="nofollow"
-                  className="block text-small font-medium text-gray-2 transition-colors hover:text-orange xl:text-gray-1"
+                  className="block text-small font-medium text-gray transition-colors hover:text-orange xl:text-gray-dark"
                 >
                   {link.label}
                 </Link>

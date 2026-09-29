@@ -23,17 +23,15 @@ function Identidad({ className = "" }: { className?: string }) {
       <div className="flex items-center gap-3">
         <Image src={isotipoWcar} alt="" aria-hidden className="h-[26.63px] w-6" />
         {/* Separador: gris 200 al 30%. */}
-        <span aria-hidden className="h-8 w-[2px] bg-gray-2/30" />
-        <span className="text-small font-bold whitespace-nowrap text-gray-1">
+        <span aria-hidden className="h-8 w-[2px] bg-gray/30" />
+        <span className="text-small font-bold whitespace-nowrap text-gray-dark">
           Ceo de la empresa
         </span>
       </div>
 
       <p className="mt-6 text-subheadline-1 xl:mt-8">
         <span className="block font-bold text-dark-gray">Walther Carvajal</span>
-        {/* El naranja de este renglón es #FF8000, el mismo hex suelto que usan
-            las líneas de antetítulo, no el naranja de marca del sistema. */}
-        <span className="block italic text-[#ff8000]">Fundador de wcar</span>
+        <span className="block italic text-orange">Fundador de wcar</span>
       </p>
     </div>
   );
@@ -46,7 +44,7 @@ function Identidad({ className = "" }: { className?: string }) {
  */
 function FotoFundador() {
   return (
-    <div className="relative aspect-[568/593] w-full shrink-0 xl:h-[593px] xl:w-[568px]">
+    <div className="reveal reveal-left relative aspect-[568/593] w-full shrink-0 xl:h-[593px] xl:w-[568px]">
       <Image
         src="/assets/about-us/fundador/walther.jpg"
         alt="Walther Carvajal, fundador de WCAR"
@@ -60,7 +58,7 @@ function FotoFundador() {
       />
       <span
         aria-hidden
-        className="absolute right-0 bottom-0 size-[71px] bg-[#ff8000] xl:size-[124px]"
+        className="absolute right-0 bottom-0 size-[71px] bg-orange xl:size-[124px]"
       />
     </div>
   );
@@ -90,18 +88,18 @@ export default function FounderComponent() {
             contenedor al borde de la ventana. */}
         <div
           aria-hidden
-          className="absolute inset-y-0 right-[calc(50%-50vw)] left-[calc(50%-50vw)] bg-light-gray xl:top-[124px] xl:left-8"
+          className="absolute inset-y-0 right-[calc(50%-50vw)] left-[calc(50%-50vw)] bg-gray-light xl:top-[124px] xl:left-8"
         />
 
         <div className="relative flex flex-col pt-[35px] pb-[43px] xl:flex-row xl:pt-0 xl:pb-0">
           <FotoFundador />
 
-          <Identidad className="mt-6 text-center xl:mt-0 xl:ml-[99px] xl:pt-[171px] xl:text-left" />
+          <Identidad className="reveal mt-6 text-center xl:mt-0 xl:ml-[99px] xl:pt-[171px] xl:text-left" />
 
           {/* El bloque de identidad y el párrafo van separados porque en
               desktop comparten columna y en mobile no: el párrafo va alineado
               a la izquierda aunque el nombre esté centrado. */}
-          <p className="mt-12 whitespace-pre-wrap text-body font-medium text-gray-1 xl:absolute xl:top-[355px] xl:left-[667px] xl:mt-0 xl:w-[431px]">
+          <p className="reveal mt-12 whitespace-pre-wrap text-body font-medium text-gray-dark xl:absolute xl:top-[355px] xl:left-[667px] xl:mt-0 xl:w-[431px]">
             {BIOGRAFIA}
           </p>
 

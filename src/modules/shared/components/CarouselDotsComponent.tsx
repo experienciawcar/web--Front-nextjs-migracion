@@ -26,7 +26,7 @@ export default function CarouselDotsComponent({
         <span
           key={i}
           style={{ width }}
-          className={`h-px ${i === active ? "bg-[#ff8000]" : "bg-[#c7d1df]"}`}
+          className={`h-px ${i === active ? "bg-orange" : "bg-[#c7d1df]"}`}
         />
       ))}
     </div>

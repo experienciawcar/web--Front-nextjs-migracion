@@ -45,9 +45,9 @@ export default function TestimonialCardComponent({ review }: { review: Review })
         />
       </div>
 
-      <p className="mt-4 line-clamp-4 text-body font-medium text-gray-1">{review.text}</p>
+      <p className="mt-4 line-clamp-4 text-body font-medium text-gray-dark">{review.text}</p>
 
-      <time dateTime={review.dateIso} className="mt-auto pt-4 text-small font-medium text-gray-2">
+      <time dateTime={review.dateIso} className="mt-auto pt-4 text-small font-medium text-gray">
         {review.dateLabel}
       </time>
     </li>

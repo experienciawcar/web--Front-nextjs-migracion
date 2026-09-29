@@ -11,9 +11,9 @@ import NavLinkContentComponent from "./NavLinkContentComponent";
 
 /** Primer nivel más grande y con peso; los niveles de adentro, más discretos. */
 const ROW_CLASS: Record<"top" | "nested", string> = {
-  top: "flex flex-1 items-center gap-2 py-3 text-body font-bold text-gray-1 transition-colors hover:text-orange",
+  top: "flex flex-1 items-center gap-2 py-3 text-body font-bold text-gray-dark transition-colors hover:text-orange",
   nested:
-    "flex flex-1 items-center gap-2 py-2.5 text-small font-medium text-gray-1 transition-colors hover:text-orange",
+    "flex flex-1 items-center gap-2 py-2.5 text-small font-medium text-gray-dark transition-colors hover:text-orange",
 };
 
 /**
@@ -84,7 +84,7 @@ function MobileNavItem({
         )}
       </div>
 
-      <ul id={panelId} hidden={!isOpen} className="ml-2 border-l border-light-gray pl-4">
+      <ul id={panelId} hidden={!isOpen} className="ml-2 border-l border-gray-light pl-4">
         {item.children.map((child) => (
           <MobileNavItem key={child.label} item={child} level="nested" onNavigate={onNavigate} />
         ))}
@@ -125,7 +125,7 @@ export default function MobileMenuComponent({ items }: { items: NavLink[] }) {
       {isOpen && (
         <div
           id="menu-mobile"
-          className="absolute inset-x-0 top-full z-50 max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-light-gray bg-white shadow-lg"
+          className="absolute inset-x-0 top-full z-50 max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-gray-light bg-white shadow-lg"
         >
           <ul className="container-wcar flex flex-col py-2">
             {items.map((item) => (

@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import zigzagDark from "../assets/icons/zigzag-dark.svg";
+import zigzagWhite from "../assets/icons/zigzag-white.svg";
 import zigzagYellow from "../assets/icons/zigzag-yellow.svg";
 
 /**
@@ -18,12 +19,22 @@ import zigzagYellow from "../assets/icons/zigzag-yellow.svg";
  * Ojo: en los metadatos de Figma la `y` de estas instancias corresponde al
  * borde INFERIOR, no al superior. Las posiciones de aquí salen de medir el
  * render, no de esos metadatos.
+ *
+ * `tone="light"`: la línea de la izquierda en blanco en vez de oscura, para
+ * fondos oscuros (el panel "Razones para comprar" del home en mobile, Figma
+ * 701:55054, trae la misma caja de 36x112 con el blanco a la izquierda).
  */
-export default function ZigZagComponent({ className = "" }: { className?: string }) {
+export default function ZigZagComponent({
+  className = "",
+  tone = "dark",
+}: {
+  className?: string;
+  tone?: "dark" | "light";
+}) {
   return (
     <div aria-hidden className={`relative h-[112px] w-9 ${className}`}>
       <Image
-        src={zigzagDark}
+        src={tone === "light" ? zigzagWhite : zigzagDark}
         alt=""
         className="absolute top-[57px] left-[8px] h-[15.31px] w-[107.47px] max-w-none -translate-x-1/2 -translate-y-1/2 rotate-90"
       />

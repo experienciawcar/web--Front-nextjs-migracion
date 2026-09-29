@@ -29,9 +29,9 @@ const LINEA = "border-black/[0.06]";
  */
 function ContactCard() {
   return (
-    <div className="mt-12 bg-dark-gray px-6 pt-[51px] pb-[54px] xl:absolute xl:top-[243px] xl:left-[806px] xl:mt-0 xl:w-[404px] xl:px-[60px]">
+    <div className="reveal mt-12 bg-dark-gray px-6 pt-[51px] pb-[54px] xl:absolute xl:top-[243px] xl:left-[806px] xl:mt-0 xl:w-[404px] xl:px-[60px]">
       <div className="flex items-center gap-4">
-        <span aria-hidden className="h-px w-12 shrink-0 bg-blue" />
+        <span aria-hidden className="h-px w-12 shrink-0 bg-blue-neon" />
         <span className="text-small font-bold text-white">Hablemos</span>
       </div>
 
@@ -92,7 +92,7 @@ export default function ValuesComponent() {
             borde de la ventana, o sea 100vw - 908px hasta 1440 y, pasado eso,
             como el lienzo va centrado, 50vw - 188px. El fondo oscuro se ve solo
             mientras carga. */}
-        <div className="absolute inset-y-0 hidden bg-dark-gray xl:right-[calc(50%-50vw)] xl:left-[908px] xl:block">
+        <div className="reveal reveal-fade absolute inset-y-0 hidden bg-dark-gray xl:right-[calc(50%-50vw)] xl:left-[908px] xl:block">
           <Image
             src="/assets/about-us/valores/auto-suv-atardecer.webp"
             alt="Un SUV visto de frente durante el atardecer"
@@ -106,14 +106,14 @@ export default function ValuesComponent() {
             en absoluto en desktop, mide contra el lienzo de 1440 y no contra
             este contenedor (que tiene 32px de padding). */}
         <div className="container-wcar py-16 xl:pt-[124px] xl:pb-[100px]">
-          <div className="flex flex-col gap-4">
-            <span aria-hidden className="h-[4px] w-[77px] bg-[#ff8000]" />
+          <div className="reveal flex flex-col gap-4">
+            <span aria-hidden className="h-[4px] w-[77px] bg-orange" />
             <h2 id="values-title" className="text-subheadline-1 font-bold text-dark-gray">
               Nuestros <span className="font-normal text-orange italic">valores</span>
             </h2>
           </div>
 
-          <div className={`mt-8 border-t-[3px] xl:mt-[23px] xl:w-[582px] ${LINEA}`}>
+          <div className={`reveal mt-8 border-t-[3px] xl:mt-[23px] xl:w-[582px] ${LINEA}`}>
             {COMPANY_VALUES.map((value, index) => (
               <details key={value.id} name="company-values" open={index === 0} className="group">
                 <summary
@@ -134,7 +134,7 @@ export default function ValuesComponent() {
                   />
                 </summary>
                 <p
-                  className={`border-b-[3px] px-6 py-6 text-body font-medium text-gray-1 ${LINEA}`}
+                  className={`border-b-[3px] px-6 py-6 text-body font-medium text-gray-dark ${LINEA}`}
                 >
                   {value.description}
                 </p>

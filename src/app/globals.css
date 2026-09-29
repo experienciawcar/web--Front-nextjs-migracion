@@ -1,18 +1,21 @@
 @import "tailwindcss";
 
 /* Design tokens del rediseño 2026.
-   Fuente: variables del archivo de Figma "Wcar Website - 2026" (7ndc02TbteM7uS512k3nKS).
-   El comentario de cada línea es el nombre original de la variable en Figma. */
+   Colores: las variables que pasó diseño (2026-09-26), con sus nombres. Antes
+   eran las del archivo de Figma "Wcar Website - 2026" (7ndc02TbteM7uS512k3nKS),
+   con otro naranja (#EC671B) y otros nombres de gris y azul. */
 @theme {
-  --color-orange: #ec671b; /* Orange — naranja de marca 2026, NO el #FF7300 del sitio anterior */
+  --color-orange: #ff8000; /* Orange — naranja de marca: botones, rayas, marcas y cursivas */
+  --color-orange-dark: #d65a1e; /* Orange dark */
   --color-yellow: #fdb649; /* Yellow */
-  --color-blue: #00fefe; /* Blue */
+  --color-blue-neon: #00fefe; /* Blue neon */
+  --color-dark-gray: #1e1e1e; /* Dark gray — texto principal */
+  --color-gray-dark: #666c89; /* Gray dark — texto secundario */
+  --color-gray: #90a3bf; /* Gray — texto terciario */
+  --color-gray-light: #f6f7f9; /* Gray light — fondos de sección */
+  /* No están en las variables de diseño pero se usan: los "label" de las etiquetas. */
   --color-label-green: #c5f466; /* Label green */
   --color-label-yellow: #fcff5c; /* Label yellow */
-  --color-dark-gray: #1e1e1e; /* Dark gray — texto principal */
-  --color-gray-1: #666c89; /* Gray 100 — texto secundario */
-  --color-gray-2: #90a3bf; /* Gray 200 — texto terciario */
-  --color-light-gray: #f6f7f9; /* Light gray — fondos de sección */
 
   /* Escala tipográfica. Los estilos de texto de Figma usan Urbanist en dos pesos:
      Medium (500) para cuerpo y Bold (700) para títulos y énfasis. */
@@ -43,6 +46,102 @@
   width: 100%;
   max-width: calc(1192px + 4rem);
   padding-inline: 2rem;
+}
+
+/* Escala a la que se dibuja el lienzo de 1440 del hero en tablet (768 a 1279): el
+   ancho de la ventana entre 1440. `tan(atan2(a, b))` da el cociente de dos
+   longitudes como número (un `calc(100vw / 1440px)` todavía no lo entienden todos
+   los navegadores). Lo usan `HeroCarouselComponent` y `HeroSearchSectionComponent`. */
+:root {
+  --hero-s: 1;
+}
+/* Respaldo para navegadores que no entienden `tan(atan2())` (y mientras no carga el
+   JS de `HeroCarouselComponent`, que la fija exacta): escalones de 32 px, siempre por
+   ENCIMA del ancho real (el lienzo sobra un poco por la derecha, nunca falta). */
+@media (min-width: 768px) {
+  :root {
+    --hero-s: 0.5556;
+  }
+}
+@media (min-width: 800px) {
+  :root {
+    --hero-s: 0.5778;
+  }
+}
+@media (min-width: 832px) {
+  :root {
+    --hero-s: 0.6000;
+  }
+}
+@media (min-width: 864px) {
+  :root {
+    --hero-s: 0.6222;
+  }
+}
+@media (min-width: 896px) {
+  :root {
+    --hero-s: 0.6444;
+  }
+}
+@media (min-width: 928px) {
+  :root {
+    --hero-s: 0.6667;
+  }
+}
+@media (min-width: 960px) {
+  :root {
+    --hero-s: 0.6889;
+  }
+}
+@media (min-width: 992px) {
+  :root {
+    --hero-s: 0.7111;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --hero-s: 0.7333;
+  }
+}
+@media (min-width: 1056px) {
+  :root {
+    --hero-s: 0.7556;
+  }
+}
+@media (min-width: 1088px) {
+  :root {
+    --hero-s: 0.7778;
+  }
+}
+@media (min-width: 1120px) {
+  :root {
+    --hero-s: 0.8000;
+  }
+}
+@media (min-width: 1152px) {
+  :root {
+    --hero-s: 0.8222;
+  }
+}
+@media (min-width: 1184px) {
+  :root {
+    --hero-s: 0.8444;
+  }
+}
+@media (min-width: 1216px) {
+  :root {
+    --hero-s: 0.8667;
+  }
+}
+@media (min-width: 1248px) {
+  :root {
+    --hero-s: 0.8889;
+  }
+}
+@supports (width: calc(1px * tan(atan2(100vw, 1440px)))) {
+  :root {
+    --hero-s: tan(atan2(100vw, 1440px));
+  }
 }
 
 /* Animación de brillo de los botones (ver ButtonComponent): una franja de tres
@@ -92,16 +191,16 @@
       145deg,
       transparent 0%,
       transparent 40%,
-      var(--shine-color, var(--color-blue)) 40%,
-      var(--shine-color, var(--color-blue)) 43%,
+      var(--shine-color, var(--color-blue-neon)) 40%,
+      var(--shine-color, var(--color-blue-neon)) 43%,
       transparent 43%,
       transparent 46%,
-      var(--shine-color, var(--color-blue)) 46%,
-      var(--shine-color, var(--color-blue)) 49%,
+      var(--shine-color, var(--color-blue-neon)) 46%,
+      var(--shine-color, var(--color-blue-neon)) 49%,
       transparent 49%,
       transparent 52%,
-      var(--shine-color, var(--color-blue)) 52%,
-      var(--shine-color, var(--color-blue)) 55%,
+      var(--shine-color, var(--color-blue-neon)) 52%,
+      var(--shine-color, var(--color-blue-neon)) 55%,
       transparent 55%
     );
     animation: button-shine 2s linear infinite;
@@ -115,7 +214,60 @@
   }
 }
 
+/* Aparición al hacer scroll (ver `useScrollReveal`). Lo que lleva la clase
+   `reveal` entra con un fundido y un ascenso corto la primera vez que se ve.
+   Modificadores, siempre junto a `reveal`:
+   - `reveal-left` / `reveal-right`: entra de costado (etiquetas sobre la barra
+     negra, fotos de un lado). Solo donde el borde de la pantalla quede a más de
+     2rem, o dentro de un contenedor con `overflow-x-clip`: si no, desborda.
+   - `reveal-fade`: solo fundido, para lo que no debe moverse (paneles, fotos de
+     fondo).
+
+   Se oculta ÚNICAMENTE cuando el hook ya está en marcha (`data-reveal-ready` en
+   <html>, que él pone después de marcar lo que ya se veía): sin JavaScript, antes
+   de hidratar o si algo falla, la página se ve completa y sin parpadeo. El estado
+   visible es la ausencia de reglas, así que al terminar el elemento queda como lo
+   dejó su propio CSS, sin `transform` ni contexto de apilamiento de sobra. Con
+   "reducir movimiento" y al imprimir no se oculta nada.
+
+   Va sin `@layer` a propósito: en el estado oculto tiene que ganarle a
+   utilidades como `opacity-90`. Por lo mismo, no lo pongas en un elemento con
+   `transform` o `transition` propios (skew, `transition-*`): usa su contenedor. */
+.reveal-left {
+  --reveal-x: -2rem;
+  --reveal-y: 0;
+}
+
+.reveal-right {
+  --reveal-x: 2rem;
+  --reveal-y: 0;
+}
+
+.reveal-fade {
+  --reveal-y: 0;
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  html[data-reveal-ready] .reveal:not([data-revealed]) {
+    opacity: 0;
+    transform: translate(var(--reveal-x, 0), var(--reveal-y, 1.75rem));
+  }
+
+  /* El retraso (`--reveal-delay`) lo pone el hook para escalonar lo que entra junto. */
+  .reveal[data-revealed] {
+    transition:
+      opacity 700ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+      transform 700ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+  }
+}
+
 body {
   background: #ffffff;
   color: var(--color-dark-gray);
+}
+
+/* Con un modal (<dialog>) abierto, la página de atrás no se desplaza: solo el
+   contenido del modal. Ver HeadquartersModalComponent. */
+body:has(dialog[open]) {
+  overflow: hidden;
 }

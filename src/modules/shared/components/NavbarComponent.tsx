@@ -13,7 +13,7 @@ import NavDropdownComponent from "./NavDropdownComponent";
 
 /** Mismo estilo que el botón de los items con submenú (ver NavDropdownComponent). */
 const NAV_LINK_CLASS =
-  "flex items-center whitespace-nowrap text-small font-bold text-gray-1 transition-colors hover:text-orange";
+  "flex items-center whitespace-nowrap text-small font-bold text-gray-dark transition-colors hover:text-orange";
 
 /**
  * Los items con submenú (Sobre Nosotros, Compra o Vende, Servicios) llevan
@@ -44,9 +44,13 @@ export default async function NavbarComponent() {
   const navItems = await getNavItems();
 
   return (
+    // sticky y no fixed: se queda arriba al hacer scroll, pero sigue ocupando
+    // sus 80px en el flujo, así que las vistas no necesitan compensar la altura.
+    // Sigue siendo el bloque de referencia de los paneles `absolute` (menú
+    // mobile). Requiere que ningún ancestro (html, body) recorte el overflow.
     // z-40: los desplegables cuelgan sobre el contenido de la página, que en
     // Sobre Nosotros usa capas de hasta z-30 (foto del edificio, barra negra).
-    <header className="relative z-40 h-20 w-full shrink-0 bg-white">
+    <header className="sticky top-0 z-40 h-20 w-full shrink-0 bg-white">
       <nav aria-label="Principal" className="container-wcar flex h-full items-center">
         <Link href={ROUTES.home} aria-label="WCAR, ir al inicio" className="shrink-0">
           <Image
@@ -78,8 +82,8 @@ export default async function NavbarComponent() {
           <div className="hidden items-center gap-[6px] xl:flex">
             <Image src={iconLocation} alt="" aria-hidden className="size-8" />
             <div className="flex flex-col">
-              <span className="text-small font-bold leading-[22px] text-gray-1">Ubicación</span>
-              <span className="text-caption font-medium leading-[22px] text-gray-2">Bogotá</span>
+              <span className="text-small font-bold leading-[22px] text-gray-dark">Ubicación</span>
+              <span className="text-caption font-medium leading-[22px] text-gray">Bogotá</span>
             </div>
           </div>
 
@@ -89,7 +93,7 @@ export default async function NavbarComponent() {
 
           <Link
             href={ROUTES.signIn}
-            className="flex items-center gap-1 whitespace-nowrap text-small font-bold text-gray-1 transition-colors hover:text-orange"
+            className="flex items-center gap-1 whitespace-nowrap text-small font-bold text-gray-dark transition-colors hover:text-orange"
           >
             {/* El glifo es más pequeño que su caja: 32px en una caja de 40 en
                 mobile, y 25.33px en una de 32 en desktop. La caja es la que

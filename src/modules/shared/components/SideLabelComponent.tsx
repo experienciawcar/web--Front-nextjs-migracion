@@ -15,19 +15,24 @@
 export default function SideLabelComponent({
   regular,
   italic,
+  second,
   className = "",
 }: {
   regular: string;
-  italic: string;
+  /** Segunda línea en cursiva (Sobre Nosotros). */
+  italic?: string;
+  /** Segunda línea en negrita y sin cursiva ("Taller / wcar" en la vista Taller). */
+  second?: string;
   className?: string;
 }) {
   return (
     <div className={className}>
-      <span aria-hidden className="block h-[4px] w-[77px] bg-[#ff8000] xl:bg-blue" />
+      <span aria-hidden className="block h-[4px] w-[77px] bg-orange xl:bg-blue-neon" />
       <h2 className="mt-6 text-subheadline-1 text-dark-gray xl:text-white">
         <span className="font-bold">{regular}</span>
         <br />
-        <span className="italic">{italic}</span>
+        {italic && <span className="italic">{italic}</span>}
+        {second && <span className="font-bold">{second}</span>}
       </h2>
     </div>
   );

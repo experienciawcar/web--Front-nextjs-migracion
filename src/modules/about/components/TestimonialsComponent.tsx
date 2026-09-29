@@ -36,7 +36,7 @@ export default async function TestimonialsComponent() {
       <div className="relative mx-auto xl:max-w-[1440px]">
         <div
           aria-hidden
-          className="absolute inset-0 bg-light-gray xl:right-[calc(50%-50vw)] xl:left-[303px]"
+          className="absolute inset-0 bg-gray-light xl:right-[calc(50%-50vw)] xl:left-[303px]"
         />
         <div
           aria-hidden
@@ -49,7 +49,7 @@ export default async function TestimonialsComponent() {
           <SideLabelComponent
             regular="¿Qué"
             italic="dicen de wcar?"
-            className="xl:absolute xl:top-[79px] xl:left-[111px] xl:w-[192px]"
+            className="reveal reveal-left xl:absolute xl:top-[79px] xl:left-[111px] xl:w-[192px]"
           />
 
           <TestimonialsCarouselComponent reviews={reviews} />

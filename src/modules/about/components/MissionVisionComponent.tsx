@@ -67,12 +67,12 @@ export default function MissionVisionComponent() {
         <SideLabelComponent
           regular="Misión"
           italic="& visión"
-          className="hidden xl:absolute xl:top-[99px] xl:left-[111px] xl:block"
+          className="reveal reveal-left hidden xl:absolute xl:top-[99px] xl:left-[111px] xl:block"
         />
 
         {/* Texto de relleno: en Figma sigue con lorem ipsum.
             TODO: falta el copy real. */}
-        <p className="text-center text-small font-bold text-gray-2 xl:ml-14 xl:text-left">
+        <p className="reveal text-center text-small font-bold text-gray xl:ml-14 xl:text-left">
           Nibh quisque suscipit fermentum
         </p>
 
@@ -82,12 +82,12 @@ export default function MissionVisionComponent() {
           icon={iconCar}
           title="¿Que hace wcar?"
           titleAs="h3"
-          className="mt-[15px] justify-center xl:mt-2 xl:justify-start"
+          className="reveal mt-[15px] justify-center xl:mt-2 xl:justify-start"
         />
 
         {/* TODO: hoy es solo la miniatura. Falta la URL del video y el
             reproductor; el diseño no define el estado de reproducción. */}
-        <figure className="relative mt-[34px] aspect-[787/443] w-full xl:mt-[31px] xl:w-[787px]">
+        <figure className="reveal relative mt-[34px] aspect-[787/443] w-full xl:mt-[31px] xl:w-[787px]">
           <Image
             src="/assets/about-us/mision/video.jpg"
             alt="Equipo de WCAR en una de las sedes"
@@ -108,7 +108,7 @@ export default function MissionVisionComponent() {
         {/* En desktop las dos columnas ocupan 787px en total (381 + 25 + 381),
             el mismo ancho del video. Sin ese límite el contenedor llega hasta
             el borde de la pantalla y las columnas salen 110px más anchas. */}
-        <div className="mt-8 -mr-8 flex snap-x snap-mandatory gap-[23px] overflow-x-auto pr-8 xl:mt-[50px] xl:mr-0 xl:grid xl:w-[787px] xl:grid-cols-2 xl:gap-[25px] xl:overflow-visible xl:pr-0">
+        <div className="reveal mt-8 -mr-8 flex snap-x snap-mandatory gap-[23px] overflow-x-auto pr-8 xl:mt-[50px] xl:mr-0 xl:grid xl:w-[787px] xl:grid-cols-2 xl:gap-[25px] xl:overflow-visible xl:pr-0">
           {COLUMNAS.map((columna) => (
             <div
               key={columna.id}

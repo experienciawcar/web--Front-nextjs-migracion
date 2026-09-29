@@ -17,7 +17,7 @@ function ArrowButton({
       onClick={onClick}
       // Deshabilitada no baja la opacidad del botón: se desvanecería también la
       // flecha, que es blanca. Baja solo el fondo, como en el diseño.
-      className="grid size-6 place-items-center rounded-sm bg-[#ff8000] text-white disabled:bg-[#ff8000]/30"
+      className="grid size-6 place-items-center rounded-sm bg-orange text-white disabled:bg-orange/30"
     >
       <svg
         aria-hidden

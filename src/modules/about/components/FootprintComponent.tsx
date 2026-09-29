@@ -4,7 +4,7 @@ import iconLike from "@/modules/shared/assets/icons/like.svg";
 import DiagonalLinesComponent from "@/modules/shared/components/DiagonalLinesComponent";
 import SectionEyebrowComponent from "@/modules/shared/components/SectionEyebrowComponent";
 
-import logoWcarPanel from "../assets/huella/logo-wcar-panel.svg";
+import logoWcarPanel from "@/modules/shared/assets/logos/logo-wcar-panel.svg";
 
 const RUTA_FOTOS = "/assets/about-us/huella";
 
@@ -121,7 +121,7 @@ const FOTOS = [
  */
 function PanelMarca() {
   return (
-    <div className="relative order-0 col-span-2 flex flex-col overflow-hidden bg-[#ff8000] xl:col-span-1 xl:col-start-1 xl:row-span-5 xl:row-start-1">
+    <div className="reveal reveal-left relative order-0 col-span-2 flex flex-col overflow-hidden bg-orange xl:col-span-1 xl:col-start-1 xl:row-span-5 xl:row-start-1">
       <div className="relative z-10 flex flex-col items-center px-6 pt-[57px]">
         <Image src={logoWcarPanel} alt="WCAR" className="h-12 w-auto" />
         <p className="mt-9 text-center text-[32px] leading-[38px] font-bold text-white">
@@ -152,7 +152,7 @@ function PanelMarca() {
  */
 function TextoColombia() {
   return (
-    <div className="order-8 col-span-2 flex items-center py-4 xl:col-span-1 xl:col-start-4 xl:row-start-3 xl:py-0 xl:pl-2">
+    <div className="reveal order-8 col-span-2 flex items-center py-4 xl:col-span-1 xl:col-start-4 xl:row-start-3 xl:py-0 xl:pl-2">
       <div className="flex items-start gap-3">
         {/* El corazón mide 26,67x23,73: con `size-8` se estiraba a cuadrado. */}
         <Image src={iconLike} alt="" aria-hidden className="mt-[3px] h-auto w-[26.67px] shrink-0" />
@@ -165,7 +165,7 @@ function TextoColombia() {
               ("...convertirnos" / "...LATAM" / "de la industria..."): el
               renglón más largo mide 186px y el que más cerca queda de colarse
               una palabra más, 201px. */}
-          <p className="mt-2 max-w-[194px] text-body font-medium text-gray-1">
+          <p className="mt-2 max-w-[194px] text-body font-medium text-gray-dark">
             Mas cerca de convertirnos en el referente en LATAM de la industria automotris
           </p>
         </div>
@@ -217,7 +217,7 @@ export default function FootprintComponent() {
         <div className="container-wcar relative py-16 xl:pt-[107px] xl:pb-[43px]">
           {/* El encabezado arranca en la columna 2 (302px = una columna más su
               separación), a plomo con la primera foto. */}
-          <div className="flex flex-col gap-6 xl:ml-[302px] xl:gap-3">
+          <div className="reveal flex flex-col gap-6 xl:ml-[302px] xl:gap-3">
             <SectionEyebrowComponent>Nibh quisque suscipit fermentum</SectionEyebrowComponent>
             <h2 id="footprint-title" className="text-subheadline-1 font-bold text-dark-gray">
               Nuestra huella
@@ -230,7 +230,7 @@ export default function FootprintComponent() {
             {FOTOS.map((foto) => (
               <div
                 key={foto.id}
-                className={`relative overflow-hidden xl:order-none xl:aspect-auto ${foto.className}`}
+                className={`reveal relative overflow-hidden xl:order-none xl:aspect-auto ${foto.className}`}
               >
                 <Image
                   src={`${RUTA_FOTOS}/${foto.file}.webp`}

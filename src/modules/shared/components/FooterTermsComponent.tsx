@@ -36,7 +36,7 @@ function TermsAccordion({ title, children }: { title: string; children: React.Re
   return (
     <details name="footer-terms" className="group border-b border-[#cdd6da]">
       <summary className="flex cursor-pointer items-center justify-between gap-4 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
-        <span className="text-small font-medium text-gray-1">{title}</span>
+        <span className="text-small font-medium text-gray-dark">{title}</span>
         <Image src={iconPlus} alt="" aria-hidden className="size-[14px] shrink-0 group-open:hidden" />
         <Image
           src={iconClose}

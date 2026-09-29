@@ -31,7 +31,7 @@ export default function FooterLinkListComponent({
           <AppLinkComponent
             href={link.href}
             rel={nofollow ? "nofollow" : undefined}
-            className="block text-small font-medium text-gray-1 transition-colors hover:text-orange"
+            className="block text-small font-medium text-gray-dark transition-colors hover:text-orange"
           >
             {link.label}
           </AppLinkComponent>

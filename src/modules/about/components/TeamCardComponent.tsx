@@ -32,7 +32,7 @@ export default function TeamCardComponent({ member }: { member: TeamMember }) {
       {/* La proporción es la del área de foto del diseño (280x340). Las fotos
           del backend miden 282x350, casi igual, y se recortan con object-cover
           anclado arriba para no cortar la cabeza. */}
-      <div className="relative aspect-[280/340] w-full bg-light-gray">
+      <div className="relative aspect-[280/340] w-full bg-gray-light">
         {member.photoUrl && (
           <Image
             src={member.photoUrl}
@@ -48,9 +48,9 @@ export default function TeamCardComponent({ member }: { member: TeamMember }) {
         <div className="flex items-center gap-4">
           <Image src={isotipoWcar} alt="" aria-hidden className="h-auto w-8 shrink-0" />
           {/* Separador: gris 200 al 30%, el mismo del fundador. */}
-          <span aria-hidden className="h-9 w-[2px] shrink-0 bg-gray-2/30" />
+          <span aria-hidden className="h-9 w-[2px] shrink-0 bg-gray/30" />
           <div>
-            <p className="text-[13px] leading-[18px] font-medium text-gray-2">{member.role}</p>
+            <p className="text-[13px] leading-[18px] font-medium text-gray">{member.role}</p>
             <h3 className="text-[18px] leading-6 font-bold text-dark-gray">
               <span className="text-orange">{firstName}</span>
               {lastNames.length > 0 && ` ${lastNames.join(" ")}`}
@@ -62,8 +62,8 @@ export default function TeamCardComponent({ member }: { member: TeamMember }) {
             líneas del pie quedan alineadas aunque un nombre ocupe dos renglones. */}
         {member.description && (
           <div className="mt-auto flex flex-col gap-4">
-            <span aria-hidden className="border-t border-gray-2/30" />
-            <p className="flex items-center gap-2 text-small font-medium text-gray-1">
+            <span aria-hidden className="border-t border-gray/30" />
+            <p className="flex items-center gap-2 text-small font-medium text-gray-dark">
               <Image src={iconLocation} alt="" aria-hidden className="size-8 shrink-0" />
               {member.description}
             </p>

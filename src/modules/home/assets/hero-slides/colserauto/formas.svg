@@ -1,0 +1,23 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="1440" height="546" viewBox="0 0 1440 546" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Frame 555" clip-path="url(#clip0_0_39)">
+<g id="hero image desktop 1">
+</g>
+<g id="Rectangle 4256" filter="url(#filter0_f_0_39)">
+<path d="M1248.31 72.7052L1515 -13.4995L1528 -33.1263C1528 -33.1263 1383.95 27.57 1338.1 -33.1263C1292.24 -93.8227 1276.38 -74.3793 1257.01 -62.5878C1237.63 -50.7963 1025.18 154.182 1025.18 154.182L1248.31 72.7052Z" fill="url(#paint0_linear_0_39)"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_0_39" x="965.183" y="-135.174" width="622.817" height="349.356" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="30" result="effect1_foregroundBlur_0_39"/>
+</filter>
+<linearGradient id="paint0_linear_0_39" x1="1277.11" y1="-17.9987" x2="1247.05" y2="115.093" gradientUnits="userSpaceOnUse">
+<stop stop-color="#CE39C5"/>
+<stop offset="1" stop-color="#5F3299" stop-opacity="0.6"/>
+</linearGradient>
+<clipPath id="clip0_0_39">
+<rect width="1440" height="546" fill="white"/>
+</clipPath>
+</defs>
+</svg>

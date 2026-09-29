@@ -41,7 +41,7 @@ export default function CompanyIntroComponent() {
 
               Va por encima de la barra negra lateral, que pasa por detrás de
               ella. */}
-          <div className="relative hidden h-[526px] w-[490px] shrink-0 xl:z-30 xl:block">
+          <div className="reveal reveal-left relative hidden h-[526px] w-[490px] shrink-0 xl:z-30 xl:block">
             <Image
               src="/assets/about-us/intro/edificio.jpg"
               alt="Sede de WCAR"
@@ -52,20 +52,20 @@ export default function CompanyIntroComponent() {
           </div>
 
           <div className="flex flex-col items-center gap-6 pt-14 xl:w-[515px] xl:items-start xl:gap-3 xl:pt-16">
-            <SectionEyebrowComponent>Por qué nosotros</SectionEyebrowComponent>
+            <SectionEyebrowComponent className="reveal">Por qué nosotros</SectionEyebrowComponent>
 
-            <h1 className="w-full text-subheadline-1 font-bold text-dark-gray">Nuestra Empresa</h1>
+            <h1 className="reveal w-full text-subheadline-1 font-bold text-dark-gray">Nuestra Empresa</h1>
 
             <div className="flex w-full flex-col items-center gap-12 xl:items-start xl:gap-8">
-              <div className="flex flex-col gap-[22px]">
+              <div className="reveal flex flex-col gap-[22px]">
                 {PARRAFOS.map((parrafo) => (
-                  <p key={parrafo.slice(0, 32)} className="text-small font-medium text-gray-1">
+                  <p key={parrafo.slice(0, 32)} className="text-small font-medium text-gray-dark">
                     {parrafo}
                   </p>
                 ))}
               </div>
 
-              <ButtonComponent href="/contacto" variant="cyan" icon={iconExternal}>
+              <ButtonComponent href="/contacto" variant="cyan" icon={iconExternal} className="reveal">
                 CONTACTA A UN ASESOR
               </ButtonComponent>
             </div>

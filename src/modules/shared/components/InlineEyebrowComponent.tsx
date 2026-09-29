@@ -14,7 +14,7 @@ export default function InlineEyebrowComponent({
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       <span aria-hidden className="h-px w-12 shrink-0 bg-yellow" />
-      <span className="text-small font-bold whitespace-nowrap text-gray-2">{children}</span>
+      <span className="text-small font-bold whitespace-nowrap text-gray">{children}</span>
     </div>
   );
 }

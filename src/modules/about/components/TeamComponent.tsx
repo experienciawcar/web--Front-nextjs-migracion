@@ -30,7 +30,7 @@ export default async function TeamComponent() {
     // adorno del carrusel): 100vw incluye la barra de scroll de la ventana.
     <section aria-labelledby="team-title" className="overflow-x-clip">
       <div className="container-wcar py-16 xl:py-24">
-        <div className="flex flex-col gap-6 xl:gap-3">
+        <div className="reveal flex flex-col gap-6 xl:gap-3">
           {/* Texto de relleno: en Figma sigue con lorem ipsum, el mismo de
               Misión & visión.
               TODO: falta el copy real. */}
