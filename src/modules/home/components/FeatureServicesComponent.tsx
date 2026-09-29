@@ -106,12 +106,12 @@ export default function FeatureServicesComponent() {
     <section aria-labelledby="services-title" className="overflow-x-clip bg-white">
       <div className="container-wcar py-16 xl:py-16">
         <span aria-hidden className="block h-[4px] w-[115px] bg-orange" />
-        <p className="mt-4 text-small font-bold text-gray">Conoce nuestros productos y todo lo que tenemos para ofrecer</p>
-        <h2 id="services-title" className="mt-2 text-subheadline-1 font-bold text-dark-gray">
+        <p className="reveal mt-4 text-small font-bold text-gray">Conoce nuestros productos y todo lo que tenemos para ofrecer</p>
+        <h2 id="services-title" className="reveal mt-2 text-subheadline-1 font-bold text-dark-gray">
           Nuestros servicios
         </h2>
 
-        <ul className="-mx-4 -mr-8 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pr-8 pb-2 [scrollbar-width:none] xl:mx-0 xl:mt-[45px] xl:grid xl:grid-cols-4 xl:gap-6 xl:overflow-visible xl:px-0 xl:pr-0 [&::-webkit-scrollbar]:hidden">
+        <ul className="reveal -mx-4 -mr-8 mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pr-8 pb-2 [scrollbar-width:none] xl:mx-0 xl:mt-[45px] xl:grid xl:grid-cols-4 xl:gap-6 xl:overflow-visible xl:px-0 xl:pr-0 [&::-webkit-scrollbar]:hidden">
           {HOME_SERVICES.map((service) => (
             <ServiceCard key={service.id} service={service} />
           ))}

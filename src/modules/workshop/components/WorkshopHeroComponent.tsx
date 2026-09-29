@@ -143,6 +143,7 @@ export default function WorkshopHeroComponent() {
             className="mt-6 text-[34px] leading-10 font-bold tracking-[0.5px] text-white xl:mt-[46px] xl:ml-[22px] xl:text-[50px] xl:leading-[60px]"
           >
             <span className="block">Cuida tu carro</span>
+            {" "}
             <span className="block">
               <span className="font-normal italic">Taller</span> <span className="text-orange">wcar</span>
             </span>

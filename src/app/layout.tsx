@@ -5,6 +5,7 @@ import ContactAdvisorTabComponent from "@/modules/shared/components/ContactAdvis
 import FooterComponent from "@/modules/shared/components/FooterComponent";
 import NavbarComponent from "@/modules/shared/components/NavbarComponent";
 import ScrollRevealComponent from "@/modules/shared/components/ScrollRevealComponent";
+import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/modules/shared/utils/seo";
 
 import "./globals.css";
 
@@ -18,10 +19,14 @@ const urbanist = Urbanist({
   style: ["normal", "italic"],
 });
 
+// `metadataBase` vuelve absolutas las rutas relativas (canonical, og:url, imágenes).
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "WCAR | Compra y vende tu vehículo seguro en Colombia",
   description:
     "Compra, vende y financia vehículos usados con garantía. Peritaje, trámites, seguros y taller en un solo lugar.",
+  openGraph: { type: "website", siteName: SITE_NAME, locale: "es_CO", images: [OG_IMAGE] },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
 };
 
 export default function RootLayout({

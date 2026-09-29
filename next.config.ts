@@ -20,6 +20,13 @@ const nextConfig: NextConfig = {
         hostname: "storage.googleapis.com",
         pathname: "/wcar-images/images-tpyes/**",
       },
+      // Logos de las marcas (GET /api/v2/brands/, filtro "Marca y modelo"). Mismo
+      // bucket y mismas URLs firmadas.
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+        pathname: "/wcar-images/images-brands/**",
+      },
       // Logos de los aliados (GET /api/partners/). Mismo bucket y mismas URLs
       // firmadas.
       {

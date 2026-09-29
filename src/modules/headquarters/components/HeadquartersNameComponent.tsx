@@ -24,7 +24,7 @@ export default function HeadquartersNameComponent({
 
   return (
     <>
-      <span className="block text-orange">{brand}</span>
+      <span className="block text-orange">{brand}</span>{" "}
       {name}
     </>
   );

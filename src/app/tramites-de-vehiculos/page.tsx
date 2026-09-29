@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 
 import ProceduresComponent from "@/modules/procedures/components/ProceduresComponent";
+import { buildPageMetadata } from "@/modules/shared/utils/seo";
 
 // TODO(seo): confirmar con marketing la palabra clave. Título y descripción son los
 // de la página del sitio anterior (wcar.co/tramites-de-vehiculos), que llevaba el
 // año en el título ("… en 2026", con `new Date().getFullYear()`): aquí va sin él para
 // que no envejezca.
-// TODO(seo): sumar `alternates.canonical` y el Open Graph de la página cuando el
-// layout tenga `metadataBase` (guía §16.3): una ruta relativa sin ella rompe el build.
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Trámites de vehículos | te ahorramos tiempo y dinero",
   description:
     "Realizamos todos tus trámites de vehículos al comprar o vender tu auto en Colombia, ahorramos tiempo y dinero en transacciones seguras para tu carro.",
-};
+  path: "/tramites-de-vehiculos",
+});
 
 /**
  * Vista Trámites de vehículos (`ROUTES.procedures`). Es la URL del sitio anterior

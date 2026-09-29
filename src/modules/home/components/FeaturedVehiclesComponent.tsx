@@ -66,12 +66,12 @@ export default async function FeaturedVehiclesComponent() {
       <div className="container-wcar relative pt-[182px] pb-16 xl:pt-[172px]">
         <span aria-hidden className="block h-[4px] w-[115px] bg-orange" />
         {/* TODO: confirmar con diseño: el eyebrow va en minúsculas. */}
-        <p className="mt-4 text-small font-semibold text-gray">conoce lo mas destacado de nuestro catalogo en esta semana</p>
-        <h2 id="featured-title" className="mt-2 text-subheadline-1 font-bold text-dark-gray">
+        <p className="reveal mt-4 text-small font-semibold text-gray">conoce lo mas destacado de nuestro catalogo en esta semana</p>
+        <h2 id="featured-title" className="reveal mt-2 text-subheadline-1 font-bold text-dark-gray">
           Destacados del Catálogo
         </h2>
 
-        <div className="mt-8 xl:mt-[53px]">
+        <div className="reveal mt-8 xl:mt-[53px]">
           <FeaturedVehiclesCarouselComponent>
             {vehicles.map((vehicle) => (
               <li key={vehicle.id} className="flex w-[291px] shrink-0 snap-start">

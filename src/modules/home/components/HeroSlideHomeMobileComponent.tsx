@@ -81,6 +81,7 @@ export default function HeroSlideHomeMobileComponent() {
           className="absolute top-[41px] left-[19px] w-[220px] text-[28px] leading-8 font-bold tracking-[0.28px] text-dark-gray"
         >
           El carro usado más seguro
+          {" "}
           <span className="block font-normal text-orange italic">de Colombia</span>
         </p>
 

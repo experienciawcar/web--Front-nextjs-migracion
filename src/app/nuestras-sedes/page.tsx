@@ -4,12 +4,14 @@ import HeadquartersHeroComponent from "@/modules/headquarters/components/Headqua
 import HeadquartersListComponent from "@/modules/headquarters/components/HeadquartersListComponent";
 import HeadquartersModalProvider from "@/modules/headquarters/components/HeadquartersModalProvider";
 import { HEADQUARTERS } from "@/modules/headquarters/constants/headquarters";
+import { buildPageMetadata } from "@/modules/shared/utils/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Nuestras Sedes | WCAR",
   description:
     "Conoce las sedes de WCAR y encuentra el concesionario más cercano para comprar, vender o mantener tu carro.",
-};
+  path: "/nuestras-sedes",
+});
 
 /**
  * Vista Nuestras Sedes. La ruta es /nuestras-sedes porque es la que ya apunta

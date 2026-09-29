@@ -142,6 +142,7 @@ export default function HeroSlideHomeComponent() {
               className="text-[32px] leading-9 font-bold text-dark-gray md:text-[42px] md:leading-[48px]"
             >
               El vehículo mas seguro
+              {" "}
               <span className="block text-orange italic">de colombia</span>
             </h1>
 

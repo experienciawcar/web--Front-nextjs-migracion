@@ -43,7 +43,7 @@ const SIN_SCROLLBAR = "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden";
 export default function IntroFeaturesComponent() {
   return (
     <ul
-      className={`-mx-8 -mt-2 -mb-6 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-pl-4 px-4 pt-2 pb-6 xl:mx-0 xl:mt-0 xl:mb-0 xl:grid xl:snap-none xl:grid-cols-3 xl:gap-[25px] xl:overflow-visible xl:p-0 ${SIN_SCROLLBAR}`}
+      className={`reveal -mx-8 -mt-2 -mb-6 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-pl-4 px-4 pt-2 pb-6 xl:mx-0 xl:mt-0 xl:mb-0 xl:grid xl:snap-none xl:grid-cols-3 xl:gap-[25px] xl:overflow-visible xl:p-0 ${SIN_SCROLLBAR}`}
     >
       {INTRO_FEATURES.map((feature) => (
         <li

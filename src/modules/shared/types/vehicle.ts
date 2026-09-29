@@ -12,7 +12,8 @@ export type VehicleFileDto = {
 };
 
 /**
- * Vehículo tal como lo entrega GET /api/cars/ (`results[]`, paginado de a 22).
+ * Vehículo tal como lo entrega GET /api/cars/ (`results[]`, paginado de a 22)
+ * o POST /v2/filter-cars/ (catálogo con filtros, `results[]`, 22 por página).
  * Solo se declaran los campos que usa la tarjeta.
  *
  * Ojo con los tipos, que el backend no cuida:
@@ -24,6 +25,12 @@ export type VehicleFileDto = {
  * - `image_first` es una URL firmada de Google Cloud Storage que caduca a las
  *   24 h; por eso la tarjeta usa las variantes de `image_first_srcset` (URLs del
  *   propio backend, sin firma) y no esa.
+ * - **La galería viene en dos formas distintas según el endpoint**: `GET
+ *   /api/cars/` trae `files[]` (un objeto por foto, con su propio
+ *   `image_srcset`); `POST /v2/filter-cars/` trae `preview_images` (URLs
+ *   firmadas) y `preview_images_srcset` (array de arrays, uno por foto, en el
+ *   mismo orden que `preview_images`) — no hay `files`. `toImages()` lee
+ *   cualquiera de los dos que venga.
  */
 export type VehicleDto = {
   id: number;
@@ -48,6 +55,9 @@ export type VehicleDto = {
   image_first?: string | null;
   image_first_srcset?: VehicleImageSrcsetDto[] | null;
   files?: VehicleFileDto[] | null;
+  /** Solo en POST /v2/filter-cars/: galería sin agrupar por objeto (ver arriba). */
+  preview_images?: (string | null)[] | null;
+  preview_images_srcset?: VehicleImageSrcsetDto[][] | null;
 };
 
 /** Una foto lista para pintar: la URL más ancha y su `srcset`. */

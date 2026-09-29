@@ -11,12 +11,14 @@ import TeamComponent from "@/modules/about/components/TeamComponent";
 import TestimonialsComponent from "@/modules/about/components/TestimonialsComponent";
 import ValuesComponent from "@/modules/about/components/ValuesComponent";
 import DiagonalLinesComponent from "@/modules/shared/components/DiagonalLinesComponent";
+import { buildPageMetadata } from "@/modules/shared/utils/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Sobre Nosotros | WCAR",
   description:
     "Conoce a WCAR: nuestra misión, nuestro equipo, nuestras sedes y los aliados que respaldan la compra y venta de vehículos usados con transparencia.",
-};
+  path: "/about-us",
+});
 
 /**
  * Vista Sobre Nosotros. La ruta es /about-us porque es la que ya apunta el

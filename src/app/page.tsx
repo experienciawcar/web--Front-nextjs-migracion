@@ -6,12 +6,14 @@ import HeroComponent from "@/modules/home/components/HeroComponent";
 import HeroSearchSectionComponent from "@/modules/home/components/HeroSearchSectionComponent";
 import TransparencyComponent from "@/modules/home/components/TransparencyComponent";
 import AlliesComponent from "@/modules/shared/components/AlliesComponent";
+import { buildPageMetadata } from "@/modules/shared/utils/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "WCAR | Compra y vende tu vehículo seguro en Colombia",
   description:
     "Compra, vende y financia vehículos usados con garantía. Peritaje, trámites, seguros y taller en un solo lugar.",
-};
+  path: "/",
+});
 
 /**
  * Inicio. Diseño: Figma "Wcar Website - 2026", página "Home - 2.0", frame

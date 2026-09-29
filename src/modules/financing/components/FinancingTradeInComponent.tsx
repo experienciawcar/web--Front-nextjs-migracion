@@ -125,6 +125,7 @@ export default function FinancingTradeInComponent() {
             className="mt-2.5 text-[32px] leading-[38px] font-bold text-gray-light xl:text-subheadline-1 xl:leading-11"
           >
             Cambia tu vehículo con wcar
+            {" "}
             <span className="block font-medium text-blue-neon italic">y obtén un bono BRUTAL</span>
           </h2>
           <p className="mt-6 text-body font-medium text-gray-light xl:mt-[39px] xl:w-[421px]">

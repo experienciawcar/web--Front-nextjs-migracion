@@ -59,7 +59,7 @@ export default function TradeInBannerComponent() {
   return (
     <AppLinkComponent
       href={ROUTES.sellCar}
-      className="@container relative mx-auto block aspect-[329/296] max-w-[480px] overflow-hidden bg-orange [--u:calc(100cqw/329)] xl:flex xl:aspect-auto xl:h-20 xl:max-w-[785px] xl:items-center xl:gap-[86px] xl:py-0 xl:pr-0 xl:pl-[29px]"
+      className="reveal @container relative mx-auto block aspect-[329/296] max-w-[480px] overflow-hidden bg-orange [--u:calc(100cqw/329)] xl:flex xl:aspect-auto xl:h-20 xl:max-w-[785px] xl:items-center xl:gap-[86px] xl:py-0 xl:pr-0 xl:pl-[29px]"
     >
       <span
         aria-hidden

@@ -61,7 +61,9 @@ function parsePrice(value: string | null | undefined): number {
 function getWarranty(dto: VehicleDto): Vehicle["warranty"] {
   const coverage = dto.warranty_type || dto.type_warranty || "";
   const hasCoverage = coverage !== "" && coverage !== "null";
-  if (!(dto.warranty || hasCoverage || dto.garantie7Day)) return null;
+  // `garantie7Day` por sí sola no da badge: solo cambia el lado de la etiqueta en el sitio anterior
+  // (docs/car-card-imagenes-y-garantia.md §2.2).
+  if (!(dto.warranty || hasCoverage)) return null;
 
   const tones: Record<string, { label: string; tone: VehicleWarrantyTone }> = {
     "Garantía de marca o km": { label: "Garantía de fábrica", tone: "factory" },
@@ -84,7 +86,7 @@ function pickDefault(variants: VehicleImageSrcsetDto[]): VehicleImageSrcsetDto {
  * que el navegador baja la de 320 px en una pantalla chica en vez de la de 1200.
  * Si no las hay se cae a la URL firmada, sin `srcset`.
  */
-function toImage(
+export function toImage(
   variants: VehicleImageSrcsetDto[] | null | undefined,
   signedUrl: string | null | undefined,
 ): VehicleImage | null {
@@ -115,12 +117,23 @@ function toImages(dto: VehicleDto): VehicleImage[] {
 
   add(toImage(dto.image_first_srcset, dto.image_first));
   for (const file of dto.files ?? []) add(toImage(file.image_srcset, file.image));
+  // POST /v2/filter-cars/ (catálogo) no trae `files`: la galería viene en
+  // `preview_images_srcset`, un array paralelo a `preview_images`.
+  if (!dto.files?.length) {
+    const previews = dto.preview_images ?? [];
+    const previewsSrcset = dto.preview_images_srcset ?? [];
+    for (let i = 0; i < previewsSrcset.length; i++) add(toImage(previewsSrcset[i], previews[i]));
+  }
 
   return images.slice(0, MAX_IMAGES);
 }
 
-/** Convierte un vehículo del backend en el que pinta la tarjeta; `null` si no se puede mostrar. */
-function toVehicle(dto: VehicleDto): Vehicle | null {
+/**
+ * Convierte un vehículo del backend en el que pinta la tarjeta; `null` si no
+ * se puede mostrar. Exportada porque `catalog/services/vehicles.ts` la
+ * reutiliza para `POST /v2/filter-cars/` (mismo shape de `VehicleDto`).
+ */
+export function toVehicle(dto: VehicleDto): Vehicle | null {
   const name = dto.car?.trim();
   const listPrice = parsePrice(dto.price);
   const discountPrice = parsePrice(dto.discount_price);

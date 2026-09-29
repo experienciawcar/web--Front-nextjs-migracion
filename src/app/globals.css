@@ -41,6 +41,15 @@
    (margen de 124px a cada lado) y 32px de margen lateral en el canvas mobile
    de 393px. El padding de 2rem cubre el caso mobile y el max-width lo compensa
    para que en desktop el contenido siga midiendo exactamente 1192px. */
+/* Catálogo: más ancho que el lienzo de 1192 del resto de vistas — la web anterior lo abre
+   hasta 1442 px en pantallas anchas (tarjetas de ~330 px, sidebar de ~367 px). */
+@utility container-catalog {
+  margin-inline: auto;
+  width: 100%;
+  max-width: calc(1442px + 4rem);
+  padding-inline: 2rem;
+}
+
 @utility container-wcar {
   margin-inline: auto;
   width: 100%;
@@ -270,4 +279,83 @@ body {
    contenido del modal. Ver HeadquartersModalComponent. */
 body:has(dialog[open]) {
   overflow: hidden;
+}
+
+/* Filtros del catálogo (docs/replicar-diseno-filtros.md §4, §6): checkbox tipo Bootstrap
+   (1em, borde gris, naranja al marcar con check blanco) y slider de precio/kilometraje. */
+.filter-checkbox {
+  appearance: none;
+  width: 1em;
+  height: 1em;
+  margin: 0;
+  flex-shrink: 0;
+  border: 1px solid rgb(0 0 0 / 0.25);
+  border-radius: 0.25em;
+  background-color: #fff;
+  cursor: pointer;
+}
+.filter-checkbox:checked {
+  background-color: var(--color-orange);
+  border-color: var(--color-orange);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+}
+.filter-checkbox:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 2px;
+}
+
+.filter-scroll {
+  scrollbar-width: auto;
+  scrollbar-color: #ccc #f1f1f1;
+}
+.filter-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+.filter-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.filter-scroll::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 8px;
+}
+.filter-scroll::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.price-slider {
+  height: 22px;
+  background: transparent;
+}
+.price-slider::-webkit-slider-thumb {
+  pointer-events: auto;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: #fff;
+  border: 3px solid var(--color-orange);
+  cursor: pointer;
+}
+.price-slider::-moz-range-thumb {
+  pointer-events: auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: #fff;
+  border: 3px solid var(--color-orange);
+  cursor: pointer;
+}
+
+/* Todo lo clicable muestra la manito: Tailwind v4 deja los botones con el cursor por defecto. */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+[role="option"],
+summary,
+select,
+label[for],
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"] {
+  cursor: pointer;
 }

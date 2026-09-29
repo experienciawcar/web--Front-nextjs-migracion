@@ -109,7 +109,7 @@ const PHOTO_MOBILE_FADE =
 function TransparencyPhotoMobile() {
   return (
     <div className="bg-dark-gray md:hidden">
-      <div className="relative mx-auto aspect-square w-full max-w-[560px] overflow-hidden bg-orange">
+      <div className="reveal reveal-fade relative mx-auto aspect-square w-full max-w-[560px] overflow-hidden bg-orange">
         <Image
           src="/assets/home/transparencia/renault-retro-mobile.webp"
           alt=""
@@ -202,21 +202,21 @@ function GlitchStripes() {
 function ReasonsToTradeComponent() {
   return (
     <div>
-      <div className="flex items-center gap-4 xl:gap-3">
+      <div className="reveal flex items-center gap-4 xl:gap-3">
         <span aria-hidden className="h-px w-12 bg-blue-neon xl:bg-gray-light" />
         <span className="text-small font-bold whitespace-nowrap text-gray-light">Nosotros</span>
       </div>
 
-      <h3 className="mt-4 text-subheadline-1 font-bold text-white md:mt-6 xl:text-[36px] xl:leading-[44px]">
+      <h3 className="reveal mt-4 text-subheadline-1 font-bold text-white md:mt-6 xl:text-[36px] xl:leading-[44px]">
         Razones para comprar <span className="font-normal italic">y vender con wcar</span>
       </h3>
 
-      <p className="mt-16 max-w-[279px] text-body leading-6 font-medium text-gray-light md:mt-6 md:max-w-[483px] md:opacity-90">
+      <p className="reveal mt-16 max-w-[279px] text-body leading-6 font-medium text-gray-light md:mt-6 md:max-w-[483px] md:opacity-90">
         Somos la plataforma tecnológica más transparente y de mayor crecimiento en Colombia para comprar un auto usado
         online, financiarlo y asegurarlo en un par de clics.
       </p>
 
-      <div className="mt-16 flex flex-col items-start gap-6 md:mt-8 md:flex-row md:flex-wrap md:items-stretch md:gap-4">
+      <div className="reveal mt-16 flex flex-col items-start gap-6 md:mt-8 md:flex-row md:flex-wrap md:items-stretch md:gap-4">
         <ButtonComponent
           href={ROUTES.buyCar}
           icon={arrowCircle}
@@ -360,13 +360,13 @@ export default function TransparencyComponent() {
         <div className="relative pt-11 pb-[65px] md:pt-[124px] md:pr-8 md:pb-16 md:pl-[400px] lg:pr-10 lg:pl-[516px] xl:pr-0 xl:pl-[732px]">
           <h2
             id="transparency-title"
-            className="px-8 text-center text-subheadline-1 font-bold text-dark-gray md:px-0 md:text-left xl:text-[36px] xl:leading-[44px]"
+            className="reveal px-8 text-center text-subheadline-1 font-bold text-dark-gray md:px-0 md:text-left xl:text-[36px] xl:leading-[44px]"
           >
             Compra<span className="hidden md:inline">s</span> online con atención{" "}
             <span className="font-normal text-orange italic">personalizada.</span>
           </h2>
 
-          <div className="mt-6 md:mt-14">
+          <div className="reveal mt-6 md:mt-14">
             <TransparencyFeaturesComponent features={TRANSPARENCY_FEATURES} />
           </div>
 
@@ -426,7 +426,7 @@ export default function TransparencyComponent() {
         {/* Foto en desktop: estira sola al alto de las dos sub-secciones de
             arriba, menos los 100 px de la franja con el amarillo y los
             paralelogramos. */}
-        <TransparencyPhoto className="absolute top-[100px] bottom-0 left-16 hidden w-[300px] md:block lg:left-24 lg:w-[380px] xl:left-[130px] xl:w-[483px]" />
+        <TransparencyPhoto className="reveal reveal-fade absolute top-[100px] bottom-0 left-16 hidden w-[300px] md:block lg:left-24 lg:w-[380px] xl:left-[130px] xl:w-[483px]" />
 
         {/* Las rayas cian del acento "glitch" van por encima de la foto. */}
         <GlitchStripes />

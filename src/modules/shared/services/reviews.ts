@@ -43,14 +43,20 @@ function toReview(dto: ReviewDto, id: number): Review {
 }
 
 /**
- * Reseñas para la sección "¿Qué dicen de wcar?" (GET /api/map/), en el orden
- * en que las entrega el backend. Una reseña sin texto no es un testimonio, así
- * que se descarta.
+ * Reseñas de Google (GET /api/map/), en el orden en que las entrega el
+ * backend. Las usan "¿Qué dicen de wcar?" de Sobre Nosotros y "Testimonios y
+ * Opiniones" de Vende tu Carro. Una reseña sin texto no es un testimonio, así
+ * que se descarta siempre.
+ *
+ * `minRating`: el sitio anterior, en Vende tu Carro, descartaba además las de
+ * 3 estrellas o menos (`filter(calification > 3)`); Sobre Nosotros no filtraba
+ * por calificación, así que aquí es opcional y por defecto no filtra, para no
+ * cambiar ese comportamiento.
  *
  * Si el backend falla no se cae la página: devuelve una lista vacía, la
  * sección no se pinta y el error queda en el log del servidor.
  */
-export async function getReviews(): Promise<Review[]> {
+export async function getReviews({ minRating }: { minRating?: number } = {}): Promise<Review[]> {
   const url = apiUrl("/map/");
 
   try {
@@ -60,7 +66,10 @@ export async function getReviews(): Promise<Review[]> {
     }
     const reviews: ReviewDto[] = await response.json();
 
-    return reviews.map(toReview).filter((review) => review.text !== "");
+    return reviews
+      .map(toReview)
+      .filter((review) => review.text !== "")
+      .filter((review) => minRating === undefined || review.rating >= minRating);
   } catch (error) {
     console.error("No se pudieron cargar las reseñas:", error);
     return [];

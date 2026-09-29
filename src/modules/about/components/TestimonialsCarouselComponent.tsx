@@ -1,10 +1,9 @@
 "use client";
 
 import CarouselArrowsComponent from "@/modules/shared/components/CarouselArrowsComponent";
+import TestimonialCardComponent from "@/modules/shared/components/TestimonialCardComponent";
 import { useCarousel } from "@/modules/shared/hooks/useCarousel";
-
-import type { Review } from "../types/reviews";
-import TestimonialCardComponent from "./TestimonialCardComponent";
+import type { Review } from "@/modules/shared/types/reviews";
 
 /** Sin barra de scroll: el desplazamiento se hace con las flechas, la línea o el dedo. */
 const SIN_SCROLLBAR = "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden";

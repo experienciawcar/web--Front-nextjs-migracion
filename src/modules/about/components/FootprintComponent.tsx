@@ -126,6 +126,7 @@ function PanelMarca() {
         <Image src={logoWcarPanel} alt="WCAR" className="h-12 w-auto" />
         <p className="mt-9 text-center text-[32px] leading-[38px] font-bold text-white">
           <span className="block">Mas que solo</span>
+          {" "}
           <span className="block">una marca</span>
         </p>
       </div>
@@ -159,6 +160,7 @@ function TextoColombia() {
         <div>
           <h3 className="text-heading-1 font-bold text-dark-gray">
             <span className="block">Haciendo rodar a</span>
+            {" "}
             <span className="block text-orange italic">toda colombia</span>
           </h3>
           {/* 194px porque con ese ancho el párrafo parte donde el diseño

@@ -7,12 +7,14 @@ import WorkshopLocationComponent from "@/modules/workshop/components/WorkshopLoc
 import WorkshopPostSalesComponent from "@/modules/workshop/components/WorkshopPostSalesComponent";
 import WorkshopWarrantyComponent from "@/modules/workshop/components/WorkshopWarrantyComponent";
 import WorkshopWhatWeDoComponent from "@/modules/workshop/components/WorkshopWhatWeDoComponent";
+import { buildPageMetadata } from "@/modules/shared/utils/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Taller | WCAR",
   description:
     "Taller WCAR en Bogotá: mantenimiento preventivo, talleres especializados por marca y modelo, garantías y servicios adicionales para tu vehículo.",
-};
+  path: "/taller",
+});
 
 /**
  * Vista Taller. La ruta es /taller porque es la que ya apunta el navbar

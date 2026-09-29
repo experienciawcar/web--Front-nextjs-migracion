@@ -7,12 +7,14 @@ import FinancingWarrantyComponent from "@/modules/financing/components/Financing
 import FinancingProductsComponent from "@/modules/financing/components/FinancingProductsComponent";
 import FinancingSimulatorComponent from "@/modules/financing/components/FinancingSimulatorComponent";
 import FinancingStepsComponent from "@/modules/financing/components/FinancingStepsComponent";
+import { buildPageMetadata } from "@/modules/shared/utils/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Financiación | WCAR",
   description:
     "Financia hasta el 100 % de tu vehículo con WCAR: simula tu cuota, conoce el proceso de financiación, la garantía y los créditos Credirápido y Credifácil.",
-};
+  path: "/servicios/financiacion",
+});
 
 /**
  * Vista Financiación. La ruta es /servicios/financiacion porque es la que ya

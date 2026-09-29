@@ -2,7 +2,7 @@ import Image, { type StaticImageData } from "next/image";
 
 import AppLinkComponent from "./AppLinkComponent";
 
-type Variant = "primary" | "secondary" | "tertiary" | "cyan" | "black";
+type Variant = "primary" | "secondary" | "tertiary" | "cyan" | "black" | "outline";
 
 /**
  * Cada variante trae su color de borde (transparente o naranja) a propósito:
@@ -16,10 +16,14 @@ const VARIANTS: Record<Variant, string> = {
   // verían, así que ahí van naranjas.
   cyan: "justify-center border-transparent bg-blue-neon text-black [--shine-color:var(--color-orange)]",
   black: "justify-center border-transparent bg-black text-white",
+  // Borde naranja, sin relleno: para "Contacta a un asesor" sobre una foto o
+  // un fondo oscuro (Vende tu Carro), donde `secondary` (fondo blanco) taparía
+  // la foto. Es el "btn_orange_transparent" del sitio anterior.
+  outline: "justify-center border-orange bg-transparent text-white",
 };
 
 /** Variantes de texto blanco: el ícono es oscuro y ahí se pasa a blanco. */
-const LIGHT_TEXT: Variant[] = ["primary", "tertiary", "black"];
+const LIGHT_TEXT: Variant[] = ["primary", "tertiary", "black", "outline"];
 
 const SIZES = {
   big: "h-12 px-8",
@@ -70,7 +74,10 @@ type NativeProps = CommonProps & {
  * - Alto de 48px (44px en `medium`, con un máximo de 180px de ancho), texto de
  *   14px en negrita y mayúsculas, sin partirse en renglones.
  * - Variantes: `primary` (naranja), `secondary` (blanco con borde naranja),
- *   `tertiary` (oscuro con borde naranja y 221px de ancho), `cyan` y `black`.
+ *   `tertiary` (oscuro con borde naranja y 221px de ancho), `cyan`, `black` y
+ *   `outline` (borde naranja, fondo transparente, texto blanco: para un botón
+ *   secundario sobre una foto o un fondo oscuro, donde `secondary` taparía lo
+ *   de atrás; es el "btn_orange_transparent" del sitio anterior).
  *   El naranja es el token del rediseño y no el #FF7300 fijo del sitio anterior.
  *   Solo `primary` reparte el texto y el ícono a los extremos; las demás los
  *   centran.

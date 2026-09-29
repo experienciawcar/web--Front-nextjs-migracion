@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 
 import ContactComponent from "@/modules/contact/components/ContactComponent";
+import { buildPageMetadata } from "@/modules/shared/utils/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Contacto | WCAR",
   description:
     "Escríbenos o llámanos: contacta a WCAR para resolver tus dudas, vender tu vehículo o llevarlo a nuestro taller.",
-};
+  path: "/contacto",
+});
 
 /**
  * Vista Contacto (`ROUTES.contact`).

@@ -1,10 +1,10 @@
 import Image from "next/image";
 
+import ReviewerAvatarComponent from "@/modules/shared/components/ReviewerAvatarComponent";
 import StarRatingComponent from "@/modules/shared/components/StarRatingComponent";
+import type { Review } from "@/modules/shared/types/reviews";
 
-import iconQuote from "../assets/testimonios/icon-quote.svg";
-import type { Review } from "../types/reviews";
-import ReviewerAvatarComponent from "./ReviewerAvatarComponent";
+import iconQuote from "../assets/icons/icon-quote.svg";
 
 /**
  * Tarjeta de una reseña (381px de ancho y 251 de alto en desktop): foto,

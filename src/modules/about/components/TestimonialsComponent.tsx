@@ -1,7 +1,7 @@
 import DiagonalLinesComponent from "@/modules/shared/components/DiagonalLinesComponent";
 import SideLabelComponent from "@/modules/shared/components/SideLabelComponent";
 
-import { getReviews } from "../services/reviews";
+import { getReviews } from "@/modules/shared/services/reviews";
 import TestimonialsCarouselComponent from "./TestimonialsCarouselComponent";
 
 /**

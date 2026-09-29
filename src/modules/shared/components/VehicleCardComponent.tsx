@@ -97,6 +97,8 @@ export default function VehicleCardComponent({
       {/* Foto */}
       <div className="relative aspect-[3/2] shrink-0 overflow-hidden rounded-t-lg bg-gray-light">
         <VehicleGalleryComponent
+          key={vehicle.id}
+          vehicleId={vehicle.id}
           images={vehicle.images}
           name={vehicle.name}
           href={vehicle.href}

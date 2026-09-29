@@ -161,6 +161,7 @@ export default function HeadquartersHeroComponent() {
                 className="reveal mt-3 text-[28px] leading-9 font-bold text-dark-gray xl:text-subheadline-1 xl:leading-11"
               >
                 Encuentra el concesionario
+                {" "}
                 <span className="block font-medium text-orange italic">de wcar mas cerca de ti</span>
               </h1>
 

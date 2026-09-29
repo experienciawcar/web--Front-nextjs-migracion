@@ -1,5 +1,6 @@
+import AccordionIconComponent from "@/modules/shared/components/AccordionIconComponent";
+
 import { PROCEDURES } from "../constants/procedures";
-import AccordionIconComponent from "./AccordionIconComponent";
 
 /**
  * La tarjeta blanca de "Trámites de *vehículos*": el título, la introducción y el
