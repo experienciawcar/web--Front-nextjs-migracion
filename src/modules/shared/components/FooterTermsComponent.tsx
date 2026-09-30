@@ -3,6 +3,7 @@ import Image from "next/image";
 import iconClose from "../assets/footer/icon-close.svg";
 import iconPlus from "../assets/footer/icon-plus.svg";
 import { getTermsLinks } from "../services/terms";
+import { ROUTES } from "../constants/routes";
 import FooterHeadingComponent from "./FooterHeadingComponent";
 import FooterLinkListComponent, { type FooterLink } from "./FooterLinkListComponent";
 
@@ -20,7 +21,7 @@ const PRIVACY_LINKS: FooterLink[] = [
 
 const BUYER_TERMS_LINK: FooterLink = {
   label: "Términos y condiciones comprador",
-  href: "/politicas-comprador",
+  href: ROUTES.buyerPolicies,
 };
 
 /**
@@ -55,8 +56,7 @@ function TermsAccordion({ title, children }: { title: string; children: React.Re
  * documentos de los desplegables vienen del backend (ver `getTermsLinks`).
  *
  * Los enlaces apuntan a `/<slug>/<id>`, la misma forma que usaba el sitio
- * anterior. Esas páginas todavía no existen en este proyecto.
- * TODO: crear la ruta dinámica de documentos legales.
+ * anterior; las sirve `app/[title]/[id]/page.tsx`.
  *
  * Los dos desplegables repiten "Términos y condiciones comprador" porque así
  * estaba en el sitio anterior; parece un copia-pega, confirmar si en

@@ -22,3 +22,24 @@ export type TermsLink = {
   href: string;
   isApp: boolean;
 };
+
+/** Un bloque del documento (GET /api/terms/<id>/): subtítulo opcional y HTML del editor. */
+export type TermsContentDto = {
+  id: number;
+  subTitle: string;
+  paragraph: string;
+};
+
+/** Respuesta de GET /api/terms/<id>/. */
+export type TermsDetailDto = {
+  term: TermsDto & { contents_terms: TermsContentDto[] };
+};
+
+/** Documento legal completo, listo para pintarlo. */
+export type TermsDocument = {
+  id: number;
+  title: string;
+  /** Slug tal cual lo guarda el backend (sin codificar). */
+  slug: string;
+  sections: { id: number; title: string | null; html: string }[];
+};

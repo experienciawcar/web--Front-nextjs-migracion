@@ -1,7 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
+import iconUser from "../assets/summary/icon-usuario-registro.svg";
+import arrowCircle from "@/modules/shared/assets/icons/arrow-circle.svg";
+import externalLink from "@/modules/shared/assets/icons/external-link.svg";
+import { ROUTES } from "@/modules/shared/constants/routes";
 import ButtonComponent from "@/modules/shared/components/ButtonComponent";
 import { isValidEmail } from "@/modules/quote/constants/validation";
 import { QuoteTextFieldComponent } from "@/modules/quote/components/QuoteFieldComponents";
@@ -90,7 +95,7 @@ export default function ExpertiseLeadFormComponent({
     return (
       <form
         onSubmit={submitCode}
-        className="mx-auto flex w-full max-w-[420px] flex-col gap-5 px-6 py-10"
+        className="flex w-full flex-col gap-5 px-6 pt-16 pb-10 sm:px-20"
       >
         <h3 className="text-heading-1 font-bold text-dark-gray">
           Confirma tu celular
@@ -137,38 +142,40 @@ export default function ExpertiseLeadFormComponent({
     <form
       onSubmit={submitForm}
       noValidate
-      className="mx-auto flex w-full max-w-[420px] flex-col gap-5 px-6 py-10"
+      className="flex w-full flex-col gap-4 px-6 pt-20 pb-10 sm:px-20"
     >
-      <h3 className="text-heading-1 font-bold text-dark-gray">
-        Deja tus datos para ver el peritaje
+      <Image src={iconUser} alt="" aria-hidden className="mx-auto size-[100px]" />
+      <h3 className="mb-2 text-center text-body font-bold text-dark-gray">
+        Regístrate gratis y accede a toda la información de los vehículos
       </h3>
       <QuoteTextFieldComponent
         id="expertise-name"
         label="Nombre"
         required
         autoComplete="name"
+        placeholder="Ingrese su nombre"
         value={name}
         error={errors.name}
         onChange={(event) => setName(event.target.value)}
       />
       <QuoteTextFieldComponent
         id="expertise-phone"
-        label="Celular"
+        label="Teléfono"
         required
         inputMode="tel"
         autoComplete="tel"
-        placeholder="3001234567"
+        placeholder="Ej: 3001234567 o +573001234567"
         value={phone}
         error={errors.phone}
         onChange={(event) => setPhone(event.target.value)}
       />
       <QuoteTextFieldComponent
         id="expertise-email"
-        label="Correo"
+        label="Email"
         required
         type="email"
         autoComplete="email"
-        placeholder="ejemplo@gmail.com"
+        placeholder="ingrese su email"
         value={email}
         error={errors.email}
         onChange={(event) => setEmail(event.target.value)}
@@ -182,16 +189,15 @@ export default function ExpertiseLeadFormComponent({
             className="mt-1 size-4 shrink-0 accent-orange"
           />
           <span>
-            Acepto la{" "}
+            Acepto tratamiento de datos personales.{" "}
             <a
               href={policyHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-orange"
+              className="text-[#5b7aa6] underline hover:text-orange"
             >
-              política de tratamiento de datos
+              Política de Tratamiento de Datos y Protección de Datos Personales.
             </a>
-            .
           </span>
         </label>
         {errors.terms && (
@@ -205,9 +211,24 @@ export default function ExpertiseLeadFormComponent({
           {message}
         </p>
       )}
-      <ButtonComponent type="submit" disabled={busy}>
-        {busy ? "Enviando código" : "Ver peritaje"}
-      </ButtonComponent>
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-6">
+        <ButtonComponent
+          variant="cyan"
+          href={ROUTES.contact}
+          icon={externalLink}
+          className="max-w-none"
+        >
+          Contacta un asesor
+        </ButtonComponent>
+        <ButtonComponent
+          type="submit"
+          icon={arrowCircle}
+          disabled={busy}
+          className="w-[135px]"
+        >
+          {busy ? "Enviando" : "Ver"}
+        </ButtonComponent>
+      </div>
     </form>
   );
 }

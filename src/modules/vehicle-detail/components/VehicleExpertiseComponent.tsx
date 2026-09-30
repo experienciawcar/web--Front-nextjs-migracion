@@ -10,6 +10,7 @@ import { ROUTES } from "@/modules/shared/constants/routes";
 import type { ExpertiseResult } from "../types/expertise";
 import type { VehicleExpertise } from "../types/vehicle-detail";
 
+import ColserautoReportComponent from "./ColserautoReportComponent";
 import ExpertiseLeadFormComponent from "./ExpertiseLeadFormComponent";
 import ExpertiseReportComponent from "./ExpertiseReportComponent";
 
@@ -18,6 +19,7 @@ const LEAD_KEY = "dataUserColection";
 /** TODO(negocio): confirmar la URL de la política de tratamiento de datos. */
 const POLICY_HREF = "/politicas-comprador";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function hasLeftData(): boolean {
   try {
     return localStorage.getItem(LEAD_KEY) === "true";
@@ -43,10 +45,7 @@ type State =
  * vehículo (`automas_pdf`) o, sin él, lo que encuentre el servidor (`GET /api/peritaje/{id}`):
  * el certificado de Automás por placa o la imagen de Colserauto. Sin nada, un aviso con salida
  * a un asesor.
- *
- * TODO: POR AHORA LOS BOTONES "VER PERITAJE" NO HACEN NADA (pedido del usuario). Para reactivarlos
- * basta con volver a pasarles `onClick={open}`; el visor y el flujo de abajo ya están hechos y no se abren.
- *
+ * *
  * El visor es un `<dialog>` nativo.
  */
 export default function VehicleExpertiseComponent({
@@ -78,13 +77,12 @@ export default function VehicleExpertiseComponent({
     }
   }
 
-  // TODO: sin uso a propósito mientras los botones no hacen nada (ver el JSDoc).
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function open() {
     dialogRef.current?.showModal();
     if (state.status === "ready") return;
-    if (hasLeftData()) void load();
-    else setState({ status: "lead" });
+    // TODO: por ahora el modal de registro está deshabilitado (pedido del usuario) y el peritaje
+    // se muestra de una vez. Para reactivarlo: `if (hasLeftData()) void load(); else setState({ status: "lead" });`
+    void load();
   }
 
   function onLeadDone() {
@@ -96,6 +94,17 @@ export default function VehicleExpertiseComponent({
     void load();
   }
 
+  const isLead = state.status === "lead";
+  // El certificado de Automás trae su propia barra y fondo: ocupa todo el alto, sin el marco blanco.
+  const isColserauto =
+    state.status === "ready" &&
+    expertise?.kind !== "pdf" &&
+    state.result.kind === "colserauto";
+  const isReport =
+    state.status === "ready" &&
+    expertise?.kind !== "pdf" &&
+    (state.result.kind === "report" || state.result.kind === "colserauto");
+
   return (
     <>
       {variant === "summary" ? (
@@ -103,7 +112,7 @@ export default function VehicleExpertiseComponent({
           variant="cyan"
           size="medium"
           icon={iconDownload}
-
+          onClick={open}
           className="max-w-none!"
         >
           Ver peritaje
@@ -113,6 +122,7 @@ export default function VehicleExpertiseComponent({
           variant="cyan"
 
           icon={externalLink}
+          onClick={open}
           shine
           className="mx-auto"
         >
@@ -126,10 +136,28 @@ export default function VehicleExpertiseComponent({
         onClick={(event) => {
           if (event.target === event.currentTarget) dialogRef.current?.close();
         }}
-        className="m-auto h-[90vh] w-[min(960px,94vw)] rounded-lg bg-white p-0 backdrop:bg-black/70"
+        className={`m-auto p-0 ${
+          isReport
+            ? `h-dvh max-h-none overflow-y-auto ${isColserauto ? "w-[min(960px,100vw)]" : "w-[min(860px,100vw)]"} bg-transparent backdrop:bg-[#050a1e]/75 backdrop:backdrop-blur-sm`
+            : isLead
+              ? "max-h-[94vh] w-[min(600px,94vw)] rounded-2xl bg-white backdrop:bg-black/50"
+              : "h-[90vh] w-[min(960px,94vw)] rounded-lg bg-white backdrop:bg-black/50"
+        }`}
       >
-        <div className="flex h-full flex-col">
-          <div className="flex items-center justify-between gap-4 border-b border-[#c2d3ed] px-6 py-4">
+        {isLead && (
+          <button
+            type="button"
+            aria-label="Cerrar"
+            onClick={() => dialogRef.current?.close()}
+            className="absolute top-5 right-6 z-10 flex size-8 cursor-pointer items-center justify-center text-dark-gray"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden>
+              <path d="M2 2L14 14M14 2L2 14" />
+            </svg>
+          </button>
+        )}
+        <div className={isLead || isReport ? "" : "flex h-full flex-col"}>
+          <div className={isLead || isReport ? "hidden" : "flex items-center justify-between gap-4 border-b border-[#c2d3ed] px-6 py-4"}>
             <h2 className="text-heading-1 font-bold text-dark-gray">
               Peritaje del vehículo
             </h2>
@@ -142,7 +170,7 @@ export default function VehicleExpertiseComponent({
             </ButtonComponent>
           </div>
 
-          <div className="min-h-0 flex-1 overflow-auto">
+          <div className={isLead || isReport ? "" : "min-h-0 flex-1 overflow-auto"}>
             {state.status === "lead" && (
               <ExpertiseLeadFormComponent
                 vehicleId={vehicleId}
@@ -170,7 +198,15 @@ export default function VehicleExpertiseComponent({
               state.result.kind === "report" && (
                 <ExpertiseReportComponent
                   report={state.result.report}
-                  vehicleName={vehicleName}
+                  onClose={() => dialogRef.current?.close()}
+                />
+              )}
+            {state.status === "ready" &&
+              expertise?.kind !== "pdf" &&
+              state.result.kind === "colserauto" && (
+                <ColserautoReportComponent
+                  report={state.result.report}
+                  onClose={() => dialogRef.current?.close()}
                 />
               )}
             {state.status === "ready" &&

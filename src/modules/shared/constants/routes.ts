@@ -5,7 +5,7 @@
  * Solo `home` y `aboutUs` tienen página hoy. El resto son las URLs del sitio
  * anterior (wcar.co), que se conservan a propósito para no perder
  * posicionamiento cuando existan las páginas, salvo las que el navbar ya traía
- * definidas: `/comprar`, `/servicios/financiacion`, `/blog`, `/contacto` y
+ * definidas: `/servicios/financiacion`, `/blog`, `/contacto` y
  * `/sign-in`.
  * TODO: unificar el idioma de las URLs (hoy conviven `/about-us` y `/sign-in`
  * con `/compra-tu-carro`) y, si se renombran, crear las redirecciones desde las
@@ -15,7 +15,7 @@ export const ROUTES = {
   home: "/",
   aboutUs: "/about-us",
   headquarters: "/nuestras-sedes",
-  buyOrSell: "/comprar",
+  buyOrSell: "/compra-o-vende-tu-carro-en-colombia",
   buyCar: "/compra-tu-carro",
   buyMotorcycle: "/compra-tu-moto",
   buyTruck: "/compra-tu-camion",
@@ -33,6 +33,11 @@ export const ROUTES = {
   /** "Contacta un asesor" / cotizar la venta de un vehículo (URL del sitio anterior). */
   quote: "/cotizar",
   signIn: "/sign-in",
+  /** Política de tratamiento de datos personales (URL del sitio anterior). */
+  privacyPolicy: "/politica-de-privacidad",
+  /** Términos y condiciones del comprador y del vendedor (URLs del sitio anterior). */
+  buyerPolicies: "/politicas-comprador",
+  sellerPolicies: "/politicas-vendedor",
 } as const;
 
 /** Texto en minúsculas, sin tildes y con guiones ("Camioneta - SUV" → "camioneta-suv"). */

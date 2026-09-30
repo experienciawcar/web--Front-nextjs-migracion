@@ -1,4 +1,4 @@
-import type { TermsDto, TermsLink } from "../types/terms";
+import type { TermsDetailDto, TermsDocument, TermsDto, TermsLink } from "../types/terms";
 import { apiUrl } from "./api";
 
 /**
@@ -43,4 +43,39 @@ export async function getTermsLinks(): Promise<TermsLink[]> {
     console.error("No se pudieron cargar los términos y condiciones:", error);
     return [];
   }
+}
+
+/** Ruta canónica de un documento: `/<slug>/<id>`, la misma que arma el footer. */
+export function termsPath(slug: string, id: number): string {
+  return `/${encodeURIComponent(slug)}/${id}`;
+}
+
+/**
+ * Un documento legal con su contenido (GET /api/terms/<id>/).
+ *
+ * `null` si no existe (el backend responde 404 "Term not found") o está dado de baja: la página
+ * responde 404 real, no una pantalla en blanco como el sitio anterior. Cualquier otro fallo lanza,
+ * para que no se cachee como si el documento no existiera.
+ */
+export async function getTermsDocument(id: number): Promise<TermsDocument | null> {
+  const url = apiUrl(`/terms/${id}/`);
+  const response = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
+  if (response.status === 404) return null;
+  if (!response.ok) {
+    throw new Error(`GET ${url} respondió ${response.status}`);
+  }
+
+  const { term }: TermsDetailDto = await response.json();
+  if (!term.active) return null;
+
+  return {
+    id: term.id,
+    title: term.title.trim(),
+    slug: term.url,
+    sections: term.contents_terms.map((item) => ({
+      id: item.id,
+      title: item.subTitle.trim() || null,
+      html: item.paragraph,
+    })),
+  };
 }

@@ -23,6 +23,7 @@ const PAGES = [
   ROUTES.buyMotorcycle,
   ROUTES.buyVan,
   ROUTES.buyTruck,
+  ROUTES.buyOrSell,
   ROUTES.sellCar,
   ROUTES.financing,
   ROUTES.procedures,
@@ -30,6 +31,9 @@ const PAGES = [
   ROUTES.blog,
   ROUTES.contact,
   ROUTES.quote,
+  ROUTES.privacyPolicy,
+  ROUTES.buyerPolicies,
+  ROUTES.sellerPolicies,
 ];
 
 /**
