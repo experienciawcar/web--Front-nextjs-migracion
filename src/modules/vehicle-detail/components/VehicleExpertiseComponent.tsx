@@ -19,7 +19,6 @@ const LEAD_KEY = "dataUserColection";
 /** TODO(negocio): confirmar la URL de la política de tratamiento de datos. */
 const POLICY_HREF = "/politicas-comprador";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function hasLeftData(): boolean {
   try {
     return localStorage.getItem(LEAD_KEY) === "true";
@@ -80,9 +79,8 @@ export default function VehicleExpertiseComponent({
   function open() {
     dialogRef.current?.showModal();
     if (state.status === "ready") return;
-    // TODO: por ahora el modal de registro está deshabilitado (pedido del usuario) y el peritaje
-    // se muestra de una vez. Para reactivarlo: `if (hasLeftData()) void load(); else setState({ status: "lead" });`
-    void load();
+    if (hasLeftData()) void load();
+    else setState({ status: "lead" });
   }
 
   function onLeadDone() {
