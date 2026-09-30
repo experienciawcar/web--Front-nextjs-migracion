@@ -3,6 +3,18 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   // Genera .next/standalone (servidor mínimo) para la imagen de Docker / Cloud Run.
   output: "standalone",
+  // La ficha de un vehículo (/compra-tu-carro/<tipo>/<nombre>/<id>) se sirve desde una ruta
+  // propia y estática (src/app/vehiculo/[id]); la URL pública no cambia. Solo cuenta el id.
+  async rewrites() {
+    return {
+      beforeFiles: [
+        {
+          source: "/compra-tu-carro/:type/:name/:id(\\d+)",
+          destination: "/vehiculo/:id",
+        },
+      ],
+    };
+  },
   images: {
     remotePatterns: [
       // Fotos de los asesores (GET /api/advisors/). El backend las entrega

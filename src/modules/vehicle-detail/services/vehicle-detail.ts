@@ -1,3 +1,4 @@
+import { getSedes } from "@/modules/catalog/services/sedes";
 import { vehicleHref } from "@/modules/shared/constants/routes";
 import { apiUrl } from "@/modules/shared/services/api";
 import {
@@ -274,7 +275,10 @@ function toExpertise(dto: VehicleDetailDto): VehicleExpertise {
 }
 
 /** El vehículo del backend como lo pinta la ficha; `null` si no se puede mostrar (inactivo, sin precio o sin fotos). */
-export function toVehicleDetail(dto: VehicleDetailDto): VehicleDetail | null {
+export function toVehicleDetail(
+  dto: VehicleDetailDto,
+  sedeName?: string,
+): VehicleDetail | null {
   const listPrice = parseAmount(dto.price);
   const discountPrice = parseAmount(dto.discount_price);
   const images = toImages(dto);
@@ -301,7 +305,7 @@ export function toVehicleDetail(dto: VehicleDetailDto): VehicleDetail | null {
     mileage:
       dto.mileage != null ? `${numberFormat.format(dto.mileage)} Km` : null,
     transmission,
-    city: dto.sede_car?.name?.trim() || "Bogotá",
+    city: sedeName || "Bogotá",
     price: formatMoney(hasDiscount ? discountPrice : listPrice),
     previousPrice: hasDiscount ? formatMoney(listPrice) : null,
     priceValue: hasDiscount ? discountPrice : listPrice,
@@ -338,23 +342,27 @@ export function toVehicleDetail(dto: VehicleDetailDto): VehicleDetail | null {
 }
 
 /**
- * Un vehículo por su id (GET /cars/{id}/). Devuelve `null` si no existe, está
- * inactivo o no se puede pintar: la página responde 404 (el sitio anterior lo
- * mandaba al inicio, lo que esconde el error a los buscadores). Cualquier otro
- * fallo del backend lanza: así el error no se queda cacheado como si el
- * vehículo no existiera.
+ * Un vehículo por su id (GET /v2/cars/{id}/, ~1,1 s contra ~1,8 s de GET /cars/{id}/). Devuelve
+ * `null` si no existe, está inactivo o no se puede pintar: la página responde 404 (el sitio
+ * anterior lo mandaba al inicio, lo que esconde el error a los buscadores). Cualquier otro fallo
+ * del backend lanza: así el error no se queda cacheado como si el vehículo no existiera.
+ *
+ * La v2 trae la sede solo como id (`sede`), no como objeto (`sede_car`): el nombre sale de
+ * `GET /sedes/` (`getSedes`, cacheado), que se pide a la vez. Si falla, la ciudad queda "Bogotá".
  */
 export async function getVehicleDetail(
   id: number,
 ): Promise<VehicleDetail | null> {
-  const url = apiUrl(`/cars/${id}/`);
-  const response = await fetch(url, {
-    next: { revalidate: REVALIDATE_SECONDS },
-  });
+  const url = apiUrl(`/v2/cars/${id}/`);
+  const [response, sedes] = await Promise.all([
+    fetch(url, { next: { revalidate: REVALIDATE_SECONDS } }),
+    getSedes(),
+  ]);
   if (response.status === 404) return null;
   if (!response.ok) throw new Error(`GET ${url} respondió ${response.status}`);
   const dto: VehicleDetailDto = await response.json();
-  return toVehicleDetail(dto);
+  const sedeName = sedes.find((sede) => sede.id === String(dto.sede))?.name;
+  return toVehicleDetail(dto, sedeName);
 }
 
 /**

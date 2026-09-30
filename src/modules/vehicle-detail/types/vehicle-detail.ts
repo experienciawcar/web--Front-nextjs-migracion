@@ -17,7 +17,7 @@ export type VehicleDescriptionRowDto = {
 };
 
 /**
- * Vehículo tal como lo entrega GET /api/cars/{id}/. Solo los campos que usa la
+ * Vehículo tal como lo entrega GET /api/v2/cars/{id}/. Solo los campos que usa la
  * ficha. `description_list` ya trae lo mismo que GET /description-car/{id}/
  * (verificado con un vehículo real), así que no hace falta la segunda llamada
  * que hacía el sitio anterior.
@@ -44,7 +44,8 @@ export type VehicleDetailDto = {
   brand_car?: { brand?: string | null } | null;
   type?: { type?: string | null } | null;
   body_type?: string | null;
-  sede_car?: { name?: string | null } | null;
+  /** Id de la sede (la v2 no trae el objeto `sede_car`); el nombre sale de GET /sedes/. */
+  sede?: number | null;
   tag_car?: { id: number; tag: string; color?: string | null } | null;
   warranty?: boolean | null;
   warranty_type?: string | null;

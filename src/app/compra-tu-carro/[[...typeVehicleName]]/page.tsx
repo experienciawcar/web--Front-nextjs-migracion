@@ -6,9 +6,6 @@ import { CATALOG_CARS } from "@/modules/catalog/constants/catalogs";
 import { getCatalogFilterOptions } from "@/modules/catalog/services/options";
 import type { CatalogFilters } from "@/modules/catalog/types/filters";
 import { buildPageMetadata } from "@/modules/shared/utils/seo";
-import VehicleDetailComponent from "@/modules/vehicle-detail/components/VehicleDetailComponent";
-import { getRelatedVehicles, getVehicleDetail } from "@/modules/vehicle-detail/services/vehicle-detail";
-import { buildVehicleMetadata } from "@/modules/vehicle-detail/utils/seo";
 
 type PageProps = {
   params: Promise<{ typeVehicleName?: string[] }>;
@@ -37,29 +34,10 @@ function normalizeSegment(segment: string): string {
     .toLowerCase();
 }
 
-/**
- * El id del vehículo si la ruta es una ficha: `/compra-tu-carro/<tipo>/<nombre>/<id>` (la
- * estructura del sitio anterior, ver `vehicleHref`). Solo cuenta el id: el tipo y el nombre son
- * la URL amigable y pueden decir cualquier cosa. `null` si la ruta no es de una ficha.
- */
-function getVehicleId(segments: string[] | undefined): number | null {
-  if (segments?.length !== 3) return null;
-  const id = segments[2];
-  return /^\d+$/.test(id) ? Number(id) : null;
-}
-
 // Canonical fijo a `/compra-tu-carro`: los segmentos por tipo y los filtros (`?type_vehicle=`)
 // muestran el mismo catálogo, y así no compiten entre sí como duplicados. La ficha de un
 // vehículo tiene el suyo (ver `buildVehicleMetadata`).
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { typeVehicleName } = await params;
-  const vehicleId = getVehicleId(typeVehicleName);
-
-  if (vehicleId !== null) {
-    const vehicle = await getVehicleDetail(vehicleId);
-    return vehicle ? buildVehicleMetadata(vehicle) : {};
-  }
-
+export async function generateMetadata(): Promise<Metadata> {
   return buildPageMetadata({
     title: CATALOG_CARS.seo.title,
     description: CATALOG_CARS.seo.description,
@@ -93,24 +71,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
  *
  * Faltan por agregar: imágenes/iconos (tarea 10).
  *
- * **La ficha de un vehículo vive en esta misma ruta.** Next no deja un segmento dinámico
- * (`[tipo]`) hermano de un catch-all opcional, así que `/compra-tu-carro/<tipo>/<nombre>/<id>` se
- * resuelve aquí: con tres segmentos y un id numérico al final se pinta la ficha
- * (`VehicleDetailComponent`, `docs/planes/detalle-vehiculo.md`); con uno o ninguno, el catálogo;
- * cualquier otra forma, 404. Un vehículo que no existe o está inactivo también da 404 (el sitio
- * anterior lo mandaba al inicio).
+ * **La ficha de un vehículo ya no se resuelve aquí:** `/compra-tu-carro/<tipo>/<nombre>/<id>` la
+ * reescribe `next.config.ts` a `src/app/vehiculo/[id]` (estática, con caché). Cualquier otra ruta
+ * de más de un segmento da 404.
  */
 export default async function BuyCarPage({ params, searchParams }: PageProps) {
   const { typeVehicleName: segments } = await params;
 
-  if (segments && segments.length > 1) {
-    const vehicleId = getVehicleId(segments);
-    if (vehicleId === null) notFound();
-
-    const [vehicle, related] = await Promise.all([getVehicleDetail(vehicleId), getRelatedVehicles(vehicleId)]);
-    if (!vehicle) notFound();
-    return <VehicleDetailComponent vehicle={vehicle} related={related} />;
-  }
+  if (segments && segments.length > 1) notFound();
 
   const [options, { type_vehicle: typeVehicleName }] = await Promise.all([getCatalogFilterOptions(), searchParams]);
 

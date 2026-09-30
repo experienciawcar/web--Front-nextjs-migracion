@@ -1,9 +1,7 @@
-import type { Vehicle } from "@/modules/shared/types/vehicle";
-
 import type { VehicleDetail } from "../types/vehicle-detail";
 import { buildVehicleJsonLd } from "../utils/seo";
 
-import RelatedVehiclesComponent from "./RelatedVehiclesComponent";
+import RelatedVehiclesLoaderComponent from "./RelatedVehiclesLoaderComponent";
 import VehicleFeaturesComponent from "./VehicleFeaturesComponent";
 import VehicleFinancingComponent from "./VehicleFinancingComponent";
 import VehicleSpecsComponent from "./VehicleSpecsComponent";
@@ -23,15 +21,13 @@ import VehicleTopComponent from "./VehicleTopComponent";
  * `docs/planes/detalle-vehiculo.md`.
  *
  * Datos: `GET /cars/{id}/` (todo el vehículo, con `description_list`) y
- * `GET /cars-related/{id}/`. Comportamiento del sitio anterior que se conserva o se cambia:
+ * `GET /cars-related/{id}/` (este, desde el navegador: tarda ~24 s, ver `RelatedVehiclesLoaderComponent`). Comportamiento del sitio anterior que se conserva o se cambia:
  * `docs/DETALLE_VEHICULO.md`.
  */
 export default function VehicleDetailComponent({
   vehicle,
-  related,
 }: {
   vehicle: VehicleDetail;
-  related: Vehicle[];
 }) {
   return (
     <main className="flex-1">
@@ -43,7 +39,7 @@ export default function VehicleDetailComponent({
       <VehicleSpecsComponent vehicle={vehicle} />
       <VehicleFeaturesComponent vehicle={vehicle} />
       <VehicleFinancingComponent />
-      <RelatedVehiclesComponent vehicles={related} />
+      <RelatedVehiclesLoaderComponent vehicleId={vehicle.id} />
       <VehicleStickyBarComponent tagName={vehicle.tag?.name} />
     </main>
   );
