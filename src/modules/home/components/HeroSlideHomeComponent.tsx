@@ -60,21 +60,24 @@ import { HERO_BAND_END, HERO_CANVAS_MARGIN } from "../constants/hero-carousel";
  */
 export default function HeroSlideHomeComponent() {
   return (
-    <div className="relative mx-auto hidden md:block md:max-w-[1440px]" style={{ marginLeft: HERO_CANVAS_MARGIN }}>
-        {/* Cuña naranja + jeep + lockup: solo desktop. */}
-        <div aria-hidden className="absolute inset-0 hidden md:block">
-          <Image
-            src={watermarkWcar}
-            alt=""
-            className="absolute top-[9px] left-[-23px] h-[186px] w-[835px] max-w-none opacity-80"
-          />
-          <div
-            className="absolute top-0 right-0 h-[500px] w-full bg-orange"
-            style={{
-              clipPath: "polygon(80% 0, 100% 0, 100% 100%, 48.75% 100%)",
-            }}
-          />
-          {/* La diagonal de arriba mide 500 de alto (lo que medía TODO el hero
+    <div
+      className="relative mx-auto hidden md:block md:max-w-[1440px]"
+      style={{ marginLeft: HERO_CANVAS_MARGIN }}
+    >
+      {/* Cuña naranja + jeep + lockup: solo desktop. */}
+      <div aria-hidden className="absolute inset-0 hidden md:block">
+        <Image
+          src={watermarkWcar}
+          alt=""
+          className="absolute top-[9px] left-[-23px] h-[186px] w-[835px] max-w-none opacity-80"
+        />
+        <div
+          className="absolute top-0 right-0 h-[500px] w-full bg-orange"
+          style={{
+            clipPath: "polygon(80% 0, 100% 0, 100% 100%, 48.75% 100%)",
+          }}
+        />
+        {/* La diagonal de arriba mide 500 de alto (lo que medía TODO el hero
               en el diseño): al estirar el hero a 740 para que la tarjeta de
               búsqueda se montara más sobre él, si la diagonal se estiraba con
               todo el hero, la tarjeta le tapaba el tramo de abajo y la cuña se
@@ -90,12 +93,12 @@ export default function HeroSlideHomeComponent() {
               antes de que la tarjeta acabe (en el diseño acaba en 538 y la
               tarjeta en 586). Es la misma altura donde acaba la banda negra de
               los slides oscuros: ver `constants/hero-carousel.ts`. */}
-          <div
-            aria-hidden
-            className="absolute top-[499px] right-0 left-[48.75%] bg-orange"
-            style={{ height: HERO_BAND_END - 499 }}
-          />
-          {/* La cuña de arriba mide justo el lienzo de 1440 (su lado derecho ya
+        <div
+          aria-hidden
+          className="absolute top-[499px] right-0 left-[48.75%] bg-orange"
+          style={{ height: HERO_BAND_END - 499 }}
+        />
+        {/* La cuña de arriba mide justo el lienzo de 1440 (su lado derecho ya
               cae en x=1440, recto y sin diagonal: los dos puntos de la derecha
               del `clipPath` están al 100%). En pantallas anchas eso dejaba un
               corte seco y toda esa foto y el lockup quedaban lejos del borde
@@ -103,74 +106,73 @@ export default function HeroSlideHomeComponent() {
               del mismo naranja: como el borde ya es recto, no hace falta
               repetir el corte diagonal. Acaba a la misma altura (`HERO_BAND_END`) que la
               franja lisa de arriba, para que el corte inferior sea uno solo. */}
-          <div
-            aria-hidden
-            className="absolute top-0 left-full hidden w-[calc(50vw-50%+1px)] bg-orange md:block"
-            style={{ height: HERO_BAND_END }}
-          />
-          <DiagonalLinesComponent
-            variant="white"
-            className="absolute top-0 right-[calc((50%-50vw)*var(--hero-bleed,1))] h-[147px] w-[56px] opacity-50"
-          />
+        <div
+          aria-hidden
+          className="absolute top-0 left-full hidden w-[calc(50vw-50%+1px)] bg-orange md:block"
+          style={{ height: HERO_BAND_END }}
+        />
+        <DiagonalLinesComponent
+          variant="white"
+          className="absolute top-0 right-[calc((50%-50vw)*var(--hero-bleed,1))] h-[147px] w-[56px] opacity-50"
+        />
 
-          <div className="absolute top-[31px] right-8 flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Image
-                src={isotipoWcar}
-                alt=""
-                aria-hidden
-                className="h-8 w-auto"
-              />
-              <span className="text-heading-1 font-bold text-dark-gray">
-                wcar
-              </span>
-            </div>
-            <span aria-hidden className="h-8 w-px bg-gray/40" />
+        <div className="absolute top-[31px] right-8 flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <Image
-              src={logoSantander}
-              alt="Santander"
-              className="h-[26px] w-[147px] brightness-0 invert"
+              src={isotipoWcar}
+              alt=""
+              aria-hidden
+              className="h-8 w-auto"
             />
+            <span className="text-heading-1 font-bold text-dark-gray">
+              wcar
+            </span>
           </div>
+          <span aria-hidden className="h-8 w-px bg-gray/40" />
+          <Image
+            src={logoSantander}
+            alt="Santander"
+            className="h-[26px] w-[147px] brightness-0 invert"
+          />
+        </div>
+      </div>
+
+      <div className="container-wcar relative py-12 md:h-[740px] md:py-0">
+        <div className="md:max-w-[545px] md:pt-[100px]">
+          {/* TODO: confirmar con diseño: "mas" sin tilde. */}
+          <h1
+            id="hero-title"
+            className="text-[32px] leading-9 font-bold text-dark-gray md:text-[42px] md:leading-[48px]"
+          >
+            El vehículo mas seguro{" "}
+            <span className="block text-orange italic">de colombia</span>
+          </h1>
+
+          <span
+            aria-hidden
+            className="mt-6 hidden h-px w-[282px] bg-gray/30 md:block"
+          />
         </div>
 
-        <div className="container-wcar relative py-12 md:h-[740px] md:py-0">
-          <div className="md:max-w-[545px] md:pt-[100px]">
-            {/* TODO: confirmar con diseño: "mas" sin tilde. */}
-            <h1
-              id="hero-title"
-              className="text-[32px] leading-9 font-bold text-dark-gray md:text-[42px] md:leading-[48px]"
-            >
-              El vehículo mas seguro
-              {" "}
-              <span className="block text-orange italic">de colombia</span>
-            </h1>
-
-            <span
-              aria-hidden
-              className="mt-6 hidden h-px w-[282px] bg-gray/30 md:block"
-            />
-          </div>
-
-          {/* Fuera del md:max-w-[545px] del título: a 24 bold + 14 semibold, las
+        {/* Fuera del md:max-w-[545px] del título: a 24 bold + 14 semibold, las
               tres cifras no caben en 545 y el diseño (537 de ancho) sí les da
               algo más de aire. */}
-          <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-small font-semibold text-gray-dark md:mt-7 md:max-w-[620px]">
-            <Image src={starIcon} alt="" aria-hidden className="size-5" />
-            <span className="text-[24px] font-bold text-orange">4.8</span>
-            en Google
-            <span aria-hidden className="text-gray-dark/60">
-              ·
-            </span>
-            <span className="text-[24px] font-bold text-orange">+9.000</span>
-            Clientes felices
-            <span aria-hidden className="text-gray-dark/60">
-              ·
-            </span>
-            <span className="text-[24px] font-bold text-orange">+10.000</span>
-            Vehículos vendidos
-          </p>
-        </div>
+        <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-small font-semibold text-gray-dark md:mt-7 md:max-w-[620px]">
+          <Image src={starIcon} alt="" aria-hidden className="size-5" />
+          <span className="text-[24px] font-bold text-orange">4.8</span>
+          en Google
+          <span aria-hidden className="text-gray-dark/60">
+            ·
+          </span>
+          <span className="text-[24px] font-bold text-orange">+9.000</span>
+          Clientes felices
+          <span aria-hidden className="text-gray-dark/60">
+            ·
+          </span>
+          <span className="text-[24px] font-bold text-orange">+10.000</span>
+          Vehículos vendidos
+        </p>
+      </div>
     </div>
   );
 }

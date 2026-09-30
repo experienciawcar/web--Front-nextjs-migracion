@@ -76,11 +76,15 @@ export default function TradeInBannerComponent() {
           backgroundImage: "url('/assets/home/decor/arcos.png')",
           backgroundSize: "71px 73px",
           maskImage: "linear-gradient(to right, #000 30%, transparent 54%)",
-          WebkitMaskImage: "linear-gradient(to right, #000 30%, transparent 54%)",
+          WebkitMaskImage:
+            "linear-gradient(to right, #000 30%, transparent 54%)",
         }}
       />
 
-      <span aria-hidden className="pointer-events-none absolute inset-x-0 top-[52.7%] bottom-0 overflow-hidden xl:hidden">
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-[52.7%] bottom-0 overflow-hidden xl:hidden"
+      >
         <Image
           src="/assets/home/hero/autos-cambio.webp"
           alt=""
@@ -104,7 +108,10 @@ export default function TradeInBannerComponent() {
       <span
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-[20.27%] h-[32.43%] xl:hidden"
-        style={{ backgroundImage: "linear-gradient(180deg, rgba(255,128,0,0) 0.12%, #ff8000 79.3%)" }}
+        style={{
+          backgroundImage:
+            "linear-gradient(180deg, rgba(255,128,0,0) 0.12%, #ff8000 79.3%)",
+        }}
       />
 
       <Image

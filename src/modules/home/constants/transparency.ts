@@ -28,19 +28,22 @@ export const TRANSPARENCY_FEATURES: TransparencyFeature[] = [
     id: "compra-online",
     icon: iconCompraOnline,
     title: "Compras tu auto online.",
-    description: "Puedes reservarlo o pagarlo totalmente a través de nuestra plataforma.",
+    description:
+      "Puedes reservarlo o pagarlo totalmente a través de nuestra plataforma.",
   },
   {
     id: "tecnologia",
     icon: iconTecnologia,
     title: "Tecnología para acercar las personas.",
-    description: "Obtén atención personalizada a través de WCAR para resolver cualquier duda.",
+    description:
+      "Obtén atención personalizada a través de WCAR para resolver cualquier duda.",
   },
   {
     id: "envio",
     icon: iconEnvio,
     title: "Enviamos tu auto a tu casa.",
-    description: "Compra a través de nuestra plataforma y enviamos el auto a la comodidad de tu hogar.",
+    description:
+      "Compra a través de nuestra plataforma y enviamos el auto a la comodidad de tu hogar.",
   },
   {
     id: "financiacion",
@@ -54,7 +57,8 @@ export const TRANSPARENCY_FEATURES: TransparencyFeature[] = [
     icon: iconSeguros,
     title: "Seguros Wcar. ",
     titleItalic: "confianza y bienestar",
-    description: "confianza y bienestar de nuestros clientes es nuestra principal prioridad",
+    description:
+      "confianza y bienestar de nuestros clientes es nuestra principal prioridad",
   },
   {
     id: "taller",

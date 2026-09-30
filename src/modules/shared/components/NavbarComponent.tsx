@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import iconAccount from "../assets/navbar/icon-account.svg";
 import iconGoogle from "../assets/navbar/icon-google.svg";
 import iconLocation from "../assets/navbar/icon-location.svg";
 import logoWcar from "../assets/navbar/logo-wcar.svg";
+import AccountLinkComponent from "@/modules/auth/components/AccountLinkComponent";
+
 import { ROUTES } from "../constants/routes";
 import { getNavItems } from "../services/navigation";
 import AppLinkComponent from "./AppLinkComponent";
@@ -35,10 +36,11 @@ const NAV_LINK_CLASS =
  *    estado que calculaba nunca se llegaba a pintar.
  *  - Ocultar el navbar al hacer scroll hacia abajo: se calculaba `isVisible`
  *    pero ninguna clase lo usaba, así que nunca hizo nada.
- *  - Lo que depende de la sesión (nombre del usuario, "Tus Vehículos", cerrar
- *    sesión, el botón de Google): este proyecto todavía no tiene autenticación.
- *    TODO: cuando exista, el enlace "Cuenta" pasa a mostrar el nombre y a
- *    abrir la sesión.
+ *  - El One Tap de Google que saltaba solo en cada página y "Tus Vehículos".
+ *    El enlace "Cuenta" (`AccountLinkComponent`) lleva al login y, con sesión,
+ *    muestra el nombre y lleva a `/perfil`. Es un componente cliente a
+ *    propósito: leer la sesión aquí (`cookies()`) volvería dinámicas todas las
+ *    rutas.
  */
 export default async function NavbarComponent() {
   const navItems = await getNavItems();
@@ -91,23 +93,7 @@ export default async function NavbarComponent() {
               enlace ni etiqueta; probablemente sea el badge de reseñas. */}
           <Image src={iconGoogle} alt="Google" className="hidden h-7 w-auto xl:block" />
 
-          <Link
-            href={ROUTES.signIn}
-            className="flex items-center gap-1 whitespace-nowrap text-small font-bold text-gray-dark transition-colors hover:text-orange"
-          >
-            {/* El glifo es más pequeño que su caja: 32px en una caja de 40 en
-                mobile, y 25.33px en una de 32 en desktop. La caja es la que
-                define el espaciado. */}
-            <span className="flex size-10 items-center justify-center xl:size-8">
-              <Image
-                src={iconAccount}
-                alt=""
-                aria-hidden
-                className="size-8 xl:size-[25.33px]"
-              />
-            </span>
-            <span className="hidden xl:inline">Cuenta</span>
-          </Link>
+          <AccountLinkComponent />
 
           <MobileMenuComponent items={navItems} />
         </div>

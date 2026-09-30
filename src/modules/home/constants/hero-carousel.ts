@@ -40,7 +40,8 @@ export const HERO_TABS_TOP = 400;
  * escalón en el empalme de las diagonales. Con el margen entero, todo cae igual.
  * Un navegador sin `round()` ignora la declaración y queda el `mx-auto`.
  */
-export const HERO_CANVAS_MARGIN = "max(0px, round(down, calc((100% - 1440px) / 2), 1px))";
+export const HERO_CANVAS_MARGIN =
+  "max(0px, round(down, calc((100% - 1440px) / 2), 1px))";
 
 /**
  * Alto del banner en mobile (px de diseño, sobre un ancho de 393). Todos los slides

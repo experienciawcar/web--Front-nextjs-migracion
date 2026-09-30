@@ -28,15 +28,26 @@ export default function HeroSlideShapeComponent({
       src={src}
       alt=""
       aria-hidden
-      className={bleedClassName ? "block size-full max-w-none" : "absolute inset-0 block size-full max-w-none"}
+      className={
+        bleedClassName
+          ? "block size-full max-w-none"
+          : "absolute inset-0 block size-full max-w-none"
+      }
     />
   );
 
   return (
-    <div aria-hidden className={`absolute flex items-center justify-center ${outerClassName}`}>
+    <div
+      aria-hidden
+      className={`absolute flex items-center justify-center ${outerClassName}`}
+    >
       <div className={`flex-none ${transformClassName}`}>
         <div className={`relative ${boxClassName}`}>
-          {bleedClassName ? <div className={`absolute ${bleedClassName}`}>{image}</div> : image}
+          {bleedClassName ? (
+            <div className={`absolute ${bleedClassName}`}>{image}</div>
+          ) : (
+            image
+          )}
         </div>
       </div>
     </div>

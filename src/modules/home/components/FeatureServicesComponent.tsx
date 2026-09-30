@@ -17,25 +17,46 @@ import { HOME_SERVICES, type HomeService } from "../constants/services";
  * fotográfico); no se reproducen, son decorativos y no cambian la lectura.
  * TODO: confirmar con diseño si hace falta calcarlos.
  */
-const BOTTOM_FADE = "linear-gradient(to top, var(--color-orange) 0%, transparent 12%)";
+const BOTTOM_FADE =
+  "linear-gradient(to top, var(--color-orange) 0%, transparent 12%)";
 
 /** El logo o lockup que va sobre la foto: cada tarjeta trae uno distinto. */
 function ServiceLogo({ id }: { id: HomeService["id"] }) {
-  if (id === "seguros") return <Image src={logoWcarseguros} alt="wcarseguros" className="h-[27px] w-auto" />;
-  if (id === "taller") return <Image src={logoWcartaller} alt="wcartaller" className="h-[27px] w-auto" />;
+  if (id === "seguros")
+    return (
+      <Image
+        src={logoWcarseguros}
+        alt="wcarseguros"
+        className="h-[27px] w-auto"
+      />
+    );
+  if (id === "taller")
+    return (
+      <Image
+        src={logoWcartaller}
+        alt="wcartaller"
+        className="h-[27px] w-auto"
+      />
+    );
   if (id === "financiacion") {
     return (
       <div className="flex items-center gap-4">
         <Image src={logoWcar} alt="wcar" className="h-[27px] w-auto" />
         <span aria-hidden className="h-7 w-px bg-white/60" />
-        <Image src={logoSantander} alt="Santander" className="h-[21px] w-[120px]" />
+        <Image
+          src={logoSantander}
+          alt="Santander"
+          className="h-[21px] w-[120px]"
+        />
       </div>
     );
   }
   return (
     <div className="flex items-center gap-2">
       <Image src={isotipoWcar} alt="" aria-hidden className="h-[27px] w-auto" />
-      <span className="text-[24px] leading-[29px] font-semibold text-black">wcoffee</span>
+      <span className="text-[24px] leading-[29px] font-semibold text-black">
+        wcoffee
+      </span>
     </div>
   );
 }
@@ -44,8 +65,19 @@ function ServiceCard({ service }: { service: HomeService }) {
   return (
     <li className="flex w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-lg bg-white shadow-[0_7px_14px_rgba(211,218,226,0.4)] xl:w-auto">
       <div className="relative h-[340px] shrink-0 overflow-hidden rounded-t-lg bg-orange">
-        <Image src={service.photo} alt="" aria-hidden fill sizes="280px" className="object-cover" />
-        <div aria-hidden className="absolute inset-0" style={{ backgroundImage: BOTTOM_FADE }} />
+        <Image
+          src={service.photo}
+          alt=""
+          aria-hidden
+          fill
+          sizes="280px"
+          className="object-cover"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{ backgroundImage: BOTTOM_FADE }}
+        />
 
         <div className="absolute inset-x-0 top-[23px] flex justify-center px-8">
           <ServiceLogo id={service.id} />
@@ -63,7 +95,9 @@ function ServiceCard({ service }: { service: HomeService }) {
           {service.name}
           <span className="text-orange">{service.brand}</span>
         </h3>
-        <p className="min-h-[34px] text-small leading-[17px] font-medium text-gray-dark">{service.description}</p>
+        <p className="min-h-[34px] text-small leading-[17px] font-medium text-gray-dark">
+          {service.description}
+        </p>
 
         <ButtonComponent
           href={service.href}
@@ -73,7 +107,11 @@ function ServiceCard({ service }: { service: HomeService }) {
           className="mt-2 h-[42px]! w-[91px]! justify-center! px-0!"
         >
           Ver
-          <span className="sr-only"> {service.name}{service.brand}</span>
+          <span className="sr-only">
+            {" "}
+            {service.name}
+            {service.brand}
+          </span>
         </ButtonComponent>
       </div>
     </li>
@@ -103,11 +141,19 @@ function ServiceCard({ service }: { service: HomeService }) {
  */
 export default function FeatureServicesComponent() {
   return (
-    <section aria-labelledby="services-title" className="overflow-x-clip bg-white">
+    <section
+      aria-labelledby="services-title"
+      className="overflow-x-clip bg-white"
+    >
       <div className="container-wcar py-16 xl:py-16">
         <span aria-hidden className="block h-[4px] w-[115px] bg-orange" />
-        <p className="reveal mt-4 text-small font-bold text-gray">Conoce nuestros productos y todo lo que tenemos para ofrecer</p>
-        <h2 id="services-title" className="reveal mt-2 text-subheadline-1 font-bold text-dark-gray">
+        <p className="reveal mt-4 text-small font-bold text-gray">
+          Conoce nuestros productos y todo lo que tenemos para ofrecer
+        </p>
+        <h2
+          id="services-title"
+          className="reveal mt-2 text-subheadline-1 font-bold text-dark-gray"
+        >
           Nuestros servicios
         </h2>
 

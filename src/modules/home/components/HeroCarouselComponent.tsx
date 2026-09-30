@@ -4,7 +4,11 @@ import { useEffect, useReducer, useState } from "react";
 
 import CarouselArrowsComponent from "@/modules/shared/components/CarouselArrowsComponent";
 
-import { HERO_FADE_MS, HERO_SLIDE_SECONDS, HERO_TABS_TOP } from "../constants/hero-carousel";
+import {
+  HERO_FADE_MS,
+  HERO_SLIDE_SECONDS,
+  HERO_TABS_TOP,
+} from "../constants/hero-carousel";
 
 /**
  * Colores de la barra de rótulos y de las rayas de mobile según lo que haya
@@ -55,15 +59,21 @@ export type HeroSlide = {
 };
 
 type State = { index: number; leaving: number | null };
-type Action = { type: "select"; index: number } | { type: "settled" } | { type: "jump"; index: number };
+type Action =
+  | { type: "select"; index: number }
+  | { type: "settled" }
+  | { type: "jump"; index: number };
 
 function reducer(state: State, action: Action): State {
-  if (action.type === "settled") return state.leaving === null ? state : { ...state, leaving: null };
+  if (action.type === "settled")
+    return state.leaving === null ? state : { ...state, leaving: null };
   // "jump": cambia de slide sin fundido ni dejar el anterior debajo (lo usa el
   // ajuste por `hiddenOnMobile`, para no fundir hacia/desde un slide que nunca
   // se vio en pantalla).
   if (action.type === "jump") return { index: action.index, leaving: null };
-  return action.index === state.index ? state : { index: action.index, leaving: state.index };
+  return action.index === state.index
+    ? state
+    : { index: action.index, leaving: state.index };
 }
 
 /**
@@ -117,9 +127,16 @@ function reducer(state: State, action: Action): State {
  * que React monte los efectos) puede alcanzar a verse un instante ese slide en
  * mobile antes de saltar al siguiente.
  */
-export default function HeroCarouselComponent({ slides }: { slides: HeroSlide[] }) {
+export default function HeroCarouselComponent({
+  slides,
+}: {
+  slides: HeroSlide[];
+}) {
   const count = slides.length;
-  const [{ index, leaving }, dispatch] = useReducer(reducer, { index: 0, leaving: null });
+  const [{ index, leaving }, dispatch] = useReducer(reducer, {
+    index: 0,
+    leaving: null,
+  });
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const paused = hovered || focused;
@@ -183,7 +200,8 @@ export default function HeroCarouselComponent({ slides }: { slides: HeroSlide[] 
   // un número, que entienden todos, y se mantiene al cambiar el tamaño de la ventana.
   useEffect(() => {
     const root = document.documentElement;
-    const update = () => root.style.setProperty("--hero-s", String(window.innerWidth / 1440));
+    const update = () =>
+      root.style.setProperty("--hero-s", String(window.innerWidth / 1440));
     update();
     window.addEventListener("resize", update);
     return () => {
@@ -192,9 +210,17 @@ export default function HeroCarouselComponent({ slides }: { slides: HeroSlide[] 
     };
   }, []);
 
-  const select = (target: number) => dispatch({ type: "select", index: (target + count) % count });
+  const select = (target: number) =>
+    dispatch({ type: "select", index: (target + count) % count });
 
-  const state = (i: number) => (i === index ? "active" : i === leaving ? "leaving" : i === next ? "next" : "idle");
+  const state = (i: number) =>
+    i === index
+      ? "active"
+      : i === leaving
+        ? "leaving"
+        : i === next
+          ? "next"
+          : "idle";
   const tone = PAGER_TONES[slides[index].tone];
   const mobileTone = PAGER_TONES[slides[index].mobileTone];
 
@@ -207,7 +233,8 @@ export default function HeroCarouselComponent({ slides }: { slides: HeroSlide[] 
       onMouseLeave={() => setHovered(false)}
       onFocus={() => setFocused(true)}
       onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false);
+        if (!event.currentTarget.contains(event.relatedTarget))
+          setFocused(false);
       }}
     >
       <div className="grid">
@@ -250,7 +277,9 @@ export default function HeroCarouselComponent({ slides }: { slides: HeroSlide[] 
             key={slide.id}
             aria-hidden={i !== index}
             className={`pointer-events-none absolute inset-0 z-20 hidden md:block ${
-              i === index ? "opacity-100 transition-opacity duration-700 motion-reduce:transition-none" : "opacity-0"
+              i === index
+                ? "opacity-100 transition-opacity duration-700 motion-reduce:transition-none"
+                : "opacity-0"
             }`}
           >
             <div className="relative h-[740px] w-[1440px] origin-top-left transform-[scale(var(--hero-s))] xl:mx-auto xl:h-full xl:w-auto xl:max-w-[1440px] xl:transform-none">
@@ -271,7 +300,10 @@ export default function HeroCarouselComponent({ slides }: { slides: HeroSlide[] 
         <div
           aria-hidden
           className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[190px] md:hidden"
-          style={{ backgroundImage: "linear-gradient(to bottom, transparent, rgba(0,0,0,.75) 55%, rgba(0,0,0,.8))" }}
+          style={{
+            backgroundImage:
+              "linear-gradient(to bottom, transparent, rgba(0,0,0,.75) 55%, rgba(0,0,0,.8))",
+          }}
         />
       )}
 
@@ -285,7 +317,11 @@ export default function HeroCarouselComponent({ slides }: { slides: HeroSlide[] 
         className="container-wcar absolute inset-x-0 top-[calc(var(--tabs-top)*var(--hero-s))] z-20 hidden md:block md:pl-[calc(124px*var(--hero-s))] xl:top-(--tabs-top) xl:pl-8"
         style={{ "--tabs-top": `${HERO_TABS_TOP}px` } as React.CSSProperties}
       >
-        <div role="group" aria-label="Elegir banner" className="flex items-end gap-6 xl:gap-11">
+        <div
+          role="group"
+          aria-label="Elegir banner"
+          className="flex items-end gap-6 xl:gap-11"
+        >
           <CarouselArrowsComponent
             canPrev
             canNext
@@ -336,14 +372,27 @@ export default function HeroCarouselComponent({ slides }: { slides: HeroSlide[] 
           se monta 64 px sobre el banner). */}
       <div className="container-wcar absolute inset-x-0 bottom-24 z-20 flex items-end justify-between gap-4 max-md:px-6 md:hidden">
         <div className="min-w-0">
-          <p className={`truncate text-[14px] leading-5 font-bold ${mobileTone.active}`}>{slides[index].tabTitle}</p>
-          <p className={`truncate text-[12px] leading-4 font-medium italic ${mobileTone.idle}`}>
+          <p
+            className={`truncate text-[14px] leading-5 font-bold ${mobileTone.active}`}
+          >
+            {slides[index].tabTitle}
+          </p>
+          <p
+            className={`truncate text-[12px] leading-4 font-medium italic ${mobileTone.idle}`}
+          >
             {slides[index].tabSubtitle}
           </p>
-          <span aria-hidden className={`mt-1.5 block h-[3px] w-14 ${mobileTone.lineActive}`} />
+          <span
+            aria-hidden
+            className={`mt-1.5 block h-[3px] w-14 ${mobileTone.lineActive}`}
+          />
         </div>
 
-        <div role="group" aria-label="Elegir banner" className="flex shrink-0 gap-2">
+        <div
+          role="group"
+          aria-label="Elegir banner"
+          className="flex shrink-0 gap-2"
+        >
           {slides.map((slide, i) =>
             // TEMPORAL (`hiddenOnMobile`): sin raya aquí, así tampoco se puede
             // elegir a mano en mobile. El selector de desktop no filtra nada.

@@ -53,7 +53,10 @@ const CYAN_LINES = 23;
  */
 export default function HeroSlideColserautoComponent() {
   return (
-    <div className="relative mx-auto hidden md:block md:h-[740px] md:max-w-[1440px]" style={{ marginLeft: HERO_CANVAS_MARGIN }}>
+    <div
+      className="relative mx-auto hidden md:block md:h-[740px] md:max-w-[1440px]"
+      style={{ marginLeft: HERO_CANVAS_MARGIN }}
+    >
       {/* Arte: solo desktop. */}
       <div aria-hidden className="hidden md:block">
         {/* Bordes a pantalla completa (guía §4.2): a la izquierda, negro. A la
@@ -63,19 +66,29 @@ export default function HeroSlideColserautoComponent() {
             esquina (la columna de píxeles del borde del export, estirada,
             `borde-derecho.png`). Si el negro empezara en horizontal se vería un
             codo en el borde. */}
-        <span className="absolute top-0 right-full w-[calc(50vw-50%)] bg-black" style={{ height: HERO_BAND_END }} />
-        <span className="absolute top-0 left-full w-[calc(50vw-50%+1px)] bg-black" style={{ height: HERO_BAND_END }} />
+        <span
+          className="absolute top-0 right-full w-[calc(50vw-50%)] bg-black"
+          style={{ height: HERO_BAND_END }}
+        />
+        <span
+          className="absolute top-0 left-full w-[calc(50vw-50%+1px)] bg-black"
+          style={{ height: HERO_BAND_END }}
+        />
         <span
           className="absolute top-0 left-full size-[159px]"
           style={{
             clipPath: "polygon(0 0, 100% 0, 0 100%)",
-            backgroundImage: "url('/assets/home/hero/slides/colserauto/borde-derecho.png')",
+            backgroundImage:
+              "url('/assets/home/hero/slides/colserauto/borde-derecho.png')",
             backgroundSize: "100% 546px",
             backgroundRepeat: "no-repeat",
           }}
         />
 
-        <div className="absolute inset-x-0 top-0 overflow-hidden" style={{ height: HERO_BAND_END }}>
+        <div
+          className="absolute inset-x-0 top-0 overflow-hidden"
+          style={{ height: HERO_BAND_END }}
+        >
           {/* 1. Foto del taller y sus dos degradados. */}
           <div className="absolute top-0 left-[300px] h-[381px] w-[1140px]">
             <Image
@@ -96,7 +109,12 @@ export default function HeroSlideColserautoComponent() {
 
           {/* 2. Formas del marco y brillos de esquina. */}
           <div className="absolute top-0 left-0 h-[544px] w-[1440px] overflow-clip">
-            <Image src={formas} alt="" aria-hidden className="absolute top-0 left-0 block h-[546px] w-[1440px] max-w-none" />
+            <Image
+              src={formas}
+              alt=""
+              aria-hidden
+              className="absolute top-0 left-0 block h-[546px] w-[1440px] max-w-none"
+            />
           </div>
           <HeroSlideShapeComponent
             src={brillo1}
@@ -121,7 +139,10 @@ export default function HeroSlideColserautoComponent() {
           />
 
           {/* 3. Banda negra, cuña negra de la derecha y rayas cian. */}
-          <span className="absolute top-[381px] left-0 w-[1440px] bg-black" style={{ height: HERO_BAND_END - 381 }} />
+          <span
+            className="absolute top-[381px] left-0 w-[1440px] bg-black"
+            style={{ height: HERO_BAND_END - 381 }}
+          />
           <HeroSlideShapeComponent
             src={cunaNegra}
             outerClassName="top-0 right-[-189.97px] h-[618.394px] w-[647.966px]"
@@ -132,7 +153,10 @@ export default function HeroSlideColserautoComponent() {
             <div className="flex-none rotate-90">
               <div className="flex size-[201px] items-start gap-[6px]">
                 {Array.from({ length: CYAN_LINES }, (_, index) => (
-                  <span key={index} className="h-full min-w-px flex-[1_0_0] bg-blue-neon" />
+                  <span
+                    key={index}
+                    className="h-full min-w-px flex-[1_0_0] bg-blue-neon"
+                  />
                 ))}
               </div>
             </div>
@@ -157,18 +181,23 @@ export default function HeroSlideColserautoComponent() {
       <div className="relative px-6 py-12 pb-16 md:static md:p-0">
         <div className="w-[77px] md:absolute md:top-[43px] md:left-[124px]">
           <span aria-hidden className="block h-1 w-full bg-[#ec671b]" />
-          <p className="mt-2 text-[14px] leading-[22px] font-bold text-white">wcar</p>
+          <p className="mt-2 text-[14px] leading-[22px] font-bold text-white">
+            wcar
+          </p>
         </div>
 
         <h2 className="mt-6 text-[28px] leading-9 font-semibold tracking-[-0.5px] text-white md:absolute md:top-[107px] md:left-[123px] md:mt-0 md:w-[436px] md:text-[36px] md:leading-[48px]">
           Los mejores en registro , documentación y peritaje{" "}
-          <span className="font-normal text-orange italic">para tu Vehículo</span>
+          <span className="font-normal text-orange italic">
+            para tu Vehículo
+          </span>
         </h2>
 
         <p className="mt-4 text-[18px] leading-[22px] font-medium text-white md:absolute md:top-[284px] md:left-[123px] md:mt-0 md:w-[345px]">
           Somos la única plataforma
           {/* Salto de línea del diseño (el bloque de 345 dejaría "que vende" en la primera). */}
-          <br className="hidden md:block" /> que vende autos usados con peritaje online
+          <br className="hidden md:block" /> que vende autos usados con peritaje
+          online
         </p>
       </div>
     </div>

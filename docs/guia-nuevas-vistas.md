@@ -780,3 +780,12 @@ Vende tu Carro (`docs/planes/vende-tu-carro.md`) se construyó sin Figma y sin c
 - **Carrusel mobile que corta texto → pestañas** (Misión y visión de About-us): `MissionVisionTabsComponent` apila los paneles en la misma celda de una cuadrícula y esconde el inactivo con `invisible` (la sección mide lo del más largo y no salta); en `xl` vuelven las dos columnas. `npx` puede fallar con EACCES en `~/.npm`: usa `node_modules/.bin/next` directo dentro de la copia.
 - **Espaciado entre secciones en mobile**: 64 px entre secciones consecutivas del mismo fondo (arriba `pt-16`, abajo `pb-0`); solo las que cambian de fondo llevan relleno abajo.
 
+
+---
+
+## Sesión y cuenta (módulo `auth`)
+
+- Login sin contraseña (`/iniciar-sesion`: correo → código de 6 dígitos, o Google) y cuenta (`/perfil`). La sesión va en cookies HttpOnly puestas por los route handlers `app/api/auth/*` (BFF): el navegador nunca ve el token del backend ni el código OTP (el backend lo devuelve en el JSON; el handler lo descarta).
+- **No leer `cookies()` en el layout ni en el navbar**: vuelve dinámicas todas las rutas y se pierde el ISR. El navbar usa `AccountLinkComponent` (cliente), que lee la cookie-pista `wcar_session` (solo el nombre).
+- Una vista que exija sesión: `const user = await getSessionUser(); if (!user) redirect(ROUTES.signIn + "?next=…")` (ver `app/perfil/page.tsx`). Las páginas de acceso llevan `robots: noindex`.
+- Google: el `credential` se verifica en el servidor (`google-token.ts`: firma vía `tokeninfo`, `aud` y correo verificado) antes de llamar a `/register/` + `/login-google/`.

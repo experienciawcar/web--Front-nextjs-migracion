@@ -10,6 +10,20 @@ const ROOT_MARGIN = "0px 0px -8% 0px";
 const STAGGER_MS = 90;
 const MAX_STAGGER_STEPS = 5;
 
+/** Cada cuánto se reintentan los elementos que React aún no hidrató, y hasta cuándo (luego se revelan igual). */
+const HYDRATION_RETRY_MS = 50;
+const HYDRATION_GIVE_UP_MS = 3000;
+
+/**
+ * React marca con una clave interna (`__reactFiber$…`) los nodos que ya hidrató.
+ * Tocar el atributo `data-revealed` de uno que aún no lo está (una sección en
+ * streaming, un límite de Suspense que hidrata después) provoca el aviso
+ * "A tree hydrated but some attributes of the server rendered HTML didn't match".
+ */
+function isHydrated(element: HTMLElement): boolean {
+  return Object.keys(element).some((key) => key.startsWith("__reactFiber$"));
+}
+
 /** El elemento y todos los de dentro que llevan la clase (un nodo que no es elemento no lleva ninguno). */
 function findTargets(node: Node): HTMLElement[] {
   if (!(node instanceof HTMLElement)) return [];
@@ -72,8 +86,26 @@ export function useScrollReveal() {
       { rootMargin: ROOT_MARGIN },
     );
 
+    const startedAt = Date.now();
+    let retry: ReturnType<typeof setTimeout> | undefined;
+    const waiting = new Set<HTMLElement>();
+
     const register = (elements: HTMLElement[]) => {
-      const pending = elements.filter((element) => element.dataset.revealed === undefined);
+      let pending = elements.filter((element) => element.dataset.revealed === undefined);
+      // Lo que React no ha hidratado espera (salvo que tarde demasiado: ahí se revela igual).
+      if (Date.now() - startedAt < HYDRATION_GIVE_UP_MS) {
+        const unhydrated = pending.filter((element) => !isHydrated(element));
+        if (unhydrated.length) {
+          unhydrated.forEach((element) => waiting.add(element));
+          pending = pending.filter((element) => isHydrated(element));
+          clearTimeout(retry);
+          retry = setTimeout(() => {
+            const batch = [...waiting].filter((element) => element.isConnected);
+            waiting.clear();
+            register(batch);
+          }, HYDRATION_RETRY_MS);
+        }
+      }
       // Las lecturas juntas: el navegador calcula el layout una sola vez.
       const tops = pending.map((element) => element.getBoundingClientRect().top);
       pending.forEach((element, index) => {
@@ -97,6 +129,7 @@ export function useScrollReveal() {
     mutations.observe(document.body, { childList: true, subtree: true });
 
     return () => {
+      clearTimeout(retry);
       observer.disconnect();
       mutations.disconnect();
       delete document.documentElement.dataset.revealReady;

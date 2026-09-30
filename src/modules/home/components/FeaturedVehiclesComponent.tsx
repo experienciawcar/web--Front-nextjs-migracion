@@ -38,7 +38,10 @@ export default async function FeaturedVehiclesComponent() {
   if (vehicles.length === 0) return null;
 
   return (
-    <section aria-labelledby="featured-title" className="relative overflow-x-clip bg-white">
+    <section
+      aria-labelledby="featured-title"
+      className="relative overflow-x-clip bg-white"
+    >
       {/* Lienzo de 1440 centrado para la decoración: las piezas son px del
           diseño y sangran a la derecha hasta la ventana (guía §4.2). `top-[172px]`
           es el relleno de arriba del contenedor (`xl:pt-[172px]`): la raya del
@@ -47,7 +50,10 @@ export default async function FeaturedVehiclesComponent() {
           172 = 144 (lo que ya había) + 28. En mobile el banner se sale 101 px y
           Figma deja 81 entre su borde de abajo y la raya naranja (banner en
           y=1058, raya en 1139): 182 = 101 + 81. */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 hidden xl:block">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 hidden xl:block"
+      >
         <div className="relative mx-auto h-full max-w-[1440px]">
           <DiagonalLinesComponent
             variant="gray"
@@ -66,15 +72,23 @@ export default async function FeaturedVehiclesComponent() {
       <div className="container-wcar relative pt-[182px] pb-16 xl:pt-[172px]">
         <span aria-hidden className="block h-[4px] w-[115px] bg-orange" />
         {/* TODO: confirmar con diseño: el eyebrow va en minúsculas. */}
-        <p className="reveal mt-4 text-small font-semibold text-gray">conoce lo mas destacado de nuestro catalogo en esta semana</p>
-        <h2 id="featured-title" className="reveal mt-2 text-subheadline-1 font-bold text-dark-gray">
+        <p className="reveal mt-4 text-small font-semibold text-gray">
+          conoce lo mas destacado de nuestro catalogo en esta semana
+        </p>
+        <h2
+          id="featured-title"
+          className="reveal mt-2 text-subheadline-1 font-bold text-dark-gray"
+        >
           Destacados del Catálogo
         </h2>
 
         <div className="reveal mt-8 xl:mt-[53px]">
           <FeaturedVehiclesCarouselComponent>
             {vehicles.map((vehicle) => (
-              <li key={vehicle.id} className="flex w-[291px] shrink-0 snap-start">
+              <li
+                key={vehicle.id}
+                className="flex w-[291px] shrink-0 snap-start"
+              >
                 <VehicleCardComponent vehicle={vehicle} className="w-full" />
               </li>
             ))}

@@ -3,7 +3,10 @@ import Image from "next/image";
 import arrowCircle from "@/modules/shared/assets/icons/arrow-circle.svg";
 import AppLinkComponent from "@/modules/shared/components/AppLinkComponent";
 
-import { INTRO_FEATURES, INTRO_FEATURES_HREF } from "../constants/intro-features";
+import {
+  INTRO_FEATURES,
+  INTRO_FEATURES_HREF,
+} from "../constants/intro-features";
 
 /** Sin barra de scroll: se desliza con el dedo. */
 const SIN_SCROLLBAR = "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden";
@@ -55,7 +58,9 @@ export default function IntroFeaturesComponent() {
               {feature.title}
               <span className="font-medium text-orange italic">
                 {feature.titleItalicDesktopOnly && (
-                  <span className="hidden xl:inline">{feature.titleItalicDesktopOnly}</span>
+                  <span className="hidden xl:inline">
+                    {feature.titleItalicDesktopOnly}
+                  </span>
                 )}
                 {feature.titleItalic}
               </span>
@@ -70,7 +75,12 @@ export default function IntroFeaturesComponent() {
             className="mt-auto flex items-center gap-3 self-end text-[12px] leading-[30px] font-bold text-orange xl:gap-2 xl:text-small xl:leading-[22px]"
           >
             Ver vehículos
-            <Image src={arrowCircle} alt="" aria-hidden className="size-[23px] xl:size-[18px]" />
+            <Image
+              src={arrowCircle}
+              alt=""
+              aria-hidden
+              className="size-[23px] xl:size-[18px]"
+            />
           </AppLinkComponent>
         </li>
       ))}

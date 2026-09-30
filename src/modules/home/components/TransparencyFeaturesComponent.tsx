@@ -31,11 +31,20 @@ const FEATURES_PER_PAGE = 3;
  * dos rayas; que sean dos páginas de tres (las seis de desktop, en su orden) es
  * la lectura que las cuadra. TODO: confirmar con diseño.
  */
-export default function TransparencyFeaturesComponent({ features }: { features: TransparencyFeature[] }) {
+export default function TransparencyFeaturesComponent({
+  features,
+}: {
+  features: TransparencyFeature[];
+}) {
   const [ref, carousel] = useCarousel<HTMLDivElement>();
 
-  const pages = Array.from({ length: Math.ceil(features.length / FEATURES_PER_PAGE) }, (_, index) =>
-    features.slice(index * FEATURES_PER_PAGE, (index + 1) * FEATURES_PER_PAGE),
+  const pages = Array.from(
+    { length: Math.ceil(features.length / FEATURES_PER_PAGE) },
+    (_, index) =>
+      features.slice(
+        index * FEATURES_PER_PAGE,
+        (index + 1) * FEATURES_PER_PAGE,
+      ),
   );
 
   return (
@@ -45,7 +54,10 @@ export default function TransparencyFeaturesComponent({ features }: { features: 
         className={`flex snap-x snap-mandatory overflow-x-auto md:grid md:snap-none md:grid-cols-1 md:gap-y-10 md:overflow-visible xl:grid-cols-2 xl:gap-x-[104px] ${SIN_SCROLLBAR}`}
       >
         {pages.map((page, index) => (
-          <ul key={index} className="flex w-full shrink-0 snap-start flex-col gap-8 px-8 md:contents">
+          <ul
+            key={index}
+            className="flex w-full shrink-0 snap-start flex-col gap-8 px-8 md:contents"
+          >
             {page.map((feature) => (
               <li key={feature.id}>
                 <FeatureCardComponent

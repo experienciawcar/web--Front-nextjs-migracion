@@ -36,7 +36,10 @@ import HeroSlideShapeComponent from "./HeroSlideShapeComponent";
  */
 export default function HeroSlideColserautoMobileComponent() {
   return (
-    <div className="relative overflow-hidden bg-black md:hidden" style={{ height: HERO_MOBILE_HEIGHT }}>
+    <div
+      className="relative overflow-hidden bg-black md:hidden"
+      style={{ height: HERO_MOBILE_HEIGHT }}
+    >
       <div aria-hidden>
         <div className="absolute inset-x-0 top-[257px] h-[380px]">
           <Image
@@ -54,7 +57,10 @@ export default function HeroSlideColserautoMobileComponent() {
               "linear-gradient(0deg, rgba(0, 0, 0, 0.8) 18.132%, rgba(0, 0, 0, 0.2) 25.454%, rgba(0, 0, 0, 0.2) 56.414%, rgba(0, 0, 0, 0.85) 75.305%, rgb(0, 0, 0) 82.979%), linear-gradient(2.19deg, rgba(3, 76, 145, 0) 55.595%, rgb(3, 76, 145) 66.326%, rgb(16, 35, 129) 81.42%)",
           }}
         />
-        <DiagonalLinesComponent variant="white" className="absolute top-[16px] right-0 h-[100px] w-[140px] opacity-50" />
+        <DiagonalLinesComponent
+          variant="white"
+          className="absolute top-[16px] right-0 h-[100px] w-[140px] opacity-50"
+        />
         <HeroSlideShapeComponent
           src={brillo}
           outerClassName="top-[170px] right-[-62.56px] h-[455.499px] w-[255.334px]"
@@ -66,13 +72,26 @@ export default function HeroSlideColserautoMobileComponent() {
           className="absolute top-[507px] right-0 size-[128px] bg-black"
           style={{ clipPath: "polygon(100% 0, 100% 100%, 0 100%)" }}
         />
-        <Image src={lineas} alt="" aria-hidden className="absolute top-[533px] right-[27px] size-[120px] max-w-none" />
+        <Image
+          src={lineas}
+          alt=""
+          aria-hidden
+          className="absolute top-[533px] right-[27px] size-[120px] max-w-none"
+        />
       </div>
 
       <div className="relative mx-auto h-full w-full max-w-[600px] px-[29px] pt-[43px]">
         <div className="relative ml-[15px] flex h-[41.356px] items-center">
-          <Image src={logoWcar} alt="" aria-hidden className="mt-[5.8px] h-[34.8px] w-[108px] max-w-none self-start" />
-          <span aria-hidden className="mx-[22.5px] mt-[2.9px] h-[34.8px] w-[1.45px] self-start bg-white/60" />
+          <Image
+            src={logoWcar}
+            alt=""
+            aria-hidden
+            className="mt-[5.8px] h-[34.8px] w-[108px] max-w-none self-start"
+          />
+          <span
+            aria-hidden
+            className="mx-[22.5px] mt-[2.9px] h-[34.8px] w-[1.45px] self-start bg-white/60"
+          />
           <Image
             src={logoColserauto}
             alt="Colserauto"
@@ -82,7 +101,9 @@ export default function HeroSlideColserautoMobileComponent() {
 
         <h2 className="mt-[44px] max-w-[329px] text-[28px] leading-[normal] font-semibold tracking-[-0.5px] text-white">
           Los mejores en registro , documentación y peritaje{" "}
-          <span className="font-normal text-orange italic">para tu Vehículo</span>
+          <span className="font-normal text-orange italic">
+            para tu Vehículo
+          </span>
         </h2>
 
         <p className="mt-[25px] max-w-[345px] text-[16px] leading-[normal] font-medium text-white">

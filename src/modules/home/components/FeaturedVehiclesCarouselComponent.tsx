@@ -49,8 +49,14 @@ const FADE_TO_WHITE =
  * Mobile: sin flechas ni rayas ni degradado; se desliza con el dedo y la tarjeta
  * siguiente asoma por la derecha (guía §4.3). No hay diseño mobile.
  */
-export default function FeaturedVehiclesCarouselComponent({ children }: { children: React.ReactNode }) {
-  const [ref, carousel] = useInfiniteCarousel<HTMLDivElement>(Children.count(children));
+export default function FeaturedVehiclesCarouselComponent({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [ref, carousel] = useInfiniteCarousel<HTMLDivElement>(
+    Children.count(children),
+  );
 
   const clones = (name: string) =>
     Array.from({ length: carousel.side }, (_, index) => (

@@ -55,7 +55,8 @@ function TransparencyPhoto({ className = "" }: { className?: string }) {
           style={{
             backgroundImage: "url('/assets/home/decor/arcos.png')",
             backgroundSize: "71px 73px",
-            maskImage: "linear-gradient(to bottom, #000 25%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.2) 62%, transparent 85%)",
+            maskImage:
+              "linear-gradient(to bottom, #000 25%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.2) 62%, transparent 85%)",
             WebkitMaskImage:
               "linear-gradient(to bottom, #000 25%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.2) 62%, transparent 85%)",
           }}
@@ -130,10 +131,16 @@ function TransparencyPhotoMobile() {
             backgroundImage: "url('/assets/home/decor/arcos.png')",
             backgroundSize: "58.84px 60.49px",
             maskImage: "linear-gradient(to right, #000 25%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to right, #000 25%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, #000 25%, transparent 100%)",
           }}
         />
-        <Image src={logoWcarFoto} alt="" aria-hidden className="absolute top-9 left-1/2 h-12 w-auto -translate-x-1/2" />
+        <Image
+          src={logoWcarFoto}
+          alt=""
+          aria-hidden
+          className="absolute top-9 left-1/2 h-12 w-auto -translate-x-1/2"
+        />
         <p className="absolute top-[101px] left-8 text-[36px] leading-[42px] font-bold text-white">
           Transparencia
           <br />
@@ -158,8 +165,17 @@ function TransparencyPhotoMobile() {
  */
 function GlitchAccent() {
   return (
-    <div aria-hidden className="absolute top-[671px] left-[2px] hidden h-[495px] w-[607px] overflow-hidden xl:block">
-      <Image src="/assets/home/transparencia/dashboard-neon.webp" alt="" fill sizes="607px" className="object-cover" />
+    <div
+      aria-hidden
+      className="absolute top-[671px] left-[2px] hidden h-[495px] w-[607px] overflow-hidden xl:block"
+    >
+      <Image
+        src="/assets/home/transparencia/dashboard-neon.webp"
+        alt=""
+        fill
+        sizes="607px"
+        className="object-cover"
+      />
     </div>
   );
 }
@@ -204,16 +220,20 @@ function ReasonsToTradeComponent() {
     <div>
       <div className="reveal flex items-center gap-4 xl:gap-3">
         <span aria-hidden className="h-px w-12 bg-blue-neon xl:bg-gray-light" />
-        <span className="text-small font-bold whitespace-nowrap text-gray-light">Nosotros</span>
+        <span className="text-small font-bold whitespace-nowrap text-gray-light">
+          Nosotros
+        </span>
       </div>
 
       <h3 className="reveal mt-4 text-subheadline-1 font-bold text-white md:mt-6 xl:text-[36px] xl:leading-[44px]">
-        Razones para comprar <span className="font-normal italic">y vender con wcar</span>
+        Razones para comprar{" "}
+        <span className="font-normal italic">y vender con wcar</span>
       </h3>
 
       <p className="reveal mt-16 max-w-[279px] text-body leading-6 font-medium text-gray-light md:mt-6 md:max-w-[483px] md:opacity-90">
-        Somos la plataforma tecnológica más transparente y de mayor crecimiento en Colombia para comprar un auto usado
-        online, financiarlo y asegurarlo en un par de clics.
+        Somos la plataforma tecnológica más transparente y de mayor crecimiento
+        en Colombia para comprar un auto usado online, financiarlo y asegurarlo
+        en un par de clics.
       </p>
 
       <div className="reveal mt-16 flex flex-col items-start gap-6 md:mt-8 md:flex-row md:flex-wrap md:items-stretch md:gap-4">
@@ -320,7 +340,10 @@ function ReasonsToTradeComponent() {
  */
 export default function TransparencyComponent() {
   return (
-    <section aria-labelledby="transparency-title" className="overflow-x-clip bg-gray-light">
+    <section
+      aria-labelledby="transparency-title"
+      className="overflow-x-clip bg-gray-light"
+    >
       <div className="relative mx-auto xl:max-w-[1440px]">
         {/* Barra negra lateral: cruza las dos sub-secciones, como la foto. Mide
             304 (la foto tapa lo que sobra, menos la franja de arriba) y sangra a
@@ -329,13 +352,19 @@ export default function TransparencyComponent() {
           aria-hidden
           className="absolute inset-y-0 left-[calc(50%-50vw)] hidden w-[calc(304px+50vw-50%)] bg-dark-gray md:block"
         >
-          <DiagonalLinesComponent variant="white" className="absolute top-0 left-0 h-[150px] w-[60px] opacity-60" />
+          <DiagonalLinesComponent
+            variant="white"
+            className="absolute top-0 left-0 h-[150px] w-[60px] opacity-60"
+          />
         </div>
 
         {/* En la franja de 100 px sobre la foto: el rectángulo amarillo y los
             paralelogramos naranjas (que la foto, más abajo en el documento, tapa
             donde se cruzan). */}
-        <span aria-hidden className="absolute top-0 left-[304px] hidden h-[101px] w-[202px] bg-label-yellow md:block" />
+        <span
+          aria-hidden
+          className="absolute top-0 left-[304px] hidden h-[101px] w-[202px] bg-label-yellow md:block"
+        />
         <Image
           src={zigzagNaranja}
           alt=""
@@ -362,21 +391,33 @@ export default function TransparencyComponent() {
             id="transparency-title"
             className="reveal px-8 text-center text-subheadline-1 font-bold text-dark-gray md:px-0 md:text-left xl:text-[36px] xl:leading-[44px]"
           >
-            Compra<span className="hidden md:inline">s</span> online con atención{" "}
-            <span className="font-normal text-orange italic">personalizada.</span>
+            Compra<span className="hidden md:inline">s</span> online con
+            atención{" "}
+            <span className="font-normal text-orange italic">
+              personalizada.
+            </span>
           </h2>
 
           <div className="reveal mt-6 md:mt-14">
             <TransparencyFeaturesComponent features={TRANSPARENCY_FEATURES} />
           </div>
 
-          <span aria-hidden className="absolute right-0 bottom-[54px] size-[54px] bg-blue-neon xl:hidden" />
-          <span aria-hidden className="absolute right-0 bottom-0 h-[54px] w-[102px] bg-label-yellow xl:hidden" />
+          <span
+            aria-hidden
+            className="absolute right-0 bottom-[54px] size-[54px] bg-blue-neon xl:hidden"
+          />
+          <span
+            aria-hidden
+            className="absolute right-0 bottom-0 h-[54px] w-[102px] bg-label-yellow xl:hidden"
+          />
         </div>
 
         {/* Panel "Razones para comprar y vender con wcar": oscuro, sangra hasta el borde derecho. */}
         <div className="relative md:ml-[364px] lg:ml-[476px] xl:ml-[613px]">
-          <div aria-hidden className="absolute inset-y-0 left-0 hidden bg-black xl:right-[calc(50%-50vw)] xl:block" />
+          <div
+            aria-hidden
+            className="absolute inset-y-0 left-0 hidden bg-black xl:right-[calc(50%-50vw)] xl:block"
+          />
 
           <div className="relative bg-dark-gray px-8 pt-24 pb-[120px] md:bg-black md:pt-16 md:pb-16 md:pl-9 lg:pl-10 xl:bg-transparent xl:px-0 xl:pl-[119px]">
             <ReasonsToTradeComponent />

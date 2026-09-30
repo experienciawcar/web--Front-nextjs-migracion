@@ -41,7 +41,10 @@ import { HERO_MOBILE_HEIGHT } from "../constants/hero-carousel";
  */
 export default function HeroSlideHomeMobileComponent() {
   return (
-    <div className="relative overflow-hidden bg-gray-light md:hidden" style={{ height: HERO_MOBILE_HEIGHT }}>
+    <div
+      className="relative overflow-hidden bg-gray-light md:hidden"
+      style={{ height: HERO_MOBILE_HEIGHT }}
+    >
       <div
         aria-hidden
         className="absolute top-0 right-0 h-[333px] w-[200px] bg-orange"
@@ -54,7 +57,12 @@ export default function HeroSlideHomeMobileComponent() {
       >
         <div className="flex-none rotate-[15.67deg]">
           <div className="relative h-[237px] w-[242px] opacity-70 blur-[5px]">
-            <Image src="/assets/home/hero/mobile/jeep-sombra.webp" alt="" fill sizes="242px" />
+            <Image
+              src="/assets/home/hero/mobile/jeep-sombra.webp"
+              alt=""
+              fill
+              sizes="242px"
+            />
           </div>
         </div>
       </div>
@@ -72,28 +80,44 @@ export default function HeroSlideHomeMobileComponent() {
       </div>
 
       <div className="relative mx-auto h-full w-full max-w-[600px]">
-        <Image src={w} alt="" aria-hidden className="absolute top-[24px] left-[-31px] h-[226px] w-[204px] max-w-none" />
-        <span aria-hidden className="absolute top-[22px] left-[20px] h-[2px] w-[50px] bg-orange" />
+        <Image
+          src={w}
+          alt=""
+          aria-hidden
+          className="absolute top-[24px] left-[-31px] h-[226px] w-[204px] max-w-none"
+        />
+        <span
+          aria-hidden
+          className="absolute top-[22px] left-[20px] h-[2px] w-[50px] bg-orange"
+        />
 
         <p
           role="heading"
           aria-level={1}
           className="absolute top-[41px] left-[19px] w-[220px] text-[28px] leading-8 font-bold tracking-[0.28px] text-dark-gray"
         >
-          El carro usado más seguro
-          {" "}
-          <span className="block font-normal text-orange italic">de Colombia</span>
+          El carro usado más seguro{" "}
+          <span className="block font-normal text-orange italic">
+            de Colombia
+          </span>
         </p>
 
-        <Image src={starIcon} alt="" aria-hidden className="absolute top-[173px] left-[20px] size-[10px]" />
+        <Image
+          src={starIcon}
+          alt=""
+          aria-hidden
+          className="absolute top-[173px] left-[20px] size-[10px]"
+        />
         <p className="absolute top-[178px] left-[36px] -translate-y-1/2 text-[10px] font-bold tracking-[0.16px] whitespace-nowrap text-gray-dark">
           <span className="text-[18px] text-orange">4.8</span> en Google
         </p>
         <p className="absolute top-[216px] left-[20px] -translate-y-1/2 text-[10px] font-bold tracking-[0.16px] whitespace-nowrap text-gray-dark">
-          <span className="text-[18px] text-orange">+ 9.000</span> Clientes felices
+          <span className="text-[18px] text-orange">+ 9.000</span> Clientes
+          felices
         </p>
         <p className="absolute top-[254px] left-[20px] -translate-y-1/2 text-[10px] font-bold tracking-[0.16px] whitespace-nowrap text-gray-dark">
-          <span className="text-[18px] text-orange">+ 10.000</span> Vehículos vendidos
+          <span className="text-[18px] text-orange">+ 10.000</span> Vehículos
+          vendidos
         </p>
       </div>
     </div>

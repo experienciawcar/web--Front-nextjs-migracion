@@ -29,7 +29,10 @@ function OfficePhoto() {
       </div>
       <div
         className="absolute inset-0"
-        style={{ backgroundImage: "linear-gradient(4.146deg, rgb(0, 0, 0) 39.721%, rgba(0, 0, 0, 0) 51.503%)" }}
+        style={{
+          backgroundImage:
+            "linear-gradient(4.146deg, rgb(0, 0, 0) 39.721%, rgba(0, 0, 0, 0) 51.503%)",
+        }}
       />
     </>
   );
@@ -70,7 +73,10 @@ function OfficePhoto() {
  */
 export default function HeroSlideMarceloComponent() {
   return (
-    <div className="relative mx-auto hidden md:block md:h-[740px] md:max-w-[1440px]" style={{ marginLeft: HERO_CANVAS_MARGIN }}>
+    <div
+      className="relative mx-auto hidden md:block md:h-[740px] md:max-w-[1440px]"
+      style={{ marginLeft: HERO_CANVAS_MARGIN }}
+    >
       {/* Arte: solo desktop. */}
       <div aria-hidden className="hidden md:block">
         {/* Borde derecho a pantalla completa (guía §4.2). La foto termina en un poste
@@ -87,7 +93,8 @@ export default function HeroSlideMarceloComponent() {
           className="absolute top-0 left-full w-[calc(50vw-50%+1px)] bg-gray-light"
           style={{
             height: HERO_BAND_END,
-            backgroundImage: "url('/assets/home/hero/slides/marcelo/borde-derecho.png')",
+            backgroundImage:
+              "url('/assets/home/hero/slides/marcelo/borde-derecho.png')",
             backgroundSize: "100% 546px",
             backgroundRepeat: "no-repeat",
           }}
@@ -99,10 +106,17 @@ export default function HeroSlideMarceloComponent() {
         </div>
         <span
           className="absolute top-[321px] left-full h-[60px] w-[calc(50vw-50%+1px)] opacity-50"
-          style={{ backgroundImage: "url('/assets/shared/lines-13px-white.png')", backgroundSize: "13px 13px", backgroundPosition: "-2px 0" }}
+          style={{
+            backgroundImage: "url('/assets/shared/lines-13px-white.png')",
+            backgroundSize: "13px 13px",
+            backgroundPosition: "-2px 0",
+          }}
         />
 
-        <div className="absolute inset-x-0 top-0 overflow-hidden" style={{ height: HERO_BAND_END }}>
+        <div
+          className="absolute inset-x-0 top-0 overflow-hidden"
+          style={{ height: HERO_BAND_END }}
+        >
           {/* 1. Foto de la oficina + degradado. */}
           {/* Figma la deja a 2 px del borde de arriba (y=2, 544 de alto): se sube al
               borde y se estira esos 2 px para que no quede una línea clara. */}
@@ -129,10 +143,16 @@ export default function HeroSlideMarceloComponent() {
             boxClassName="h-[586.21px] w-[617.5px]"
             transformClassName="-scale-y-100 rotate-[-176.93deg]"
           />
-          <DiagonalLinesComponent variant="white" className="absolute top-[321px] left-[1113px] h-[60px] w-[327px] opacity-50" />
+          <DiagonalLinesComponent
+            variant="white"
+            className="absolute top-[321px] left-[1113px] h-[60px] w-[327px] opacity-50"
+          />
 
           {/* 3. Banda y cuña grises. */}
-          <span className="absolute top-[381px] left-0 w-[1440px] bg-gray-light" style={{ height: HERO_BAND_END - 381 }} />
+          <span
+            className="absolute top-[381px] left-0 w-[1440px] bg-gray-light"
+            style={{ height: HERO_BAND_END - 381 }}
+          />
           <Image
             src={cunaGris}
             alt=""
@@ -155,7 +175,12 @@ export default function HeroSlideMarceloComponent() {
           </div>
           <div className="absolute top-[335px] left-[860.5px] h-[20px] w-[22.5px]">
             <div className="absolute inset-[-20%_-17.78%]">
-              <Image src={destello} alt="" aria-hidden className="block size-full max-w-none" />
+              <Image
+                src={destello}
+                alt=""
+                aria-hidden
+                className="block size-full max-w-none"
+              />
             </div>
           </div>
         </div>
@@ -177,12 +202,15 @@ export default function HeroSlideMarceloComponent() {
         <h2 className="text-[32px] leading-9 font-bold md:absolute md:top-[123px] md:left-[120px] md:w-[538px] md:text-[44px] md:leading-[48px]">
           <span className="text-black">Marcelo Cezán </span>
           <span className="font-semibold text-black">se une a </span>
-          <span className="font-medium text-orange italic">nuestro equipo de </span>
+          <span className="font-medium text-orange italic">
+            nuestro equipo de{" "}
+          </span>
           <span className="text-orange">wcar</span>
         </h2>
 
         <p className="mt-4 text-[18px] leading-[22px] font-semibold text-gray-dark md:absolute md:top-[256px] md:left-[120px] md:mt-0 md:w-[434px]">
-          Marcelo Cezán se une a la familia wcar para garantizarte el mejor trato , compra o vende de tu vehículo con total seguridad.
+          Marcelo Cezán se une a la familia wcar para garantizarte el mejor
+          trato , compra o vende de tu vehículo con total seguridad.
         </p>
       </div>
     </div>
