@@ -5,12 +5,20 @@ export type Range = { min?: number; max?: number };
  * nativos superpuestos sobre la misma pista — no hay RSuite en este proyecto
  * (a diferencia de la SPA anterior) y no vale la pena traer una librería
  * nueva solo para esto (ver "Piezas que se repiten" del plan). Más los dos
- * `<input type="number">` ("Mínimo"/"Máximo") sincronizados.
+ * `<input type="text">` ("Mínimo"/"Máximo") sincronizados.
  *
  * El valor se pasa "en crudo" (sin debounce): quien lo use decide cuándo
  * confirmarlo (`CatalogComponent` lo debounce a 600ms antes de buscar, igual
  * que el buscador de texto a 1000ms — ver la tarea 3 del plan).
  */
+/** Miles con punto (formato peso colombiano): 1000000 → "1.000.000". */
+const formatThousands = (n?: number) =>
+  n === undefined ? "" : n.toLocaleString("es-CO");
+const parseDigits = (text: string) => {
+  const digits = text.replace(/\D/g, "");
+  return digits ? Number(digits) : undefined;
+};
+
 export default function RangeFilterComponent({
   min,
   max,
@@ -76,15 +84,13 @@ export default function RangeFilterComponent({
         <>
           <div className="mt-4 flex items-center gap-3">
             <input
-              type="number"
+              type="text"
               inputMode="numeric"
               placeholder="Mínimo"
-              value={value.min ?? ""}
+              value={formatThousands(value.min)}
               onChange={(event) =>
                 onChange({
-                  min: event.target.value
-                    ? Number(event.target.value)
-                    : undefined,
+                  min: parseDigits(event.target.value),
                   max: value.max,
                 })
               }
@@ -94,16 +100,14 @@ export default function RangeFilterComponent({
               —
             </span>
             <input
-              type="number"
+              type="text"
               inputMode="numeric"
               placeholder="Máximo"
-              value={value.max ?? ""}
+              value={formatThousands(value.max)}
               onChange={(event) =>
                 onChange({
                   min: value.min,
-                  max: event.target.value
-                    ? Number(event.target.value)
-                    : undefined,
+                  max: parseDigits(event.target.value),
                 })
               }
               className="h-10 w-full min-w-0 rounded-lg border border-transparent bg-gray-light px-3 text-small font-bold text-gray-dark placeholder:text-gray focus:border-orange focus:outline-none"

@@ -359,3 +359,76 @@ input[type="radio"],
 input[type="range"] {
   cursor: pointer;
 }
+
+/* Cuerpo de un artículo del blog (`BlogParagraphComponent`): el HTML llega del editor del
+   backoffice (CKEditor) sin clases de estilo, así que se le da aquí el aspecto por etiqueta. */
+.blog-content {
+  color: var(--color-gray-dark);
+  font-size: var(--text-body);
+  line-height: 24px;
+  overflow-wrap: anywhere;
+}
+.blog-content > * + * {
+  margin-top: 0.5rem;
+}
+.blog-content h2,
+.blog-content h3,
+.blog-content h4 {
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 1.5rem;
+}
+.blog-content h2 {
+  font-size: 28px;
+}
+.blog-content h3 {
+  font-size: var(--text-heading-1);
+}
+.blog-content ul,
+.blog-content ol {
+  padding-left: 1.5rem;
+}
+.blog-content ul {
+  list-style: disc;
+}
+.blog-content ol {
+  list-style: decimal;
+}
+.blog-content a {
+  color: var(--color-orange);
+  text-decoration: underline;
+}
+.blog-content img {
+  height: auto;
+  max-width: 100%;
+}
+.blog-content figure.table,
+.blog-content figure:has(> table) {
+  overflow-x: auto;
+}
+.blog-content table {
+  border-collapse: collapse;
+  min-width: 100%;
+  font-size: var(--text-small);
+  line-height: 22px;
+}
+.blog-content th,
+.blog-content td {
+  border: 1px solid #d9d9d9;
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+.blog-content th {
+  background: var(--color-gray-light);
+  font-weight: 700;
+}
+.blog-content .blog-video {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+.blog-content .blog-video iframe {
+  border: 0;
+  height: 100%;
+  width: 100%;
+}

@@ -58,7 +58,7 @@ function parsePrice(value: string | null | undefined): number {
  * Los valores llegan con ruido ("on", "null"): no se muestran, caen en la de 6
  * meses.
  */
-function getWarranty(dto: VehicleDto): Vehicle["warranty"] {
+export function getWarranty(dto: VehicleDto): Vehicle["warranty"] {
   const coverage = dto.warranty_type || dto.type_warranty || "";
   const hasCoverage = coverage !== "" && coverage !== "null";
   // `garantie7Day` por sí sola no da badge: solo cambia el lado de la etiqueta en el sitio anterior

@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Genera .next/standalone (servidor mínimo) para la imagen de Docker / Cloud Run.
+  output: "standalone",
   images: {
     remotePatterns: [
       // Fotos de los asesores (GET /api/advisors/). El backend las entrega
@@ -33,6 +35,13 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "storage.googleapis.com",
         pathname: "/wcar-images/partners/**",
+      },
+      // Fotos de los artículos del blog (GET /api/post/). Mismo bucket y mismas
+      // URLs firmadas.
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+        pathname: "/wcar-images/post_file/**",
       },
     ],
   },

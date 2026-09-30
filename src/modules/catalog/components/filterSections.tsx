@@ -63,7 +63,6 @@ export function buildFilterSections({
     {
       id: "price",
       title: "Precio",
-      defaultOpen: true,
       content: (
         <PriceFilterComponent
           value={priceDraft}

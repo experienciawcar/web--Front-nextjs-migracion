@@ -40,7 +40,10 @@ function toSearchBody(filters: CatalogFilters, fixedBodyTypeId?: string): Record
   if (filters.colorNames?.length) body.colors = filters.colorNames;
   if (fixedBodyTypeId) body.body_type = [fixedBodyTypeId];
   else if (filters.bodyTypeIds?.length) body.body_type = filters.bodyTypeIds;
-  if (filters.fuelTypes?.length) body.fuel_type = filters.fuelTypes;
+  // En la URL y el sidebar es "hibrido"; el backend lo guarda como "hibrida".
+  if (filters.fuelTypes?.length) {
+    body.fuel_type = filters.fuelTypes.map((f) => (f === "hibrido" ? "hibrida" : f));
+  }
   if (filters.tagIds?.length) body.tag = filters.tagIds;
   if (filters.sedeIds?.length) body.sedes = filters.sedeIds;
   if (filters.priceMin != null) body.price_from = filters.priceMin;

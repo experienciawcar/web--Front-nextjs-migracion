@@ -1,6 +1,7 @@
 import VehicleCardComponent from "@/modules/shared/components/VehicleCardComponent";
 import type { Vehicle } from "@/modules/shared/types/vehicle";
 
+import EmptyResultsComponent from "./EmptyResultsComponent";
 import FinancingBannerComponent from "./FinancingBannerComponent";
 import PromoCardComponent, { PROMO_VARIANT_COUNT } from "./PromoCardComponent";
 import SkeletonCardComponent from "./SkeletonCardComponent";
@@ -31,7 +32,7 @@ const CARD_SIZES = "(min-width: 1280px) 340px, (min-width: 640px) 45vw, 100vw";
  * se reproduce, más un mensaje de texto simple por accesibilidad (no está en
  * el original, se agrega porque un usuario que combine filtros hasta 0
  * resultados de verdad necesita saber que no hay vehículos, no solo ver
- * publicidad).
+ * publicidad) — ahora `EmptyResultsComponent`, sin promos.
  *
  * TODO(diseño): la web en vivo trata el banner distinto en mobile (una
  * franja ancha de "Financiación hasta del 100%" aparte de la grilla, no una
@@ -54,9 +55,13 @@ const CARD_SIZES = "(min-width: 1280px) 340px, (min-width: 640px) 45vw, 100vw";
 export default function ResultsGridComponent({
   vehicles,
   loading,
+  hasFilters,
+  onClearFilters,
 }: {
   vehicles: Vehicle[];
   loading: boolean;
+  hasFilters: boolean;
+  onClearFilters: () => void;
 }) {
   const isInitialLoad = loading && vehicles.length === 0;
 
@@ -72,14 +77,10 @@ export default function ResultsGridComponent({
 
   if (vehicles.length === 0) {
     return (
-      <div>
-        <p className="pb-6 text-body font-medium text-gray-dark">
-          No encontramos vehículos con estos filtros.
-        </p>
-        <div className={GRID_CLASS}>
-          <PromoCardComponent />
-        </div>
-      </div>
+      <EmptyResultsComponent
+        hasFilters={hasFilters}
+        onClearFilters={onClearFilters}
+      />
     );
   }
 

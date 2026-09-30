@@ -102,6 +102,6 @@ export type Vehicle = {
   warranty: { label: string; tone: VehicleWarrantyTone } | null;
   viewers: number;
   images: VehicleImage[];
-  /** Enlace al detalle (la página aún no existe; ver `vehicleHref`). */
+  /** Enlace al detalle (ver `vehicleHref`). */
   href: string;
 };

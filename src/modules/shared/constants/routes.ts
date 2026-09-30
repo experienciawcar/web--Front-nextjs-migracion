@@ -50,8 +50,8 @@ function slugify(text: string): string {
  * misma estructura del sitio anterior (que armaba `tipo/nombre/id` con guiones y
  * minúsculas, sin quitar tildes ni símbolos: aquí sí, para no romper la URL).
  * Solo el `id` cuenta para encontrar el vehículo.
- * TODO: la página de detalle todavía no existe en este proyecto; hasta entonces
- * el enlace da 404.
+ * La página de detalle vive en `app/compra-tu-carro/[[...typeVehicleName]]/page.tsx`
+ * (módulo `vehicle-detail`).
  */
 export function vehicleHref({ id, type, name }: { id: number; type: string; name: string }): string {
   return `${ROUTES.buyCar}/${slugify(type) || "vehiculo"}/${slugify(name) || "vehiculo"}/${id}`;

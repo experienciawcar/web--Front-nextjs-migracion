@@ -3,7 +3,7 @@ import FilterAccordionComponent from "./FilterAccordionComponent";
 
 /**
  * Sidebar de filtros (desktop): los doce filtros de `buildFilterSections`, cada uno en su
- * propio acordeón independiente (Precio y Kilometraje abiertos de entrada, el resto cerrado —
+ * propio acordeón independiente (Kilometraje abierto de entrada, el resto cerrado —
  * `defaultOpen` de cada sección). La versión mobile de estos mismos filtros, en pestañas de dos
  * columnas dentro de un bottom sheet, es `FilterTabsComponent` — mismos datos, otro layout.
  */

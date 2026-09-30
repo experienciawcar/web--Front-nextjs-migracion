@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { getBlogIndex } from "@/modules/blog/services/blog";
 import { ROUTES } from "@/modules/shared/constants/routes";
 import { SITE_URL } from "@/modules/shared/utils/seo";
 
@@ -26,10 +27,22 @@ const PAGES = [
   ROUTES.financing,
   ROUTES.procedures,
   ROUTES.workshop,
+  ROUTES.blog,
   ROUTES.contact,
   ROUTES.quote,
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  return PAGES.map((path) => ({ url: path === "/" ? SITE_URL : `${SITE_URL}${path}` }));
+/**
+ * Además de las páginas, cada artículo activo del blog (`/blog/<slug>`, sin `?id=`: la página lo
+ * resuelve por slug) con su fecha real de edición como `lastmod`.
+ */
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { posts } = await getBlogIndex();
+  return [
+    ...PAGES.map((path) => ({ url: path === "/" ? SITE_URL : `${SITE_URL}${path}` })),
+    ...posts.map((post) => ({
+      url: `${SITE_URL}/blog/${encodeURIComponent(post.slug)}`,
+      lastModified: post.updatedIso,
+    })),
+  ];
 }

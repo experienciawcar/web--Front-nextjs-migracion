@@ -748,3 +748,13 @@ Vende tu Carro (`docs/planes/vende-tu-carro.md`) se construyó sin Figma y sin c
 **Un formulario de varios pasos en este proyecto (que no usa `react-hook-form`) va con un único estado por página, no uno por paso:** los pasos son solo qué se pinta, todos leen y escriben el mismo objeto (`{contact, car, book}` aquí), así no se pierde nada al ir y volver con el stepper (probado con `cdp.py`: llenar el paso 1, avanzar, volver por el círculo del stepper, comprobar que el valor sigue ahí). La validación es manual, por paso, al intentar avanzar, no campo a campo al escribir.
 
 **Buscar "el documento que más se parece" por texto en datos reales del backend puede fallar si se adivina la palabra:** se buscó un documento legal titulado con "vendedor" (razonable para un formulario de venta) y no existía — el backend solo tiene nombres de campañas puntuales. Antes de rendirse a un `TODO`, listar los datos reales (`GET /api/terms/no-contents/` completo) y elegir el más parecido de verdad ("WCAR te compra con amor", que sí es sobre vender un carro a wcar) en vez de quedarse con el primer intento fallido.
+
+---
+
+## 18. Ficha de un vehículo (lecciones)
+
+- **Ruta:** un `[tipo]` no puede ser hermano de un catch-all opcional (`[[...typeVehicleName]]`). La ficha se resuelve dentro del mismo `page.tsx` (3 segmentos + id numérico), con `generateMetadata` que ramifica; lo demás, `notFound()`.
+- **Figma sin enlace:** se encontró el marco listando las páginas del archivo con `use_figma` (solo lectura) y buscando "Detalles". Dos marcos casi iguales (`89:4207` y `238:4492`): confirmar contra las capturas del usuario cuál es. `exportAsync({format:"SVG_STRING"})` devuelve un SVG completo de un grupo de íconos (el `svgAssets` de `download_assets` los parte en piezas y su `export` trae todo el marco).
+- **Backend:** `GET /cars/{id}/` ya trae `description_list` (no hace falta `/description-car/`); `/cars-related/{id}/` lleva barra final (sin ella, 301). Las fotos `/api/v2/img/<ancho>/…` responden 302: la `orig` tarda segundos en frío; una foto casi blanca sobre el panel gris parece "no cargada" en una captura temprana.
+- **Grid en mobile:** una tira `overflow-x-auto` dentro de un grid item ensancha la columna (overflowX 2587): `grid-cols-[minmax(0,1fr)]`.
+- **Placa:** `tuition` es la placa completa; el servicio solo conserva el último carácter.

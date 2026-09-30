@@ -1,18 +1,71 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import CatalogComponent from "@/modules/catalog/components/CatalogComponent";
 import { CATALOG_CARS } from "@/modules/catalog/constants/catalogs";
 import { getCatalogFilterOptions } from "@/modules/catalog/services/options";
 import type { CatalogFilters } from "@/modules/catalog/types/filters";
 import { buildPageMetadata } from "@/modules/shared/utils/seo";
+import VehicleDetailComponent from "@/modules/vehicle-detail/components/VehicleDetailComponent";
+import { getRelatedVehicles, getVehicleDetail } from "@/modules/vehicle-detail/services/vehicle-detail";
+import { buildVehicleMetadata } from "@/modules/vehicle-detail/utils/seo";
+
+type PageProps = {
+  params: Promise<{ typeVehicleName?: string[] }>;
+  searchParams: Promise<{ type_vehicle?: string }>;
+};
+
+/**
+ * Segmentos de categoría (`/compra-tu-carro/<slug>`) que ya traen su filtro, para que la URL limpia
+ * dispare banner + acordeón SEO igual que el filtro del sidebar (`docs/SEO_CATALOGO_COMPRA_TU_CARRO.md`
+ * §2, puntos 1 y 2). El slug se compara sin tildes ni mayúsculas: el sitio anterior usaba
+ * "carros-híbridos-colombia" (con tilde), la variante del sitemap no. Los nombres de tipo son los
+ * de `/type-cars/`.
+ */
+const CATEGORY_SEGMENTS: Record<string, { fuelTypes?: string[]; typeName?: string }> = {
+  "carros-hibridos-colombia": { fuelTypes: ["hibrido"] },
+  "camionetas-usadas": { typeName: "Camioneta - SUV" },
+  "carros-coupe": { typeName: "Coupe" },
+  "carros-sedan-usados": { typeName: "Sedan" },
+  "hatchback-colombia": { typeName: "Hatchback" },
+};
+
+function normalizeSegment(segment: string): string {
+  return decodeURIComponent(segment)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+/**
+ * El id del vehículo si la ruta es una ficha: `/compra-tu-carro/<tipo>/<nombre>/<id>` (la
+ * estructura del sitio anterior, ver `vehicleHref`). Solo cuenta el id: el tipo y el nombre son
+ * la URL amigable y pueden decir cualquier cosa. `null` si la ruta no es de una ficha.
+ */
+function getVehicleId(segments: string[] | undefined): number | null {
+  if (segments?.length !== 3) return null;
+  const id = segments[2];
+  return /^\d+$/.test(id) ? Number(id) : null;
+}
 
 // Canonical fijo a `/compra-tu-carro`: los segmentos por tipo y los filtros (`?type_vehicle=`)
-// muestran el mismo catálogo, y así no compiten entre sí como duplicados.
-export const metadata: Metadata = buildPageMetadata({
-  title: CATALOG_CARS.seo.title,
-  description: CATALOG_CARS.seo.description,
-  path: "/compra-tu-carro",
-});
+// muestran el mismo catálogo, y así no compiten entre sí como duplicados. La ficha de un
+// vehículo tiene el suyo (ver `buildVehicleMetadata`).
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { typeVehicleName } = await params;
+  const vehicleId = getVehicleId(typeVehicleName);
+
+  if (vehicleId !== null) {
+    const vehicle = await getVehicleDetail(vehicleId);
+    return vehicle ? buildVehicleMetadata(vehicle) : {};
+  }
+
+  return buildPageMetadata({
+    title: CATALOG_CARS.seo.title,
+    description: CATALOG_CARS.seo.description,
+    path: "/compra-tu-carro",
+  });
+}
 
 /**
  * Catálogo "Compra tu carro". Es la misma página que `/compra-tu-moto`,
@@ -39,17 +92,35 @@ export const metadata: Metadata = buildPageMetadata({
  * proyecto) — ver la cabecera del plan.
  *
  * Faltan por agregar: imágenes/iconos (tarea 10).
+ *
+ * **La ficha de un vehículo vive en esta misma ruta.** Next no deja un segmento dinámico
+ * (`[tipo]`) hermano de un catch-all opcional, así que `/compra-tu-carro/<tipo>/<nombre>/<id>` se
+ * resuelve aquí: con tres segmentos y un id numérico al final se pinta la ficha
+ * (`VehicleDetailComponent`, `docs/planes/detalle-vehiculo.md`); con uno o ninguno, el catálogo;
+ * cualquier otra forma, 404. Un vehículo que no existe o está inactivo también da 404 (el sitio
+ * anterior lo mandaba al inicio).
  */
-export default async function BuyCarPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ type_vehicle?: string }>;
-}) {
+export default async function BuyCarPage({ params, searchParams }: PageProps) {
+  const { typeVehicleName: segments } = await params;
+
+  if (segments && segments.length > 1) {
+    const vehicleId = getVehicleId(segments);
+    if (vehicleId === null) notFound();
+
+    const [vehicle, related] = await Promise.all([getVehicleDetail(vehicleId), getRelatedVehicles(vehicleId)]);
+    if (!vehicle) notFound();
+    return <VehicleDetailComponent vehicle={vehicle} related={related} />;
+  }
+
   const [options, { type_vehicle: typeVehicleName }] = await Promise.all([getCatalogFilterOptions(), searchParams]);
 
   const initialFilters: Partial<CatalogFilters> = {};
-  if (typeVehicleName) {
-    const type = options.vehicleTypes.find((t) => t.name === typeVehicleName);
+  const category = segments?.length === 1 ? CATEGORY_SEGMENTS[normalizeSegment(segments[0])] : undefined;
+  if (category?.fuelTypes) initialFilters.fuelTypes = category.fuelTypes;
+
+  const requestedTypeName = typeVehicleName ?? category?.typeName;
+  if (requestedTypeName) {
+    const type = options.vehicleTypes.find((t) => t.name === requestedTypeName);
     // Si el nombre no calza con ninguno (backend caído, o cambió el nombre),
     // se ignora en vez de romper: el catálogo queda sin ese filtro sembrado.
     if (type) initialFilters.bodyTypeIds = [String(type.id)];

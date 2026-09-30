@@ -6,6 +6,7 @@ import ButtonComponent from "@/modules/shared/components/ButtonComponent";
 
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import { getActiveChips, removeChip } from "../services/chips";
+import { getSeoCategory } from "../services/seo-category";
 import type { CatalogFilterOptions } from "../services/options";
 import {
   filtersToSearchParams,
@@ -23,6 +24,8 @@ import FilterBottomSheetComponent from "./FilterBottomSheetComponent";
 import FilterSidebarComponent from "./FilterSidebarComponent";
 import FilterTabsComponent from "./FilterTabsComponent";
 import PaginationComponent from "./PaginationComponent";
+import SeoAccordionComponent from "./SeoAccordionComponent";
+import SeoBannerComponent from "./SeoBannerComponent";
 import type { Range } from "./RangeFilterComponent";
 import ResultsGridComponent from "./ResultsGridComponent";
 import SearchSortBarComponent from "./SearchSortBarComponent";
@@ -216,6 +219,10 @@ export default function CatalogComponent({
 
   function handleRemoveChip(chipId: string) {
     setFilters((prev) => removeChip(prev, chipId));
+    // Búsqueda, precio y kilometraje viven en sus borradores, no en `filters`.
+    if (chipId === "search") setSearchDraft("");
+    if (chipId === "price") setPriceDraft(EMPTY_RANGE);
+    if (chipId === "mileage") setMileageDraft(EMPTY_RANGE);
     setPage(1);
     setLoading(true);
   }
@@ -246,6 +253,13 @@ export default function CatalogComponent({
   const resultsRef = useRef<HTMLDivElement>(null);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
+  // Los chips salen de `effectiveFilters` (con búsqueda, precio y kilometraje), no de `filters`.
+  const chips = getActiveChips(effectiveFilters, options);
+
+  // Banner + acordeón SEO de la categoría activa (`services/seo-category.ts`). Con banner, el banner
+  // es el `<h1>` de la página y el `<h1>` oculto de la variante se omite.
+  const seoCategory = getSeoCategory(config, effectiveFilters, options);
+
   const countLabel = loading
     ? "Cargando…"
     : config.countLabelTemplate.replace("{count}", String(result?.count ?? 0));
@@ -268,7 +282,7 @@ export default function CatalogComponent({
 
   return (
     <>
-      <h1 className="sr-only">{config.seo.h1}</h1>
+      {!seoCategory?.bannerTitle && <h1 className="sr-only">{config.seo.h1}</h1>}
 
       <SearchSortBarComponent
         searchDraft={searchDraft}
@@ -331,9 +345,11 @@ export default function CatalogComponent({
           </aside>
 
           <div ref={resultsRef} className="min-w-0 xl:px-3">
+            {seoCategory?.bannerTitle && <SeoBannerComponent title={seoCategory.bannerTitle} />}
+
             <ChipsBarComponent
               countLabel={countLabel}
-              chips={getActiveChips(filters, options)}
+              chips={chips}
               onRemoveChip={handleRemoveChip}
               onClearFilters={handleClearFilters}
             />
@@ -341,6 +357,8 @@ export default function CatalogComponent({
             <ResultsGridComponent
               vehicles={result?.vehicles ?? []}
               loading={loading}
+              hasFilters={chips.length > 0}
+              onClearFilters={handleClearFilters}
             />
             {/* `result` sigue siendo el de la última búsqueda resuelta mientras
               `loading` está en `true` (nunca se limpia a `null` al empezar
@@ -359,6 +377,13 @@ export default function CatalogComponent({
           </div>
         </div>
       </div>
+
+      {seoCategory && (
+        <section className="container-wcar grid gap-x-6 pt-20 pb-10 lg:grid-cols-2">
+          <SeoAccordionComponent items={seoCategory.left} group="seo-left" imagesDir={seoCategory.key} />
+          <SeoAccordionComponent items={seoCategory.right} group="seo-right" imagesDir={seoCategory.key} />
+        </section>
+      )}
     </>
   );
 }
