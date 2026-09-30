@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import isotipoNaranja from "../assets/hero/isotipo-naranja-mobile.svg";
 import iconExternal from "@/modules/shared/assets/icons/external-link.svg";
 import ButtonComponent from "@/modules/shared/components/ButtonComponent";
 import SectionEyebrowComponent from "@/modules/shared/components/SectionEyebrowComponent";
@@ -51,8 +52,18 @@ export default function CompanyIntroComponent() {
             />
           </div>
 
-          <div className="flex flex-col items-center gap-6 pt-14 xl:w-[515px] xl:items-start xl:gap-3 xl:pt-16">
-            <SectionEyebrowComponent className="reveal">Por qué nosotros</SectionEyebrowComponent>
+          <div className="flex flex-col items-center gap-6 pt-14 pb-5 xl:w-[515px] xl:pb-0 xl:items-start xl:gap-3 xl:pt-16">
+            {/* En mobile el isotipo naranja va pegado a la izquierda del eyebrow, a
+                su altura (centrado con el texto). */}
+            <div className="reveal relative">
+              <Image
+                src={isotipoNaranja}
+                alt=""
+                aria-hidden
+                className="absolute top-3 right-full mr-2 h-[22px] w-[19.8px] max-w-none xl:hidden"
+              />
+              <SectionEyebrowComponent>¿Por qué nosotros?</SectionEyebrowComponent>
+            </div>
 
             <h1 className="reveal w-full text-subheadline-1 font-bold text-dark-gray">Nuestra Empresa</h1>
 

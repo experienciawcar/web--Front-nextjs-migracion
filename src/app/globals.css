@@ -293,6 +293,9 @@ body:has(dialog[open]) {
   border-radius: 0.25em;
   background-color: #fff;
   cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
 }
 .filter-checkbox:checked {
   background-color: var(--color-orange);
@@ -431,4 +434,39 @@ input[type="range"] {
   border: 0;
   height: 100%;
   width: 100%;
+}
+
+/* Animaciones de los filtros del catálogo. Solo con movimiento permitido; sin esto todo
+   sigue funcionando, solo que sin transición. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+
+  /* Acordeón de escritorio (`FilterAccordionComponent`): el contenido del <details> crece y
+     se pliega en vez de saltar. */
+  .filter-accordion::details-content {
+    height: 0;
+    overflow: clip;
+    opacity: 0;
+    transition:
+      height 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 200ms ease,
+      content-visibility 260ms allow-discrete;
+  }
+  .filter-accordion[open]::details-content {
+    height: auto;
+    opacity: 1;
+  }
+
+  /* Contenido que aparece al cambiar de pestaña, de marca o de modelos. */
+  .filter-fade-in {
+    animation: filter-fade-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes filter-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+  }
 }

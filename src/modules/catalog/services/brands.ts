@@ -9,7 +9,9 @@ function toBrand(dto: BrandDto): Brand {
   return {
     id: String(dto.id),
     name: dto.brand?.trim() ?? "",
-    imageUrl: dto.image || null,
+    // URL propia y estable (ver `getBrandLogoSource`): la del backend es una URL firmada de GCS
+    // que cambia en cada llamada, y con ella el caché de imágenes de Next nunca se reutiliza.
+    imageUrl: dto.image ? `/api/marca-logo/${dto.id}` : null,
     models: (dto.modelcar_set ?? [])
       .map((m) => ({ id: String(m.id), name: m.model?.trim() ?? "" }))
       .filter((m) => m.name)
@@ -22,13 +24,22 @@ function toBrand(dto: BrandDto): Brand {
  * ya anidados (ver `types/brand.ts`). El filtro manda `brand` por **id**: por
  * nombre el backend responde HTTP 500 (verificado, ver la referencia del plan).
  */
-export async function getBrands(): Promise<Brand[]> {
+async function fetchBrandDtos(): Promise<BrandDto[]> {
   const url = apiUrl("/v2/brands/");
+  const response = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
+  if (!response.ok) throw new Error(`GET ${url} respondió ${response.status}`);
+  return response.json();
+}
 
+/** URL firmada vigente del logo de una marca, para que la ruta `/api/marca-logo/[id]` lo descargue. */
+export async function getBrandLogoSource(id: string): Promise<string | null> {
+  const brands = await fetchBrandDtos();
+  return brands.find((b) => String(b.id) === id)?.image || null;
+}
+
+export async function getBrands(): Promise<Brand[]> {
   try {
-    const response = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
-    if (!response.ok) throw new Error(`GET ${url} respondió ${response.status}`);
-    const brands: BrandDto[] = await response.json();
+    const brands = await fetchBrandDtos();
     return brands
       .map(toBrand)
       .filter((b) => b.name)

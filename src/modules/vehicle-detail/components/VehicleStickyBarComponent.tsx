@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 
-import arrowCircle from "@/modules/shared/assets/icons/arrow-circle.svg";
-import ButtonComponent from "@/modules/shared/components/ButtonComponent";
+import Image from "next/image";
+
+import AppLinkComponent from "@/modules/shared/components/AppLinkComponent";
 import { ROUTES } from "@/modules/shared/constants/routes";
 
+import rectangleSticky from "../assets/sticky/rectangle-sticky-mobile.svg";
 import { isUnavailable } from "../constants/tags";
 
 /**
@@ -43,15 +45,30 @@ export default function VehicleStickyBarComponent({
   return (
     <div
       aria-hidden={footerVisible}
-      className={`fixed inset-x-0 bottom-0 z-30 bg-dark-gray p-3 transition-transform duration-200 motion-reduce:transition-none xl:hidden ${footerVisible ? "pointer-events-none translate-y-full" : ""}`}
+      className={`fixed inset-x-0 bottom-0 z-30 flex justify-center overflow-hidden bg-[#1a1a1a] px-5 py-[15px] transition-transform duration-200 motion-reduce:transition-none xl:hidden ${footerVisible ? "pointer-events-none translate-y-full" : ""}`}
     >
-      <ButtonComponent
+      <AppLinkComponent
         href={ROUTES.contact}
-        icon={arrowCircle}
-        className="w-full"
+        className="group relative flex h-11 w-full max-w-[450px] rounded-tr-[35px] rounded-bl-[35px] drop-shadow-[0_4px_15px_rgba(0,0,0,0.4)]"
       >
-        Separar vehículo
-      </ButtonComponent>
+        <span aria-hidden className="-mr-[30px] h-11 w-[53px] rounded-bl-[35px] bg-blue-neon" />
+        <span className="relative z-[101] -ml-px flex h-11 grow items-center justify-center gap-3 overflow-hidden rounded-tr-[35px] rounded-bl-[35px] bg-[#f60] text-[15px] font-bold tracking-[0.5px] text-white uppercase">
+          Separar vehículo
+          <svg
+            className="size-6 transition-transform duration-300 group-hover:translate-x-[5px]"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            aria-hidden
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </span>
+        <span aria-hidden className="absolute -top-[22px] -right-[23px] z-[100]">
+          <Image src={rectangleSticky} alt="" className="h-[50px] w-auto" />
+        </span>
+      </AppLinkComponent>
     </div>
   );
 }

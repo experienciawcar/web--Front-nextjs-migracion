@@ -2,6 +2,7 @@
 
 import CarouselArrowsComponent from "@/modules/shared/components/CarouselArrowsComponent";
 import CarouselProgressComponent from "@/modules/shared/components/CarouselProgressComponent";
+import CarouselPagesComponent from "@/modules/shared/components/CarouselPagesComponent";
 import FeatureCardComponent from "@/modules/shared/components/FeatureCardComponent";
 import { useCarousel } from "@/modules/shared/hooks/useCarousel";
 
@@ -37,8 +38,13 @@ const SIN_SCROLLBAR = "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden";
  * el recorrido máximo quedaba 24 px corto y la última posición no alineaba), así
  * que hay exactamente una posición por tarjeta. La barra es clicable.
  *
- * Mobile: sin flechas ni barra; se desliza con el dedo y la siguiente tarjeta
- * asoma por la derecha (guía §4.3). No hay diseño mobile.
+ * Teléfono (< 768, "Frame 595" 204:7750 de "financiación - 394"): las tarjetas
+ * van de a dos, una sobre otra (32 entre ellas), con el icono arriba y el texto
+ * centrado (`mobileCentered`), y cada par es una "página" de todo el ancho: 5
+ * pasos = 3 páginas, o sea las tres rayas de `CarouselPagesComponent`, a 20
+ * de las tarjetas y clicables. Es una cuadrícula de dos filas que se llena por
+ * columnas, así que el scroll-snap y `useCarousel` siguen igual (un paso = el
+ * ancho de la caja). De 768 en adelante, la fila de siempre.
  */
 export default function FinancingStepsCarouselComponent({ steps }: { steps: FinancingStep[] }) {
   const [ref, carousel] = useCarousel<HTMLOListElement>();
@@ -47,11 +53,14 @@ export default function FinancingStepsCarouselComponent({ steps }: { steps: Fina
     <div className="xl:mr-[calc(50%-50vw)]">
       <ol
         ref={ref}
-        className={`-mr-8 flex snap-x snap-mandatory gap-6 overflow-x-auto pr-8 after:w-[calc(100%-298px)] after:shrink-0 xl:mr-0 xl:scroll-pl-6 xl:pr-0 xl:pl-6 ${SIN_SCROLLBAR}`}
+        className={`grid snap-x snap-mandatory auto-cols-[100%] grid-flow-col grid-rows-2 items-start gap-y-8 overflow-x-auto after:hidden md:-mr-8 md:flex md:gap-6 md:pr-8 md:after:block md:after:w-[calc(100%-298px)] md:after:shrink-0 xl:mr-0 xl:scroll-pl-6 xl:pr-0 xl:pl-6 ${SIN_SCROLLBAR}`}
       >
         {steps.map((step, index) => (
-          <li key={step.id} className="w-[274px] shrink-0 snap-start">
+          <li key={step.id} className="snap-start md:w-[274px] md:shrink-0">
             <FeatureCardComponent
+              mobileCentered
+              className="max-md:gap-3!"
+              textClassName="max-md:gap-3!"
               icon={step.icon}
               titleMarker={`${index + 1}.`}
               title={step.title}
@@ -60,6 +69,13 @@ export default function FinancingStepsCarouselComponent({ steps }: { steps: Fina
           </li>
         ))}
       </ol>
+
+      <CarouselPagesComponent
+        position={carousel.position}
+        positions={carousel.positions}
+        onSelect={carousel.scrollToPosition}
+        className="mt-[15px] md:hidden"
+      />
 
       <div className="mt-8 hidden h-8 items-center xl:flex">
         <CarouselArrowsComponent

@@ -25,6 +25,7 @@ export default function FeatureCardComponent({
   description,
   descriptionClassName = "",
   titleClassName = "",
+  textClassName = "",
   iconClassName = "size-8",
   tone = "light",
   mobileCentered = false,
@@ -46,6 +47,8 @@ export default function FeatureCardComponent({
   descriptionClassName?: string;
   /** Igual que `descriptionClassName`, para el título. */
   titleClassName?: string;
+  /** Clases de la columna de texto, p. ej. otra separación entre título y descripción. */
+  textClassName?: string;
   /** Tamaño de la caja del icono: 32px (`size-8`), o 48px (`size-12`) en "Servicios adicionales". */
   iconClassName?: string;
   /** `dark` para fondos oscuros: título y descripción en blanco (al 90 y 80 %). */
@@ -59,11 +62,21 @@ export default function FeatureCardComponent({
       className={`flex ${mobileCentered ? "flex-col items-center gap-2 text-center md:flex-row md:items-start md:gap-6 md:text-left" : "items-start gap-6"} ${className}`}
     >
       <Image src={icon} alt="" aria-hidden className={`${iconClassName} shrink-0`} />
-      <div className="flex min-w-0 flex-1 flex-col gap-2">
+      <div className={`flex min-w-0 flex-1 flex-col gap-2 ${textClassName}`}>
         <Title
           className={`text-heading-1 font-bold opacity-90 ${tone === "dark" ? "text-white" : "text-dark-gray"} ${titleClassName}`}
         >
-          {titleMarker && <span className="inline-block w-[33px] pr-[5.5px] text-right">{titleMarker}</span>}
+          {titleMarker && (
+            <span
+              className={
+                mobileCentered
+                  ? "mr-1 md:mr-0 md:inline-block md:w-[33px] md:pr-[5.5px] md:text-right"
+                  : "inline-block w-[33px] pr-[5.5px] text-right"
+              }
+            >
+              {titleMarker}
+            </span>
+          )}
           {title}
           {titleItalic && (
             <>

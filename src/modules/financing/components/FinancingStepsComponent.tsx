@@ -20,7 +20,7 @@ export default function FinancingStepsComponent() {
   return (
     <section aria-label="Proceso de financiación" className="relative overflow-x-clip">
       <div className="mx-auto xl:max-w-[1440px]">
-        <div className="container-wcar py-16 xl:py-20">
+        <div className="container-wcar pt-[30px] pb-[230px] xl:py-20">
           <FinancingStepsCarouselComponent steps={FINANCING_STEPS} />
         </div>
       </div>

@@ -13,7 +13,7 @@ import patch from "../assets/que-hace/parche-fachada.svg";
  *
  * Fuente: captura del desktop 1440 (`docs/planes/taller/1-hero-y-que-hace.png`,
  * calibrada como en el hero: -2,4 + 0,640 × px de diseño) y, para la foto y su
- * caja, el Figma (nodo 188:8089, grupo 190:3229). Sin diseño mobile. Medidas (px
+ * caja, el Figma (nodo 188:8089, grupo 190:3229). El mobile viene de Figma (ver más abajo). Medidas (px
  * de diseño, ±1,5 salvo lo que diga "Figma"):
  * - Tarjeta: la del contenedor (x=124..1316), de y=352 a 775 (423 de alto: es el
  *   alto de la foto; Figma, la captura había dado 355 y 421). Solapa 157 px al
@@ -39,8 +39,15 @@ import patch from "../assets/que-hace/parche-fachada.svg";
  *   de 305 x 48. El ancho de 480 sale de que la primera línea (477) cabe y la
  *   quinta con la palabra siguiente (485) no.
  *
- * Mobile: no hay diseño. Se adaptó con el criterio de la guía §4.3: una columna,
- * el texto primero y la foto debajo, sobre blanco a todo el ancho.
+ * Mobile (Figma, marco 1:9787, 393 de ancho): la tarjeta blanca (329 de ancho, x=32)
+ * arranca 108 px antes del final del hero (que mide 583) y solo es el respaldo
+ * blanco del texto sobre la foto; el diseño NO trae la foto de la fachada, así
+ * que aquí no se muestra. Todo el bloque va centrado salvo el párrafo: antetítulo
+ * "wcar taller" de 14 con su raya de 117 x 4 (36 de alto entre las dos, a 8 px del
+ * título); título de 36/44 en dos renglones ("¿Que hace" / "wcar Taller?", esto
+ * último en cursiva naranja, sin espacio antes del "?" y con "T" mayúscula, a
+ * diferencia de desktop); párrafo de 16/24 a 32 px del título y el botón de 305 x 48
+ * a 64 px del párrafo, centrado. La tarjeta arranca 36 px sobre el antetítulo.
  *
  * Colores (medidos de la captura, recordando que sus hex no son los del diseño):
  * - Título: `dark-gray` al 90 % como los títulos de `FeatureCardComponent` (en la
@@ -61,11 +68,11 @@ import patch from "../assets/que-hace/parche-fachada.svg";
  */
 export default function WorkshopWhatWeDoComponent() {
   return (
-    <section aria-labelledby="que-hace-title" className="relative z-20 bg-white xl:-mt-[157px] xl:bg-transparent">
+    <section aria-labelledby="que-hace-title" className="relative z-20 -mt-[108px] xl:-mt-[157px]">
       <div className="container-wcar">
-        <div className="flex flex-col gap-10 py-12 xl:h-[423px] xl:flex-row xl:gap-[87px] xl:bg-white xl:py-0">
+        <div className="flex flex-col bg-white pt-9 pb-16 xl:h-[423px] xl:flex-row xl:gap-[87px] xl:py-0">
           {/* Foto. En mobile va después del texto. */}
-          <div className="reveal reveal-left relative order-2 aspect-[4/3] w-full overflow-hidden xl:order-1 xl:aspect-auto xl:h-[423px] xl:w-[554px] xl:shrink-0">
+          <div className="reveal reveal-left relative order-1 hidden overflow-hidden xl:block xl:h-[423px] xl:w-[554px] xl:shrink-0">
             <Image
               src="/assets/taller/que-hace/fachada-taller-wcar.webp"
               alt="Fachada del taller de WCAR: “Taller de reacondicionamiento automotriz”"
@@ -82,19 +89,28 @@ export default function WorkshopWhatWeDoComponent() {
             />
           </div>
 
-          <div className="order-1 flex flex-col xl:order-2 xl:w-[480px] xl:pt-14">
-            <span aria-hidden className="reveal block h-1 w-[115px] bg-orange" />
+          <div className="order-2 flex flex-col xl:w-[480px] xl:pt-14">
+            <span aria-hidden className="reveal hidden h-1 w-[115px] bg-orange xl:block" />
+            <div className="reveal flex flex-col items-center gap-2.5 xl:hidden">
+              <span aria-hidden className="block h-1 w-[117px] bg-orange" />
+              <span className="text-small font-bold text-gray">wcar taller</span>
+            </div>
 
             {/* TODO: confirmar con diseño: "¿Que" sin tilde y el espacio antes
                 del "?". */}
             <h2
               id="que-hace-title"
-              className="reveal mt-[30px] text-heading-1 font-bold text-dark-gray opacity-90"
+              className="reveal mt-2 text-center text-subheadline-1 font-bold text-dark-gray opacity-90 xl:mt-[30px] xl:text-left xl:text-heading-1"
             >
-              ¿Que hace <span className="font-medium italic">wcar taller ?</span>
+              ¿Que hace{" "}
+              <span className="xl:hidden">
+                <br />
+                <span className="font-normal text-orange italic">wcar Taller?</span>
+              </span>
+              <span className="hidden font-medium italic xl:inline">wcar taller ?</span>
             </h2>
 
-            <p className="reveal mt-[30px] text-body font-medium text-gray-dark">
+            <p className="reveal mt-8 text-body font-medium text-gray-dark xl:mt-[30px]">
               En <strong className="font-bold text-orange">wcar</strong>, ofrecemos un servicio de calidad
               superior para tu vehículo. Nuestro taller en Bogotá está equipado con{" "}
               <strong className="font-bold text-[#5d6480]">tecnología de punta</strong> y cuenta con un equipo de
@@ -109,7 +125,7 @@ export default function WorkshopWhatWeDoComponent() {
               href={ROUTES.contact}
               variant="primary"
               icon={arrowCircle}
-              className="reveal mt-10 self-start"
+              className="reveal mt-16 self-center xl:mt-10 xl:self-start"
             >
               Solicitar servicio tecnico
             </ButtonComponent>

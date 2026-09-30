@@ -12,22 +12,21 @@ import type { ActiveChip } from "../services/chips";
  * `docs/planes/compra-tu-carro.md`.
  */
 export default function ChipsBarComponent({
-  countLabel,
   chips,
   onRemoveChip,
   onClearFilters,
 }: {
-  countLabel: string;
   chips: ActiveChip[];
   onRemoveChip: (chipId: string) => void;
   onClearFilters: () => void;
 }) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-4 pb-4 xl:min-h-[51px] xl:pt-2 xl:pb-0">
+    <div
+      className={`flex-wrap items-center justify-between gap-4 pb-4 xl:flex xl:min-h-[51px] xl:pt-2 xl:pb-0 ${
+        chips.length > 0 ? "flex" : "hidden"
+      }`}
+    >
       <div className="flex flex-wrap items-center gap-2">
-        <span className="text-body font-semibold text-dark-gray xl:hidden">
-          {countLabel}
-        </span>
         {chips.map((chip) => (
           <span
             key={chip.id}
@@ -57,7 +56,7 @@ export default function ChipsBarComponent({
       <button
         type="button"
         onClick={onClearFilters}
-        className="ml-auto flex items-center gap-2 text-body text-dark-gray"
+        className="ml-auto hidden items-center gap-2 text-body text-dark-gray xl:flex"
       >
         <svg
           viewBox="0 0 24 24"

@@ -80,7 +80,8 @@ export default function SearchSortBarComponent({
           />
         </label>
 
-        <div className="flex items-center gap-3 text-white">
+        {/* En mobile "Ordenar por" baja a la fila de `MobileToolbar`, junto a Filtrar. */}
+        <div className="hidden items-center gap-3 text-white xl:flex">
           <span className="text-body">Ordenar por:</span>
           <OrderDropdown value={orderBy} onChange={onOrderByChange} />
         </div>
@@ -94,12 +95,14 @@ export default function SearchSortBarComponent({
  * flecha, y una lista blanca flotante debajo (no el `<select>` nativo, cuya lista no se puede
  * estilar). Patrón de botón + `listbox`; cierra con clic afuera o Esc.
  */
-function OrderDropdown({
+export function OrderDropdown({
   value,
   onChange,
+  tone = "dark",
 }: {
   value: CatalogOrderBy;
   onChange: (value: CatalogOrderBy) => void;
+  tone?: "dark" | "light";
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -131,12 +134,18 @@ function OrderDropdown({
         aria-expanded={open}
         aria-label={`Ordenar resultados por: ${current.label}`}
         onClick={() => setOpen((prev) => !prev)}
-        className="flex h-10 items-center gap-4 rounded-md bg-dark-gray px-4 text-body font-bold text-white"
+        className={`flex h-10 items-center gap-4 rounded-md px-4 text-body ${
+          tone === "light"
+            ? "bg-gray/30 text-dark-gray"
+            : "bg-dark-gray font-bold text-white"
+        }`}
       >
         {current.label}
         <span
           aria-hidden
-          className="border-x-[4px] border-t-[4px] border-x-transparent border-t-white"
+          className={`border-x-[4px] border-t-[4px] border-x-transparent ${
+            tone === "light" ? "border-t-dark-gray" : "border-t-white"
+          }`}
         />
       </button>
 
@@ -144,7 +153,7 @@ function OrderDropdown({
         <ul
           role="listbox"
           aria-label="Ordenar resultados por"
-          className="absolute top-full right-0 z-30 mt-2 min-w-40 rounded-lg border border-gray/30 bg-white py-2 shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
+          className="absolute top-full left-0 z-30 xl:right-0 xl:left-auto mt-2 min-w-40 rounded-lg border border-gray/30 bg-white py-2 shadow-[0_4px_12px_rgba(0,0,0,0.15)]"
         >
           {ORDER_OPTIONS.map((option) => (
             <li

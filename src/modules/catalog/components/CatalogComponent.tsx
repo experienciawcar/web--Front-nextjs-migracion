@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import ButtonComponent from "@/modules/shared/components/ButtonComponent";
+import { FiltersIcon } from "@/modules/shared/components/icons";
 
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import { getActiveChips, removeChip } from "../services/chips";
@@ -28,7 +29,7 @@ import SeoAccordionComponent from "./SeoAccordionComponent";
 import SeoBannerComponent from "./SeoBannerComponent";
 import type { Range } from "./RangeFilterComponent";
 import ResultsGridComponent from "./ResultsGridComponent";
-import SearchSortBarComponent from "./SearchSortBarComponent";
+import SearchSortBarComponent, { OrderDropdown } from "./SearchSortBarComponent";
 
 /** Debounce del buscador de texto: mismo valor que usaba la SPA anterior (ver la referencia del plan). */
 const SEARCH_DEBOUNCE_MS = 1000;
@@ -291,19 +292,6 @@ export default function CatalogComponent({
         onOrderByChange={handleOrderByChange}
       />
 
-      {/* Disparador del bottom sheet: solo en mobile, el sidebar de al lado ya
-          cumple esto en desktop (`hidden xl:block`). */}
-      <div className="container-wcar pb-4 xl:hidden">
-        <ButtonComponent
-          variant="primary"
-          size="big"
-          className="w-full justify-center!"
-          onClick={() => setMobileFiltersOpen(true)}
-        >
-          Filtrar
-        </ButtonComponent>
-      </div>
-
       <FilterBottomSheetComponent
         open={mobileFiltersOpen}
         onClose={() => setMobileFiltersOpen(false)}
@@ -313,6 +301,29 @@ export default function CatalogComponent({
       </FilterBottomSheetComponent>
 
       <div className="bg-gray-light">
+        {/* Solo mobile: "Ordenar por" a la izquierda y "Filtrar" (abre el bottom
+            sheet) a la derecha; el sidebar de al lado cumple esto en desktop.
+            Va dentro del mismo fondo gris que los resultados para que no haya
+            una costura entre los dos bloques. */}
+        <div className="container-catalog relative z-10 flex items-center justify-between py-4 xl:hidden">
+          <div className="flex items-center gap-3 text-dark-gray">
+            <span className="text-small">Ordenar por:</span>
+            <OrderDropdown
+              tone="light"
+              value={filters.orderBy ?? "relevance"}
+              onChange={handleOrderByChange}
+            />
+          </div>
+          <button
+            type="button"
+            onClick={() => setMobileFiltersOpen(true)}
+            className="flex items-center gap-2 text-body text-dark-gray"
+          >
+            <FiltersIcon className="size-6" />
+            Filtrar
+          </button>
+        </div>
+
         <div className="container-catalog grid gap-8 pb-16 xl:grid-cols-[minmax(0,1fr)_3fr] xl:gap-0">
           <aside className="hidden bg-white px-6 xl:block">
             <div className="sticky top-20 flex max-h-[calc(100vh-5rem)] flex-col">
@@ -348,7 +359,6 @@ export default function CatalogComponent({
             {seoCategory?.bannerTitle && <SeoBannerComponent title={seoCategory.bannerTitle} />}
 
             <ChipsBarComponent
-              countLabel={countLabel}
               chips={chips}
               onRemoveChip={handleRemoveChip}
               onClearFilters={handleClearFilters}

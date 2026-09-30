@@ -5,6 +5,7 @@ import ButtonComponent from "@/modules/shared/components/ButtonComponent";
 import DiagonalLinesComponent from "@/modules/shared/components/DiagonalLinesComponent";
 import { ROUTES } from "@/modules/shared/constants/routes";
 
+import triangleMobile from "../assets/hero/triangulo-movil.svg";
 import watermark from "../assets/hero/watermark-isotipo.svg";
 
 /**
@@ -15,7 +16,7 @@ import watermark from "../assets/hero/watermark-isotipo.svg";
  *
  * Fuente: captura del desktop 1440 (`docs/planes/taller/1-hero-y-que-hace.png`)
  * y, para la foto y el alto del banner, el Figma "Wcar Website - 2026" (nodo
- * 188:8089, marco "Frame 586" 188:11272). No hay diseño mobile. Calibrada con la
+ * 188:8089, marco "Frame 586" 188:11272). El mobile viene de Figma (ver más abajo). Calibrada con la
  * tarjeta blanca = contenedor (124…1316 ⇒ x 77…840): px de captura = -2,4 + 0,640
  * × px de diseño. Las medidas de abajo salen de la captura, con ±1,5 px de error,
  * salvo lo que diga "Figma":
@@ -63,9 +64,29 @@ import watermark from "../assets/hero/watermark-isotipo.svg";
  *   (comando en el Registro de la tarea 8 de `docs/planes/taller.md`; el original,
  *   fuera del repo, en `../originales/taller/`).
  *
- * Mobile: no hay diseño. Se adaptó con el criterio de la guía §4.3: sin corte
- * diagonal, triángulo, marca de agua, rayado ni pestaña; el texto arriba y la
- * foto debajo.
+ * Mobile (Figma, marco "Vende tu carro -mobile 397", nodo 1:9787, 393 de ancho;
+ * las cifras son relativas al inicio del hero, es decir, la y del marco menos 96
+ * del navbar). Se aplica bajo `xl` y crece en ancho (la foto y el negro sangran;
+ * lo demás va a la izquierda o a la derecha, como en el marco):
+ * - Bloque negro de 270 de alto con el antetítulo (raya de 48 x 3 en x=50 alineada
+ *   con el PRIMER renglón, texto de 14/18 en x=114 y 220 de ancho, en dos
+ *   renglones) y el `<h1>` de 28 px bold con 0,28 de tracking en x=54, y=129, dos
+ *   renglones de 34: "Taller y Servicio" / "Postventa en" (cursiva regular)
+ *   "wcar" (naranja). El copy es OTRO que el de desktop ("Cuida tu carro Taller
+ *   wcar"): el h1 lleva los dos, cada uno visible solo en su tamaño.
+ *   TODO: confirmar con diseño cuál de los dos textos es el definitivo.
+ * - Marca de agua "W" de 250 x 277 en (35,26) al 10 %, y un rayado fino (tile de
+ *   6,5) de 40 x 93 en la esquina superior izquierda.
+ * - Foto de 407 de alto desde y=176 (94 px quedan bajo el bloque negro): el
+ *   export de Figma a 3× del nodo 193:7652 (la foto viene recortada y volteada
+ *   con una transformación afín, no sale de `object-cover` de la original),
+ *   recortada desde su primera fila con imagen y reducida a 2×:
+ *   `taller-vehiculos-movil.webp`. Encima, degradado de transparente a negro de
+ *   436 a 583 y un rayado de 119 x 48 abajo a la derecha.
+ * - Triángulo naranja de 139,5 x 244,5 pegado a la derecha en y=148, con punta a
+ *   la izquierda (el SVG de Figma, volteado) y desvanecido.
+ * - Pestaña "Contacta a un asesor": la misma de desktop, en y=47 (48 x 271).
+ * El hero mide 583; la tarjeta blanca de `WorkshopWhatWeDoComponent` lo solapa.
  *
  * Colores: la raya, "wcar" y el triángulo son el token `orange` (#FF8000). En la
  * captura se ven 255,113,42 por el corrimiento de color de la captura y no por
@@ -79,29 +100,53 @@ import watermark from "../assets/hero/watermark-isotipo.svg";
  */
 export default function WorkshopHeroComponent() {
   return (
-    <section aria-labelledby="taller-hero-title" className="relative isolate overflow-x-clip bg-black xl:bg-transparent">
+    <section aria-labelledby="taller-hero-title" className="relative isolate overflow-x-clip xl:bg-transparent">
       {/* El lienzo de 1440 centrado: los px del diseño valen aquí y los fondos
           sangran hasta el borde de la ventana (guía §4.2). */}
-      <div className="relative mx-auto flex flex-col xl:block xl:h-[509px] xl:max-w-[1440px]">
-        {/* Foto. En mobile va debajo del texto; en desktop es la caja de 900 x 509
-            del diseño (x=540) y sangra a la derecha; la forma negra la tapa a la
-            izquierda. Las capas de diseño van en CSS (ver JSDoc). */}
-        <div className="relative order-2 aspect-[393/230] w-full overflow-hidden xl:absolute xl:top-0 xl:right-[calc(50%-50vw)] xl:left-[540px] xl:aspect-auto xl:h-[509px] xl:w-auto">
+      <div className="relative mx-auto h-[583px] xl:h-[509px] xl:max-w-[1440px]">
+        {/* ---------- Mobile: foto, negro y adornos ---------- */}
+        <div className="absolute inset-x-0 top-[176px] h-[407px] xl:hidden">
+          <Image
+            src="/assets/taller/hero/taller-vehiculos-movil.webp"
+            alt="Nave del taller de WCAR con vehículos en los elevadores, paredes naranjas y un Ford con el capó abierto en primer plano"
+            fill
+            sizes="100vw"
+            className="object-cover object-[50%_70%]"
+          />
+        </div>
+        <div aria-hidden className="absolute inset-x-0 top-[436px] z-10 h-[147px] bg-linear-to-b from-transparent to-black xl:hidden" />
+        <div aria-hidden className="absolute inset-x-0 top-0 z-10 h-[270px] bg-black xl:hidden" />
+        <DiagonalLinesComponent
+          tile={6.5}
+          className="absolute top-0 left-0 z-10 h-[93px] w-[40px] -scale-x-100 opacity-50 xl:hidden"
+        />
+        <DiagonalLinesComponent className="absolute top-[535px] right-0 z-10 h-[48px] w-[119px] -scale-x-100 opacity-50 xl:hidden" />
+        <Image
+          src={triangleMobile}
+          alt=""
+          aria-hidden
+          className="absolute top-[148px] right-0 z-10 h-[244.5px] w-[139.5px] max-w-none -scale-x-100 xl:hidden"
+        />
+
+        {/* Foto de desktop: la caja de 900 x 509 del diseño (x=540), que sangra a
+            la derecha; la forma negra la tapa a la izquierda. Las capas de diseño
+            van en CSS (ver JSDoc). */}
+        <div className="absolute top-0 right-[calc(50%-50vw)] left-[540px] z-0 hidden h-[509px] overflow-hidden xl:block">
           <Image
             src="/assets/taller/hero/taller-vehiculos-en-elevadores.webp"
             alt="Nave del taller de WCAR con vehículos en los elevadores, paredes naranjas y un Ford con el capó abierto en primer plano"
             fill
             preload
-            sizes="(min-width: 1280px) 900px, 100vw"
+            sizes="900px"
             className="object-cover object-bottom"
           />
           <div
             aria-hidden
-            className="absolute inset-0 bg-black/16 xl:bg-transparent xl:bg-[linear-gradient(to_right,rgb(13_19_23)_63px,rgb(0_0_0/0.16)_290px)]"
+            className="absolute inset-0 bg-[linear-gradient(to_right,rgb(13_19_23)_63px,rgb(0_0_0/0.16)_290px)]"
           />
           <div
             aria-hidden
-            className="absolute right-0 bottom-0 left-[62px] hidden h-[116px] bg-[linear-gradient(184.56deg,transparent_27.29%,black_127.51%)] xl:block"
+            className="absolute right-0 bottom-0 left-[62px] h-[116px] bg-[linear-gradient(184.56deg,transparent_27.29%,black_127.51%)]"
           />
         </div>
 
@@ -125,27 +170,38 @@ export default function WorkshopHeroComponent() {
           src={watermark}
           alt=""
           aria-hidden
-          className="absolute top-[36px] left-[41px] z-10 hidden h-[437px] w-[394px] max-w-none xl:block"
+          className="absolute top-[26px] left-[35px] z-10 h-[277px] w-[250px] max-w-none xl:top-[36px] xl:left-[41px] xl:h-[437px] xl:w-[394px]"
         />
 
         {/* Rayado sobre la foto, a la derecha de la tarjeta blanca. */}
         <DiagonalLinesComponent className="absolute top-[451px] right-[calc(50%-50vw)] left-[1316px] z-10 hidden h-[56px] -scale-x-100 opacity-50 xl:block" />
 
         {/* ---------- Texto ---------- */}
-        <div className="relative z-20 order-1 container-wcar pt-12 pb-10 xl:pt-[83px] xl:pb-0">
-          <div className="flex items-center gap-4 xl:h-[22px]">
-            <span aria-hidden className="h-[3px] w-12 shrink-0 bg-orange" />
-            <p className="text-small font-bold text-white">Lo revisamos a fondo. Lo reparamos con excelencia</p>
+        <div className="relative z-20 max-xl:pt-[50px] max-xl:pl-[50px] xl:container-wcar xl:pt-[83px]">
+          <div className="flex items-start gap-4 xl:h-[22px] xl:items-center">
+            <span aria-hidden className="mt-[6.5px] h-[3px] w-12 shrink-0 bg-orange xl:mt-0" />
+            <p className="w-[220px] max-w-[calc(100vw-170px)] text-small/[18px] font-bold text-white xl:w-auto xl:max-w-none xl:text-small">
+              Lo revisamos a fondo. Lo reparamos con excelencia
+            </p>
           </div>
 
           <h1
             id="taller-hero-title"
-            className="mt-6 text-[34px] leading-10 font-bold tracking-[0.5px] text-white xl:mt-[46px] xl:ml-[22px] xl:text-[50px] xl:leading-[60px]"
+            className="mt-[43px] ml-1 text-[28px] leading-[34px] max-[359px]:text-[22px] max-[359px]:leading-7 font-bold tracking-[0.28px] text-white xl:mt-[46px] xl:ml-[22px] xl:text-[50px] xl:leading-[60px] xl:tracking-[0.5px]"
           >
-            <span className="block">Cuida tu carro</span>
+            {/* Mobile y desktop traen un copy distinto en el diseño (ver JSDoc). */}
+            <span className="xl:hidden">
+              <span className="block">Taller y Servicio</span>{" "}
+              <span className="block">
+                <span className="font-normal italic">Postventa en</span> <span className="text-orange">wcar</span>
+              </span>
+            </span>
             {" "}
-            <span className="block">
-              <span className="font-normal italic">Taller</span> <span className="text-orange">wcar</span>
+            <span className="hidden xl:inline">
+              <span className="block">Cuida tu carro</span>{" "}
+              <span className="block">
+                <span className="font-normal italic">Taller</span> <span className="text-orange">wcar</span>
+              </span>
             </span>
           </h1>
         </div>
@@ -154,7 +210,7 @@ export default function WorkshopHeroComponent() {
       {/* Pestaña "Contacta a un asesor": un botón girado 90° con su esquina
           pivote pegada al borde de la ventana. Al girar, la caja crece hacia la
           izquierda (su alto) y hacia abajo (su ancho). */}
-      <div className="absolute top-[131px] right-0 z-30 hidden h-0 w-0 xl:block">
+      <div className="absolute top-[47px] right-0 z-30 h-0 w-0 xl:top-[131px]">
         <div className="absolute top-0 left-0 w-max origin-top-left rotate-90">
           <ButtonComponent href={ROUTES.contact} variant="cyan" icon={iconExternal}>
             CONTACTA A UN ASESOR

@@ -15,6 +15,8 @@ export type ProductItem = {
   textTop: number;
   /** El ícono baja 1 px en las filas de un solo renglón con interlineado de 38. */
   iconTop?: number;
+  /** Lo mismo en teléfono (tarjeta de 367): alto de la fila y separaciones de arriba del texto y del ícono. */
+  mobile: { rowHeight: number; textTop: number; iconTop: number };
   /** Tamaño e interlineado del renglón principal. */
   mainClassName: string;
   main: ProductTextPart[];
@@ -25,6 +27,19 @@ export type ProductItem = {
 
 /** Colores del acento de la cabecera: el del nombre del producto y el de las rayas. */
 export type ProductAccent = "orange" | "cyan";
+
+/** Un punto de la cabecera en px (esquina superior izquierda). */
+export type HeaderPoint = { left: number; top: number };
+
+/** Geometría de la cabecera en teléfono: la tarjeta mide 367 x 80 y todo va en px reales. */
+export type ProductMobileHeader = {
+  iconBox: { left: number; top: number; width: number; height: number };
+  namePosition: HeaderPoint;
+  /** El subtítulo de teléfono puede ser más corto que el de desktop. */
+  subtitle: string;
+  subtitlePosition: HeaderPoint;
+  linesPosition: { right: number; top: number };
+};
 
 export type FinancingProduct = {
   id: string;
@@ -43,6 +58,7 @@ export type FinancingProduct = {
   subtitlePosition: { left: number; top: number };
   /** Rayado de la esquina de la cabecera: `right` (negativo) y `top` de su caja de 148,7 x 136,3. */
   linesPosition: { right: number; top: number };
+  mobile: ProductMobileHeader;
   items: ProductItem[];
   buttonLabel: string;
 };

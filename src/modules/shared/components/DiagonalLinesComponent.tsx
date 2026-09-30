@@ -9,11 +9,14 @@
 export default function DiagonalLinesComponent({
   className,
   variant = "white",
+  tile = 13,
 }: {
   className?: string;
   /** El tile existe en dos colores: blanco sobre fondos oscuros (hero) y gris
    *  sobre fondos claros o fotos (fundador). */
   variant?: "white" | "gray";
+  /** Lado del tile en px (13 en casi todo el diseño; 6,5 en el rayado fino del hero mobile del Taller). */
+  tile?: number;
 }) {
   return (
     <div
@@ -21,7 +24,7 @@ export default function DiagonalLinesComponent({
       className={className}
       style={{
         backgroundImage: `url('/assets/shared/lines-13px-${variant}.png')`,
-        backgroundSize: "13px 13px",
+        backgroundSize: `${tile}px ${tile}px`,
         backgroundRepeat: "repeat",
       }}
     />

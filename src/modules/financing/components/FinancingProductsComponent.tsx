@@ -32,7 +32,10 @@ import FinancingProductCardComponent from "./FinancingProductCardComponent";
  *   en el zigzag de Taller (medido: espejado solo daba 886 px de diferencia entre
  *   máscaras, girado 246).
  *
- * Mobile (no hay diseño): sin adornos; título y tarjetas en una columna.
+ * Teléfono (< 1280, "financiación - 394", gris de y=4144 a 5376): sin adornos. Título
+ * centrado en una caja de 277 (64 de aire arriba; raya de 77, título de 36/44 en dos
+ * renglones y el subtítulo de 14/17 en `gray`), y 63 debajo las dos tarjetas de 367
+ * (13 de margen), separadas por 67 y con 76 de cierre.
  *
  * TODO: el subtítulo es una copia sin retocar del de "Garantía" del sitio anterior
  * (erratas incluidas): confirmar con diseño el texto.
@@ -62,21 +65,21 @@ export default function FinancingProductsComponent() {
         </div>
 
         {/* ---------- Título ---------- */}
-        <div className="relative px-8 pt-16 xl:absolute xl:top-[63px] xl:left-[235px] xl:p-0">
-          <span aria-hidden className="block h-1 w-[77px] bg-orange" />
+        <div className="relative mx-auto max-w-[277px] pt-16 text-center xl:absolute xl:top-[63px] xl:left-[235px] xl:mx-0 xl:max-w-none xl:p-0 xl:text-left">
+          <span aria-hidden className="mx-auto block h-1 w-[77px] bg-orange xl:mx-0" />
           <h2
             id="productos-title"
             className="mt-4 text-subheadline-1 leading-11 font-bold text-dark-gray"
           >
             Financia tu <span className="font-normal text-orange italic">Vehículo</span>
           </h2>
-          <p className="mt-2 text-body font-medium whitespace-pre-wrap text-gray-dark xl:mt-0 xl:w-[882px] xl:text-[18px] xl:leading-11">
+          <p className="mt-4 text-[14px] leading-[17px] font-medium whitespace-pre-wrap text-gray xl:mt-0 xl:w-[882px] xl:text-[18px] xl:leading-11 xl:text-gray-dark">
             Financia tu garantía y cubre la reparación o sustitución{"  "}de piezas de tu vehículo Con nuestra garantía
           </p>
         </div>
 
         {/* ---------- Tarjetas ---------- */}
-        <div className="relative flex flex-col items-center gap-8 px-8 pt-10 pb-16 xl:contents">
+        <div className="relative flex flex-col items-center gap-[67px] px-[13px] pt-[63px] pb-[76px] xl:contents">
           <div className="w-full max-w-[482px] xl:absolute xl:top-[203px] xl:left-[228px] xl:max-w-none xl:w-[482px]">
             <FinancingProductCardComponent product={FINANCING_PRODUCTS[0]} />
           </div>

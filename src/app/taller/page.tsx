@@ -22,8 +22,9 @@ export const metadata: Metadata = buildPageMetadata({
  *
  * Diseño: Figma "Wcar Website - 2026", nodo 188:8089 (desktop 1440; las medidas
  * de las secciones salieron primero de cinco capturas en `docs/planes/taller/` y
- * luego se corrigieron con las cifras de Figma, ver el JSDoc de cada una). No hay
- * diseño mobile: se adaptó con el criterio de la guía §4.3. Plan de trabajo:
+ * luego se corrigieron con las cifras de Figma, ver el JSDoc de cada una). El
+ * mobile sale del marco 1:9787 del mismo archivo ("Vende tu carro -mobile 397":
+ * el nombre está mal, es el de Taller), 393 x 6031. Plan de trabajo:
  * `docs/planes/taller.md`.
  *
  * Están todas las secciones del diseño y todas las imágenes (fotos en

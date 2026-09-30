@@ -70,25 +70,43 @@ export default function HeadquartersHeroComponent() {
           `container-wcar` de dentro (ver guía §4.2). */}
       <div className="relative mx-auto xl:max-w-[1440px]">
         {/* ---------- Banner ---------- */}
-        <div className="relative h-[193px] xl:h-[302px]">
+        <div className="relative h-[193px] overflow-hidden xl:h-[302px] xl:overflow-visible">
           {/* Foto. En desktop arranca en x=282 y sangra a la derecha hasta el
               borde de la ventana; a 1440 mide 1158 y, más ancho, `object-cover`
               la agranda en vez de estirarla. A su izquierda no hay foto: ahí la
               sombra de abajo cae sobre el fondo blanco de la página. */}
-          <div className="absolute inset-0 xl:right-[calc(50%-50vw)] xl:left-[282px]">
+          <div className="absolute inset-0 hidden xl:right-[calc(50%-50vw)] xl:left-[282px] xl:block">
             <Image
               src="/assets/nuestras-sedes/hero/fachada-wcar-pits.webp"
               alt=""
               aria-hidden
               fill
-              sizes="(min-width: 1280px) calc(50vw + 438px), 100vw"
-              className="object-cover object-[45%_50%] xl:object-[left_10.9%]"
+              sizes="(min-width: 1280px) calc(50vw + 438px), 1px"
+              className="object-cover xl:object-[left_10.9%]"
               preload
             />
-            {/* Mobile: oscurece la foto (más a la izquierda) para que se lea el
-                lockup, que cae sobre el rótulo de la fachada. Es una
-                estimación, no hay diseño mobile. */}
-            <div aria-hidden className="absolute inset-0 bg-linear-to-r from-black/75 via-black/55 to-black/25 xl:hidden" />
+          </div>
+
+          {/* Mobile (Figma 898:7110, 393x193): la fachada ENTERA, no el recorte
+              ancho de desktop. Medida por correlación contra el export del
+              nodo: foto de 455x303 con la esquina en (0,-56), o sea `cover` a
+              escala 455/393 y `object-position` y=51%. Encima, el degradado del
+              nodo: #1e1e1e al 9.5% que se apaga al 85.5% a 98.9°. */}
+          <div className="absolute inset-0 xl:hidden">
+            <Image
+              src="/assets/nuestras-sedes/hero/fachada-wcar-movil.webp"
+              alt=""
+              aria-hidden
+              width={455}
+              height={303}
+              sizes="455px"
+              className="absolute top-[-56px] left-1/2 max-w-none -translate-x-[196.5px]"
+              preload
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-[linear-gradient(98.92deg,#1e1e1e_9.55%,rgba(30,30,30,0)_85.53%)]"
+            />
           </div>
 
           {/* Sombra oscura de la izquierda (desktop). No es la barra negra: en
@@ -118,13 +136,32 @@ export default function HeadquartersHeroComponent() {
             className="absolute top-[16px] left-[51px] z-20 hidden h-[206.42px] w-[637px] max-w-none xl:block"
           />
 
+          {/* Mobile: marca de agua (380x123 en x=44, y=22 del banner), rayado de
+              32 de alto al pie (y=161) y triángulo naranja del borde derecho
+              (Figma 898:7111; los vértices se ajustaron a la captura que dio
+              diseño: arista izquierda de (328,193) a (393,41); el rayado
+              es de ~52 de alto ahí, no los 32 del nodo). Todo se ancla al centro del lienzo de
+              393 para que no se corra en teléfonos más anchos. */}
+          <div aria-hidden className="absolute inset-y-0 left-1/2 z-20 w-[393px] -translate-x-1/2 xl:hidden">
+            <Image src={heroWatermark} alt="" className="absolute top-[22px] left-[44px] h-[123px] w-[380px] max-w-none" />
+          </div>
+          {/* El rayado y el triángulo van pegados a los bordes de la ventana, no
+              al lienzo de 393: en teléfonos más anchos no deben dejar hueco. El
+              triángulo mide 90 de ancho y se ancla a la derecha. */}
+          <div aria-hidden className="absolute inset-y-0 right-0 left-0 z-20 xl:hidden">
+            <DiagonalLinesComponent className="absolute top-[141px] right-0 left-0 h-[52px] opacity-40" />
+            <svg viewBox="0 0 90 193" className="absolute top-0 right-0 h-full w-[90px] overflow-visible" fill="#FF8000">
+              <polygon points="89.4,0 300,0 300,215 0,208" />
+            </svg>
+          </div>
+
           {/* Lockup wcar | Santander. En mobile va a 2/3 del tamaño y centrado
               en vertical; en desktop a top=97. */}
-          <div className="absolute inset-x-0 top-1/2 z-20 -translate-y-1/2 xl:top-[97px] xl:translate-y-0">
-            <div className="container-wcar flex items-center gap-4 xl:gap-[29px]">
-              <Image src={logoWcarWhite} alt="WCAR" className="h-8 w-[99.4px] xl:h-12 xl:w-[149.13px]" />
-              <span aria-hidden className="h-8 w-[2px] bg-white/60 xl:h-12" />
-              <Image src={logoSantander} alt="Santander" className="h-7 w-[159px] xl:h-[42px] xl:w-[239px]" />
+          <div className="absolute inset-x-0 top-[73px] z-30 xl:top-[97px] xl:z-20">
+            <div className="mx-auto flex w-[393px] items-center gap-[14px] pl-[101px] xl:w-full xl:max-w-[calc(1192px+4rem)] xl:gap-[29px] xl:px-8">
+              <Image src={logoWcarWhite} alt="WCAR" className="h-[22px] w-[67.8px] xl:h-12 xl:w-[149.13px]" />
+              <span aria-hidden className="h-[22px] w-px bg-white/60 xl:h-12 xl:w-[2px]" />
+              <Image src={logoSantander} alt="Santander" className="h-[19.4px] w-[110px] xl:h-[42px] xl:w-[239px]" />
             </div>
           </div>
         </div>

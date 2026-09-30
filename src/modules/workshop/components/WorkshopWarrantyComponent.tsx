@@ -17,7 +17,7 @@ import iconGuidance from "../assets/garantias/icon-orientacion.svg";
  *
  * Fuente: captura del desktop 1440 (`docs/planes/taller/3-garantias-y-seguros.png`,
  * calibrada con el panel gris = contenedor: x de captura = 0,641 × X; el panel
- * arranca en el px 31,6 de la captura). Sin Figma ni diseño mobile. Medidas
+ * arranca en el px 31,6 de la captura). El mobile viene de Figma (ver más abajo). Medidas
  * (px de diseño, ±1,5), con y=0 en el borde superior del panel, que es donde
  * acaba "Servicios Postventa" (y=1299 de la página):
  * - Panel `gray-light`: x=124, sangra a la derecha, 689 de alto (Figma; la captura
@@ -49,9 +49,14 @@ import iconGuidance from "../assets/garantias/icon-orientacion.svg";
  * - `ZigZagComponent` en (1295,495): su línea negra mide 15 x 107, igual que en
  *   la captura.
  *
- * Mobile: no hay diseño. Se adaptó (guía §4.3): panel gris a todo el ancho, la
- * foto arriba con las mismas proporciones (en porcentajes) y todo apilado; sin
- * zigzag.
+ * Mobile (Figma, marco 1:9787): el panel gris arranca 138 px por debajo del
+ * borde superior de la foto (que sobresale sobre el bloque anterior, como en
+ * desktop); la foto compuesta de 329 x 329 va centrada, y a 64 px el eyebrow y el
+ * título (36/44) centrados, el párrafo a 32 px, y a 64 px los dos botones
+ * apilados y alineados a la izquierda, separados 32. Sin zigzag ni las dos
+ * tarjetas de "Equipos de diagnóstico" y "Orientación": el diseño mobile no las
+ * trae. Su degradado inferior es negro sólido hasta el 11,64 % y transparente al
+ * 22,92 % (en desktop, al 66,3 %).
  *
  * Colores: el botón secundario no lleva fondo blanco sino el del panel (el
  * interior se ve 245,246,248 igual que el panel), por eso `bg-transparent!`.
@@ -68,13 +73,13 @@ export default function WorkshopWarrantyComponent() {
   return (
     <section
       aria-labelledby="garantias-title"
-      className="relative overflow-x-clip bg-gray-light xl:h-[689px] xl:bg-transparent"
+      className="relative overflow-x-clip xl:h-[689px]"
     >
       {/* El lienzo de 1440 centrado; el panel sangra a la derecha (guía §4.2). */}
       <div className="relative mx-auto xl:h-[689px] xl:max-w-[1440px]">
         <div
           aria-hidden
-          className="absolute inset-y-0 left-[124px] hidden bg-gray-light xl:right-[calc(50%-50vw)] xl:block"
+          className="absolute inset-x-0 top-[138px] bottom-0 bg-gray-light xl:inset-y-0 xl:right-[calc(50%-50vw)] xl:left-[124px]"
         />
         {/* En un contenedor propio: `ZigZagComponent` ya trae `relative` y este
             `absolute` competiría con él. */}
@@ -86,11 +91,11 @@ export default function WorkshopWarrantyComponent() {
             texto, que es contenido estático. Va a `z-10` y no más porque la foto
             (`z-20` dentro) tiene que quedar por encima de la barra negra de
             "Servicios Postventa", que también es `z-10` pero está antes. */}
-        <div className="container-wcar relative z-10 flex flex-col gap-10 py-16 xl:gap-0 xl:py-0">
-          <div className="flex flex-col gap-10 xl:flex-row xl:gap-14">
+        <div className="container-wcar relative z-10 flex flex-col pb-20 xl:gap-0 xl:py-0">
+          <div className="flex flex-col gap-16 xl:flex-row xl:gap-14">
             {/* Foto compuesta: en porcentajes de su caja cuadrada, así sirve en
                 mobile. */}
-            <div className="reveal reveal-left relative aspect-square w-full max-w-[380px] shrink-0 xl:z-20 xl:size-[380px] xl:max-w-none">
+            <div className="reveal reveal-left relative mx-auto aspect-square w-full max-w-[380px] shrink-0 xl:z-20 xl:mx-0 xl:size-[380px] xl:max-w-none">
               <Image
                 src="/assets/taller/garantias/mecanico-junto-al-elevador.webp"
                 alt="Un mecánico de overol junto a un elevador, con una bolsa de herramientas y una aceitera en la mano"
@@ -100,22 +105,22 @@ export default function WorkshopWarrantyComponent() {
               />
               <div
                 aria-hidden
-                className="absolute inset-0 bg-[linear-gradient(to_top,rgb(0_0_0/0.663)_0,transparent_23%)]"
+                className="absolute inset-0 bg-[linear-gradient(to_top,black_11.64%,transparent_22.92%)] xl:bg-[linear-gradient(to_top,rgb(0_0_0/0.663)_0,transparent_23%)]"
               />
               <DiagonalLinesComponent className="absolute bottom-0 left-0 h-[32.63%] w-[67.37%] opacity-50" />
               <div aria-hidden className="absolute right-0 bottom-0 size-[32.63%] bg-orange" />
             </div>
 
             <div className="flex min-w-0 flex-col xl:pt-[60px]">
-              <SectionEyebrowComponent className="reveal xl:gap-2.5!">Servicios Ofrecidos por wcar</SectionEyebrowComponent>
+              <SectionEyebrowComponent className="reveal gap-2.5! max-xl:mx-auto max-xl:items-center">Servicios Ofrecidos por wcar</SectionEyebrowComponent>
 
               {/* TODO: confirmar con diseño: "Garantias" sin tilde. */}
-              <h2 id="garantias-title" className="reveal mt-[11px] text-subheadline-1 font-bold text-dark-gray">
+              <h2 id="garantias-title" className="reveal mt-2.5 text-center text-subheadline-1 font-bold text-dark-gray xl:mt-[11px] xl:text-left">
                 Garantias y seguros
               </h2>
 
               {/* TODO: confirmar con diseño: "Wcar" con mayúscula y sin punto final. */}
-              <p className="reveal mt-[23px] text-body font-medium text-gray-dark">
+              <p className="reveal mt-8 text-body font-medium text-gray-dark xl:mt-[23px]">
                 En Wcar, garantizamos su tranquilidad ofreciéndole cobertura integral para la reparación o
                 sustitución de piezas defectuosas. Asimismo, al adquirir su póliza con Wcar Seguros, nuestros talleres
                 especializados se encargarán de solventar cualquier daño en su vehículo, brindándole un respaldo
@@ -123,7 +128,7 @@ export default function WorkshopWarrantyComponent() {
               </p>
 
               {/* TODO: confirmar con diseño: "TECNICO" sin tilde. */}
-              <div className="reveal mt-10 flex flex-col items-start gap-4 xl:mt-[48px] xl:flex-row xl:gap-11">
+              <div className="reveal mt-16 flex flex-col items-start gap-8 xl:mt-[48px] xl:flex-row xl:gap-11">
                 <ButtonComponent href={ROUTES.contact} variant="primary" icon={arrowCircle}>
                   Solicitar servicio tecnico
                 </ButtonComponent>
@@ -140,7 +145,7 @@ export default function WorkshopWarrantyComponent() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-10 xl:mt-[67px] xl:ml-[203px] xl:flex-row xl:gap-[130px]">
+          <div className="hidden flex-col gap-10 xl:mt-[67px] xl:ml-[203px] xl:flex xl:flex-row xl:gap-[130px]">
             <FeatureCardComponent
               icon={iconChip}
               title="Equipos de Diagnóstico"

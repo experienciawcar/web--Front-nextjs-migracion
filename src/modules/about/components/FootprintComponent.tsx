@@ -216,7 +216,7 @@ export default function FootprintComponent() {
           className="absolute top-[109px] hidden h-[102px] bg-dark-gray xl:right-[calc(50%-50vw)] xl:left-[1335px] xl:block"
         />
 
-        <div className="container-wcar relative py-16 xl:pt-[107px] xl:pb-[43px]">
+        <div className="container-wcar relative pt-16 pb-0 xl:pt-[107px] xl:pb-[43px]">
           {/* El encabezado arranca en la columna 2 (302px = una columna más su
               separación), a plomo con la primera foto. */}
           <div className="reveal flex flex-col gap-6 xl:ml-[302px] xl:gap-3">

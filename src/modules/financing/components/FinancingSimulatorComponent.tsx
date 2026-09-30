@@ -21,8 +21,11 @@ import LoanSimulatorComponent from "./LoanSimulatorComponent";
  * componente cliente del simulador (`LoanSimulatorComponent`), que es el único
  * que necesita JavaScript.
  *
- * Mobile (no hay diseño): sin rectángulo amarillo; el banner arriba, luego el título
- * y el párrafo, el formulario y el resultado en una columna.
+ * Teléfono (< 1280, marco "financiación - 394"): sin rectángulo amarillo. El gris
+ * arranca en y=1321 y el banner (329 x 296) en 1116, o sea 205 px POR ENCIMA
+ * (sobre el blanco de los pasos, que le dejan el sitio con su `pb`); el título
+ * queda a 42 del banner, y el formulario (32), el resultado (32) y los 60 de cierre
+ * van en una columna de 329 con 32 a cada lado.
  *
  * TODO: erratas del diseño en el párrafo ("cuanto" sin tilde) y en la nota del
  * resultado ("de neto uso interactivo"): se dejan tal cual, pendientes de diseño.
@@ -30,12 +33,12 @@ import LoanSimulatorComponent from "./LoanSimulatorComponent";
 export default function FinancingSimulatorComponent() {
   return (
     <section aria-labelledby="simulador-title" className="relative bg-gray-light">
-      <div className="relative mx-auto px-4 py-12 xl:h-[672px] xl:max-w-[1440px] xl:px-0 xl:py-0">
+      <div className="relative mx-auto flow-root px-8 pb-[60px] xl:h-[672px] xl:max-w-[1440px] xl:px-0 xl:pb-0">
         {/* El banner cuelga 40 px del gris hacia arriba y queda por encima de
             los pasos (la sección va después en el DOM). */}
-        <FinancingBannerComponent className="mx-auto max-w-[785px] xl:absolute xl:top-[-40px] xl:left-[327px] xl:mx-0" />
+        <FinancingBannerComponent className="mx-auto -mt-[205px] max-w-[329px] xl:absolute xl:top-[-40px] xl:left-[327px] xl:mx-0 xl:mt-0 xl:max-w-[785px]" />
 
-        <div className="mt-10 xl:absolute xl:top-[88px] xl:left-[225px] xl:mt-0">
+        <div className="mt-[42px] xl:absolute xl:top-[88px] xl:left-[225px] xl:mt-0">
           <LoanSimulatorComponent>
             <span aria-hidden className="block h-1 w-[75px] bg-blue-neon" />
             <h2
@@ -44,7 +47,7 @@ export default function FinancingSimulatorComponent() {
             >
               Calcula tu <span className="font-normal italic">préstamo</span>
             </h2>
-            <p className="mt-4 text-body font-medium text-gray-dark">
+            <p className="mt-[22px] text-body font-medium text-gray-dark xl:mt-4">
               Nada como saber desde el primer momento cuanto debes pagar mensual. Conoce el valor de tu cuota con estos
               datos, de manera fácil y sencilla.
             </p>

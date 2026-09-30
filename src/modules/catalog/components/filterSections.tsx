@@ -35,6 +35,8 @@ export type FilterSectionsParams = {
   onMileageDraftChange: (next: Range) => void;
   options: CatalogFilterOptions;
   showTypeFilter: boolean;
+  /** "cards" = marcas como tarjetas en dos columnas (bottom sheet mobile). */
+  brandLayout?: "list" | "cards";
 };
 
 /**
@@ -58,6 +60,7 @@ export function buildFilterSections({
   onMileageDraftChange,
   options,
   showTypeFilter,
+  brandLayout,
 }: FilterSectionsParams): FilterSection[] {
   const sections: FilterSection[] = [
     {
@@ -87,6 +90,7 @@ export function buildFilterSections({
       title: "Marca y modelo",
       content: (
         <BrandModelFilterComponent
+          layout={brandLayout}
           brands={options.brands}
           selectedBrandIds={filters.brandIds ?? []}
           selectedModelIds={filters.modelIds ?? []}

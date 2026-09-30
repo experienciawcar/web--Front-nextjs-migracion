@@ -76,11 +76,17 @@ export default function AboutHeroComponent() {
             "wcar" blanco arriba (sobre la foto) y el isotipo naranja abajo (ya
             sobre el blanco), con vacío en medio. Así lo exporta Figma, así que
             no puede ir dentro del contenedor con overflow-hidden de la foto. */}
-        <Image
-          src={logoWcarWhiteMobile}
-          alt="WCAR"
-          className="absolute top-[52.38%] left-[15.78%] h-[81.82%] w-[17.51%]"
-        />
+        {/* Solo se usa la parte de arriba (la palabra "wcar", 10,5 de alto en el
+            SVG de 158): el isotipo naranja de abajo vive junto al eyebrow de la
+            sección siguiente. La palabra va centrada en vertical con el
+            Santander (en Figma queda 8,7 px más abajo). */}
+        <div className="absolute top-[47.87%] left-[15.78%] h-[5.44%] w-[17.51%] overflow-hidden">
+          <Image
+            src={logoWcarWhiteMobile}
+            alt="WCAR"
+            className="absolute top-0 left-0 h-[1504%] w-full max-w-none"
+          />
+        </div>
         <span
           aria-hidden
           className="absolute top-[45.08%] left-[36.69%] h-[11.48%] w-[0.24%] bg-white/60"

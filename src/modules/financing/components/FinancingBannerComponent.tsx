@@ -21,7 +21,10 @@ import logoWcarHorizontal from "../assets/banner/logo-wcar-horizontal.svg";
  * Cruza la costura entre los pasos y el simulador: arranca 40 px por encima del
  * gris (lo coloca `FinancingSimulatorComponent`).
  *
- * Mobile (no hay diseño): apilado y centrado, con el texto a 28 px.
+ * Teléfono (< 1280, "Banner_393×296" 1:6617): tarjeta de 329 x 296; logo de 80,7 x
+ * 32 en (16,16), el texto en 36/44 centrado en dos renglones ("Financiación /
+ * hasta del 100%") a 70 de arriba y 44 de cada lado, y el botón de 193 x 48
+ * centrado a 192 de arriba.
  *
  * TODO: destino de "Evalúa tu crédito" (hoy `ROUTES.contact`). En el sitio
  * anterior era un enlace suelto a un documento de ZapSign: no se copió.
@@ -29,7 +32,7 @@ import logoWcarHorizontal from "../assets/banner/logo-wcar-horizontal.svg";
 export default function FinancingBannerComponent({ className = "" }: { className?: string }) {
   return (
     <div
-      className={`relative flex flex-col items-center gap-4 overflow-hidden bg-blue-neon p-4 text-center xl:block xl:h-20 xl:w-[785px] xl:p-0 xl:text-left ${className}`}
+      className={`relative h-[296px] w-full overflow-hidden bg-blue-neon text-center xl:h-20 xl:w-[785px] xl:text-left ${className}`}
     >
       <div
         aria-hidden
@@ -38,12 +41,13 @@ export default function FinancingBannerComponent({ className = "" }: { className
       <Image
         src={logoWcarHorizontal}
         alt="WCAR"
-        className="relative h-6 w-[60.5px] xl:absolute xl:top-4 xl:left-4"
+        className="absolute top-4 left-4 h-8 w-[80.67px] xl:h-6 xl:w-[60.5px]"
       />
-      <p className="relative text-subheadline-1 leading-11 font-bold text-dark-gray xl:absolute xl:top-[18px] xl:left-[106px] xl:whitespace-nowrap">
-        Financiación hasta <span className="font-normal italic">del 100%</span>
+      <p className="absolute inset-x-0 top-[70px] text-subheadline-1 leading-11 font-bold whitespace-nowrap text-dark-gray xl:inset-x-auto xl:top-[18px] xl:left-[106px]">
+        Financiación <br className="xl:hidden" />
+        hasta <span className="font-normal italic">del 100%</span>
       </p>
-      <div className="relative xl:absolute xl:top-4 xl:right-4">
+      <div className="absolute top-[192px] left-1/2 -translate-x-1/2 xl:top-4 xl:right-4 xl:left-auto xl:translate-x-0">
         {/* TODO: destino del botón (ver el JSDoc). */}
         <ButtonComponent href={ROUTES.contact}>EVALÚA TU CRÉDITO</ButtonComponent>
       </div>

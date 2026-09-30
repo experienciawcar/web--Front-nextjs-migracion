@@ -1,11 +1,12 @@
 import arrowCircle from "@/modules/shared/assets/icons/arrow-circle.svg";
 import ButtonComponent from "@/modules/shared/components/ButtonComponent";
 import DiagonalLinesComponent from "@/modules/shared/components/DiagonalLinesComponent";
-import FeatureCardComponent from "@/modules/shared/components/FeatureCardComponent";
 import SectionEyebrowComponent from "@/modules/shared/components/SectionEyebrowComponent";
 import { ROUTES } from "@/modules/shared/constants/routes";
 
 import { WARRANTY_FEATURES } from "../constants/warranty";
+
+import FinancingWarrantyCarouselComponent from "./FinancingWarrantyCarouselComponent";
 
 /**
  * Sección "Financia tu garantía": la barra negra lateral con "Compra tu vehículo
@@ -40,8 +41,12 @@ import { WARRANTY_FEATURES } from "../constants/warranty";
  *   de las tarjetas. El botón mide 265 en Figma y aquí unos px más: el
  *   `ButtonComponent` trae el borde transparente de 2 px y el texto avanza más.
  *
- * Mobile (no hay diseño): sin barra, rayados ni etiqueta lateral, que baja a
- * título normal con raya naranja; las tarjetas y el botón se apilan.
+ * Teléfono (< 1280, "financiación - 394", y=2572..3290): sin barra, rayados ni
+ * etiqueta lateral (el marco mobile no la trae). Todo centrado y con 64 de aire
+ * arriba y abajo: eyebrow con raya de 115 y 24 de separación, título de 32/36 en
+ * cuatro renglones (el "o" va en negro; solo "sustitución…" es naranja), las
+ * tarjetas en carrusel 64 debajo con sus tres rayas (ver
+ * `FinancingWarrantyCarouselComponent`) y el botón 52 más abajo.
  *
  * TODO: destino del botón "Adquiere tu garantía" (hoy `ROUTES.contact`; en el
  * sitio anterior era un `<button>` sin enlace). El texto del botón en Figma no lleva
@@ -63,10 +68,10 @@ export default function FinancingWarrantyComponent() {
           className="absolute top-0 left-[833px] hidden h-[100px] opacity-50 xl:right-[calc(50%-50vw)] xl:block"
         />
 
-        {/* Etiqueta de la barra. En mobile baja a título normal con raya naranja. */}
-        <div className="relative z-20 px-8 pt-16 xl:absolute xl:top-[160px] xl:left-[128px] xl:w-[161px] xl:p-0">
-          <span aria-hidden className="block h-1 w-[77px] bg-orange xl:bg-blue-neon" />
-          <p className="mt-6 text-[28px] leading-[34px] font-bold text-dark-gray xl:text-white">
+        {/* Etiqueta de la barra (solo desktop). */}
+        <div className="absolute z-20 hidden xl:top-[160px] xl:left-[128px] xl:block xl:w-[161px]">
+          <span aria-hidden className="block h-1 w-[77px] bg-blue-neon" />
+          <p className="mt-6 text-[28px] leading-[34px] font-bold text-white">
             Compra
             <br />
             tu vehículo <span className="font-normal italic">con nuestra ayuda</span>
@@ -74,33 +79,24 @@ export default function FinancingWarrantyComponent() {
         </div>
 
         {/* ---------- Contenido ---------- */}
-        <div className="container-wcar py-10 xl:pt-[69px] xl:pb-0">
+        <div className="container-wcar py-16 xl:pt-[69px] xl:pb-0">
           <div className="xl:ml-[307px]">
-            <SectionEyebrowComponent>Servicios Ofrecidos por wcar</SectionEyebrowComponent>
+            <SectionEyebrowComponent className="mx-auto items-center gap-6! xl:mx-0 xl:items-stretch xl:gap-4!">
+              Servicios Ofrecidos por wcar
+            </SectionEyebrowComponent>
 
             <h2
               id="garantia-title"
-              className="mt-4 text-[32px] leading-9 font-bold whitespace-pre-wrap text-dark-gray xl:w-[688px] xl:text-subheadline-1 xl:leading-11"
+              className="mt-6 text-center text-[32px] leading-9 font-bold whitespace-pre-wrap text-dark-gray xl:mt-4 xl:w-[688px] xl:text-left xl:text-subheadline-1 xl:leading-11"
             >
               Financia tu garantía y cubre la reparación{" "}
-              <span className="font-normal text-orange italic">o sustitución{"  "}de piezas de tu vehículo</span>
+              <span className="xl:font-normal xl:text-orange xl:italic">o </span>
+              <span className="font-normal text-orange italic">sustitución{"  "}de piezas de tu vehículo</span>
             </h2>
 
-            <div className="mt-10 flex flex-col gap-10 xl:mt-16 xl:w-[876px] xl:flex-row xl:gap-6 xl:pl-6">
-              {WARRANTY_FEATURES.map((feature) => (
-                <FeatureCardComponent
-                  key={feature.id}
-                  icon={feature.icon}
-                  title={feature.title}
-                  titleItalic={feature.titleItalic}
-                  titleAs="h3"
-                  description={feature.description}
-                  className="xl:flex-1"
-                />
-              ))}
-            </div>
+            <FinancingWarrantyCarouselComponent features={WARRANTY_FEATURES} />
 
-            <div className="mt-10 xl:mt-[57px] xl:ml-[352px]">
+            <div className="mt-[52px] flex justify-center xl:mt-[57px] xl:ml-[352px] xl:block">
               {/* TODO: destino del botón y tilde de "GARANTIA" (ver el JSDoc). */}
               <ButtonComponent href={ROUTES.contact} icon={arrowCircle}>
                 ADQUIERE TU GARANTIA

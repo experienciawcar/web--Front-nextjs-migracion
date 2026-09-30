@@ -23,14 +23,17 @@ export default function CarouselSegmentsComponent({
   positions,
   onSelect,
   className = "",
+  style,
 }: {
   position: number;
   positions: number;
   onSelect: (position: number) => void;
   className?: string;
+  /** Para fijar el ancho de la fila (p. ej. rayas de 48px: `positions * 60 - 12`). */
+  style?: React.CSSProperties;
 }) {
   return (
-    <div className={`relative flex h-6 flex-1 items-center ${className}`}>
+    <div className={`relative flex h-6 flex-1 items-center ${className}`} style={style}>
       <span aria-hidden className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gray/20" />
       <div className="relative flex min-w-0 flex-1 gap-3 xl:gap-6">
         {Array.from({ length: positions }, (_, index) => (

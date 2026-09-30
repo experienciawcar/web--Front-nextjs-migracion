@@ -35,7 +35,8 @@ import iconPlus from "../assets/faq/icon-mas.svg";
  * Sin animación de apertura (un `<details>` salta): no hay nada que reducir con
  * `prefers-reduced-motion`.
  *
- * Mobile (no hay diseño): el mismo acordeón a todo el ancho.
+ * Teléfono ("financiación - 394", y=5376..6430): el mismo acordeón a 329 de ancho, con
+ * 64 de aire arriba, 24 entre el título y la lista y 115 de cierre.
  *
  * TODO: los datos son de prueba (ver `constants/faq.ts`): lorem, la "м" cirílica de
  * "Potentiмnibh", el doble espacio de "ttitore  ismod" y el espacio inicial de la
@@ -43,17 +44,17 @@ import iconPlus from "../assets/faq/icon-mas.svg";
  */
 export default function FinancingFaqComponent() {
   return (
-    <section aria-labelledby="faq-title" className="px-8 pt-12 pb-12 xl:px-0 xl:pt-[54px] xl:pb-[78px]">
+    <section aria-labelledby="faq-title" className="px-8 pt-16 pb-[115px] xl:px-0 xl:pt-[54px] xl:pb-[78px]">
       <div className="mx-auto max-w-[786px]">
         <span aria-hidden className="block h-1 w-[77px] bg-orange" />
         <h2
           id="faq-title"
-          className="mt-4 text-subheadline-1 leading-11 font-bold text-dark-gray"
+          className="mt-6 text-subheadline-1 leading-11 font-bold text-dark-gray xl:mt-4"
         >
           Preguntas <span className="font-normal text-orange italic">frecuentes</span>
         </h2>
 
-        <div className="relative mt-10 xl:mt-16">
+        <div className="relative mt-6 xl:mt-16">
           {FAQ_ITEMS.map((item, index) => (
             <details
               key={item.id}

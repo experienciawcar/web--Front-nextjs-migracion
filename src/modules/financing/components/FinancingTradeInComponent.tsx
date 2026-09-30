@@ -54,8 +54,12 @@ const SHINE = "left-[11.972cqw] top-[42.254cqw] w-[46.283cqw] h-[30.81cqw]";
  *     medio < 1/255 en sus 314 píxeles opacos). La sombra de Figma (60 60 100 al 8 %)
  *     no se dibuja: a ese desenfoque no se ve.
  *
- * Mobile (no hay diseño): el panel naranja a todo el ancho arriba (sin salirse de la
- * sección) y el oscuro debajo.
+ * Teléfono (< 1280, "financiación - 394", y=3290..4144): el panel naranja de 328 x 328
+ * centrado (todo escala con `cqw`, así que se ve igual que el de desktop) monta el
+ * borde del fondo oscuro, que arranca 154 px más abajo; luego, centrados, la raya
+ * cian de 115 (53 bajo el panel), el eyebrow y el título de 32/38, cuyos renglones
+ * son "Cambia tu vehículo" (semibold) / "con wcar y obtén un" / "bono BRUTAL" (cursiva
+ * regular, este cian) y, a 64, el párrafo alineado a la izquierda con 81 de cierre.
  *
  * TODO: la foto trae una marca de agua de Gemini (una estrella) en la esquina inferior
  * derecha del original; el recorte del diseño la deja fuera, pero conviene pedir la foto
@@ -65,19 +69,21 @@ export default function FinancingTradeInComponent() {
   return (
     <section aria-labelledby="cambio-title" className="relative overflow-x-clip xl:h-[444px]">
       <div className="relative mx-auto flex flex-col xl:block xl:h-full xl:max-w-[1440px]">
-        {/* Panel oscuro (desktop): del borde x=696 a la ventana. */}
+        {/* Panel oscuro. Desktop: del borde x=696 a la ventana. Teléfono: de lado a
+            lado y desde 154 px bajo el borde de arriba, o sea que la tarjeta
+            naranja lo monta y queda mitad sobre el blanco, mitad sobre el negro. */}
         <div
           aria-hidden
-          className="absolute inset-y-0 hidden bg-dark-gray xl:right-[calc(50%-50vw)] xl:left-[696px] xl:block"
+          className="absolute inset-x-0 top-[154px] bottom-0 bg-dark-gray xl:inset-y-0 xl:right-[calc(50%-50vw)] xl:left-[696px]"
         />
 
         {/* ---------- Panel naranja ---------- */}
-        <div className="relative aspect-square w-full overflow-hidden bg-orange [container-type:inline-size] xl:absolute xl:top-[-124px] xl:left-[128px] xl:z-20 xl:size-[568px]">
+        <div className="relative mx-auto aspect-square w-full max-w-[328px] overflow-hidden bg-orange [container-type:inline-size] xl:absolute xl:top-[-124px] xl:left-[128px] xl:z-20 xl:mx-0 xl:size-[568px] xl:max-w-none">
           <Image
             src="/assets/financiacion/cambio-de-vehiculo/dos-carros-sobre-fondo-naranja.webp"
             alt="Dos carros plateados, una camioneta y un hatchback, sobre un fondo naranja de estudio"
             fill
-            sizes="(min-width: 1280px) 568px, 100vw"
+            sizes="(min-width: 1280px) 568px, 328px"
             className="object-cover"
           />
           <Image
@@ -117,18 +123,21 @@ export default function FinancingTradeInComponent() {
         </div>
 
         {/* ---------- Panel oscuro: contenido ---------- */}
-        <div className="bg-dark-gray px-8 py-12 xl:absolute xl:top-[65px] xl:left-[783px] xl:w-[472px] xl:bg-transparent xl:p-0">
-          <span aria-hidden className="block h-1 w-[115px] bg-blue-neon" />
-          <p className="mt-2.5 text-small font-bold text-gray">Financia tu vehículo</p>
+        <div className="relative px-8 pt-[53px] pb-[81px] xl:absolute xl:top-[65px] xl:left-[783px] xl:w-[472px] xl:p-0">
+          <span aria-hidden className="mx-auto block h-1 w-[115px] bg-blue-neon xl:mx-0" />
+          <p className="mt-2.5 text-center text-small font-bold text-gray xl:text-left">Financia tu vehículo</p>
           <h2
             id="cambio-title"
-            className="mt-2.5 text-[32px] leading-[38px] font-bold text-gray-light xl:text-subheadline-1 xl:leading-11"
+            className="mt-2.5 text-center text-[32px] leading-[38px] font-semibold text-gray-light xl:text-left xl:text-subheadline-1 xl:leading-11 xl:font-bold"
           >
-            Cambia tu vehículo con wcar
-            {" "}
-            <span className="block font-medium text-blue-neon italic">y obtén un bono BRUTAL</span>
+            Cambia tu vehículo
+            <br className="xl:hidden" />{" "}
+            <span className="font-normal italic xl:font-bold xl:not-italic">con wcar</span>
+            <br className="hidden xl:inline" />{" "}
+            <span className="font-normal italic xl:font-medium xl:text-blue-neon">y obtén un</span>{" "}
+            <span className="font-normal text-blue-neon italic xl:font-medium">bono BRUTAL</span>
           </h2>
-          <p className="mt-6 text-body font-medium text-gray-light xl:mt-[39px] xl:w-[421px]">
+          <p className="mt-16 text-body font-medium text-gray-light xl:mt-[39px] xl:w-[421px]">
             Deja tu vehículo actual como parte de pago, financia la diferencia con nuestras tasas preferenciales y llévate
             tu auto nuevo hoy mismo. ¿El toque final? Te regalamos un BONO BRUTAL de descuento directo al precio. ¡No
             dejes pasar esta oportunidad y súbete al auto de tus sueños!

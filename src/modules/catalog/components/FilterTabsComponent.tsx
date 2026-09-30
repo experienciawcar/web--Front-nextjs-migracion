@@ -16,7 +16,7 @@ import { buildFilterSections, type FilterSectionsParams } from "./filterSections
  * por su cuenta dentro de esa altura.
  */
 export default function FilterTabsComponent(props: FilterSectionsParams) {
-  const sections = buildFilterSections(props);
+  const sections = buildFilterSections({ ...props, brandLayout: "cards" });
   const [activeId, setActiveId] = useState(sections[0]?.id);
   const active = sections.find((section) => section.id === activeId) ?? sections[0];
 
@@ -29,7 +29,7 @@ export default function FilterTabsComponent(props: FilterSectionsParams) {
             type="button"
             onClick={() => setActiveId(section.id)}
             aria-current={section.id === active?.id}
-            className={`block w-full border-l-[5px] px-3 py-5 text-left text-[13.6px] ${
+            className={`block w-full border-l-[5px] px-3 py-5 text-left text-[13.6px] transition-colors duration-200 ${
               section.id === active?.id ? "border-orange bg-white font-bold text-orange" : "border-transparent text-[#6b7280]"
             }`}
           >
@@ -38,7 +38,7 @@ export default function FilterTabsComponent(props: FilterSectionsParams) {
         ))}
       </div>
 
-      <div className="min-w-0 flex-1 overflow-y-auto p-5">
+      <div key={active?.id} className="filter-fade-in min-w-0 flex-1 overflow-y-auto p-5">
         <h2 className="mb-5 text-[17.6px] font-extrabold text-[#1f2937]">{active?.title}</h2>
         {active?.content}
       </div>

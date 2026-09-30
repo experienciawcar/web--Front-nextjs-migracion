@@ -27,3 +27,14 @@ export function HeartIcon({ className = "" }: { className?: string }) {
     </svg>
   );
 }
+
+/** Control deslizante ("filtros") del botón Filtrar en mobile. */
+export function FiltersIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <path d="M3 7h5M14 7h7M3 17h9M18 17h3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="11" cy="7" r="2.6" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="15" cy="17" r="2.6" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}

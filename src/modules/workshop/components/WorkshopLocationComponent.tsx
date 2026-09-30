@@ -13,7 +13,7 @@ import { getWorkshopMapUrl, WORKSHOP_LOCATION } from "../constants/workshop-loca
  * el horario y el mapa.
  *
  * Fuente: parte inferior de la captura 4 (`docs/planes/taller/4-adicionales-y-ubicacion.png`,
- * x de captura = 0,640 × X). Sin Figma ni diseño mobile. Medidas (px de diseño,
+ * x de captura = 0,640 × X). El mobile viene de Figma (ver más abajo). Medidas (px de diseño,
  * ±1,5), con y=0 en el borde superior de esta sección (y=2590 de la página, donde
  * acaba el panel oscuro), que mide 497: la columna naranja de la sección anterior
  * acaba en y=1100 de la página, o sea aquí en 497 (Figma; la captura daba 499), y el mapa acaba ahí mismo:
@@ -34,8 +34,10 @@ import { getWorkshopMapUrl, WORKSHOP_LOCATION } from "../constants/workshop-loca
  *   pegado a él, el cuadrado negro de 100 x 100 en x=1341 [1342] que sangra a la
  *   ventana.
  *
- * Mobile: no hay diseño. Se adaptó (guía §4.3): una columna, sin adornos, con los
- * dos datos apilados y el mapa a todo el ancho.
+ * Mobile (Figma 1:9787): sin adornos; eyebrow y título centrados ("¿Donde nos" /
+ * "Ubicamos?" en cursiva, con U mayúscula por CSS), el párrafo (con salto tras
+ * "Orci,") a 32 px, los dos datos apilados a 64 px (pin de 24 y reloj de 22, 33 px
+ * entre filas) y el mapa de 180 de alto a 64 px.
  *
  * Textos tal cual del diseño (con `TODO: confirmar con diseño`): "Donde" sin
  * tilde, "Sabado" sin tilde y el párrafo, que es lorem ipsum de relleno (con
@@ -59,30 +61,30 @@ export default function WorkshopLocationComponent() {
         />
 
         {/* ---------- Contenido ---------- */}
-        <div className="container-wcar pt-16 pb-16 xl:pt-[64px] xl:pb-0">
+        <div className="container-wcar pb-16 xl:pt-[64px] xl:pb-0">
           <div className="xl:ml-[435px]">
-            <SectionEyebrowComponent className="reveal xl:gap-2.5!">Taller wcar</SectionEyebrowComponent>
+            <SectionEyebrowComponent className="reveal gap-2.5! max-xl:mx-auto max-xl:items-center">Taller wcar</SectionEyebrowComponent>
 
             {/* TODO: confirmar con diseño: "Donde" sin tilde. */}
-            <h2 id="ubicacion-title" className="reveal mt-[11px] text-subheadline-1 font-bold text-dark-gray">
-              ¿Donde nos ubicamos?
+            <h2 id="ubicacion-title" className="reveal mt-2.5 text-center text-subheadline-1 font-bold text-dark-gray xl:mt-[11px] xl:text-left">
+              ¿Donde nos <span className="max-xl:block max-xl:font-normal max-xl:capitalize max-xl:italic">ubicamos?</span>
             </h2>
 
             {/* TODO: confirmar con diseño: es lorem ipsum de relleno. */}
-            <p className="reveal mt-[50px] text-body font-medium text-gray-dark">
+            <p className="reveal mt-8 text-body font-medium text-gray-dark xl:mt-[50px]">
               Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla. Orci,{" "}
-              <br className="hidden xl:inline" />
+              <br />
               dictumst nec aliquet id ullamcorper venenatis. Fermentum sulla craspor ttitore ismod nulla.
             </p>
 
-            <div className="reveal mt-8 flex flex-col gap-4 text-body font-medium text-gray-dark xl:mt-[29px] xl:flex-row xl:items-center xl:gap-[93px]">
+            <div className="reveal mt-16 flex flex-col gap-[33px] text-body font-medium text-gray-dark xl:mt-[29px] xl:flex-row xl:items-center xl:gap-[93px]">
               <p className="flex items-center gap-2 xl:-ml-0.5 xl:gap-1">
-                <Image src={pinIcon} alt="" aria-hidden className="size-[29px] shrink-0" />
+                <Image src={pinIcon} alt="" aria-hidden className="size-6 shrink-0 xl:size-[29px]" />
                 {address}
               </p>
               {/* TODO: confirmar con diseño: "Sabado" sin tilde. */}
-              <p className="flex items-center gap-2">
-                <Image src={clockIcon} alt="" aria-hidden className="size-[29px] shrink-0" />
+              <p className="flex items-center gap-3 xl:gap-2">
+                <Image src={clockIcon} alt="" aria-hidden className="size-[22px] shrink-0 xl:size-[29px]" />
                 {hours}
               </p>
             </div>
@@ -92,7 +94,7 @@ export default function WorkshopLocationComponent() {
               src={getWorkshopMapUrl(WORKSHOP_LOCATION)}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="reveal mt-8 h-[240px] w-full rounded-lg border-0 xl:mt-[40px] xl:h-[146px] xl:w-[656px]"
+              className="reveal mt-16 h-[180px] w-full rounded-lg border-0 xl:mt-[40px] xl:h-[146px] xl:w-[656px]"
             />
           </div>
         </div>

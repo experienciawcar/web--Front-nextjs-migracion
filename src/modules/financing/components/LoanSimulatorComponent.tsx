@@ -39,8 +39,10 @@ const LABEL = `${formLabelFont.className} flex h-5 items-center text-base leadin
  *   nota de 12/22 `gray`, centrada. El resultado va con `aria-live="polite"`.
  *
  * Los valores iniciales son los del diseño ($ 3.921.855). La fórmula y sus casos
- * límite están en `services/loan-calculator.ts`. Mobile (no hay diseño): una
- * columna, el formulario y luego el resultado.
+ * límite están en `services/loan-calculator.ts`. Teléfono (Figma "Datos personales"
+ * 1:6582 y "Popup" 1:6605, 329 de ancho): una columna, el formulario (relleno de 40
+ * desde el borde exterior, como en desktop) y luego el resultado, con la raya que
+ * lo parte de lado a lado de la tarjeta.
  *
  * TODO: el texto del aviso tiene las erratas del diseño ("de neto uso interactivo",
  * "cuanto" sin tilde en el párrafo): se dejan tal cual hasta que diseño las revise.
@@ -56,13 +58,13 @@ export default function LoanSimulatorComponent({ children }: { children: React.R
   const paymentText = `$ ${formatThousands(payment)}`;
 
   return (
-    <div className="mx-auto grid max-w-[584px] gap-10 xl:w-[990px] xl:max-w-none xl:grid-cols-[584px_382px] xl:grid-rows-[auto_1fr] xl:gap-x-6 xl:gap-y-0">
+    <div className="mx-auto grid max-w-[584px] gap-8 xl:w-[990px] xl:max-w-none xl:grid-cols-[584px_382px] xl:grid-rows-[auto_1fr] xl:gap-x-6 xl:gap-y-0">
       <div className="order-1 xl:order-none xl:col-start-2 xl:row-start-1">{children}</div>
 
       <form
         onSubmit={(event) => event.preventDefault()}
         aria-label="Simulador de cuota mensual"
-        className="order-2 flex flex-col gap-8 rounded-lg border-2 border-gray/30 bg-white px-6 pt-8 pb-10 xl:order-none xl:col-start-1 xl:row-span-2 xl:row-start-1 xl:px-[38px] xl:pt-[38px] xl:pb-[46px]"
+        className="order-2 flex flex-col gap-8 rounded-lg border-2 border-gray/30 bg-white px-[38px] pt-[38px] pb-[46px] xl:order-none xl:col-start-1 xl:row-span-2 xl:row-start-1"
       >
         <MoneyFieldComponent id="loan-vehicle-value" label="Valor del Vehículo" value={vehicleValue} onChange={setVehicleValue} />
         <MoneyFieldComponent id="loan-down-payment" label="Cuota inicial" value={downPayment} onChange={setDownPayment} />
@@ -126,7 +128,7 @@ export default function LoanSimulatorComponent({ children }: { children: React.R
             </p>
           </div>
         </div>
-        <span aria-hidden className="h-px w-full bg-gray" />
+        <span aria-hidden className="-mx-8 h-px w-[calc(100%+4rem)] bg-gray xl:mx-0 xl:w-full" />
         <p className="text-center text-caption font-medium text-gray">
           *Este simulador es de neto uso interactivo y calcula una cuota aproximada la cual tiene fines informativos y
           no comporta ofertas o promesas de contratar.

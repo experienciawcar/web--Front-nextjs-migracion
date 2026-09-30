@@ -3,6 +3,7 @@ import Image from "next/image";
 import logoWcarPanel from "@/modules/shared/assets/logos/logo-wcar-panel.svg";
 import SectionEyebrowComponent from "@/modules/shared/components/SectionEyebrowComponent";
 
+import logoWcarMobile from "../assets/adicionales/logo-wcar-movil.svg";
 import { ADDITIONAL_SERVICES } from "../constants/additional-services";
 import WorkshopServicesCarouselComponent from "./WorkshopServicesCarouselComponent";
 
@@ -38,7 +39,7 @@ const ORANGE_FADE = `linear-gradient(to bottom,
  * Fuente: captura del desktop 1440 (`docs/planes/taller/4-adicionales-y-ubicacion.png`,
  * calibrada con el marco: x de captura = 0,640 × X, y desde el borde superior de
  * la captura, que es el de la sección) y, para la columna, el Figma (nodo 188:8089,
- * marco "Frame 592" 193:6421). Sin diseño mobile. Medidas (px de diseño, ±1,5
+ * marco "Frame 592" 193:6421). El mobile viene de Figma (ver más abajo). Medidas (px de diseño, ±1,5
  * salvo lo que diga "Figma"), con y=0 en el borde superior de la sección (y=1987 de
  * la página, justo donde acaba "Garantías y seguros"):
  * - Panel oscuro (`dark-gray`): x=404, sangra a la derecha, 603 de alto.
@@ -68,9 +69,16 @@ const ORANGE_FADE = `linear-gradient(to bottom,
  *   (`SectionEyebrowComponent` con 10 px hasta el texto) con la raya en y=89 (Figma; la captura daba 91),
  *   título de 36/44 en blanco y, 61 px debajo, las tarjetas (y=243).
  *
- * Mobile: no hay diseño. Se adaptó (guía §4.3): la columna baja a una franja
- * naranja con el logo y el lema; sin foto ni rayas, y el panel oscuro a todo el
- * ancho con el carrusel deslizable.
+ * Mobile (Figma, marco 1:9787): panel oscuro a todo el ancho con eyebrow y título
+ * centrados (36/44), el carrusel a 64 px del título (tarjetas de 253 la primera y
+ * 294,5 las demás, 16 entre ellas) y rayas de paginación a 64 px; luego, a 52 px, la
+ * foto cuadrada de 329 (`lavado-de-rin-movil.webp`, el export a 2× del nodo
+ * 193:7935 con su degradado naranja ya incluido) con el logo de 124 x 40 a 37 px
+ * del borde superior. La foto sobresale 166 px del panel oscuro sobre la sección
+ * siguiente (el panel acaba 230 px antes del final de la sección). No lleva el
+ * lema "Mas que solo una marca". El diseño trae CINCO tarjetas (las dos últimas,
+ * a medio hacer, como en desktop: ver `constants/additional-services.ts`) y aquí
+ * hay tres. Sin Figma de desktop no se sabía; TODO: confirmar cuántas van.
  *
  * Textos tal cual del diseño (con `TODO: confirmar con diseño`): "Mas" sin tilde.
  * Iconos de las tarjetas (en `constants/additional-services.ts`): los de Figma
@@ -78,18 +86,25 @@ const ORANGE_FADE = `linear-gradient(to bottom,
  */
 export default function WorkshopAdditionalServicesComponent() {
   return (
-    <section aria-labelledby="adicionales-title" className="relative overflow-x-clip xl:h-[603px]">
+    <section aria-labelledby="adicionales-title" className="relative overflow-x-clip pb-16 xl:h-[603px] xl:pb-0">
       {/* Lienzo de 1440. `isolate` para poder mandar el panel oscuro detrás del
           contenido con un z-index negativo sin que se vaya detrás de la página
           (un absoluto pinta por encima del contenido estático). */}
-      <div className="relative isolate mx-auto xl:h-[603px] xl:max-w-[1440px]">
+      <div className="relative isolate mx-auto flex flex-col xl:block xl:h-[603px] xl:max-w-[1440px]">
         <div
           aria-hidden
-          className="absolute top-0 -z-10 hidden h-[603px] bg-dark-gray xl:right-[calc(50%-50vw)] xl:left-[404px] xl:block"
+          className="absolute inset-x-0 top-0 bottom-[230px] -z-10 bg-dark-gray xl:right-[calc(50%-50vw)] xl:bottom-auto xl:left-[404px] xl:h-[603px]"
         />
 
-        {/* ---------- Columna naranja ---------- */}
-        <div className="reveal reveal-fade relative flex flex-col items-center bg-orange px-8 py-12 xl:absolute xl:top-0 xl:left-0 xl:z-10 xl:block xl:h-[1100px] xl:w-[404px] xl:p-0">
+        {/* ---------- Columna naranja (en mobile, la foto cuadrada con el logo) ---------- */}
+        <div className="reveal reveal-fade relative order-2 mx-auto mt-[52px] aspect-square w-[calc(100%-4rem)] max-w-[329px] bg-orange xl:absolute xl:top-0 xl:left-0 xl:z-10 xl:m-0 xl:aspect-auto xl:h-[1100px] xl:w-[404px] xl:max-w-none">
+          <Image
+            src="/assets/taller/adicionales/lavado-de-rin-movil.webp"
+            alt="Una mano lava con una esponja el rin de un carro sobre una cubeta, con luz naranja de atardecer"
+            fill
+            sizes="329px"
+            className="object-cover xl:hidden"
+          />
           {/* Foto de la rueda, de y=260 (donde empieza en el diseño) hasta abajo, y
               encima el degradado naranja de toda la columna. */}
           <div aria-hidden className="absolute inset-x-0 top-[260px] hidden h-[840px] xl:block">
@@ -102,13 +117,20 @@ export default function WorkshopAdditionalServicesComponent() {
             />
           </div>
           <div aria-hidden className="absolute inset-0 hidden xl:block" style={{ backgroundImage: ORANGE_FADE }} />
+          {/* El logo de mobile es el de Figma (193:7937) con las letras en blanco: así
+              se ve en el diseño, aunque el SVG exportado las trae en negro. */}
+          <Image
+            src={logoWcarMobile}
+            alt="WCAR"
+            className="absolute top-[37px] left-1/2 w-[124.27px] -translate-x-1/2 xl:hidden"
+          />
           <Image
             src={logoWcarPanel}
             alt="WCAR"
-            className="relative w-[160px] xl:absolute xl:top-[81px] xl:left-[103px] xl:w-[198.84px]"
+            className="absolute top-[81px] left-[103px] hidden w-[198.84px] xl:block"
           />
-          {/* TODO: confirmar con diseño: "Mas" sin tilde. */}
-          <p className="relative mt-6 text-center text-[24px] leading-[30px] font-bold text-white xl:absolute xl:inset-x-0 xl:top-[201px] xl:mt-0 xl:text-[32px] xl:leading-[38px]">
+          {/* TODO: confirmar con diseño: "Mas" sin tilde. Solo en desktop: el diseño mobile no lo trae. */}
+          <p className="absolute inset-x-0 top-[201px] hidden text-center text-[32px] leading-[38px] font-bold text-white xl:block">
             Mas que solo
             <br />
             una marca
@@ -121,12 +143,12 @@ export default function WorkshopAdditionalServicesComponent() {
         />
 
         {/* ---------- Panel oscuro ---------- */}
-        <div className="bg-dark-gray xl:bg-transparent">
-          <div className="container-wcar pb-16 pt-16 xl:pt-[89px] xl:pb-0">
+        <div className="order-1">
+          <div className="container-wcar pt-16 xl:pt-[89px]">
             <div className="xl:ml-[435px]">
-              <SectionEyebrowComponent className="reveal xl:gap-2.5!">Servicios Ofrecidos por wcar</SectionEyebrowComponent>
+              <SectionEyebrowComponent className="reveal gap-2.5! max-xl:mx-auto max-xl:items-center">Servicios Ofrecidos por wcar</SectionEyebrowComponent>
 
-              <h2 id="adicionales-title" className="reveal mt-[11px] text-subheadline-1 font-bold text-white">
+              <h2 id="adicionales-title" className="reveal mt-2.5 text-center text-subheadline-1 font-bold text-white min-[375px]:max-xl:whitespace-nowrap xl:mt-[11px] xl:text-left">
                 Servicios adicionales
               </h2>
 

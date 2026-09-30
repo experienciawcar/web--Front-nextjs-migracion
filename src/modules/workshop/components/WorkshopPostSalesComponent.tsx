@@ -1,11 +1,32 @@
 import DiagonalLinesComponent from "@/modules/shared/components/DiagonalLinesComponent";
-import FeatureCardComponent from "@/modules/shared/components/FeatureCardComponent";
 import SectionEyebrowComponent from "@/modules/shared/components/SectionEyebrowComponent";
 import SideLabelComponent from "@/modules/shared/components/SideLabelComponent";
 
 import iconBuilding from "../assets/postventa/icon-edificio.svg";
 import iconTools from "../assets/postventa/icon-herramientas.svg";
 import ParallelogramsComponent from "./ParallelogramsComponent";
+import WorkshopPostSalesCarouselComponent, { type PostSalesCard } from "./WorkshopPostSalesCarouselComponent";
+
+const CARDS: PostSalesCard[] = [
+  {
+    id: "mantenimiento-preventivo",
+    icon: iconTools,
+    title: "Mantenimiento preventivo",
+    description:
+      "Ofrecemos soluciones completas para cualquier problema mecánico, eléctrico o de carrocería. Ya sea que necesites una reparación menor o mayor, estamos preparados para ayudarte.",
+    descriptionClassName: "leading-[22px]",
+    widthClassName: "w-[243px] xl:w-[334px]",
+  },
+  {
+    id: "talleres-especializados",
+    icon: iconBuilding,
+    title: "Talleres Especializados por",
+    titleItalic: "Marca y Modelo",
+    description:
+      "Contamos con talleres especializados para diferentes marcas y modelos, lo que nos permite ofrecer un servicio personalizado y preciso para tu vehículo.",
+    widthClassName: "w-[244px] xl:w-[349px]",
+  },
+];
 
 /**
  * Sección "Servicios Postventa": la barra negra lateral con "Taller / wcar" y,
@@ -13,7 +34,7 @@ import ParallelogramsComponent from "./ParallelogramsComponent";
  *
  * Fuente: captura del desktop 1440 (`docs/planes/taller/2-servicios-postventa.png`,
  * calibrada con la barra negra de 303: px de captura = 3 + 0,641 × px de
- * diseño). Sin Figma ni diseño mobile. Medidas (px de diseño, ±1,5), con y=0
+ * diseño). El mobile viene de Figma (ver más abajo). Medidas (px de diseño, ±1,5), con y=0
  * en el borde superior de la sección, que es donde arranca la barra:
  * - La sección arranca en y=635 de la página, 140 px por encima del final de
  *   la tarjeta "¿Qué hace?" (su foto sobresale sobre la barra: `z-20` contra
@@ -44,8 +65,10 @@ import ParallelogramsComponent from "./ParallelogramsComponent";
  *   por y=246..346 (Figma; la captura daba 248) y, pegado a su derecha, un cuadrado negro de 100 x 100 que sangra
  *   a la ventana; encima, los dos paralelogramos amarillos en (1190,292).
  *
- * Mobile: no hay diseño. Se adaptó (guía §4.3): sin barra, rayado ni adornos;
- * la etiqueta baja a título normal con raya naranja y las tarjetas se apilan.
+ * Mobile (Figma, marco 1:9787): sin barra, etiqueta lateral, rayados ni
+ * paralelogramos; eyebrow y título de 36/44 centrados (10 px entre la raya, el
+ * texto y el título), y las dos tarjetas en un carrusel a 64 px del título
+ * (`WorkshopPostSalesCarouselComponent`). El fondo es blanco.
  *
  * Iconos: los de Figma ("mdi:tools" y "famicons:business", 32 x 32, naranja),
  * exportados con el fondo de página que Figma les incrusta ya quitado.
@@ -76,34 +99,24 @@ export default function WorkshopPostSalesComponent() {
         <ParallelogramsComponent className="absolute top-[292px] left-[1190px] hidden xl:block" />
 
         {/* ---------- Contenido ---------- */}
-        <div className="container-wcar flex flex-col gap-10 py-16 xl:flex-row xl:gap-0 xl:pt-[271px] xl:pb-0">
-          <div className="xl:relative xl:z-20 xl:w-[234px] xl:shrink-0 xl:pt-[151px]">
+        <div className="container-wcar flex flex-col pb-[51px] xl:flex-row xl:pt-[271px] xl:pb-0">
+          <div className="hidden xl:relative xl:z-20 xl:block xl:w-[234px] xl:shrink-0 xl:pt-[151px]">
             <SideLabelComponent regular="Taller" second="wcar" className="reveal reveal-left" />
           </div>
 
-          <div className="flex-1">
-            <SectionEyebrowComponent className="reveal xl:gap-2.5!">Servicios Ofrecidos por wcar</SectionEyebrowComponent>
+          <div className="min-w-0 flex-1">
+            <SectionEyebrowComponent className="reveal gap-2.5! max-xl:mx-auto max-xl:items-center">
+              Servicios Ofrecidos por wcar
+            </SectionEyebrowComponent>
 
-            <h2 id="postventa-title" className="reveal mt-[11px] text-subheadline-1 font-bold text-dark-gray">
+            <h2
+              id="postventa-title"
+              className="reveal mt-2.5 text-center text-subheadline-1 font-bold text-dark-gray xl:mt-[11px] xl:text-left"
+            >
               Servicios Postventa
             </h2>
 
-            <div className="mt-10 flex flex-col gap-10 xl:mt-[60px] xl:ml-3 xl:flex-row xl:gap-[129px]">
-              <FeatureCardComponent
-                icon={iconTools}
-                title="Mantenimiento preventivo"
-                description="Ofrecemos soluciones completas para cualquier problema mecánico, eléctrico o de carrocería. Ya sea que necesites una reparación menor o mayor, estamos preparados para ayudarte."
-                descriptionClassName="leading-[22px]"
-                className="reveal xl:w-[334px]"
-              />
-              <FeatureCardComponent
-                icon={iconBuilding}
-                title="Talleres Especializados por"
-                titleItalic="Marca y Modelo"
-                description="Contamos con talleres especializados para diferentes marcas y modelos, lo que nos permite ofrecer un servicio personalizado y preciso para tu vehículo."
-                className="reveal xl:w-[349px]"
-              />
-            </div>
+            <WorkshopPostSalesCarouselComponent cards={CARDS} />
           </div>
         </div>
       </div>

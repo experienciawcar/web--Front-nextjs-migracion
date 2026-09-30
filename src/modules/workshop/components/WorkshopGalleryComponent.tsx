@@ -26,6 +26,8 @@ const PHOTOS = [
     src: "/assets/taller/nuestro-taller/camioneta-gris-capo-abierto.webp",
     alt: "Un mecánico revisa el motor de una camioneta gris con el capó abierto, con el carro de herramientas al frente",
     className: "xl:h-[386px] xl:w-[629px]",
+    itemClassName: "col-span-2",
+    aspectClassName: "aspect-[329/219]",
     sizes: "(min-width: 1280px) 629px, 100vw",
     position: "object-center",
   },
@@ -34,7 +36,9 @@ const PHOTOS = [
     src: "/assets/taller/nuestro-taller/nave-nissan-roja.webp",
     alt: "Nave del taller con un Nissan rojo al frente y otros carros en elevadores",
     className: "xl:h-[386px] xl:w-[468px]",
-    sizes: "(min-width: 1280px) 579px, 100vw",
+    itemClassName: "max-xl:order-3",
+    aspectClassName: "aspect-[156/105]",
+    sizes: "(min-width: 1280px) 579px, 50vw",
     position: "object-center",
   },
   {
@@ -42,7 +46,9 @@ const PHOTOS = [
     src: "/assets/taller/garantias/mecanico-junto-al-elevador.webp",
     alt: "Un mecánico de overol junto a un elevador, con una bolsa de herramientas y una aceitera",
     className: "xl:h-[341px] xl:w-[512px]",
-    sizes: "(min-width: 1280px) 512px, 100vw",
+    itemClassName: "max-xl:order-2",
+    aspectClassName: "aspect-[157/105]",
+    sizes: "(min-width: 1280px) 512px, 50vw",
     position: "object-center",
   },
   {
@@ -50,6 +56,8 @@ const PHOTOS = [
     src: "/assets/taller/nuestro-taller/nave-vehiculos-en-elevadores.webp",
     alt: "Nave del taller con un Nissan rojo con el capó abierto y otros carros en los elevadores",
     className: "xl:h-[341px] xl:w-[585px]",
+    itemClassName: "col-span-2 max-xl:order-4",
+    aspectClassName: "aspect-[329/192]",
     sizes: "(min-width: 1280px) 585px, 100vw",
     position: "object-top",
   },
@@ -61,7 +69,7 @@ const PHOTOS = [
  *
  * Fuente: captura del desktop 1440 (`docs/planes/taller/5-nuestro-taller.png`,
  * calibrada con el marco: x de captura = 2 + 0,641 × X) y, para las fotos, el
- * Figma (nodo 188:8089, grupo 193:6426). Sin diseño mobile. Medidas (px de diseño,
+ * Figma (nodo 188:8089, grupo 193:6426). El mobile viene de Figma (ver más abajo). Medidas (px de diseño,
  * ±1,5 salvo lo que diga "Figma"), con y=0 en el borde superior del marco,
  * que es el de la sección (y=3215 del marco de Figma, donde acaba "¿Dónde nos
  * ubicamos?") y que mide 1119 (Figma: hasta donde arranca el footer, en 4334; la
@@ -78,9 +86,12 @@ const PHOTOS = [
  * - Dos paralelogramos amarillos (`ParallelogramsComponent`) en (1166,147): el de
  *   abajo queda casi tapado por la foto de arriba a la derecha.
  *
- * Mobile: no hay diseño. Se adaptó (guía §4.3): una columna con las cuatro fotos en
- * 4:3 a todo el ancho, sin rayado ni paralelogramos. No hay carrusel ni modal: el
- * diseño no los trae.
+ * Mobile (Figma 1:9787): eyebrow y título centrados y a 64 px la cuadrícula de 329 de
+ * ancho con 16 entre fotos: la camioneta (329 x 219), el mecánico (157 x 105) y la
+ * nave del Nissan (156 x 105) en una fila, y la nave con capó abierto (329 x 192).
+ * Es distinto orden al de desktop (`order` sin tocar el DOM). Con el rayado gris
+ * de 188 x 254 y los paralelogramos de 164 x 160 (volteados) detrás. No hay
+ * carrusel ni modal: el diseño no los trae.
  */
 export default function WorkshopGalleryComponent() {
   return (
@@ -93,20 +104,30 @@ export default function WorkshopGalleryComponent() {
           variant="gray"
           className="absolute top-[125px] left-[504px] -z-10 hidden h-[718px] opacity-50 xl:right-[calc(50%-50vw)] xl:block"
         />
+        {/* Adornos de mobile (Figma): rayado gris de 188 x 254 pegado a la derecha y
+            el par de paralelogramos a 164 x 160, volteado y saliendo 50 px de la
+            ventana. */}
+        <DiagonalLinesComponent
+          variant="gray"
+          className="absolute top-[119px] right-0 -z-10 h-[254px] w-[188px] opacity-50 xl:hidden"
+        />
+        <div aria-hidden className="absolute top-[74px] -right-[50px] -z-10 h-[160px] w-[164px] -scale-x-100 xl:hidden [&>svg]:h-full [&>svg]:w-full">
+          <ParallelogramsComponent />
+        </div>
         <ParallelogramsComponent className="absolute top-[147px] left-[1166px] -z-10 hidden xl:block" />
 
-        <div className="container-wcar py-16 xl:pt-[81px] xl:pb-0">
+        <div className="container-wcar pb-16 xl:pt-[81px] xl:pb-0">
           <div className="xl:ml-[33px]">
-            <SectionEyebrowComponent className="reveal xl:gap-2.5!">Conoce nuestro taller</SectionEyebrowComponent>
+            <SectionEyebrowComponent className="reveal gap-2.5! max-xl:mx-auto max-xl:items-center">Conoce nuestro taller</SectionEyebrowComponent>
 
-            <h2 id="galeria-title" className="reveal mt-[11px] text-subheadline-1 font-bold text-dark-gray">
+            <h2 id="galeria-title" className="reveal mt-2.5 text-center text-subheadline-1 font-bold text-dark-gray xl:mt-[11px] xl:text-left">
               Nuestro taller
             </h2>
 
-            <ul className="mt-10 grid gap-4 xl:mt-[79px] xl:flex xl:w-[1114px] xl:flex-wrap xl:gap-4">
+            <ul className="mt-16 grid grid-cols-2 gap-4 xl:mt-[79px] xl:flex xl:w-[1114px] xl:flex-wrap xl:gap-4">
               {PHOTOS.map((photo) => (
-                <li key={photo.id} className="reveal">
-                  <div className={`relative aspect-[4/3] w-full overflow-hidden xl:aspect-auto ${photo.className}`}>
+                <li key={photo.id} className={`reveal ${photo.itemClassName}`}>
+                  <div className={`relative w-full overflow-hidden xl:aspect-auto ${photo.aspectClassName} ${photo.className}`}>
                     <Image src={photo.src} alt={photo.alt} fill sizes={photo.sizes} className={`object-cover ${photo.position}`} />
                   </div>
                 </li>

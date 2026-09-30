@@ -1,6 +1,7 @@
 "use client";
 
 import CarouselArrowsComponent from "@/modules/shared/components/CarouselArrowsComponent";
+import CarouselSegmentsComponent from "@/modules/shared/components/CarouselSegmentsComponent";
 import CarouselProgressComponent from "@/modules/shared/components/CarouselProgressComponent";
 import FeatureCardComponent from "@/modules/shared/components/FeatureCardComponent";
 import { useCarousel } from "@/modules/shared/hooks/useCarousel";
@@ -43,20 +44,21 @@ const SIN_SCROLLBAR = "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden";
  * botón por posición, para que la barra continua del diseño cumpla también la
  * regla de "una raya por posición, y clicable".
  *
- * Mobile: sin flechas ni barra; se desliza con el dedo y la siguiente tarjeta
- * asoma por la derecha (guía §4.3). No hay diseño mobile.
+ * Mobile (Figma 1:9787): sin flechas ni barra; se desliza con el dedo, la
+ * siguiente tarjeta asoma por la derecha y debajo van las rayas de paginación (48
+ * de ancho, una por posición y clicables).
  */
 export default function WorkshopServicesCarouselComponent({ services }: { services: AdditionalService[] }) {
   const [ref, carousel] = useCarousel<HTMLUListElement>();
 
   return (
-    <div className="reveal mt-10 xl:absolute xl:top-[240px] xl:right-[calc(50%-50vw)] xl:left-[584px] xl:mt-0">
+    <div className="reveal mt-16 xl:absolute xl:top-[240px] xl:right-[calc(50%-50vw)] xl:left-[584px] xl:mt-0">
       <ul
         ref={ref}
-        className={`-mr-8 flex snap-x snap-mandatory gap-[29px] overflow-x-auto pr-8 after:w-[calc(100%-306px)] after:shrink-0 xl:mr-0 xl:pr-0 ${SIN_SCROLLBAR}`}
+        className={`-mr-8 flex snap-x snap-mandatory gap-4 overflow-x-auto pr-8 after:w-[calc(100%-310px)] after:shrink-0 xl:mr-0 xl:gap-[29px] xl:after:w-[calc(100%-306px)] xl:pr-0 ${SIN_SCROLLBAR}`}
       >
         {services.map((service) => (
-          <li key={service.id} className="w-[277px] shrink-0 snap-start">
+          <li key={service.id} className="w-[294.5px] shrink-0 snap-start first:w-[253px] xl:w-[277px] xl:first:w-[277px]">
             <FeatureCardComponent
               icon={service.icon}
               title={service.title}
@@ -74,6 +76,16 @@ export default function WorkshopServicesCarouselComponent({ services }: { servic
           </li>
         ))}
       </ul>
+
+      <div className="mt-[52px] flex justify-center xl:hidden">
+        <CarouselSegmentsComponent
+          position={carousel.position}
+          positions={carousel.positions}
+          onSelect={carousel.scrollToPosition}
+          className="max-w-full flex-none"
+          style={{ width: carousel.positions * 60 - 12 }}
+        />
+      </div>
 
       <div className="mt-[41px] hidden items-center xl:flex">
         <CarouselArrowsComponent

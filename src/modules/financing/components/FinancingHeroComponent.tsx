@@ -7,6 +7,7 @@ import DiagonalLinesComponent from "@/modules/shared/components/DiagonalLinesCom
 import { ROUTES } from "@/modules/shared/constants/routes";
 
 import watermark from "../assets/hero/watermark-wcar.svg";
+import watermarkIsotipo from "../assets/hero/watermark-isotipo.svg";
 
 /**
  * Caja de la foto del hero. La foto y el recorte de las dos personas comparten
@@ -38,7 +39,7 @@ function HeroPhotoStage({
       aria-hidden={decorative || undefined}
       className={`grid-cols-[100%] grid-rows-[100%] place-items-center overflow-hidden xl:absolute xl:inset-y-0 xl:right-[calc(50%-50vw)] xl:left-[533.3px] xl:aspect-auto xl:w-auto ${className}`}
     >
-      <div className="relative aspect-[906/596] w-full xl:min-w-[775px]">{children}</div>
+      <div className="relative aspect-[906/596] w-full max-md:aspect-auto max-md:h-full xl:min-w-[775px]">{children}</div>
     </div>
   );
 }
@@ -98,9 +99,16 @@ function HeroPhotoStage({
  * - Hay además una "Line H" naranja de 77 x 4 en (124,208) que el render no
  *   muestra (queda oculta): no se dibuja.
  *
- * Mobile: no hay diseño. Se adapta con el criterio de la guía §4.3: sin forma
- * negra, marca de agua, rayado ni triángulo; el texto arriba y la foto abajo
- * (el recorte no hace falta: nada le pasa por encima).
+ * Teléfono (< 768, marco "Frame 596" 204:7761 de "financiación - 394", 393 x 626
+ * desde y=96): el mismo lenguaje en chico, en px del marco. Lockup centrado
+ * (wcar 91,8 x 29,5, raya de 1,2, Santander 123 x 21,5; 47 de arriba), `<h1>` de
+ * 32/40 en (31,118), párrafo de 280 de ancho en 16/22 (y=223), la foto a 508 x
+ * 338,7 en (-32,247) con la forma negra por encima (diagonal de (0,469) a
+ * (393,257), medida sobre el render), el recorte de las personas encima de la
+ * forma, el isotipo de 281 x 312 al 10 % en (-43,25), el triángulo cian (393,543)
+ * -(393,626)-(225,626), el rayado de los últimos 40 px y el botón de 205 x 48
+ * centrado, a 522 del borde de arriba (se monta sobre la foto). De 768 a 1279
+ * (sin diseño) sigue el apilado de siempre: texto arriba y foto abajo.
  *
  * TODO: destino del botón "Solicita tu crédito" (hoy `ROUTES.contact`); el
  * diseño no lo dice y en el sitio anterior era un `<button>` que abría un
@@ -114,15 +122,16 @@ export default function FinancingHeroComponent() {
     <section aria-labelledby="financiacion-hero-title" className="relative isolate overflow-x-clip bg-black">
       {/* El lienzo de 1440 centrado: los px del diseño valen aquí y los fondos
           sangran hasta el borde de la ventana (guía §4.2). */}
-      <div className="relative mx-auto flex flex-col xl:block xl:h-[509px] xl:max-w-[1440px]">
-        {/* Foto. En mobile va debajo del texto. */}
-        <HeroPhotoStage className="relative order-2 grid aspect-[906/596] w-full">
+      <div className="relative mx-auto flex h-[626px] flex-col md:h-auto xl:block xl:h-[509px] xl:max-w-[1440px]">
+        {/* Foto. De 768 a 1279 va debajo del texto; en teléfono, montada bajo la
+            forma negra (ver el JSDoc). */}
+        <HeroPhotoStage className="relative order-2 grid aspect-[906/596] w-full max-md:absolute max-md:top-[247px] max-md:-left-8 max-md:aspect-[508/338.67] max-md:w-[508px]">
           <Image
             src="/assets/financiacion/hero/asesora-y-cliente-firmando-solicitud.webp"
             alt="Dos personas firmando una solicitud de crédito sobre una mesa, en una oficina de paredes naranjas"
             fill
             preload
-            sizes="(min-width: 1280px) calc(50vw + 183px), 100vw"
+            sizes="(min-width: 1280px) calc(50vw + 183px), (min-width: 768px) 100vw, 508px"
             className="object-fill"
           />
         </HeroPhotoStage>
@@ -130,6 +139,23 @@ export default function FinancingHeroComponent() {
         <div
           aria-hidden
           className="absolute inset-y-0 hidden bg-[linear-gradient(to_left,rgb(0_0_0/0.743),transparent_275px)] xl:right-[calc(50%-50vw)] xl:left-[533.3px] xl:block"
+        />
+
+        {/* ---------- Decoración de teléfono ---------- */}
+        <DiagonalLinesComponent className="absolute top-[586px] left-0 z-10 h-[40px] w-full -scale-x-100 opacity-50 md:hidden" />
+        <div
+          aria-hidden
+          className="absolute top-[543px] right-0 z-20 h-[83px] w-[168px] bg-blue-neon [clip-path:polygon(100%_0,100%_100%,0_100%)] md:hidden"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 z-30 bg-black [clip-path:polygon(0_0,100%_0,100%_257px,0_469px)] md:hidden"
+        />
+        <Image
+          src={watermarkIsotipo}
+          alt=""
+          aria-hidden
+          className="absolute top-[25px] left-[-43px] z-40 h-[312px] w-[281px] max-w-none md:hidden"
         />
 
         {/* ---------- Decoración de desktop ---------- */}
@@ -157,50 +183,53 @@ export default function FinancingHeroComponent() {
         />
 
         {/* Las personas, recortadas: por encima de la forma negra. */}
-        <HeroPhotoStage decorative className="z-50 hidden xl:grid">
+        <HeroPhotoStage
+          decorative
+          className="z-50 hidden max-md:absolute max-md:top-[247px] max-md:-left-8 max-md:grid max-md:aspect-[508/338.67] max-md:w-[508px] xl:grid"
+        >
           <Image
             src="/assets/financiacion/hero/asesora-y-cliente-recorte.webp"
             alt=""
             width={659}
             height={763}
-            sizes="(min-width: 1280px) 25vw, 1px"
+            sizes="(min-width: 1280px) 25vw, (min-width: 768px) 1px, 190px"
             className="absolute top-[12.1%] left-[7.25%] h-[65.97%] w-[37.41%] max-w-none"
           />
         </HeroPhotoStage>
 
         {/* ---------- Texto ---------- */}
-        <div className="order-1 container-wcar pt-8 pb-10 xl:pt-[58px] xl:pb-0">
+        <div className="order-1 container-wcar pt-[47px] pb-0 md:pt-8 md:pb-10 xl:pt-[58px] xl:pb-0">
           {/* Lockup wcar | Santander. En desktop, tres piezas a alturas
               distintas (medidas de Figma); en mobile, a 2/3 y en fila. */}
-          <div className="relative z-40 flex items-center gap-4 xl:block xl:h-[52px]">
+          <div className="relative z-40 flex items-center justify-center gap-[18px] md:justify-start md:gap-4 xl:block xl:h-[52px]">
             <Image
               src={logoWcarWhite}
               alt="WCAR"
-              className="h-8 w-[99.4px] xl:absolute xl:top-1 xl:left-0 xl:h-12 xl:w-[149.13px]"
+              className="h-[29.54px] w-[91.77px] md:h-8 md:w-[99.4px] xl:absolute xl:top-1 xl:left-0 xl:h-12 xl:w-[149.13px]"
             />
             <span
               aria-hidden
-              className="h-8 w-[2px] bg-gray/30 xl:absolute xl:top-0 xl:left-[178.13px] xl:h-12"
+              className="h-[29.54px] w-[1.23px] bg-gray/30 md:h-8 md:w-[2px] xl:absolute xl:top-0 xl:left-[178.13px] xl:h-12"
             />
             <Image
               src={logoSantander}
               alt="Santander"
-              className="h-[23px] w-[133px] xl:absolute xl:top-1.5 xl:left-[209px] xl:h-[35px] xl:w-[200px]"
+              className="h-[21.54px] w-[123px] md:h-[23px] md:w-[133px] xl:absolute xl:top-1.5 xl:left-[209px] xl:h-[35px] xl:w-[200px]"
             />
           </div>
 
           <h1
             id="financiacion-hero-title"
-            className="relative z-40 mt-8 text-[32px] leading-9 font-semibold text-white xl:mt-[31px] xl:w-[465px] xl:text-[50px] xl:leading-[55px]"
+            className="relative z-40 mt-[39px] text-[32px] leading-10 font-semibold text-white md:mt-8 md:leading-9 xl:mt-[31px] xl:w-[465px] xl:text-[50px] xl:leading-[55px]"
           >
             Financia hasta el <span className="block font-normal text-blue-neon italic">100% de tu vehículo</span>
           </h1>
 
-          <p className="relative z-40 mt-5 text-body font-medium text-gray-light xl:mt-[30px] xl:w-[434px] xl:text-[18px] xl:leading-[22px]">
+          <p className="relative z-40 mt-[25px] max-w-[280px] text-body leading-[22px] font-medium text-gray-light md:mt-5 md:max-w-none md:leading-6 xl:mt-[30px] xl:w-[434px] xl:text-[18px] xl:leading-[22px]">
             Póngase en contacto con nosotros y le informaremos sin compromiso de nuestras tarifas y servicios.
           </p>
 
-          <div className="relative z-40 mt-8 xl:mt-[41px]">
+          <div className="relative z-40 mt-8 max-md:absolute max-md:top-[522px] max-md:left-1/2 max-md:mt-0 max-md:-translate-x-1/2 xl:mt-[41px]">
             {/* TODO: destino del botón (ver el JSDoc). */}
             <ButtonComponent href={ROUTES.contact}>SOLICITA TU CRÉDITO</ButtonComponent>
           </div>

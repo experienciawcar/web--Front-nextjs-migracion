@@ -17,7 +17,9 @@ export default function BrandModelFilterComponent({
   selectedBrandIds,
   selectedModelIds,
   onChange,
+  layout = "list",
 }: {
+  layout?: "list" | "cards";
   brands: Brand[];
   selectedBrandIds: string[];
   selectedModelIds: string[];
@@ -62,6 +64,65 @@ export default function BrandModelFilterComponent({
 
   if (brands.length === 0) {
     return <p className="text-caption text-gray">No hay marcas disponibles.</p>;
+  }
+
+  if (layout === "cards") {
+    return (
+      <ul className="grid grid-cols-2 gap-3">
+        {brands.map((brand) => {
+          const checked = selectedBrandIds.includes(brand.id);
+          return (
+            <li key={brand.id} className="contents">
+              <button
+                type="button"
+                aria-pressed={checked}
+                onClick={() => toggleBrand(brand.id)}
+                className={`flex h-[52px] min-w-0 items-center gap-3 rounded-lg border px-3 text-left text-small transition-[background-color,border-color,color,transform] duration-200 active:scale-[0.97] ${
+                  checked
+                    ? "border-orange bg-orange text-white"
+                    : "border-gray/40 bg-white text-dark-gray"
+                }`}
+              >
+                {brand.imageUrl && (
+                  <Image
+                    src={brand.imageUrl}
+                    alt=""
+                    aria-hidden
+                    width={32}
+                    height={32}
+                    className="size-8 shrink-0 object-contain"
+                  />
+                )}
+                <span className="truncate">{brand.name}</span>
+              </button>
+
+              {checked && brand.models.length > 0 && (
+                <div className="filter-fade-in col-span-2 flex flex-wrap gap-2 rounded-lg bg-gray-light p-3">
+                  {brand.models.map((model) => {
+                    const modelChecked = selectedModelIds.includes(model.id);
+                    return (
+                      <button
+                        key={model.id}
+                        type="button"
+                        aria-pressed={modelChecked}
+                        onClick={() => toggleModel(model.id)}
+                        className={`rounded-md border px-3 py-1.5 text-caption transition-colors duration-200 active:scale-95 ${
+                          modelChecked
+                            ? "border-orange bg-orange text-white"
+                            : "border-gray/40 bg-white text-dark-gray"
+                        }`}
+                      >
+                        {model.name}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    );
   }
 
   return (
@@ -110,7 +171,7 @@ export default function BrandModelFilterComponent({
               </div>
 
               {brandChecked && brand.models.length > 0 && (
-                <ul className="ml-6 flex flex-col gap-1 border-l border-gray/15 pl-3">
+                <ul className="filter-fade-in ml-6 flex flex-col gap-1 border-l border-gray/15 pl-3">
                   {brand.models.map((model) => {
                     const modelInputId = `model-${model.id}`;
                     return (

@@ -71,7 +71,7 @@ export default function HeroSlideSantanderMobileComponent() {
       {/* Fondo: a todo el ancho real de la ventana (`inset-x-0`), no encerrado
           en el `max-w-[600px]` del texto — ver el JSDoc de
           `HeroSlideMarceloMobileComponent` para por qué. */}
-      <div aria-hidden className="absolute inset-x-0 top-[-22px] h-[637px]">
+      <div aria-hidden className="absolute inset-x-0 top-[65px] h-[637px]">
         <Image
           src="/assets/home/hero/mobile/santander.webp"
           alt=""
@@ -81,6 +81,13 @@ export default function HeroSlideSantanderMobileComponent() {
         />
       </div>
 
+      {/* La foto baja 60 px para que la cabeza del hombre quede bajo la
+          tarjeta naranja (que llega a y=280) y no tapada por ella; el borde
+          inferior de la foto es blanco, así que se funde a negro. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 bottom-0 h-[130px] bg-gradient-to-b from-transparent via-black/90 to-black"
+      />
       <div
         aria-hidden
         className="absolute inset-x-0 top-0 h-[380px] bg-orange"

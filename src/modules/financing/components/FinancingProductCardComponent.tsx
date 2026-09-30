@@ -33,60 +33,99 @@ const cq = (px: number) => `${((px / CARD_WIDTH) * 100).toFixed(3)}cqw`;
  * 20 abajo (la línea cae 19 debajo de la fila), y el botón `primary` con la flecha
  * en círculo en y=309 del cuerpo (409 de la tarjeta), a 40 del borde.
  *
- * La cabecera va en unidades `cqw` y la tarjeta es un contenedor (`container-type`):
- * a 482 de ancho 1cqw = 4,82 px y las medidas de Figma salen exactas; más angosta
- * (mobile) escala entera. El borde va en un `::after` para no restar ancho al
- * contenido (en Figma el borde entra en los 482). El cuerpo, en cambio, en mobile
- * deja de ser de tamaño fijo: las filas envuelven el texto y el botón sigue al
- * contenido. No hay diseño mobile.
+ * En desktop la cabecera va en unidades `cqw` y la tarjeta es un contenedor
+ * (`container-type`): a 482 de ancho 1cqw = 4,82 px y las medidas de Figma salen
+ * exactas. El borde va en un `::after` para no restar ancho al contenido (en Figma
+ * el borde entra en los 482).
+ *
+ * Teléfono (< 1280, "Frame 298" 204:7906 / "Frame 299" 204:7947 de "financiación -
+ * 394"): tarjeta de 367 (13 px de margen a cada lado), sin borde, con cabecera de
+ * 80 cuyas piezas van en px reales (`product.mobile`; el nombre a 24 y el subtítulo
+ * a 14) y cuerpo de relleno 24 x 28, filas separadas por 16 con el check de 28 (el
+ * texto a 4 de él, 16 px, y las notas a 12) y el botón a 16 de la última fila. Las
+ * piezas de la cabecera reciben su posición de teléfono y de desktop en variables
+ * CSS (`--m-*` y `--d-*`) y las clases eligen cuál usar según el ancho.
  *
  * TODO: destino de los botones (hoy `ROUTES.contact`; en el sitio anterior eran
  * `<button>` que abrían un formulario).
  */
+/** Posición de teléfono (px) y de desktop (cqw) de una pieza de la cabecera, como variables CSS. */
+function place(mobile: { left: number; top: number }, desktop: { left: number; top: number }) {
+  return {
+    "--m-left": `${mobile.left}px`,
+    "--m-top": `${mobile.top}px`,
+    "--d-left": cq(desktop.left),
+    "--d-top": cq(desktop.top),
+  } as React.CSSProperties;
+}
+
+const PLACE = "left-(--m-left) top-(--m-top) xl:left-(--d-left) xl:top-(--d-top)";
+
 export default function FinancingProductCardComponent({ product }: { product: FinancingProduct }) {
-  const { accent, iconBox, namePosition, subtitlePosition, linesPosition } = product;
+  const { accent, iconBox, namePosition, subtitlePosition, linesPosition, mobile } = product;
   const accentText = accent === "orange" ? "text-orange" : "text-blue-neon";
   const linesColor = accent === "orange" ? "bg-gray-light" : "bg-white";
 
   return (
-    <article className="relative w-full max-w-[482px] overflow-hidden rounded-lg bg-white [container-type:inline-size] after:pointer-events-none after:absolute after:inset-0 after:z-10 after:rounded-lg after:border after:border-gray xl:h-[489px] xl:w-[482px]">
+    <article className="relative mx-auto w-full max-w-[482px] overflow-hidden rounded-lg bg-white [container-type:inline-size] after:pointer-events-none after:absolute after:inset-0 after:z-10 after:rounded-lg after:border-gray xl:after:border xl:h-[489px] xl:w-[482px]">
       {/* ---------- Cabecera ---------- */}
-      <header className="relative overflow-hidden bg-dark-gray" style={{ aspectRatio: `${CARD_WIDTH} / 100` }}>
+      <header className="relative h-20 overflow-hidden bg-dark-gray xl:aspect-[482/100] xl:h-auto">
         <div
           aria-hidden
           className="absolute inset-0 -right-5 -bottom-[7px] bg-[url('/assets/financiacion/productos/patron-cabecera.png')] bg-size-[58.84px_60.49px] bg-top-left"
         />
         <div
           aria-hidden
-          className="absolute top-0 h-full bg-linear-to-r from-[rgb(30_30_30/0)] to-dark-gray to-[50.962%]"
-          style={{ left: cq(116), width: cq(366) }}
+          className="absolute top-0 left-[116px] h-full w-[366px] bg-linear-to-r from-[rgb(30_30_30/0)] to-dark-gray to-[50.962%] xl:left-(--d-left) xl:w-(--d-width)"
+          style={{ "--d-left": cq(116), "--d-width": cq(366) } as React.CSSProperties}
         />
         <Image
           src={product.icon}
           alt=""
           aria-hidden
-          className="absolute max-w-none"
-          style={{ left: cq(iconBox.left), top: cq(iconBox.top), width: cq(iconBox.width), height: cq(iconBox.height) }}
+          className={`absolute h-(--m-height) w-(--m-width) max-w-none xl:h-(--d-height) xl:w-(--d-width) ${PLACE}`}
+          style={
+            {
+              ...place(mobile.iconBox, iconBox),
+              "--m-width": `${mobile.iconBox.width}px`,
+              "--m-height": `${mobile.iconBox.height}px`,
+              "--d-width": cq(iconBox.width),
+              "--d-height": cq(iconBox.height),
+            } as React.CSSProperties
+          }
         />
         <h3
-          className={`absolute whitespace-nowrap ${product.nameClassName} ${accentText}`}
-          style={{ left: cq(namePosition.left), top: cq(namePosition.top), fontSize: cq(36) }}
+          className={`absolute text-[24px] whitespace-nowrap xl:text-(length:--d-size) ${PLACE} ${product.nameClassName} ${accentText}`}
+          style={{ ...place(mobile.namePosition, namePosition), "--d-size": cq(36) } as React.CSSProperties}
         >
           {product.nameLead}
           <span className={product.nameTailClassName}>{product.nameTail}</span>
         </h3>
         <p
-          className="absolute leading-[normal] font-semibold whitespace-nowrap text-white"
-          style={{ left: cq(subtitlePosition.left), top: cq(subtitlePosition.top), fontSize: cq(20) }}
+          className={`absolute text-[14px] leading-[normal] font-semibold whitespace-nowrap text-white xl:text-(length:--d-size) ${PLACE}`}
+          style={{ ...place(mobile.subtitlePosition, subtitlePosition), "--d-size": cq(20) } as React.CSSProperties}
         >
-          {product.subtitle}
+          <span className="xl:hidden">{mobile.subtitle}</span>
+          <span className="hidden xl:inline">{product.subtitle}</span>
         </p>
         <div
           aria-hidden
-          className="absolute flex items-center justify-center"
-          style={{ right: cq(linesPosition.right), top: cq(linesPosition.top), width: cq(148.676), height: cq(136.276) }}
+          className="absolute top-(--m-top) right-(--m-right) flex h-[136.276px] w-[148.676px] items-center justify-center xl:top-(--d-top) xl:right-(--d-right) xl:h-(--d-height) xl:w-(--d-width)"
+          style={
+            {
+              "--m-top": `${mobile.linesPosition.top}px`,
+              "--m-right": `${mobile.linesPosition.right}px`,
+              "--d-top": cq(linesPosition.top),
+              "--d-right": cq(linesPosition.right),
+              "--d-width": cq(148.676),
+              "--d-height": cq(136.276),
+            } as React.CSSProperties
+          }
         >
-          <div className="flex rotate-[48.06deg]" style={{ width: cq(18.636), height: cq(183.143), gap: cq(6) }}>
+          <div
+            className="flex h-[183.143px] w-[18.636px] rotate-[48.06deg] gap-[6px] xl:h-(--d-height) xl:w-(--d-width) xl:gap-(--d-gap)"
+            style={{ "--d-width": cq(18.636), "--d-height": cq(183.143), "--d-gap": cq(6) } as React.CSSProperties}
+          >
             <span className={`h-full flex-1 ${linesColor}`} />
             <span className={`h-full flex-1 ${linesColor}`} />
             <span className={`h-full flex-1 ${linesColor}`} />
@@ -95,21 +134,29 @@ export default function FinancingProductCardComponent({ product }: { product: Fi
       </header>
 
       {/* ---------- Cuerpo ---------- */}
-      <div className="relative flex flex-col gap-5 px-6 py-8 xl:h-[389px] xl:px-10">
+      <div className="relative flex flex-col gap-4 px-6 py-7 xl:h-[389px] xl:gap-5 xl:px-10 xl:py-8">
         {product.items.map((item, index) => (
           <div key={item.id} className="contents">
             <div
-              className="flex items-start gap-[10px] xl:h-(--row-h)"
+              className="flex h-(--m-row-h) items-start gap-1 xl:h-(--row-h) xl:gap-[10px]"
               style={
                 {
+                  "--m-row-h": `${item.mobile.rowHeight}px`,
+                  "--m-text-top": `${item.mobile.textTop}px`,
+                  "--m-icon-top": `${item.mobile.iconTop}px`,
                   "--row-h": `${item.rowHeight}px`,
                   "--text-top": `${item.textTop}px`,
                   "--icon-top": `${item.iconTop ?? 0}px`,
                 } as React.CSSProperties
               }
             >
-              <Image src={iconCheck} alt="" aria-hidden className="size-[38px] shrink-0 xl:mt-(--icon-top)" />
-              <p className="min-w-0 font-medium text-dark-gray xl:mt-(--text-top) xl:whitespace-nowrap">
+              <Image
+                src={iconCheck}
+                alt=""
+                aria-hidden
+                className="mt-(--m-icon-top) size-7 shrink-0 xl:mt-(--icon-top) xl:size-[38px]"
+              />
+              <p className="mt-(--m-text-top) min-w-0 font-medium text-dark-gray xl:mt-(--text-top) xl:whitespace-nowrap">
                 <span className={item.mainClassName}>
                   {item.main.map((part) => (
                     <span key={part.text} className={part.className}>
@@ -137,7 +184,7 @@ export default function FinancingProductCardComponent({ product }: { product: Fi
           </div>
         ))}
 
-        <div className="mt-2 xl:absolute xl:top-[309px] xl:left-10 xl:mt-0">
+        <div className="xl:absolute xl:top-[309px] xl:left-10">
           {/* TODO: destino del botón (ver el JSDoc). */}
           <ButtonComponent href={ROUTES.contact} icon={arrowCircle}>
             {product.buttonLabel}

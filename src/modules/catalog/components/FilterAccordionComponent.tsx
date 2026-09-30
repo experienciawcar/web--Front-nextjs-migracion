@@ -16,7 +16,7 @@ export default function FilterAccordionComponent({
   children: React.ReactNode;
 }) {
   return (
-    <details open={defaultOpen} className="group mt-4">
+    <details open={defaultOpen} className="filter-accordion group mt-4">
       <summary className="flex border-b border-gray pb-2 cursor-pointer list-none items-center justify-between gap-2 marker:content-none [&::-webkit-details-marker]:hidden">
         <span className="text-small text-gray">{title}</span>
         <svg

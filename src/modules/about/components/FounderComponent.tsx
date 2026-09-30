@@ -91,7 +91,7 @@ export default function FounderComponent() {
           className="absolute inset-y-0 right-[calc(50%-50vw)] left-[calc(50%-50vw)] bg-gray-light xl:top-[124px] xl:left-8"
         />
 
-        <div className="relative flex flex-col pt-[35px] pb-[43px] xl:flex-row xl:pt-0 xl:pb-0">
+        <div className="relative flex flex-col pt-[35px] pb-0 xl:flex-row xl:pt-0">
           <FotoFundador />
 
           <Identidad className="reveal mt-6 text-center xl:mt-0 xl:ml-[99px] xl:pt-[171px] xl:text-left" />
