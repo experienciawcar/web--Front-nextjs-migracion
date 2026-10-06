@@ -1,6 +1,5 @@
 import type { HeroSlide } from "./HeroCarouselComponent";
 import HeroCarouselComponent from "./HeroCarouselComponent";
-import HeroHomeJeepComponent from "./HeroHomeJeepComponent";
 import HeroSlideColserautoComponent from "./HeroSlideColserautoComponent";
 import HeroSlideColserautoMobileComponent from "./HeroSlideColserautoMobileComponent";
 import HeroSlideHomeComponent from "./HeroSlideHomeComponent";
@@ -41,7 +40,6 @@ const SLIDES: HeroSlide[] = [
         <HeroSlideHomeMobileComponent />
       </>
     ),
-    foreground: <HeroHomeJeepComponent />,
   },
   {
     id: "santander",

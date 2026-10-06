@@ -592,7 +592,7 @@ export const metadata: Metadata = buildPageMetadata({
 
 **3. Imágenes.**
 - `alt` descriptivo (qué se ve, hasta 125 caracteres, sin "imagen de…") en **toda foto de contenido**. Decorativa: `alt=""` **y** `aria-hidden`. Logos: el nombre de la marca. Una foto de vehículo: su nombre (ya lo hace `VehicleGalleryComponent`).
-- **`preload` solo en la foto candidata a LCP, y solo una por vista** (`priority` está deprecado en Next 16; ver §8). Lo demás, carga diferida. Hoy `priority` sigue en `HeroHomeJeepComponent`, `NavbarComponent` y `AboutHeroComponent` (dos veces): migrarlo.
+- **`preload` solo en la foto candidata a LCP, y solo una por vista** (`priority` está deprecado en Next 16; ver §8). Lo demás, carga diferida. Hoy `priority` sigue en `NavbarComponent` y `AboutHeroComponent` (dos veces): migrarlo.
 - `sizes` = el ancho al que SE VE la foto (§6.1). Sin `sizes`, el navegador baja una imagen de más.
 - Cuidado con lo que se monta en `<head>`: hoy los 8 íconos del navbar (`loading="eager"`, PNG de menos de 1 KB) salen como `<link rel=preload>` en las 6 páginas y compiten con la foto del hero. Las 9-12 precargas de imagen por página son las que el script avisa.
 
@@ -793,3 +793,15 @@ Vende tu Carro (`docs/planes/vende-tu-carro.md`) se construyó sin Figma y sin c
 ### Foto de Figma girada unos grados y espejada, en una ventana más angosta que el nodo (slide 1 mobile del Home, nodo 1306:4922)
 
 `figma_imagen.py` no cubre el giro libre (el nodo trae `relativeTransform` con ±0,0138 fuera de la diagonal). Se hornea con PIL: `Image.transform(..., Image.AFFINE)` con la inversa de `relativeTransform` (sumando el origen del marco padre) y se ajusta el color con un polinomio de grado 3 contra el export, sobre una región sin texto. Se verifica con la correlación contra el export (0,996, desvío 0). Se hornea la ventana de 768 de ancho (no solo los 393 del marco) para que en 394–767 se vea más escena y no un hueco. Alineación a la izquierda, como el marco. El degradado a `gray-light` va en CSS con las paradas del nodo (75,96 % → 97,6 % de su alto, mapeadas al marco).
+
+### Banner del Home con VARIAS capas de la misma foto (slide 1, desktop 1322:9916 y mobile 1322:8888)
+
+Cuando el nodo no es una capa sino un montaje (tres rectángulos con la misma `imageHash`, cada uno con su `relativeTransform`, su recorte y sus degradados al gris de la página), se hornea todo el fondo en UN WebP (2x) y el texto/lockups van en CSS encima. Receta que funcionó (correlación 0,994 con el export, error de color 3/255):
+
+- `use_figma` (solo lectura) por cada capa: `relativeTransform`, `width/height`, `fills[].imageTransform`, `scaleMode`, `gradientStops` y `gradientTransform`. Las coordenadas de `relativeTransform` son del padre: si hay marcos anidados, sumar su `x,y`.
+- PIL: por capa, `Image.transform(AFFINE)` con la inversa de `relativeTransform` (px del lienzo → local → uv del nodo → `imageTransform` → px de la foto). **Enmascarar con la caja del nodo (0 ≤ u,v ≤ 1)**: un recorte `CROP` deja caer en la foto zonas que están FUERA del nodo y se pintan igual (salió un jeep gigante de una capa que solo debía mostrar el muro). `imageTransform` se lee `uv_foto = T · uv_nodo` (a<1 = la foto se ve ampliada; a>1 = sobra nodo y queda hueco, p. ej. la franja negra).
+- Degradado de relleno: `t = fila0 de gradientTransform · (u, v, 1)`; transparente por debajo de la primera parada y opaco desde la segunda (el segundo degradado de estas capas es el desvanecido del borde de arriba).
+- Los rectángulos con degradado y desenfoque de capa (`LAYER_BLUR` r=20 → sigma 10) se hornean también (`GaussianBlur`).
+- Color: ajuste polinómico cúbico RGB→RGB contra el export en una región sin texto, **incluyendo zonas del gris liso** (si no, el gris se vuelve rosado), y después una corrección que lleva el gris liso exacto a `#f6f7f9`: si queda 3 puntos más oscuro se ve la costura contra el fondo de la página.
+- Un nodo que NO se ve en el export (aquí un rayado de 327x60) no se reproduce, aunque salga en `get_design_context`. Comparar siempre contra el export, no contra el código.
+- Más ancho que 1440: el muro es casi horizontal, así que se prolonga estirando una columna de 1 px del borde (WebP de 4 x alto, `bg-[length:100%_100%]`).

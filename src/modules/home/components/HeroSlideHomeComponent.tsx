@@ -1,176 +1,117 @@
 import Image from "next/image";
 
-import starIcon from "@/modules/shared/assets/icons/star.svg";
-import isotipoWcar from "@/modules/shared/assets/icons/isotipo-wcar.svg";
-import logoSantander from "@/modules/shared/assets/hero/logo-santander.png";
-import DiagonalLinesComponent from "@/modules/shared/components/DiagonalLinesComponent";
-
+import starIcon from "../assets/hero-decor/star-blanca.svg";
 import watermarkWcar from "../assets/hero-decor/watermark-wcar.svg";
-import { HERO_BAND_END, HERO_CANVAS_MARGIN } from "../constants/hero-carousel";
+import { HERO_CANVAS_MARGIN } from "../constants/hero-carousel";
 
 /**
- * Primer slide del carousel del banner (`HeroComponent`): el hero del inicio
- * (rediseño "Home - 2.0" de Figma, nodo 671:11456 "Banner", 1440 x 500, dentro
- * del frame 671:11438).
+ * Primer slide del banner (`HeroComponent`) en DESKTOP: el hero del inicio.
+ * Diseño: Figma "Wcar Website - 2026", página "Banners", nodo 1322:9916
+ * ("Banner", 1440 x 546, dentro del marco "desktop 1482" 1322:9876). Reemplaza al
+ * hero anterior (cuña naranja + jeep aparte): ahora la foto trae el muro naranja, el
+ * jeep y su reflejo, todo en una sola imagen.
  *
- * El jeep NO está aquí: va en `HeroHomeJeepComponent`, en una capa aparte por
- * encima de la tarjeta de búsqueda (dentro del slide no puede pasar por encima
- * de ella: el slide tiene su propio fondo y su propio contexto de apilado).
- *
- * Este slide, en Figma, es el hero anterior: Reemplaza al hero anterior (con dos
- * botones y varios jeeps): sin botones (se movieron a la tarjeta de búsqueda
- * que cuelga encima, ver `HeroSearchSectionComponent`), y el fondo es un
- * reparto diagonal: gris claro a la izquierda con la marca de agua "wcar", y
- * una cuña naranja a la derecha con un solo jeep.
- *
- * El alto (740) y el tamaño del jeep (585x313, misma proporción que el de
- * Figma) NO son los del diseño (500 y 396x212): el usuario pidió, en dos
- * pasos, un hero cada vez más alto y la tarjeta de búsqueda cada vez más
- * montada sobre él (`HeroSearchSectionComponent`, que fija cuánto se monta
- * con un margen negativo). Salió a ojo contra la referencia que pasó, no de
- * una medida de Figma.
- *
- * Medidas (px de diseño):
- * - Cuña naranja: un rectángulo girado 3,3°; medida contra el export
- *   (`comparar_figma`-style, a ojo de píxel) da aproximadamente
- *   `polygon(80% 0, 100% 0, 100% 100%, 48.75% 100%)`. Su lado derecho ya cae
- *   recto en x=1440 (los dos puntos de la derecha del `clipPath` están al
- *   100 %), así que en pantallas anchas una segunda franja lisa del mismo
- *   naranja sangra desde ahí hasta el borde de la ventana (guía §4.2): sin
- *   eso, el usuario vio la foto y el lockup parados lejos del borde real, con
- *   una franja gris de más en medio.
- * - Lockup arriba a la derecha (916,31,394,50): el isotipo "W" en naranja +
- *   "wcar" en negro (no blanco, porque acá va sobre fondo claro) | Santander en
- *   blanco (va sobre la cuña naranja). Con una raya vertical en medio.
- * - Rayado pequeño en la esquina superior derecha (671:11471, 56 x 147, al
- *   50 %), recortado por el borde del hero.
- * - `<h1>` a (126,46,545,96), 42/48 (antes era 48/48): "El vehículo mas
- *   seguro" bold + "de colombia" italic naranja.
- * - Raya fina (126,169,282,0) `gray` al 30 %, 1,5px.
- * - Calificación (126,197): estrella + "4,8 en Google · +9.000 Clientes
- *   felices · +10.000 Vehículos vendidos" (antes solo traía dos datos), con
- *   cada cifra en 24 bold naranja y la etiqueta en 14 semibold `gray-dark`.
- *
- * La foto es el mismo jeep de antes (mismo recorte de Figma: incluso las seis
- * cifras del `imageTransform` son idénticas), solo que ahora se ve más chico.
- *
- * Solo desktop (`xl`): el mobile es `HeroSlideHomeMobileComponent`. Por eso el
+ * Solo desktop (`md`+): el mobile es `HeroSlideHomeMobileComponent`. Por eso el
  * `<h1>` de la página (que vive aquí) está oculto en mobile, donde el título es un
  * `role="heading" aria-level="1"` del componente mobile.
+ *
+ * La foto (`banner.webp`, 2880 x 1092 = 1440 x 546 a 2x) está HORNEADA: en Figma son
+ * tres capas de la misma foto, espejadas y giradas 0,79° (`relativeTransform` con
+ * ±0,0138 fuera de la diagonal), con contraste +13 % y saturación +65 % y degradados al
+ * gris de la página (#f6f7f9) por abajo. CSS no sabe hacer eso, así que se compuso con
+ * PIL (inversa de `relativeTransform` por capa + ajuste de color polinómico contra el
+ * export, error 3/255; correlación 0,994 con el export). Los degradados del banner
+ * (rectángulos 4249-4251) ya van dentro. No lleva texto ni la "wcar" de fondo: eso va
+ * encima, como en Figma.
+ *
+ * El muro es casi horizontal, así que a anchos mayores de 1440 la foto se prolonga
+ * estirando su columna de borde (`banner-borde-izq/der.webp`, una columna de 1 px):
+ * se ve como más muro. Mismo criterio que las franjas que sangran de los otros slides.
+ *
+ * Medidas (px de diseño, desde el borde de arriba del banner):
+ * - Raya blanca (120,57) 77 x 4.
+ * - `<h1>` (120,111) 542 x 112: 48/56 bold, "El vehículo mas seguro" en negro y
+ *   "de colombia" en cursiva blanca sobre un rectángulo negro (0,62) de 277 x 49. El
+ *   texto va 4 px a la derecha de la caja (left 4), con tracking 0,48.
+ * - Cifras (120,273), separadas 16: "+10.000 Vehículos vendidos", "+9.000 Clientes
+ *   felices" y la estrella + "4.8 en Google" (estrella de 24, 7 de aire). Cada cifra en
+ *   28 extrabold blanca y la etiqueta en 14 bold negra.
+ * - "wcar" de fondo (-97,77) 808 x 180 (la marca de agua ya trae su opacidad y su
+ *   degradado: es el SVG tal cual).
+ * - El "Hero 1" del nodo (rayado blanco al 50 % en (1113,321), 327 x 60) NO se ve en el export de
+ *   Figma, así que no se reprodujo.
+ *
+ * TODO: confirmar con diseño: "mas" sin tilde en el título.
  */
 export default function HeroSlideHomeComponent() {
   return (
     <div
-      className="relative mx-auto hidden md:block md:max-w-[1440px]"
+      className="relative mx-auto hidden md:block md:h-[740px] md:max-w-[1440px]"
       style={{ marginLeft: HERO_CANVAS_MARGIN }}
     >
-      {/* Cuña naranja + jeep + lockup: solo desktop. */}
       <div aria-hidden className="absolute inset-0 hidden md:block">
+        <Image
+          src="/assets/home/hero/banner.webp"
+          alt=""
+          width={1440}
+          height={546}
+          sizes="1440px"
+          className="absolute top-0 left-0 h-[546px] w-[1440px] max-w-none"
+        />
+        {/* Prolongación del muro a los lados del lienzo (ver arriba). `--hero-bleed: 0`
+            en tablet: ahí el lienzo escalado ya llena la ventana. */}
+        <div className="absolute top-0 right-full h-[546px] w-[calc(50vw*var(--hero-bleed,1))] bg-[url('/assets/home/hero/banner-borde-izq.webp')] bg-[length:100%_100%]" />
+        <div className="absolute top-0 left-full h-[546px] w-[calc(50vw*var(--hero-bleed,1))] bg-[url('/assets/home/hero/banner-borde-der.webp')] bg-[length:100%_100%]" />
+
         <Image
           src={watermarkWcar}
           alt=""
-          className="absolute top-[9px] left-[-23px] h-[186px] w-[835px] max-w-none opacity-80"
+          className="absolute top-[77px] left-[-97px] h-[180px] w-[808px] max-w-none"
         />
-        <div
-          className="absolute top-0 right-0 h-[500px] w-full bg-orange"
-          style={{
-            clipPath: "polygon(80% 0, 100% 0, 100% 100%, 48.75% 100%)",
-          }}
-        />
-        {/* La diagonal de arriba mide 500 de alto (lo que medía TODO el hero
-              en el diseño): al estirar el hero a 740 para que la tarjeta de
-              búsqueda se montara más sobre él, si la diagonal se estiraba con
-              todo el hero, la tarjeta le tapaba el tramo de abajo y la cuña se
-              veía cortada en una línea recta en vez de terminar en punta. Esta
-              franja lisa completa la cuña donde la diagonal ya terminó (ancha
-              del todo, de 48,75% a 100%): la tarjeta se monta encima, sobre
-              naranja liso, no sobre la diagonal cortada a la mitad.
-
-              Arranca 1 px antes (499) para que, con el lienzo escalado en tablet, no quede una línea
-              fina entre esta franja y la cuña. Termina en `HERO_BAND_END` (673), no en el borde del hero (740):
-              la tarjeta empieza en y=490 y mide ~231, o sea acaba en ~721, y
-              como en Figma el naranja que asoma a su derecha se corta ~48 px
-              antes de que la tarjeta acabe (en el diseño acaba en 538 y la
-              tarjeta en 586). Es la misma altura donde acaba la banda negra de
-              los slides oscuros: ver `constants/hero-carousel.ts`. */}
-        <div
+        <span
           aria-hidden
-          className="absolute top-[499px] right-0 left-[48.75%] bg-orange"
-          style={{ height: HERO_BAND_END - 499 }}
+          className="absolute top-[57px] left-[120px] h-1 w-[77px] bg-white"
         />
-        {/* La cuña de arriba mide justo el lienzo de 1440 (su lado derecho ya
-              cae en x=1440, recto y sin diagonal: los dos puntos de la derecha
-              del `clipPath` están al 100%). En pantallas anchas eso dejaba un
-              corte seco y toda esa foto y el lockup quedaban lejos del borde
-              real de la ventana. Esta franja sangra desde ahí hasta el borde,
-              del mismo naranja: como el borde ya es recto, no hace falta
-              repetir el corte diagonal. Acaba a la misma altura (`HERO_BAND_END`) que la
-              franja lisa de arriba, para que el corte inferior sea uno solo. */}
-        <div
-          aria-hidden
-          className="absolute top-0 left-full hidden w-[calc(50vw-50%+1px)] bg-orange md:block"
-          style={{ height: HERO_BAND_END }}
-        />
-        <DiagonalLinesComponent
-          variant="white"
-          className="absolute top-0 right-[calc((50%-50vw)*var(--hero-bleed,1))] h-[147px] w-[56px] opacity-50"
-        />
-
-        <div className="absolute top-[31px] right-8 flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <Image
-              src={isotipoWcar}
-              alt=""
-              aria-hidden
-              className="h-8 w-auto"
-            />
-            <span className="text-heading-1 font-bold text-dark-gray">
-              wcar
-            </span>
-          </div>
-          <span aria-hidden className="h-8 w-px bg-gray/40" />
-          <Image
-            src={logoSantander}
-            alt="Santander"
-            className="h-[26px] w-[147px] brightness-0 invert"
-          />
-        </div>
       </div>
 
-      <div className="container-wcar relative py-12 md:h-[740px] md:py-0">
-        <div className="md:max-w-[545px] md:pt-[100px]">
+      <div className="relative">
+        <div className="absolute top-[111px] left-[120px] h-[112px] w-[542px]">
+          <span
+            aria-hidden
+            className="absolute top-[62px] left-0 h-[49px] w-[277px] bg-black"
+          />
           {/* TODO: confirmar con diseño: "mas" sin tilde. */}
           <h1
             id="hero-title"
-            className="text-[32px] leading-9 font-bold text-dark-gray md:text-[42px] md:leading-[48px]"
+            className="absolute top-0 left-1 w-[538px] text-[48px] leading-[56px] font-bold tracking-[0.48px] text-black"
           >
-            El vehículo mas seguro{" "}
-            <span className="block text-orange italic">de colombia</span>
+            El vehículo mas seguro
+            <span className="block font-normal text-white italic">
+              de colombia
+            </span>
           </h1>
-
-          <span
-            aria-hidden
-            className="mt-6 hidden h-px w-[282px] bg-gray/30 md:block"
-          />
         </div>
 
-        {/* Fuera del md:max-w-[545px] del título: a 24 bold + 14 semibold, las
-              tres cifras no caben en 545 y el diseño (537 de ancho) sí les da
-              algo más de aire. */}
-        <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-small font-semibold text-gray-dark md:mt-7 md:max-w-[620px]">
-          <Image src={starIcon} alt="" aria-hidden className="size-5" />
-          <span className="text-[24px] font-bold text-orange">4.8</span>
-          en Google
-          <span aria-hidden className="text-gray-dark/60">
-            ·
+        <p className="absolute top-[273px] left-[120px] flex items-center gap-4 font-bold tracking-[0.16px] whitespace-nowrap text-black">
+          <span>
+            <span className="text-[28px] font-extrabold text-white">
+              +10.000
+            </span>{" "}
+            <span className="text-[14px]">Vehículos vendidos</span>
           </span>
-          <span className="text-[24px] font-bold text-orange">+9.000</span>
-          Clientes felices
-          <span aria-hidden className="text-gray-dark/60">
-            ·
+          <span>
+            <span className="text-[28px] font-extrabold text-white">
+              +9.000
+            </span>{" "}
+            <span className="text-[14px]">Clientes felices</span>
           </span>
-          <span className="text-[24px] font-bold text-orange">+10.000</span>
-          Vehículos vendidos
+          <span className="flex items-center gap-[7px]">
+            <Image src={starIcon} alt="" aria-hidden className="size-6" />
+            <span>
+              <span className="text-[28px] font-extrabold text-white">4.8</span>{" "}
+              <span className="text-[14px]">en Google</span>
+            </span>
+          </span>
         </p>
       </div>
     </div>

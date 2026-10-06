@@ -103,8 +103,8 @@ function reducer(state: State, action: Action): State {
  *
  * Tablet (`md` a `xl`, 768 a 1279; sin diseño propio): se ve la composición de desktop
  * con el lienzo de 1440 ESCALADO al ancho de la ventana (`--hero-s` = ancho / 1440, fijada
- * por JS aquí y con respaldo en globals.css): la caja de cada slide mide 740 x `--hero-s`, el jeep
- * (`foreground`) se escala igual, y la barra de rótulos baja a `HERO_TABS_TOP` x `--hero-s`
+ * por JS aquí y con respaldo en globals.css): la caja de cada slide mide 740 x `--hero-s`, lo que va en
+ * `foreground` se escala igual, y la barra de rótulos baja a `HERO_TABS_TOP` x `--hero-s`
  * sin escalar sus letras (arranca donde arranca el arte y acaba donde acaba en desktop, para
  * no pisar las rayas cian). El fondo de cada slide es el gris de la página desde `md`
  * (`HeroComponent`). Desde `xl` no se toca nada; por debajo de `md`, el diseño mobile.

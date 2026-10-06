@@ -15,13 +15,12 @@ import TradeInBannerComponent from "./TradeInBannerComponent";
  * 740), o sea que se monta 250 px sobre él. Salió a ojo, no de una medida de Figma:
  * es lo que deja la barra de rótulos de los slides (`HeroCarouselComponent`, de
  * y=400 a ~457) entre el arte y la tarjeta, con ~33 px de aire. Antes la tarjeta
- * arrancaba en 400 y se montaba sobre el jeep; la barra la bajó 90 px y el jeep
- * subió (ver `HeroHomeJeepComponent`). Si cambia el alto de la barra, del banner o
+ * arrancaba en 400 y se montaba sobre el jeep; la barra la bajó 90 px. Ahora el jeep
+ * va dentro de la foto del primer slide (acaba en y=546, ya fundida al gris). Si cambia el alto de la barra, del banner o
  * de la tarjeta, revisar este número y `HERO_BAND_END` (constants/hero-carousel.ts).
  *
- * La cuña naranja del primer slide (`HeroSlideHomeComponent`) y la banda negra de
- * los otros se ven A LOS LADOS de la tarjeta (como en Figma: el color sigue a su
- * derecha), no cortadas por ella. Para eso el fondo gris de este bloque tiene que
+ * La banda negra de los slides oscuros se ve A LOS LADOS de la tarjeta (como en Figma: el color sigue a su
+ * derecha), no cortada por ella. Para eso el fondo gris de este bloque tiene que
  * empezar donde termina el hero, no donde empieza la tarjeta: ver `flow-root`
  * abajo. Lo que deba verse POR ENCIMA de la tarjeta va en la capa `foreground` de
  * `HeroCarouselComponent` (`z-20` contra el `z-10` de ella).
