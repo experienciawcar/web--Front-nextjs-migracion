@@ -35,10 +35,6 @@ const SLIDES: HeroSlide[] = [
     background: "bg-gray-light",
     tone: "light",
     mobileTone: "light",
-    // TEMPORAL: pedido a mano, quitar solo este slide de la rotación y de las
-    // rayas EN MOBILE (desktop no cambia, sigue con sus cuatro). Para
-    // revertirlo: borrar esta línea.
-    hiddenOnMobile: true,
     content: (
       <>
         <HeroSlideHomeComponent />

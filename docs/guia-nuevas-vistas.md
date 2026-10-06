@@ -789,3 +789,7 @@ Vende tu Carro (`docs/planes/vende-tu-carro.md`) se construyó sin Figma y sin c
 - **No leer `cookies()` en el layout ni en el navbar**: vuelve dinámicas todas las rutas y se pierde el ISR. El navbar usa `AccountLinkComponent` (cliente), que lee la cookie-pista `wcar_session` (solo el nombre).
 - Una vista que exija sesión: `const user = await getSessionUser(); if (!user) redirect(ROUTES.signIn + "?next=…")` (ver `app/perfil/page.tsx`). Las páginas de acceso llevan `robots: noindex`.
 - Google: el `credential` se verifica en el servidor (`google-token.ts`: firma vía `tokeninfo`, `aud` y correo verificado) antes de llamar a `/register/` + `/login-google/`.
+
+### Foto de Figma girada unos grados y espejada, en una ventana más angosta que el nodo (slide 1 mobile del Home, nodo 1306:4922)
+
+`figma_imagen.py` no cubre el giro libre (el nodo trae `relativeTransform` con ±0,0138 fuera de la diagonal). Se hornea con PIL: `Image.transform(..., Image.AFFINE)` con la inversa de `relativeTransform` (sumando el origen del marco padre) y se ajusta el color con un polinomio de grado 3 contra el export, sobre una región sin texto. Se verifica con la correlación contra el export (0,996, desvío 0). Se hornea la ventana de 768 de ancho (no solo los 393 del marco) para que en 394–767 se vea más escena y no un hueco. Alineación a la izquierda, como el marco. El degradado a `gray-light` va en CSS con las paradas del nodo (75,96 % → 97,6 % de su alto, mapeadas al marco).
