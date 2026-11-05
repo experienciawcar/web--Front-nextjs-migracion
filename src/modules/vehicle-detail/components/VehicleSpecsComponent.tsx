@@ -8,7 +8,6 @@ import iconMotor from "../assets/specs/icon-motor.svg";
 import iconTransmission from "../assets/specs/icon-transmision.svg";
 import type { VehicleDetail } from "../types/vehicle-detail";
 
-import CredirapidoBannerComponent from "./CredirapidoBannerComponent";
 
 type Spec = { label: string; value: string; icon: StaticImageData };
 
@@ -39,15 +38,13 @@ function toSpecs(vehicle: VehicleDetail): Spec[] {
 }
 
 /**
- * "Detalles del Vehículo": el título con su raya, el banner Credirápido a la derecha y, sobre un
- * panel gris, las seis tarjetas de datos (garantía, kilometraje, modelo, motor, transmisión y
- * combustible).
+ * "Detalles del Vehículo": el título con su raya y, sobre un panel gris, las seis tarjetas de
+ * datos (garantía, kilometraje, modelo, motor, transmisión y combustible).
  *
  * Figma 89:4207, en px del lienzo de 1440 con y=823 en el borde superior de la sección (panel
  * blanco de 198, luego un panel `gray-light` de 220 que acaba en y=1241): la raya de 77 x 4 en
- * y=893 y el título de 36/44 debajo ("Vehículo" en `orange` cursiva regular), el banner de 568 x
- * 120 en (730, 865) —alineado 18 px adentro del margen derecho—, y las tarjetas de 176 x 176 con
- * 8 de radio en y=1043, x=142 con 20 de separación (6 x 176 + 5 x 20 = 1156, o sea 18 px adentro
+ * y=893 y el título de 36/44 debajo ("Vehículo" en `orange` cursiva regular), y las tarjetas de
+ * 176 x 176 con 8 de radio en y=1043, x=142 con 20 de separación (6 x 176 + 5 x 20 = 1156, o sea 18 px adentro
  * de cada margen). Dentro de cada tarjeta: el ícono de 48 a 34 del borde, la etiqueta de 16 Bold
  * `gray-dark` (y+88) y el valor de 22 Bold (y+118), centrados.
  *
@@ -69,7 +66,7 @@ export default function VehicleSpecsComponent({
   return (
     <section aria-labelledby="detalles-title">
       <div className="bg-white">
-        <div className="container-wcar flex flex-col gap-8 pt-10 pb-10 xl:flex-row xl:items-start xl:justify-between xl:pt-[42px] xl:pb-9">
+        <div className="container-wcar pt-10 pb-10 xl:pt-[42px] xl:pb-9">
           <div className="reveal xl:pt-7">
             <span aria-hidden className="block h-1 w-[77px] bg-orange" />
             <h2
@@ -79,9 +76,6 @@ export default function VehicleSpecsComponent({
               Detalles del{" "}
               <span className="font-normal text-orange italic">Vehículo</span>
             </h2>
-          </div>
-          <div className="reveal xl:mr-[18px] xl:w-[568px]">
-            <CredirapidoBannerComponent />
           </div>
         </div>
       </div>
