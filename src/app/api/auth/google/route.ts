@@ -10,8 +10,8 @@ export async function POST(request: Request) {
     const body = await readJson<{ credential: string }>(request);
     if (typeof body.credential !== "string" || !body.credential) throw new AuthError("Solicitud no válida.");
 
-    const profile = await verifyGoogleCredential(body.credential);
-    const { token, user } = await loginWithGoogle(profile);
+    await verifyGoogleCredential(body.credential); // defensa extra: el backend también lo verifica
+    const { token, user } = await loginWithGoogle(body.credential);
     await createSession(token, user);
     return Response.json({ user: { name: user.name } });
   } catch (error) {

@@ -48,32 +48,34 @@ export async function verifyOtp(email: string, code: string): Promise<{ token: s
   return { token: data.token, user: toUser(data.user, email) };
 }
 
-/**
- * Inicia sesión con un correo que Google ya verificó (ver `google-token.ts`).
- * Si la cuenta no existe la crea primero: el backend actual no tiene un
- * endpoint de "iniciar o crear" y `/login-google/` responde 401 a un correo nuevo.
- *
- * TODO(backend): `/register/` exige teléfono y contraseña. Se manda una contraseña
- * aleatoria por cuenta (nadie la usa: el acceso es por OTP o Google) y el
- * teléfono de relleno que ya usaba el sitio anterior. Cuando exista
- * `POST /auth/google { credential }` (ver docs/CUENTA_DE_USUARIO_Y_LOGIN.md §10.2)
- * esto se reemplaza por una sola llamada con el credential.
- */
-export async function loginWithGoogle(profile: { email: string; name: string }): Promise<{ token: string; user: User }> {
-  let result = await post<LoginResponseDto>("/login-google/", { email: profile.email });
-  if (result.status === 401 || result.status === 404) {
-    await post("/register/", {
-      name: profile.name || profile.email.split("@")[0],
-      email: profile.email,
-      phone: "12345678",
-      password: `${crypto.randomUUID()}-Aa1!`,
-      role: "client",
-    });
-    result = await post<LoginResponseDto>("/login-google/", { email: profile.email });
-  }
-  if (result.status >= 500) throw new AuthError("El servicio no está disponible. Inténtalo en unos minutos.", 502);
-  if (result.status >= 400 || !result.data?.token) throw new AuthError("No pudimos iniciar sesión con Google.", 401);
-  return { token: result.data.token, user: toUser(result.data.user, profile.email) };
+/** Mensaje de error del backend (`error`, `message` o `detail`) o el de respaldo. */
+function backendMessage(data: unknown, fallback: string): string {
+  const d = (data ?? {}) as { error?: unknown; message?: unknown; detail?: unknown };
+  const msg = [d.error, d.message, d.detail].find((v) => typeof v === "string" && v);
+  return (msg as string | undefined) ?? fallback;
+}
+
+/** `POST /login/ { email, password }`. */
+export async function loginWithPassword(email: string, password: string): Promise<{ token: string; user: User }> {
+  const { status, data } = await post<LoginResponseDto>("/login/", { email, password });
+  if (status >= 500) throw new AuthError("El servicio no está disponible. Inténtalo en unos minutos.", 502);
+  if (status >= 400 || !data?.token) throw new AuthError(backendMessage(data, "Correo o contraseña incorrectos."), 401);
+  return { token: data.token, user: toUser(data.user, email) };
+}
+
+/** `POST /register-customer/`; quien llama inicia sesión después con `loginWithPassword`. */
+export async function registerCustomer(input: { name: string; email: string; phone: string; password: string }): Promise<void> {
+  const { status, data } = await post("/register-customer/", input);
+  if (status >= 500) throw new AuthError("El servicio no está disponible. Inténtalo en unos minutos.", 502);
+  if (status >= 400) throw new AuthError(backendMessage(data, "No pudimos crear la cuenta."), 400);
+}
+
+/** `POST /login-google/ { credential }`: el backend verifica el ID token con Google y crea la cuenta si no existe. */
+export async function loginWithGoogle(credential: string): Promise<{ token: string; user: User }> {
+  const { status, data } = await post<LoginResponseDto>("/login-google/", { credential });
+  if (status >= 500) throw new AuthError("El servicio no está disponible. Inténtalo en unos minutos.", 502);
+  if (status >= 400 || !data?.token) throw new AuthError("No pudimos iniciar sesión con Google.", 401);
+  return { token: data.token, user: toUser(data.user) };
 }
 
 /** `PATCH /user/update/`. Un 401 significa token vencido: quien llama cierra la sesión. */

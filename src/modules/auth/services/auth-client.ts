@@ -26,6 +26,9 @@ export function notifySessionChange(): void {
   window.dispatchEvent(new Event(SESSION_EVENT));
 }
 
+export const loginWithPasswordCall = (email: string, password: string) => call("/login", "POST", { email, password });
+export const registerCall = (input: { name: string; email: string; phone: string; password: string }) =>
+  call("/register", "POST", input);
 export const sendOtpCode = (email: string) => call("/otp/send", "POST", { email });
 export const verifyOtpCode = (email: string, code: string) => call("/otp/verify", "POST", { email, code });
 export const signInWithGoogleCredential = (credential: string) => call("/google", "POST", { credential });

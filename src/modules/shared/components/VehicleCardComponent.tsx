@@ -1,3 +1,4 @@
+import FavoriteButtonComponent from "@/modules/favorites/components/FavoriteButtonComponent";
 import Image, { type StaticImageData } from "next/image";
 
 import iconCity from "../assets/vehicle/icon-city.svg";
@@ -60,7 +61,7 @@ function InfoItem({
  * Diseño: el de la tarjeta del sitio anterior (wcar.co/compra-tu-carro), que
  * es el que pidió negocio con capturas:
  * - La etiqueta de estado va arriba a la izquierda de la foto y la garantía
- *   arriba a la derecha, ambas sobre la imagen. Sin corazón de favoritos.
+ *   arriba a la derecha, ambas sobre la imagen. Corazón de favoritos abajo a la derecha de la foto.
  * - Datos en cuadrícula de 2 columnas: año, kilometraje, transmisión y ciudad.
  * - Precio a la izquierda (con el de lista tachado debajo si hay descuento) y
  *   el botón VER dentro del margen, con esquinas opuestas redondeadas. No lleva cuota mensual ni "Envío a
@@ -120,6 +121,11 @@ export default function VehicleCardComponent({
             {tag.name}
           </span>
         )}
+
+        <FavoriteButtonComponent
+          vehicleId={vehicle.id}
+          className="absolute right-3 bottom-3 z-20 flex size-9 items-center justify-center rounded-full bg-white shadow"
+        />
 
         {warranty && (
           <WarrantyBadgeComponent

@@ -35,6 +35,8 @@ export const ROUTES = {
   signIn: "/iniciar-sesion",
   /** Cuenta del usuario (URL del sitio anterior). Exige sesión. */
   account: "/perfil",
+  /** Vehículos favoritos del usuario (URL del sitio anterior). Exige sesión. */
+  favorites: "/favoritos",
   /** Política de tratamiento de datos personales (URL del sitio anterior). */
   privacyPolicy: "/politica-de-privacidad",
   /** Términos y condiciones del comprador y del vendedor (URLs del sitio anterior). */

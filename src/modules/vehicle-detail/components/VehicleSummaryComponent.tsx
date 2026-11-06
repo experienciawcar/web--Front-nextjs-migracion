@@ -15,8 +15,8 @@ import { isUnavailable } from "../constants/tags";
 import type { VehicleDetail } from "../types/vehicle-detail";
 
 import VehicleExpertiseComponent from "./VehicleExpertiseComponent";
-import VehicleFavoriteComponent from "./VehicleFavoriteComponent";
 import VehicleShareComponent from "./VehicleShareComponent";
+import FavoriteButtonComponent from "@/modules/favorites/components/FavoriteButtonComponent";
 
 /**
  * Columna derecha de la ficha, tres tarjetas blancas de 8 de radio separadas 16: resumen,
@@ -35,8 +35,7 @@ import VehicleShareComponent from "./VehicleShareComponent";
  *
  * El ícono de IA (círculo con degradado y estrella, 1542:22590, esquina de la tarjeta) lleva a la
  * descripción de IA del acordeón (`#descripcion-ia`); el SVG está armado a mano (el export del nodo
- * trae el marco entero). El corazón de favoritos guarda en `localStorage` (no hay backend de
- * favoritos). Sin hacer, a propósito: "o desde $X /mes*", porque la API no trae la cuota.
+ * trae el marco entero). El corazón de favoritos usa el backend (`/api/favorites`). Sin hacer, a propósito: "o desde $X /mes*", porque la API no trae la cuota.
  * TODO(negocio): "SEPÁRALO AQUÍ" abría el pago (Wompi/ePayco); lleva a Contacto
  * (`docs/DETALLE_VEHICULO.md` §7.2-3). TODO: "Garantia de 6 meses" del diseño lleva errata; aquí
  * sale el texto del backend ("Garantía 6 meses").
@@ -145,7 +144,7 @@ export default function VehicleSummaryComponent({
             )}
           </p>
           <div className="flex items-center gap-4">
-            <VehicleFavoriteComponent vehicleId={vehicle.id} />
+            <FavoriteButtonComponent vehicleId={vehicle.id} />
             <VehicleShareComponent title={vehicle.name} />
           </div>
         </div>
