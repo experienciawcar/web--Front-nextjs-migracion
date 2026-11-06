@@ -2,8 +2,8 @@ import Image from "next/image";
 
 import iconClose from "../assets/footer/icon-close.svg";
 import iconPlus from "../assets/footer/icon-plus.svg";
-import { getTermsLinks } from "../services/terms";
 import { ROUTES } from "../constants/routes";
+import { getTermsLinks } from "../services/terms";
 import FooterHeadingComponent from "./FooterHeadingComponent";
 import FooterLinkListComponent, { type FooterLink } from "./FooterLinkListComponent";
 
@@ -26,18 +26,14 @@ const BUYER_TERMS_LINK: FooterLink = {
 
 /**
  * Desplegable nativo (<details>), sin JavaScript: el `name` los agrupa y el
- * navegador cierra el otro al abrir uno, que es lo que hacía el estado
- * `open` del sitio anterior. El ícono cambia de "+" a "×" con `group-open`.
- *
- * Diferencia con el sitio anterior: allí el ícono se salía por la derecha de
- * la línea divisoria (la línea medía 325px y la fila 350). Aquí la línea y la
- * fila miden lo mismo.
+ * navegador cierra el otro al abrir uno, como hacía el estado `open` del sitio
+ * anterior. El ícono pasa de "+" a "×" con `group-open`.
  */
 function TermsAccordion({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <details name="footer-terms" className="group border-b border-[#cdd6da]">
-      <summary className="flex cursor-pointer items-center justify-between gap-4 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
-        <span className="text-small font-medium text-gray-dark">{title}</span>
+    <details name="footer-terms" className="group border-t border-[#cdd6da] last:border-b">
+      <summary className="flex cursor-pointer items-center justify-between gap-3 py-4 pr-2.5 marker:content-none md:pr-0 [&::-webkit-details-marker]:hidden">
+        <span className="text-left text-small font-semibold text-gray-dark">{title}</span>
         <Image src={iconPlus} alt="" aria-hidden className="size-[14px] shrink-0 group-open:hidden" />
         <Image
           src={iconClose}
@@ -46,21 +42,18 @@ function TermsAccordion({ title, children }: { title: string; children: React.Re
           className="hidden size-[14px] shrink-0 group-open:block"
         />
       </summary>
-      <div className="pb-5">{children}</div>
+      <div className="pb-4">{children}</div>
     </details>
   );
 }
 
 /**
- * Columna "Términos y condiciones" del footer. Es asíncrona porque los
- * documentos de los desplegables vienen del backend (ver `getTermsLinks`).
+ * Tarjeta "Términos y condiciones". Es asíncrona porque los documentos de los
+ * desplegables vienen del backend (ver `getTermsLinks`). Los enlaces apuntan a
+ * `/<slug>/<id>`, la forma del sitio anterior (las sirve `app/[title]/[id]`).
  *
- * Los enlaces apuntan a `/<slug>/<id>`, la misma forma que usaba el sitio
- * anterior; las sirve `app/[title]/[id]/page.tsx`.
- *
- * Los dos desplegables repiten "Términos y condiciones comprador" porque así
- * estaba en el sitio anterior; parece un copia-pega, confirmar si en
- * "Campañas" debería ir.
+ * "Términos y condiciones comprador" va al final de ambos desplegables porque
+ * así estaba en el sitio anterior; parece un copia-pega, confirmar.
  */
 export default async function FooterTermsComponent() {
   const terms = await getTermsLinks();
@@ -69,20 +62,31 @@ export default async function FooterTermsComponent() {
     terms.filter((item) => item.isApp === isApp).map(({ title, href }) => ({ label: title, href }));
 
   return (
-    <div>
-      <FooterHeadingComponent>Términos y condiciones</FooterHeadingComponent>
+    <div className="rounded-lg bg-white py-11 pr-[21px] pl-[37px] max-[1100px]:col-span-full md:px-12 md:py-10">
+      <FooterHeadingComponent className="mb-4 text-[20px] [--bt:0px] [--bx:-15px] [--pl:0px] md:mb-3 md:[--bt:2px] md:[--bx:0px] md:[--pl:12px]">
+        Términos y condiciones
+      </FooterHeadingComponent>
 
-      <FooterLinkListComponent links={PRIVACY_LINKS} nofollow className="mt-[25px]" />
+      <FooterLinkListComponent
+        links={PRIVACY_LINKS}
+        nofollow
+        className="gap-4 md:pl-3"
+      />
 
-      <div className="mt-3 border-t border-[#cdd6da]">
+      <div className="mt-4 md:ml-3">
         <TermsAccordion title="Términos y condiciones Website wcar">
-          <FooterLinkListComponent links={[...toLinks(false), BUYER_TERMS_LINK]} nofollow />
+          <FooterLinkListComponent
+            links={[...toLinks(false), BUYER_TERMS_LINK]}
+            nofollow
+            className="gap-2.5"
+          />
         </TermsAccordion>
 
-        <TermsAccordion title="Términos y condiciones de Campañas de wcar">
+        <TermsAccordion title="Mas términos y condiciones">
           <FooterLinkListComponent
-            links={[...PRIVACY_LINKS, ...toLinks(true), BUYER_TERMS_LINK]}
+            links={[...toLinks(true), BUYER_TERMS_LINK]}
             nofollow
+            className="gap-2.5"
           />
         </TermsAccordion>
       </div>

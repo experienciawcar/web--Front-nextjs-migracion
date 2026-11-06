@@ -6,11 +6,10 @@ export type FooterLink = {
 };
 
 /**
- * Lista vertical de enlaces del footer (14px, gris, 16px entre renglones).
- *
- * `AppLinkComponent` decide si el enlace es interno o externo (por ejemplo
- * "Seguros" apunta a otro dominio). `nofollow` se usa en los documentos
- * legales, igual que en el sitio anterior.
+ * Lista vertical de enlaces del footer (14px, gris). `gap` y sangría los pone
+ * quien la usa. `AppLinkComponent` decide si el enlace es interno o externo
+ * (por ejemplo "Seguros" apunta a otro dominio); `nofollow` va en los
+ * documentos legales, igual que en el sitio anterior.
  */
 export default function FooterLinkListComponent({
   links,
@@ -22,12 +21,9 @@ export default function FooterLinkListComponent({
   className?: string;
 }) {
   return (
-    <ul className={`flex flex-col gap-4 ${className}`}>
+    <ul className={`flex flex-col ${className}`}>
       {links.map((link) => (
         <li key={link.href}>
-          {/* `block` es lo que hace que cada renglón mida 22px y no 24: un <a>
-              en línea hereda el interlineado del <li> (16px x 1.5) y separa 2px
-              de más. */}
           <AppLinkComponent
             href={link.href}
             rel={nofollow ? "nofollow" : undefined}

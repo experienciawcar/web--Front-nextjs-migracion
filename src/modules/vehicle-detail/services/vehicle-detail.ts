@@ -14,6 +14,7 @@ import type {
 
 import {
   CHARACTERISTIC_ICONS,
+  CHARACTERISTIC_EXTRA_ORDER,
   CHARACTERISTIC_ITEMS,
   EQUIPMENT_ITEMS,
   EQUIPMENT_ORDER,
@@ -243,10 +244,14 @@ function toCharacteristics(
     },
     {
       label: "Tracción",
-      value: isMotorcycle ? null : traction,
+      value: values.get(57) ?? (isMotorcycle ? null : traction),
       icon: CHARACTERISTIC_ICONS.traction,
     },
   ];
+  for (const item of CHARACTERISTIC_EXTRA_ORDER) {
+    const { label, icon } = CHARACTERISTIC_ITEMS[item];
+    candidates.push({ label, value: values.get(item), icon });
+  }
   return candidates.flatMap((c) =>
     c.value ? [{ label: c.label, value: c.value, icon: c.icon }] : [],
   );
@@ -285,8 +290,8 @@ export function toVehicleDetail(
   if (
     !dto.car?.trim() ||
     listPrice === 0 ||
-    images.length === 0 ||
-    dto.active === false
+    images.length === 0
+    // TODO: validación de "inactivo" (`dto.active === false`) quitada temporalmente; restaurar.
   )
     return null;
 

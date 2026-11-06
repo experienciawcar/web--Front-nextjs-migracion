@@ -36,6 +36,16 @@ import iconTipoVehiculo from "../assets/features/tipo-vehiculo.webp";
 import iconTraccion from "../assets/features/traccion.webp";
 import iconTurbo from "../assets/features/turbo.webp";
 import iconUsb from "../assets/features/usb.webp";
+import iconSuspensionDelantera from "../assets/features/suspension-delantera.svg";
+import iconSuspensionTrasera from "../assets/features/suspension-trasera.svg";
+import iconControlTraccion from "../assets/features/control-traccion.svg";
+import iconPantalla from "../assets/features/pantalla.svg";
+import iconModosConduccion from "../assets/features/modos-conduccion.svg";
+import iconSistemaAbs from "../assets/features/sistema-abs.svg";
+import iconIluminacion from "../assets/features/iluminacion.svg";
+import iconBateria from "../assets/features/bateria.svg";
+import iconAsistenciasConduccion from "../assets/features/asistencias-conduccion.svg";
+import iconSensores from "../assets/features/sensores.svg";
 
 export type FeatureDefinition = {
   label: string;
@@ -77,15 +87,24 @@ export const CHARACTERISTIC_ITEMS: Record<number, FeatureDefinition> = {
   43: { label: "Cilindraje", icon: iconCilindraje },
   44: { label: "Tipo de combustible", icon: iconCombustible },
   45: { label: "Tipo de caja", icon: iconCaja },
+  48: { label: "Suspensión delantera", icon: iconSuspensionDelantera },
+  49: { label: "Suspensión trasera", icon: iconSuspensionTrasera },
+  55: { label: "Capacidad de batería", icon: iconBateria },
+  56: { label: "Autonomía", icon: iconBateria },
 };
+/** Orden de los extras de "Características" que salen de `description_list`. */
+export const CHARACTERISTIC_EXTRA_ORDER = [48, 49, 55, 56];
 
 /** Grupo 3, "Seguridad". */
 export const SAFETY_ITEMS: Record<number, FeatureDefinition> = {
   9: { label: "Airbags", icon: iconAirbags },
   10: { label: "Frenos ABS", icon: iconFrenosAbs },
   11: { label: "Calificación seguridad", icon: iconCalificacionSeguridad },
+  50: { label: "Control de tracción", icon: iconControlTraccion },
+  58: { label: "Asistencias a la conducción", icon: iconAsistenciasConduccion },
+  59: { label: "Sensores", icon: iconSensores },
 };
-export const SAFETY_ORDER = [9, 10, 11];
+export const SAFETY_ORDER = [9, 10, 11, 50, 58, 59];
 
 /** Grupo 4, "Accesorios y equipamiento". */
 export const EQUIPMENT_ITEMS: Record<number, FeatureDefinition> = {
@@ -116,6 +135,11 @@ export const EQUIPMENT_ITEMS: Record<number, FeatureDefinition> = {
   36: { label: "Tipo de dirección", icon: iconDireccion },
   37: { label: "Comandos en el timón", icon: iconTimonAjustable },
   38: { label: "Kit de carretera", icon: iconKitCarretera },
+  51: { label: "Pantalla", icon: iconPantalla },
+  52: { label: "Modos de conducción", icon: iconModosConduccion },
+  53: { label: "Sistema ABS", icon: iconSistemaAbs },
+  54: { label: "Iluminación", icon: iconIluminacion },
+  60: { label: "Climatización", icon: iconAireAcondicionado },
 };
 export const EQUIPMENT_ORDER = Object.keys(EQUIPMENT_ITEMS).map(Number);
 
