@@ -1,27 +1,31 @@
 import Image, { type StaticImageData } from "next/image";
 
-import iconFuel from "../assets/specs/icon-combustible.webp";
-import iconWarranty from "../assets/specs/icon-garantia.svg";
-import iconMileage from "../assets/specs/icon-kilometraje.svg";
-import iconYear from "../assets/specs/icon-modelo.svg";
-import iconMotor from "../assets/specs/icon-motor.svg";
-import iconTransmission from "../assets/specs/icon-transmision.svg";
+import iconYear from "../assets/specs/d-anio.svg";
+import iconFuel from "../assets/specs/d-combustible.svg";
+import iconMileage from "../assets/specs/d-km.svg";
+import iconModel from "../assets/specs/d-modelo.svg";
+import iconMotor from "../assets/specs/d-motor.svg";
+import iconStock from "../assets/specs/d-stock.svg";
+import iconTransmission from "../assets/specs/d-transmision.svg";
+import iconLocation from "../assets/specs/d-ubicacion.svg";
 import type { VehicleDetail } from "../types/vehicle-detail";
 
-
-type Spec = { label: string; value: string; icon: StaticImageData };
+type Spec = {
+  label: string;
+  value: string;
+  icon: StaticImageData;
+  note?: string;
+};
 
 function toSpecs(vehicle: VehicleDetail): Spec[] {
+  const year = vehicle.year ? String(vehicle.year) : null;
   const specs: (Spec | null)[] = [
-    vehicle.warranty
-      ? { label: "Garantia", value: vehicle.warranty.short, icon: iconWarranty }
-      : null,
+    year ? { label: "Año", value: year, icon: iconYear } : null,
     vehicle.mileage
       ? { label: "Kilometraje", value: vehicle.mileage, icon: iconMileage }
       : null,
-    vehicle.year
-      ? { label: "Modelo", value: String(vehicle.year), icon: iconYear }
-      : null,
+    // TODO: el backend solo trae `year`; el diseño muestra "Año" y "Modelo" por separado.
+    year ? { label: "Modelo", value: year, icon: iconModel } : null,
     vehicle.engine
       ? { label: "Motor", value: vehicle.engine, icon: iconMotor }
       : null,
@@ -33,78 +37,67 @@ function toSpecs(vehicle: VehicleDetail): Spec[] {
     vehicle.fuel
       ? { label: "Combustible", value: vehicle.fuel, icon: iconFuel }
       : null,
+    { label: "Stock ID", value: vehicle.stockId, icon: iconStock },
+    {
+      label: "Ubicación",
+      value: vehicle.city,
+      icon: iconLocation,
+      // TODO: confirmar con diseño (erratas reproducidas: "Envió", "pais").
+      note: "Envió por todo el pais",
+    },
   ];
   return specs.filter((spec): spec is Spec => spec !== null);
 }
 
 /**
- * "Detalles del Vehículo": el título con su raya y, sobre un panel gris, las seis tarjetas de
- * datos (garantía, kilometraje, modelo, motor, transmisión y combustible).
+ * Datos del vehículo bajo la galería: ocho tarjetas blancas de 8 de radio en cuatro columnas
+ * (Año, Kilometraje, Modelo, Motor, Transmisión, Combustible, Stock ID y Ubicación).
  *
- * Figma 89:4207, en px del lienzo de 1440 con y=823 en el borde superior de la sección (panel
- * blanco de 198, luego un panel `gray-light` de 220 que acaba en y=1241): la raya de 77 x 4 en
- * y=893 y el título de 36/44 debajo ("Vehículo" en `orange` cursiva regular), y las tarjetas de
- * 176 x 176 con 8 de radio en y=1043, x=142 con 20 de separación (6 x 176 + 5 x 20 = 1156, o sea 18 px adentro
- * de cada margen). Dentro de cada tarjeta: el ícono de 48 a 34 del borde, la etiqueta de 16 Bold
- * `gray-dark` (y+88) y el valor de 22 Bold (y+118), centrados.
+ * Figma 1542:22997 (marco "Página carro -desktop 1451", 1542:22539): cuadrícula de 1205 x 220 en
+ * x=124, y=858, tarjetas de 287 x 98 con 19 de separación horizontal y 24 vertical; ícono de 48
+ * (opacidad 80 %), etiqueta de 16 Bold `gray` y valor de 18 SemiBold. Reemplaza al bloque
+ * "Detalles del Vehículo" del diseño 89:4207.
  *
- * Una tarjeta sin dato (sin motor, sin garantía) no se pinta: la cuadrícula se reparte entre las
- * que hay. Mobile (no hay diseño de esta tarjeta): dos columnas.
- *
- * TODO: erratas del diseño reproducidas: "Garantia" sin tilde en la etiqueta de la primera
- * tarjeta ("Transmisión" y "Kilometraje" sí la llevan). Y el diseño muestra "Mecanica" y
- * "11000 Km" como ejemplo; aquí sale "Mecánica" (con tilde, como el resto del sitio) y el
- * kilometraje con puntos de miles.
+ * Una tarjeta sin dato (sin motor, sin combustible) no se pinta. Mobile (sin diseño): una columna, dos desde 560. La nota de Ubicación va en su propia línea (en el diseño sigue a la ciudad y desborda la tarjeta).
  */
 export default function VehicleSpecsComponent({
   vehicle,
 }: {
   vehicle: VehicleDetail;
 }) {
-  const specs = toSpecs(vehicle);
-
   return (
-    <section aria-labelledby="detalles-title">
-      <div className="bg-white">
-        <div className="container-wcar pt-10 pb-10 xl:pt-[42px] xl:pb-9">
-          <div className="reveal xl:pt-7">
-            <span aria-hidden className="block h-1 w-[77px] bg-orange" />
-            <h2
-              id="detalles-title"
-              className="mt-4 text-[28px] leading-9 font-bold text-dark-gray xl:text-subheadline-1 xl:leading-11"
+    <section aria-label="Detalles del vehículo" className="bg-gray-light">
+      <div className="container-wcar pb-10 xl:pb-[49px]">
+        <ul className="reveal grid grid-cols-1 gap-3 min-[560px]:grid-cols-2 xl:grid-cols-4 xl:gap-x-[19px] xl:gap-y-6">
+          {toSpecs(vehicle).map((spec) => (
+            <li
+              key={spec.label}
+              className="flex min-w-0 items-center gap-3 rounded-lg bg-white px-4 py-5 xl:gap-4 xl:py-6 xl:pr-4 xl:pl-6"
             >
-              Detalles del{" "}
-              <span className="font-normal text-orange italic">Vehículo</span>
-            </h2>
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-gray-light">
-        <div className="container-wcar py-8 xl:py-[22px]">
-          <ul className="reveal grid grid-cols-2 gap-3 sm:grid-cols-3 xl:mx-[18px] xl:grid-cols-[repeat(auto-fit,minmax(0,176px))] xl:justify-start xl:gap-5">
-            {specs.map((spec) => (
-              <li
-                key={spec.label}
-                className="flex flex-col items-center rounded-lg bg-white px-2 pt-[34px] pb-[34px] text-center xl:h-[176px]"
-              >
-                <Image
-                  src={spec.icon}
-                  alt=""
-                  aria-hidden
-                  className="size-12 object-contain"
-                />
-                <p className="mt-[6px] text-body leading-6 font-bold text-gray-dark">
+              <Image
+                src={spec.icon}
+                alt=""
+                aria-hidden
+                className="size-10 shrink-0 opacity-80 xl:size-12"
+              />
+              <div className="min-w-0">
+                <p className="text-body leading-6 font-bold text-gray-dark">
                   {spec.label}
                 </p>
-                <p className="mt-[6px] text-[20px] leading-6 font-bold text-dark-gray xl:text-[22px]">
+                <p className="text-[18px] leading-6 font-semibold break-words text-dark-gray">
                   {spec.value}
+                  {spec.note && (
+                    <span className="block text-[12px] leading-4 font-bold tracking-[-0.2px] text-[#50a628]">
+                      {spec.note}
+                    </span>
+                  )}
                 </p>
-              </li>
-            ))}
-          </ul>
-        </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
 }
+

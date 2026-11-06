@@ -326,7 +326,11 @@ export default function VehicleFeaturesComponent({
           Decripción GPT
         </>
       ),
-      body: <VehicleAiDescriptionComponent text={vehicle.aiDescription} />,
+      body: (
+        <div id="descripcion-ia">
+          <VehicleAiDescriptionComponent text={vehicle.aiDescription} />
+        </div>
+      ),
     });
   }
 

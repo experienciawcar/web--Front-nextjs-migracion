@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 import arrowCircle from "@/modules/shared/assets/icons/arrow-circle.svg";
 import ButtonComponent from "@/modules/shared/components/ButtonComponent";
 import { isValidEmail, isValidPersonName, isValidPhone, YEAR_OPTIONS } from "@/modules/quote/constants/validation";
-import { getBrands } from "@/modules/quote/services/brands";
-import type { Brand } from "@/modules/quote/types/brand";
+import { getBrands } from "@/modules/catalog/services/brands";
+import type { Brand } from "@/modules/catalog/types/brand";
 
 import { createHeroSellQuote } from "../services/sell-quote";
 
-import HeroSellBrandSelectComponent from "./HeroSellBrandSelectComponent";
+import HeroSellPickerComponent from "./HeroSellPickerComponent";
 import HeroSellSuccessModalComponent from "./HeroSellSuccessModalComponent";
 
 const FIELD =
@@ -76,6 +76,7 @@ export default function HeroSellPanelComponent() {
   const [brands, setBrands] = useState<Brand[]>([]);
   const [car, setCar] = useState({ year: "", brandId: "", model: "", km: "" });
   const [owner, setOwner] = useState({ name: "", email: "", phone: "" });
+  const [showOwner, setShowOwner] = useState(false);
   const [touched, setTouched] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
@@ -85,6 +86,8 @@ export default function HeroSellPanelComponent() {
     getBrands().then(setBrands);
   }, []);
 
+  // El valor del modelo es su nombre (va como `reference`), por eso id = name.
+  const models = (brands.find((b) => b.id === car.brandId)?.models ?? []).map((m) => ({ id: m.name, name: m.name }));
   const carReady = Boolean(car.year && car.brandId && car.model.trim() && Number(car.km) > 0);
   const ownerOk = {
     name: isValidPersonName(owner.name),
@@ -95,6 +98,8 @@ export default function HeroSellPanelComponent() {
 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
+    // Primer clic: con el carro completo solo despliega los datos del propietario.
+    if (!showOwner) return carReady ? setShowOwner(true) : undefined;
     setTouched(true);
     if (!valid || sending) return;
     setSending(true);
@@ -112,6 +117,7 @@ export default function HeroSellPanelComponent() {
     setCar({ year: "", brandId: "", model: "", km: "" });
     setOwner({ name: "", email: "", phone: "" });
     setTouched(false);
+    setShowOwner(false);
   }
 
   return (
@@ -123,8 +129,8 @@ export default function HeroSellPanelComponent() {
 
       <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-5">
         <Select label="Año" value={car.year} onChange={(year) => setCar({ ...car, year })} options={YEAR_OPTIONS.map((y) => ({ value: String(y), label: String(y) }))} />
-        <HeroSellBrandSelectComponent brands={brands} value={car.brandId} onChange={(brandId) => setCar({ ...car, brandId })} className={FIELD} />
-        <input aria-label="Modelo" placeholder="Modelo" value={car.model} onChange={(e) => setCar({ ...car, model: e.target.value })} className={FIELD} />
+        <HeroSellPickerComponent label="Marca" options={brands} logoBase="/api/marca-logo" value={car.brandId} onChange={(brandId) => setCar({ ...car, brandId, model: "" })} className={FIELD} />
+        <HeroSellPickerComponent label="Modelo" options={models} disabled={!car.brandId} value={car.model} onChange={(model) => setCar({ ...car, model })} className={FIELD} />
         <input
           aria-label="Kilometraje"
           placeholder="kilometraje"
@@ -135,24 +141,30 @@ export default function HeroSellPanelComponent() {
         />
       </div>
 
-      {carReady && (
-        <div className="mt-6">
-          <h4 className="text-body font-bold text-dark-gray">Datos de propietario</h4>
-          <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
-            <Owner id="sell-name" label="Nombre" value={owner.name} onChange={(name) => setOwner({ ...owner, name })} error={touched && !ownerOk.name} />
-            <Owner id="sell-email" label="Gmail" type="email" value={owner.email} onChange={(email) => setOwner({ ...owner, email })} error={touched && !ownerOk.email} />
-            <Owner id="sell-phone" label="Teléfono" type="tel" value={owner.phone} onChange={(phone) => setOwner({ ...owner, phone })} error={touched && !ownerOk.phone} />
+      {/* grid 0fr -> 1fr anima el alto real sin medirlo; `inert` saca del tab los campos ocultos */}
+      <div
+        inert={!showOwner}
+        className={`grid transition-[grid-template-rows,opacity] duration-500 ease-out motion-reduce:transition-none ${showOwner ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+      >
+        <div className="overflow-hidden">
+          <div className="pt-6">
+            <h4 className="text-body font-bold text-dark-gray">Datos de propietario</h4>
+            <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
+              <Owner id="sell-name" label="Nombre" value={owner.name} onChange={(name) => setOwner({ ...owner, name })} error={touched && !ownerOk.name} />
+              <Owner id="sell-email" label="Gmail" type="email" value={owner.email} onChange={(email) => setOwner({ ...owner, email })} error={touched && !ownerOk.email} />
+              <Owner id="sell-phone" label="Teléfono" type="tel" value={owner.phone} onChange={(phone) => setOwner({ ...owner, phone })} error={touched && !ownerOk.phone} />
+            </div>
           </div>
         </div>
-      )}
+      </div>
 
       {error && <p role="alert" className="mt-4 text-small text-[#ed3f3f]">{error}</p>}
 
       <ButtonComponent
         type="submit"
         icon={arrowCircle}
-        disabled={!valid || sending}
-        className={`mt-5 w-full justify-center! ${valid ? "" : "bg-gray! text-dark-gray! opacity-100!"}`}
+        disabled={!(showOwner ? valid : carReady) || sending}
+        className={`mt-5 w-full justify-center! ${(showOwner ? valid : carReady) ? "" : "bg-gray! text-dark-gray! opacity-100!"}`}
       >
         {sending ? "Enviando…" : "Cotizar ahora"}
       </ButtonComponent>

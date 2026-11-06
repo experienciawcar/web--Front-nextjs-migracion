@@ -13,12 +13,11 @@ import VehicleTopComponent from "./VehicleTopComponent";
  * resumen, "Detalles del Vehículo", "Características del vehículo" con el acordeón y la
  * evaluación, "Financia tu Vehículo" y "Vehículos relacionados".
  *
- * Diseño: Figma "Wcar Website - 2026", página "Compra tu carro / Detalles del vehículo", marco
- * "Página carro -desktop 1449" (89:4207, 1440 x 4684) y su mobile "Página carro -mobile 405"
- * (89:4840, 393 x 6017). Ojo: en la misma página hay otra versión más nueva (238:4492, mobile
- * 252:7188) con favoritos, el botón "Financiar", "¿Tienes vehículo? Úsalo de cuota inicial" y seis
- * datos más; se hizo la 89:4207 porque es la que se pasó como referencia. Plan y registro:
- * `docs/planes/detalle-vehiculo.md`.
+ * Diseño: Figma "Wcar Website - 2026", marco "Página carro -desktop 1451" (1542:22539, 1440 x 4684).
+ * Reemplaza a la versión 89:4207: tarjeta de resumen nueva, ocho datos bajo la galería (sin el
+ * bloque "Detalles del Vehículo") y "¿Tienes vehículo?". Las secciones de más abajo siguen
+ * tal como se hicieron con 89:4207. Mobile: sin marco nuevo, se adaptó el de 89:4840. Plan y
+ * registro: `docs/planes/detalle-vehiculo.md`.
  *
  * Datos: `GET /cars/{id}/` (todo el vehículo, con `description_list`) y
  * `GET /cars-related/{id}/` (este, desde el navegador: tarda ~24 s, ver `RelatedVehiclesLoaderComponent`). Comportamiento del sitio anterior que se conserva o se cambia:

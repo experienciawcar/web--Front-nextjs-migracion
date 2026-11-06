@@ -23,25 +23,26 @@ export default function HeroSellSuccessModalComponent({ open, onClose }: { open:
       ref={ref}
       onClose={onClose}
       aria-labelledby="sell-success-title"
-      className="m-auto w-[min(304px,calc(100%-32px))] rounded-lg bg-white p-0 shadow-xl backdrop:bg-black/50 md:w-[304px]"
+      className="m-auto w-[min(492px,calc(100%-32px))] rounded-2xl bg-white p-0 shadow-xl backdrop:bg-black/50"
     >
-      <div className="relative flex flex-col items-center px-6 pt-14 pb-10 text-center">
+      {/* Figma 1542:22183: 492 x 400; logo a 59, texto a 137, botón de 335 a 53 del fondo. */}
+      <div className="relative flex flex-col items-center px-6 pt-[59px] pb-[53px] text-center">
         <button
           type="button"
           aria-label="Cerrar"
           onClick={onClose}
-          className="absolute top-4 right-4 size-6 cursor-pointer text-lg leading-none text-dark-gray"
+          className="absolute top-6 right-6 size-6 cursor-pointer text-2xl leading-none text-dark-gray"
         >
           ×
         </button>
         <Image src={logoWcar} alt="wcar" className="h-8 w-auto" />
-        <h2 id="sell-success-title" className="mt-9 text-body leading-6 font-bold text-dark-gray">
+        <h2 id="sell-success-title" className="mt-[46px] max-w-[366px] text-[22px] leading-[1.25] font-bold text-dark-gray">
           Le agradecemos su tiempo,
           <br />
-          <span className="font-normal italic">en un momento un asesor se pondrá en contacto con usted</span>
+          <span className="font-medium italic">en un momento un asesor se pondrá en contacto con usted</span>
         </h2>
-        <p className="mt-5 text-caption text-gray-dark">Le agradecemos su paciencia</p>
-        <ButtonComponent icon={arrowCircle} onClick={onClose} className="mt-8 w-full justify-center!">
+        <p className="mt-4 text-small font-medium text-gray-dark">Le agradecemos su paciencia</p>
+        <ButtonComponent icon={arrowCircle} onClick={onClose} className="mt-12 h-[50px]! w-full max-w-[335px] justify-center!">
           Continuar
         </ButtonComponent>
       </div>

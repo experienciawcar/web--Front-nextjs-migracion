@@ -50,6 +50,14 @@ export type VehicleDto = {
   warranty_type?: string | null;
   type_warranty?: string | null;
   garantie7Day?: boolean | null;
+  /**
+   * Plan de garantía (campo nuevo del backend, verificado 2026-11-06 en GET /v2/cars/{id}/ y POST
+   * /v2/filter-cars/): `{ id: 1, name: "Garantía de fábrica" }` o `{ id: 2, name: "Garantía de 6
+   * meses" }`; `null` sin plan. Manda sobre `warranty`/`warranty_type`, que ya vienen inconsistentes
+   * (plan sin `warranty: true`, `"on"` como cobertura).
+   */
+  warranty_plan_car?: { id: number; name: string; description?: string | null } | null;
+  warranty_plan?: number | null;
   /** Personas que han visto el vehículo. */
   quantityPersons?: number | null;
   image_first?: string | null;

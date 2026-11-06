@@ -1,70 +1,45 @@
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 
 import arrowCircle from "@/modules/shared/assets/icons/arrow-circle.svg";
 import ButtonComponent from "@/modules/shared/components/ButtonComponent";
 import WarrantyBadgeComponent from "@/modules/shared/components/WarrantyBadgeComponent";
 import { ROUTES } from "@/modules/shared/constants/routes";
 
-import iconFinancing from "../assets/summary/icon-financiacion.svg";
-import iconHappiness from "../assets/summary/icon-garantia-vehiculo.svg";
-import iconViews from "../assets/summary/icon-visualizaciones.svg";
-import iconStopwatch from "../assets/summary/icon-cronometro.svg";
-import iconHappinessWarranty from "../assets/summary/icon-felicidad.svg";
-import iconFairPrice from "../assets/summary/icon-precio-justo.svg";
-import iconCity from "../assets/specs/icon-ubicacion.svg";
-import iconMileage from "../assets/specs/icon-kilometraje.svg";
-import iconTransmission from "../assets/specs/icon-transmision.svg";
-import iconYear from "../assets/specs/icon-modelo.svg";
+import iconCar from "../assets/summary/n-auto.svg";
+import iconExchange from "../assets/summary/n-cambio.svg";
+import iconMoney from "../assets/summary/n-dinero.svg";
+import iconMedal from "../assets/summary/n-medalla.svg";
+import iconAi from "../assets/summary/icono-ia.svg";
+import iconEye from "../assets/summary/n-ojo.svg";
 import { isUnavailable } from "../constants/tags";
 import type { VehicleDetail } from "../types/vehicle-detail";
 
 import VehicleExpertiseComponent from "./VehicleExpertiseComponent";
+import VehicleFavoriteComponent from "./VehicleFavoriteComponent";
 import VehicleShareComponent from "./VehicleShareComponent";
 
-function InfoItem({
-  icon,
-  children,
-}: {
-  icon: typeof iconCity;
-  children: React.ReactNode;
-}) {
-  return (
-    <li className="flex min-w-0 items-center gap-2">
-      <Image src={icon} alt="" aria-hidden className="size-6 shrink-0" />
-      <span className="truncate">{children}</span>
-    </li>
-  );
-}
-
 /**
- * Tarjeta de resumen de la ficha (a la derecha de la galería): insignia de garantía y compartir,
- * el nombre (el `<h1>` de la página), año, kilometraje, transmisión y ciudad, la línea
- * "tipo / nombre año", el Stock ID, el precio, los dos botones y las tres viñetas de valor.
+ * Columna derecha de la ficha, tres tarjetas blancas de 8 de radio separadas 16: resumen,
+ * "¿Tienes vehículo?" y las viñetas de valor.
  *
- * Figma 89:4207, en px del lienzo de 1440 con y=213 en el borde superior de la tarjeta (381 de
- * ancho, 8 de radio, blanca, 32 de relleno): la insignia (y=245, alto 30), el nombre de 24/44
- * Bold (y=286; aquí a 24/32 y no a 44, para que un nombre de dos renglones no crezca la tarjeta), dos filas de datos de 12 Medium con íconos de 20 (y=337 y 367, segunda
- * columna a 116), la línea de tipo de 14 Medium (y=413), el Stock ID de 16 Bold (y=445), el
- * precio de 24 Bold (y=480), "VER PERITAJE" cian (y=542) y "SEPÁRALO AQUÍ" naranja
- * (y=591), con el `ButtonComponent` tal como se usa en el resto del sitio (el diseño los dibuja de 32 de alto y con un "+"; "Sepáralo aquí" lleva la flecha en círculo como los demás), y las viñetas desde y=644 (339 x 131:
- * en Figma son una imagen; aquí se dibujan con tres filas de ~44 de alto y separadores).
- * Mobile (89:4840): la tarjeta va bajo la galería con el nombre a 22/30 y los botones lado a lado
- * de 40 de alto.
+ * Figma 1542:22565 (marco "Página carro -desktop 1451", 1542:22539), tarjeta de 381: insignia de
+ * garantía (verde, 12 Medium), nombre 18/26 Bold (el `<h1>`), línea "tipo / nombre año" 12/16
+ * `gray-dark`, raya, precio 32/44 Bold, "SEPÁRALO AQUÍ" de ancho completo, "VER PERITAJE" y
+ * "FINANCIAR" lado a lado, raya, y abajo visitas (ojo + número) y compartir. Los botones usan el
+ * `ButtonComponent` del sitio (el diseño los dibuja de 32 de alto).
  *
  * Reglas del sitio anterior (`docs/DETALLE_VEHICULO.md` §4.1): el precio se oculta y "SEPÁRALO
- * AQUÍ" no sale si la etiqueta es "Reservado" (y el botón tampoco si es "Vendido"); con
- * descuento se tacha el precio de lista debajo del que se cobra; la viñeta de garantía solo sale
- * si hay garantía y la de "Garantía de felicidad" si el vehículo la trae.
+ * AQUÍ" no sale si la etiqueta es "Reservado" (y el botón tampoco si es "Vendido"); con descuento
+ * se tacha el precio de lista; la viñeta de garantía solo sale si hay garantía y la de los 7
+ * días si el vehículo trae la garantía de felicidad.
  *
- * TODO(negocio): "SEPÁRALO AQUÍ" abría el pago (Wompi o ePayco, monto libre entre $2.000.000 y el
- * precio; `ModalAmount`). Ese flujo firma el pago en el navegador con una llave de integridad
- * incrustada y define el monto en el cliente (`docs/DETALLE_VEHICULO.md` §7.2-3): no se copió.
- * Mientras tanto lleva a Contacto.
- * Ajuste pedido por el usuario con una captura del sitio anterior: textos más grandes, compartir y
- * el contador de visitas (`quantityPersons`, sin el +9 que le sumaba el sitio anterior) arriba a la
- * izquierda con la insignia a la derecha, "Sepáralo aquí" antes de "Ver peritaje" y cinco viñetas
- * (con "Financia hasta $15 millones en 3 minutos" y "Garantía de felicidad"). Esto pisa las medidas
- * de Figma de arriba, que ya no rigen en esta tarjeta.
+ * El ícono de IA (círculo con degradado y estrella, 1542:22590, esquina de la tarjeta) lleva a la
+ * descripción de IA del acordeón (`#descripcion-ia`); el SVG está armado a mano (el export del nodo
+ * trae el marco entero). El corazón de favoritos guarda en `localStorage` (no hay backend de
+ * favoritos). Sin hacer, a propósito: "o desde $X /mes*", porque la API no trae la cuota.
+ * TODO(negocio): "SEPÁRALO AQUÍ" abría el pago (Wompi/ePayco); lleva a Contacto
+ * (`docs/DETALLE_VEHICULO.md` §7.2-3). TODO: "Garantia de 6 meses" del diseño lleva errata; aquí
+ * sale el texto del backend ("Garantía 6 meses").
  */
 export default function VehicleSummaryComponent({
   vehicle,
@@ -81,108 +56,127 @@ export default function VehicleSummaryComponent({
     .join(" / ");
 
   return (
-    <div className="flex flex-col rounded-none bg-white px-6 py-6 xl:px-8 xl:py-8 xl:rounded-lg">
-      <div className="flex items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <VehicleShareComponent title={vehicle.name} />
-          {vehicle.viewers > 0 && (
-            <p className="flex items-center gap-1 text-body leading-6 font-medium text-gray-dark">
-              <Image
-                src={iconViews}
-                alt=""
-                aria-hidden
-                className="size-6 shrink-0"
-              />
-              <span className="sr-only">
-                Personas que han visto este vehículo:{" "}
-              </span>
-              {vehicle.viewers}
-            </p>
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 bg-white px-6 py-4 xl:rounded-lg xl:pl-[25px]">
+        <div className="flex items-start justify-between gap-4">
+          {vehicle.warranty ? (
+            <WarrantyBadgeComponent
+              label={vehicle.warranty.label}
+              tone={vehicle.warranty.tone}
+            />
+          ) : (
+            <span />
+          )}
+          {/* Lleva a la descripción de IA del acordeón si el vehículo la tiene (el diseño no dice qué abre). */}
+          {vehicle.aiDescription ? (
+            <a href="#descripcion-ia" aria-label="Ver la descripción generada por IA">
+              <Image src={iconAi} alt="" aria-hidden className="size-8 shrink-0" />
+            </a>
+          ) : (
+            <Image src={iconAi} alt="" aria-hidden className="size-8 shrink-0" />
           )}
         </div>
-        {vehicle.warranty && (
-          <WarrantyBadgeComponent
-            label={vehicle.warranty.label}
-            tone={vehicle.warranty.tone}
-            className="h-[38px]"
-          />
-        )}
-      </div>
 
-      <h1 className="mt-5 text-[28px] leading-9 font-bold text-dark-gray xl:text-[30px]">
-        {vehicle.name}
-      </h1>
-
-      <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-small leading-6 font-medium text-gray">
-        {vehicle.year && <InfoItem icon={iconYear}>{vehicle.year}</InfoItem>}
-        {vehicle.mileage && (
-          <InfoItem icon={iconMileage}>{vehicle.mileage}</InfoItem>
-        )}
-        <InfoItem icon={iconTransmission}>{vehicle.transmission}</InfoItem>
-        <InfoItem icon={iconCity}>{vehicle.city}</InfoItem>
-      </ul>
-
-      <p className="mt-5 text-[15px] leading-6 font-medium text-gray-dark">
-        {typeLine}
-      </p>
-      <p className="mt-2 text-body leading-6 font-bold text-gray-dark">
-        Stock ID: {vehicle.stockId}
-      </p>
-
-      {!hidePrice && (
-        <div className="mt-3">
-          <p className="text-[26px] leading-9 font-bold text-dark-gray xl:text-[28px]">
-            {vehicle.price}
+        <div className="flex flex-col gap-[7px]">
+          <h1 className="text-[18px] leading-[26px] font-bold text-dark-gray">
+            {vehicle.name}
+          </h1>
+          <p className="text-[12px] leading-4 font-medium text-gray-dark">
+            {typeLine}
           </p>
-          {vehicle.previousPrice && (
-            <p className="text-small leading-5 font-bold text-gray line-through">
-              <span className="sr-only">Antes </span>
-              {vehicle.previousPrice}
-            </p>
-          )}
         </div>
-      )}
 
-      <div className="mt-5 flex flex-col items-start gap-4">
+        {!hidePrice && (
+          <>
+            <hr className="border-gray/30" />
+            <div>
+              <p className="text-[32px] leading-11 font-bold text-dark-gray">
+                {vehicle.price}
+              </p>
+              {vehicle.previousPrice && (
+                <p className="text-body leading-[22px] font-medium text-gray-dark line-through">
+                  <span className="sr-only">Antes </span>
+                  {vehicle.previousPrice}
+                </p>
+              )}
+            </div>
+          </>
+        )}
+
         {!soldOut && (
           // TODO(negocio): ver el JSDoc, el pago no está portado.
           <ButtonComponent
             href={ROUTES.contact}
             size="medium"
             icon={arrowCircle}
-            className="max-w-none!"
+            className="w-full max-w-none! justify-center!"
           >
             Sepáralo aquí
           </ButtonComponent>
         )}
-        <VehicleExpertiseComponent
-          vehicleId={vehicle.id}
-          expertise={vehicle.expertise}
-          vehicleName={vehicle.name}
-          variant="summary"
-        />
+        <div className="grid grid-cols-2 gap-4 [&>*]:w-full [&>*]:max-w-none!">
+          <VehicleExpertiseComponent
+            vehicleId={vehicle.id}
+            expertise={vehicle.expertise}
+            vehicleName={vehicle.name}
+            variant="summary"
+          />
+          <ButtonComponent
+            href="#financiacion"
+            variant="secondary"
+            size="medium"
+            className="max-w-none!"
+          >
+            Financiar
+          </ButtonComponent>
+        </div>
+
+        <hr className="border-gray/30" />
+        <div className="flex items-center justify-between">
+          <p className="flex items-center gap-1 text-small leading-6 font-bold text-gray-dark">
+            {vehicle.viewers > 0 && (
+              <>
+                <Image src={iconEye} alt="" aria-hidden className="size-6" />
+                <span className="sr-only">
+                  Personas que han visto este vehículo:{" "}
+                </span>
+                {vehicle.viewers}
+              </>
+            )}
+          </p>
+          <div className="flex items-center gap-4">
+            <VehicleFavoriteComponent vehicleId={vehicle.id} />
+            <VehicleShareComponent title={vehicle.name} />
+          </div>
+        </div>
       </div>
 
-      <ul className="mt-7 text-[15px] leading-6 font-medium text-gray-dark">
-        {vehicle.warranty && (
-          <Bullet icon={iconHappiness}>{vehicle.warranty.bullet}</Bullet>
-        )}
-        <Bullet icon={iconFinancing}>
-          Financiación hasta del 100% del vehículo
-        </Bullet>
-        <Bullet icon={iconFairPrice}>
-          Precio más justo <span className="text-orange">del mercado</span>
-        </Bullet>
-        <Bullet icon={iconStopwatch}>
-          <a href="#financiacion" className="hover:text-orange">
-            Financia hasta $15 millones en 3 minutos
+      <div className="flex items-center gap-[17px] bg-white px-6 py-4 xl:rounded-lg">
+        <Image src={iconCar} alt="" aria-hidden className="size-6 shrink-0" />
+        <div>
+          <p className="text-small leading-[22px] font-bold text-dark-gray">
+            ¿Tienes vehículo? Úsalo como cuota inicial.
+          </p>
+          <a
+            href={ROUTES.quote}
+            className="mt-[3px] flex items-center gap-[7px] text-small font-bold text-orange underline"
+          >
+            Cotizar mi carro ahora
+            <Image src={arrowCircle} alt="" aria-hidden className="size-6" />
           </a>
-        </Bullet>
+        </div>
+      </div>
+
+      <ul className="flex flex-col gap-4 bg-white px-6 py-4 text-small leading-[22px] font-medium text-gray-dark xl:rounded-lg">
         {vehicle.happinessWarranty && (
-          <Bullet icon={iconHappinessWarranty}>
-            Garantía de felicidad: 7 días o te cambiamos el carro
+          <Bullet icon={iconExchange}>
+            7 Días o te lo cambiamos, sin letra pequeña
           </Bullet>
         )}
+        {vehicle.warranty && (
+          <Bullet icon={iconMedal}>{vehicle.warranty.bullet}</Bullet>
+        )}
+        <Bullet icon={iconMoney}>Financiación hasta del 100% del vehículo</Bullet>
       </ul>
     </div>
   );
@@ -192,11 +186,11 @@ function Bullet({
   icon,
   children,
 }: {
-  icon: typeof iconCity;
+  icon: StaticImageData;
   children: React.ReactNode;
 }) {
   return (
-    <li className="flex items-center gap-3 border-t border-gray/30 py-4 first:border-t-0 first:pt-0">
+    <li className="flex items-center gap-[13px]">
       <Image src={icon} alt="" aria-hidden className="size-6 shrink-0" />
       <span>{children}</span>
     </li>

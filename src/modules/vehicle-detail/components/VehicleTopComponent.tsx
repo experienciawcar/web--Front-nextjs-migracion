@@ -40,7 +40,7 @@ export default function VehicleTopComponent({
   return (
     <section
       aria-label="Datos del vehículo"
-      className="bg-gray-light pb-8 xl:pb-[33px]"
+      className="bg-gray-light pb-8 xl:pb-[52px]"
     >
       <div className="mx-auto w-full max-w-[1368px] px-8 pt-10 max-xl:px-4 xl:pt-4">
         <VehicleTagBannerComponent tag={vehicle.tag} />

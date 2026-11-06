@@ -51,6 +51,8 @@ export type VehicleDetailDto = {
   warranty_type?: string | null;
   type_warranty?: string | null;
   garantie7Day?: boolean | null;
+  /** Plan de garantía; ver `VehicleDto.warranty_plan_car`. */
+  warranty_plan_car?: { id: number; name: string } | null;
   factory_warranty_coverage?: string | null;
   quantityPersons?: number | null;
   /** Prefijo del stock ("CF") que va delante del id en "Stock ID". */

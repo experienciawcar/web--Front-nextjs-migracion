@@ -59,6 +59,16 @@ function parsePrice(value: string | null | undefined): number {
  * meses.
  */
 export function getWarranty(dto: VehicleDto): Vehicle["warranty"] {
+  // El plan (campo nuevo) manda: "Garantía de fábrica" o "Garantía de 6 meses".
+  const plan = dto.warranty_plan_car?.name?.trim();
+  if (plan) {
+    const name = plan.toLowerCase();
+    if (name.includes("fábrica") || name.includes("fabrica") || name.includes("marca")) {
+      return { label: "Garantía de fábrica", tone: "factory" };
+    }
+    if (/1 año|un año/.test(name)) return { label: "Garantía 1 año", tone: "oneYear" };
+    return { label: "Garantía de 6 meses", tone: "standard" };
+  }
   const coverage = dto.warranty_type || dto.type_warranty || "";
   const hasCoverage = coverage !== "" && coverage !== "null";
   // `garantie7Day` por sí sola no da badge: solo cambia el lado de la etiqueta en el sitio anterior

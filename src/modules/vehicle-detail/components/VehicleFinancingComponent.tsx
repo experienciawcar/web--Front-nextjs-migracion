@@ -2,19 +2,18 @@ import FinancingProductCardComponent from "@/modules/financing/components/Financ
 import { FINANCING_PRODUCTS } from "@/modules/financing/constants/products";
 
 /**
- * "Financia tu Vehículo": el título con su subtítulo y las dos tarjetas de producto (Credirápido y
- * Credifácil) sobre un panel gris claro, con la barra oscura de la sección anterior asomando a la
+ * "Financia tu Vehículo": el título con su subtítulo y la tarjeta de Credifácil (Credirápido se quitó a
+ * pedido del usuario; en el Figma 1542:22539 solo está Credifácil, centrada en x=479) sobre un panel gris claro, con la barra oscura de la sección anterior asomando a la
  * izquierda y un rayado turquesa cruzando su borde. Reutiliza las tarjetas de la vista de
  * Financiación (`FinancingProductCardComponent`, mismos textos y medidas de 482 x 489).
  *
  * Figma 89:4207, px del lienzo de 1440 con y=2705 en el borde superior de la sección (754 de
  * alto): panel `gray-light` desde x=125 que sangra a la derecha; raya naranja de 77 x 4 en
- * (294, 60), título de 36/44 debajo y el subtítulo de 18/44 en 882 de ancho; tarjetas en x=287 y
- * x=796, y=200; la barra `dark-gray` de la sección de características sigue por detrás hasta
+ * (294, 60), título de 36/44 debajo y el subtítulo de 18/44 en 882 de ancho; tarjeta en x=479 (en 89:4207 eran dos, en 287 y 796), y=200; la barra `dark-gray` de la sección de características sigue por detrás hasta
  * y=634 (se ve solo a la izquierda de x=125); el rayado turquesa de 200 x 200 va en (60, 485),
  * horizontal (líneas de ~3 px cada 8, estimado de la captura), por encima de la barra y del panel.
  *
- * El id `financiacion` es el ancla del banner Credirápido de "Detalles del Vehículo".
+ * El id `financiacion` es el ancla de los botones "Financiar" de la tarjeta de resumen.
  *
  * TODO: los botones de las tarjetas ("FINANCIAR SEPARACIÓN", "SOLICITAR") llevan a Contacto,
  * como en la vista de Financiación. El sitio anterior abría en pestaña nueva un documento de
@@ -63,10 +62,7 @@ export default function VehicleFinancingComponent() {
         </div>
 
         <div className="relative flex flex-col items-center gap-8 px-8 pt-10 pb-16 xl:contents">
-          <div className="reveal w-full max-w-[482px] xl:absolute xl:top-[200px] xl:left-[287px] xl:max-w-none xl:w-[482px]">
-            <FinancingProductCardComponent product={FINANCING_PRODUCTS[0]} />
-          </div>
-          <div className="reveal w-full max-w-[482px] xl:absolute xl:top-[200px] xl:left-[796px] xl:max-w-none xl:w-[482px]">
+          <div className="reveal w-full max-w-[482px] xl:absolute xl:top-[200px] xl:left-[479px] xl:max-w-none xl:w-[482px]">
             <FinancingProductCardComponent product={FINANCING_PRODUCTS[1]} />
           </div>
         </div>
