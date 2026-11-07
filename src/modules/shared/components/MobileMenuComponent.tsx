@@ -221,7 +221,7 @@ export default function MobileMenuComponent({ items }: { items: NavLink[] }) {
       <div
         aria-hidden
         onClick={() => setIsOpen(false)}
-        className={`fixed inset-x-0 bottom-0 top-20 z-40 bg-black/40 transition-opacity duration-300 motion-reduce:transition-none ${
+        className={`fixed inset-x-0 bottom-0 top-16 z-40 bg-black/40 transition-opacity duration-300 motion-reduce:transition-none ${
           isOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       />

@@ -47,12 +47,12 @@ export default async function NavbarComponent() {
 
   return (
     // sticky y no fixed: se queda arriba al hacer scroll, pero sigue ocupando
-    // sus 80px en el flujo, así que las vistas no necesitan compensar la altura.
+    // sus 64px (80px desde xl) en el flujo, así que las vistas no necesitan compensar la altura.
     // Sigue siendo el bloque de referencia de los paneles `absolute` (menú
     // mobile). Requiere que ningún ancestro (html, body) recorte el overflow.
     // z-40: los desplegables cuelgan sobre el contenido de la página, que en
     // Sobre Nosotros usa capas de hasta z-30 (foto del edificio, barra negra).
-    <header className="sticky top-0 z-40 h-20 w-full shrink-0 bg-white">
+    <header className="sticky top-0 z-40 h-16 w-full xl:h-20 shrink-0 bg-white">
       <nav aria-label="Principal" className="container-wcar flex h-full items-center">
         <Link href={ROUTES.home} aria-label="WCAR, ir al inicio" className="shrink-0">
           <Image
