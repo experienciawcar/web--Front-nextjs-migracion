@@ -50,7 +50,7 @@ const ORANGE_FADE = `linear-gradient(to bottom,
  *   - Logo (el de `shared/assets/logos/logo-wcar-panel.svg`, aro blanco y texto
  *     negro; es el mismo dibujo del de Figma a otra escala) de 198,84 x 64 en
  *     (103,81), centrado (Figma).
- *   - "Mas que solo / una marca": 32/38 bold blanco, centrado; caja de 210 x 76 en
+ *   - "Más que solo / una marca": 32/38 bold blanco, centrado; caja de 210 x 76 en
  *     y=201 (Figma; la primera línea base en y=232).
  *   - Foto de la rueda con la esponja (Figma, nodo 192:6184): el nodo está
  *     ESPEJADO (rotación 180° y volteo) y su relleno es un recorte con la foto
@@ -76,7 +76,7 @@ const ORANGE_FADE = `linear-gradient(to bottom,
  * 193:7935 con su degradado naranja ya incluido) con el logo de 124 x 40 a 37 px
  * del borde superior. La foto sobresale 166 px del panel oscuro sobre la sección
  * siguiente (el panel acaba 230 px antes del final de la sección). No lleva el
- * lema "Mas que solo una marca". El diseño trae CINCO tarjetas (las dos últimas,
+ * lema "Más que solo una marca". El diseño trae CINCO tarjetas (las dos últimas,
  * a medio hacer, como en desktop: ver `constants/additional-services.ts`) y aquí
  * hay tres. Sin Figma de desktop no se sabía; TODO: confirmar cuántas van.
  *
@@ -129,9 +129,8 @@ export default function WorkshopAdditionalServicesComponent() {
             alt="WCAR"
             className="absolute top-[81px] left-[103px] hidden w-[198.84px] xl:block"
           />
-          {/* TODO: confirmar con diseño: "Mas" sin tilde. Solo en desktop: el diseño mobile no lo trae. */}
           <p className="absolute inset-x-0 top-[201px] hidden text-center text-[32px] leading-[38px] font-bold text-white xl:block">
-            Mas que solo
+            Más que solo
             <br />
             una marca
           </p>

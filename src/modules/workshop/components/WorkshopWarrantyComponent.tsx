@@ -114,9 +114,8 @@ export default function WorkshopWarrantyComponent() {
             <div className="flex min-w-0 flex-col xl:pt-[60px]">
               <SectionEyebrowComponent className="reveal gap-2.5! max-xl:mx-auto max-xl:items-center">Servicios Ofrecidos por wcar</SectionEyebrowComponent>
 
-              {/* TODO: confirmar con diseño: "Garantias" sin tilde. */}
               <h2 id="garantias-title" className="reveal mt-2.5 text-center text-subheadline-1 font-bold text-dark-gray xl:mt-[11px] xl:text-left">
-                Garantias y seguros
+                Garantías y seguros
               </h2>
 
               {/* TODO: confirmar con diseño: "Wcar" con mayúscula y sin punto final. */}
@@ -127,10 +126,9 @@ export default function WorkshopWarrantyComponent() {
                 absoluto
               </p>
 
-              {/* TODO: confirmar con diseño: "TECNICO" sin tilde. */}
               <div className="reveal mt-16 flex flex-col items-start gap-8 xl:mt-[48px] xl:flex-row xl:gap-11">
                 <ButtonComponent href={ROUTES.contact} variant="primary" icon={arrowCircle}>
-                  Solicitar servicio tecnico
+                  Solicitar servicio técnico
                 </ButtonComponent>
                 <ButtonComponent
                   href={ROUTES.insurance}

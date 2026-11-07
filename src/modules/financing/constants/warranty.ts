@@ -15,7 +15,7 @@ import iconCubreReparacion from "../assets/garantia/icon-cubre-reparacion.svg";
  * eléctricos o electrónicos. Incluye términos y condiciones." (ver
  * `docs/planes/financiacion/referencia-sitio-anterior.md`).
  * TODO: erratas del diseño en la tercera tarjeta: "reparacion" sin tilde y
- * "sutitución" por "sustitución".
+ * "sustitución" por "sustitución".
  */
 export const WARRANTY_FEATURES: FinancingFeature[] = [
   {
@@ -35,8 +35,8 @@ export const WARRANTY_FEATURES: FinancingFeature[] = [
   {
     id: "cubre",
     icon: iconCubreReparacion,
-    title: "Cubre la reparacion",
-    titleItalic: "o sutitución de piezas",
+    title: "Cubre la reparación",
+    titleItalic: "o sustitución de piezas",
     description: "Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla. Orci, dictumst nec aliquet id",
   },
 ];

@@ -122,9 +122,8 @@ export default function HeroSlideSantanderMobileComponent() {
 
         <h2 className="absolute top-[116px] left-[27px] max-w-[339px] text-[28px] leading-[34px] font-bold">
           <span className="text-black">Financia hasta el 100% de </span>
-          {/* TODO: confirmar con diseño: "Santarder" (así viene en Figma). */}
           <span className="font-semibold text-white italic">
-            tu vehículo con <span className="font-bold">Santarder</span>
+            tu vehículo con <span className="font-bold">Santander</span>
           </span>
         </h2>
 

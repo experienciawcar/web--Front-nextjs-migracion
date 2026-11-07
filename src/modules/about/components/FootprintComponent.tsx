@@ -125,7 +125,7 @@ function PanelMarca() {
       <div className="relative z-10 flex flex-col items-center px-6 pt-[57px]">
         <Image src={logoWcarPanel} alt="WCAR" className="h-12 w-auto" />
         <p className="mt-9 text-center text-[32px] leading-[38px] font-bold text-white">
-          <span className="block">Mas que solo</span>
+          <span className="block">Más que solo</span>
           {" "}
           <span className="block">una marca</span>
         </p>
@@ -168,7 +168,7 @@ function TextoColombia() {
               renglón más largo mide 186px y el que más cerca queda de colarse
               una palabra más, 201px. */}
           <p className="mt-2 max-w-[194px] text-body font-medium text-gray-dark">
-            Mas cerca de convertirnos en el referente en LATAM de la industria automotris
+            Más cerca de convertirnos en el referente en LATAM de la industria automotriz
           </p>
         </div>
       </div>

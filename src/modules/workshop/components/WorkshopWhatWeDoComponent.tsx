@@ -118,16 +118,14 @@ export default function WorkshopWhatWeDoComponent() {
               <strong className="font-bold text-[#5d6480]">transparencia brutal</strong> y nos comunicamos contigo de
               manera directa y honesta, asegurando que sepas exactamente qué necesita tu auto y por qué.
             </p>
-
-            {/* TODO: confirmar con diseño: "TECNICO" sin tilde. El texto va en
-                minúscula porque el botón lo pasa a mayúsculas. */}
+            {/* El texto va en minúscula porque el botón lo pasa a mayúsculas. */}
             <ButtonComponent
               href={ROUTES.contact}
               variant="primary"
               icon={arrowCircle}
               className="reveal mt-16 self-center xl:mt-10 xl:self-start"
             >
-              Solicitar servicio tecnico
+              Solicitar servicio técnico
             </ButtonComponent>
           </div>
         </div>

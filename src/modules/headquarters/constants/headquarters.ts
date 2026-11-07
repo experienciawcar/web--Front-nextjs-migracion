@@ -2,8 +2,8 @@ import type { Headquarters } from "../types/headquarters";
 
 const PHOTOS = "/assets/nuestras-sedes/sedes";
 
-/** Horarios que trae el diseño. Se dejan tal cual, con "6p.m." y "5:30p.m." sin espacio. */
-const SCHEDULE_WEEK = "Lunes a Sábado de 9 a.m. - 6p.m.";
+/** Horarios que trae el diseño. Se dejan tal cual, con "6 p. m." y "5:30p.m." sin espacio. */
+const SCHEDULE_WEEK = "Lunes a Sábado de 9 a.m. - 6 p. m.";
 const SCHEDULE_FULL_WEEK = "Lunes a Domingo de 8:30 a.m. - 5:30p.m.";
 
 /**
@@ -30,7 +30,7 @@ const SCHEDULE_FULL_WEEK = "Lunes a Domingo de 8:30 a.m. - 5:30p.m.";
  * | Taller Morato         | (la de Morato)               | Cr 69b #98-28, Bogotá, Colombia       |
  * | Cajicá - Chía         | (la de Morato)               | Cra 5 #9-26 sur Cajicá. Torre 3 - Local 3 |
  * | La Felicidad          | Cl. 98a #69b 35              | Cl. 17 #80A-30, Bogotá, Colombia      |
- * | wcoffe Morato         | Cl. 98a #69b 35, Bogotá, Colombia | igual (el sitio anterior trae #69b-12 en la página y #69B-35 en el pie) |
+ * | WCoffee Morato         | Cl. 98a #69b 35, Bogotá, Colombia | igual (el sitio anterior trae #69b-12 en la página y #69B-35 en el pie) |
  * | Puente Aranda         | Cl. 17 #80A-30, Bogotá + "Ak. 50 #15-55, Puente Aranda" en el horario | Ak. 50 #15-55, Puente Aranda |
  *
  * TODO: confirmar las direcciones con quien lleva las sedes, y el horario de
@@ -68,7 +68,7 @@ const SCHEDULE_FULL_WEEK = "Lunes a Domingo de 8:30 a.m. - 5:30p.m.";
  *
  * Textos tal cual del diseño (con `TODO: confirmar con diseño`): "wcoffe" (la
  * marca es "wcoffee": en el sitio anterior y en la foto), el espacio antes de
- * los dos puntos en "wcoffe Morato : Un café…" y "Carrera. 50".
+ * los dos puntos en "WCoffee Morato : Un café…" y "Carrera. 50".
  */
 export const HEADQUARTERS: Headquarters[] = [
   {
@@ -161,7 +161,7 @@ export const HEADQUARTERS: Headquarters[] = [
   },
   {
     id: "wcoffee-morato",
-    brand: "wcoffe Morato",
+    brand: "WCoffee Morato",
     name: ": Un café con aroma a transparencia",
     inlineBrand: true,
     address: "Cl. 98a #69b 35, Bogotá, Colombia",

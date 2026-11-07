@@ -46,7 +46,7 @@ function ContactCard() {
       </div>
 
       <ButtonComponent href={ROUTES.contact} icon={iconExternal} className="mt-6">
-        CONTÁCTA A UN ASESOR
+        CONTACTA A UN ASESOR
       </ButtonComponent>
     </div>
   );

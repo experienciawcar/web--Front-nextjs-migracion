@@ -187,8 +187,7 @@ export default function HeadquartersHeroComponent() {
                   TODO: confirmar con diseño si es el mismo patrón. */}
               <div className="reveal flex flex-col gap-2 xl:gap-4">
                 <span aria-hidden className="h-1 w-[76px] bg-orange" />
-                {/* TODO: confirmar con diseño: "colob" (¿Colombia?). */}
-                <span className="text-small font-bold text-gray">wcar en toda colob</span>
+                <span className="text-small font-bold text-gray">WCAR en toda Colombia</span>
               </div>
 
               {/* TODO: confirmar con diseño: "mas" sin tilde y "wcar" en

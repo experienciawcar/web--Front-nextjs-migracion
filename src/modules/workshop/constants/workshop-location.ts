@@ -9,14 +9,14 @@ import type { WorkshopLocation } from "../types/workshop-location";
  * | Dato     | Diseño (Taller)                   | `/nuestras-sedes` (Taller Morato) |
  * |----------|-----------------------------------|-----------------------------------|
  * | Dirección| Cl. 98a #69b 35, Bogotá, Colombia | Cr 69b #98-28, Bogotá, Colombia   |
- * | Horario  | Lunes a Sabado de 9 a.m. - 6p.m.  | (el de la sede)                   |
+ * | Horario  | Lunes a Sábado de 9 a.m. - 6 p. m.  | (el de la sede)                   |
  *
  * TODO: confirmar con diseño/marketing cuál es la dirección del taller y el
- * horario ("Sabado" sin tilde y "6p.m." sin espacio, tal cual del diseño).
+ * horario ("Sábado" sin tilde y "6 p. m." sin espacio, tal cual del diseño).
  */
 export const WORKSHOP_LOCATION: WorkshopLocation = {
   address: "Cl. 98a #69b 35, Bogotá, Colombia",
-  hours: "Lunes a Sabado de 9 a.m. - 6p.m.",
+  hours: "Lunes a Sábado de 9 a.m. - 6 p. m.",
 };
 
 /**

@@ -82,7 +82,7 @@ export default async function FooterTermsComponent() {
           />
         </TermsAccordion>
 
-        <TermsAccordion title="Mas términos y condiciones">
+        <TermsAccordion title="Más términos y condiciones">
           <FooterLinkListComponent
             links={[...toLinks(true), BUYER_TERMS_LINK]}
             nofollow

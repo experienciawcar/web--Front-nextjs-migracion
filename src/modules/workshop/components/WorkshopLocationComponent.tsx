@@ -82,7 +82,6 @@ export default function WorkshopLocationComponent() {
                 <Image src={pinIcon} alt="" aria-hidden className="size-6 shrink-0 xl:size-[29px]" />
                 {address}
               </p>
-              {/* TODO: confirmar con diseño: "Sabado" sin tilde. */}
               <p className="flex items-center gap-3 xl:gap-2">
                 <Image src={clockIcon} alt="" aria-hidden className="size-[22px] shrink-0 xl:size-[29px]" />
                 {hours}

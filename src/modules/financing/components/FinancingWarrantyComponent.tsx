@@ -97,9 +97,9 @@ export default function FinancingWarrantyComponent() {
             <FinancingWarrantyCarouselComponent features={WARRANTY_FEATURES} />
 
             <div className="mt-[52px] flex justify-center xl:mt-[57px] xl:ml-[352px] xl:block">
-              {/* TODO: destino del botón y tilde de "GARANTIA" (ver el JSDoc). */}
+              {/* TODO: destino del botón (ver el JSDoc). */}
               <ButtonComponent href={ROUTES.contact} icon={arrowCircle}>
-                ADQUIERE TU GARANTIA
+                ADQUIERE TU GARANTÍA
               </ButtonComponent>
             </div>
           </div>

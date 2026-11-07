@@ -189,8 +189,7 @@ export default function HeroSlideSantanderComponent() {
           <span className="font-semibold text-white italic">
             tu vehículo con{" "}
           </span>
-          {/* TODO: confirmar con diseño: "Santarder" (así viene en Figma). */}
-          <span className="font-extrabold text-white italic">Santarder</span>
+          <span className="font-extrabold text-white italic">Santander</span>
         </h2>
 
         <p className="mt-4 text-[18px] leading-[22px] font-semibold text-white md:absolute md:top-[258px] md:left-[123px] md:mt-0 md:w-[434px]">
