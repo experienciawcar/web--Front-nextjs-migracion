@@ -22,6 +22,9 @@ import VehicleTopComponent from "./VehicleTopComponent";
  * Datos: `GET /cars/{id}/` (todo el vehículo, con `description_list`) y
  * `GET /cars-related/{id}/` (este, desde el navegador: tarda ~24 s, ver `RelatedVehiclesLoaderComponent`). Comportamiento del sitio anterior que se conserva o se cambia:
  * `docs/DETALLE_VEHICULO.md`.
+ *
+ * Resumen con Gemini: el ícono de IA de la tarjeta de resumen (`VehicleAiSummaryComponent`,
+ * `POST /api/resumen-ia/{id}`).
  */
 export default function VehicleDetailComponent({
   vehicle,

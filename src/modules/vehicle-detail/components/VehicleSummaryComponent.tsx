@@ -9,11 +9,11 @@ import iconCar from "../assets/summary/n-auto.svg";
 import iconExchange from "../assets/summary/n-cambio.svg";
 import iconMoney from "../assets/summary/n-dinero.svg";
 import iconMedal from "../assets/summary/n-medalla.svg";
-import iconAi from "../assets/summary/icono-ia.svg";
 import iconEye from "../assets/summary/n-ojo.svg";
 import { isUnavailable } from "../constants/tags";
 import type { VehicleDetail } from "../types/vehicle-detail";
 
+import VehicleAiSummaryComponent from "./VehicleAiSummaryComponent";
 import VehicleExpertiseComponent from "./VehicleExpertiseComponent";
 import VehicleShareComponent from "./VehicleShareComponent";
 import FavoriteButtonComponent from "@/modules/favorites/components/FavoriteButtonComponent";
@@ -33,8 +33,8 @@ import FavoriteButtonComponent from "@/modules/favorites/components/FavoriteButt
  * se tacha el precio de lista; la viñeta de garantía solo sale si hay garantía y la de los 7
  * días si el vehículo trae la garantía de felicidad.
  *
- * El ícono de IA (círculo con degradado y estrella, 1542:22590, esquina de la tarjeta) lleva a la
- * descripción de IA del acordeón (`#descripcion-ia`); el SVG está armado a mano (el export del nodo
+ * El ícono de IA (círculo con degradado y estrella, 1542:22590, esquina de la tarjeta) abre el
+ * resumen con Gemini (`VehicleAiSummaryComponent`); el SVG está armado a mano (el export del nodo
  * trae el marco entero). El corazón de favoritos usa el backend (`/api/favorites`). Sin hacer, a propósito: "o desde $X /mes*", porque la API no trae la cuota.
  * TODO(negocio): "SEPÁRALO AQUÍ" abría el pago (Wompi/ePayco); lleva a Contacto
  * (`docs/DETALLE_VEHICULO.md` §7.2-3). TODO: "Garantia de 6 meses" del diseño lleva errata; aquí
@@ -56,7 +56,7 @@ export default function VehicleSummaryComponent({
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-4 bg-white px-6 py-4 xl:rounded-lg xl:pl-[25px]">
+      <div className="relative flex flex-col gap-4 bg-white px-6 py-4 xl:rounded-lg xl:pl-[25px]">
         <div className="flex items-start justify-between gap-4">
           {vehicle.warranty ? (
             <WarrantyBadgeComponent
@@ -66,14 +66,11 @@ export default function VehicleSummaryComponent({
           ) : (
             <span />
           )}
-          {/* Lleva a la descripción de IA del acordeón si el vehículo la tiene (el diseño no dice qué abre). */}
-          {vehicle.aiDescription ? (
-            <a href="#descripcion-ia" aria-label="Ver la descripción generada por IA">
-              <Image src={iconAi} alt="" aria-hidden className="size-8 shrink-0" />
-            </a>
-          ) : (
-            <Image src={iconAi} alt="" aria-hidden className="size-8 shrink-0" />
-          )}
+          <VehicleAiSummaryComponent
+            vehicleId={vehicle.id}
+            expertise={vehicle.expertise}
+            vehicleName={vehicle.name}
+          />
         </div>
 
         <div className="flex flex-col gap-[7px]">
@@ -144,7 +141,7 @@ export default function VehicleSummaryComponent({
             )}
           </p>
           <div className="flex items-center gap-4">
-            <FavoriteButtonComponent vehicleId={vehicle.id} />
+            <FavoriteButtonComponent vehicleId={vehicle.id} fit />
             <VehicleShareComponent title={vehicle.name} />
           </div>
         </div>
@@ -169,13 +166,13 @@ export default function VehicleSummaryComponent({
       <ul className="flex flex-col gap-4 bg-white px-6 py-4 text-small leading-[22px] font-medium text-gray-dark xl:rounded-lg">
         {vehicle.happinessWarranty && (
           <Bullet icon={iconExchange}>
-            7 Días o te lo cambiamos, sin letra pequeña
+            7 días o te lo cambiamos, sin letra pequeña
           </Bullet>
         )}
         {vehicle.warranty && (
           <Bullet icon={iconMedal}>{vehicle.warranty.bullet}</Bullet>
         )}
-        <Bullet icon={iconMoney}>Financiación hasta del 100% del vehículo</Bullet>
+        <Bullet icon={iconMoney}>Financiación de hasta el 100% del vehículo</Bullet>
       </ul>
     </div>
   );

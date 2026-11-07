@@ -3,7 +3,7 @@ const REPLACEMENTS: [string, string][] = [
   ["**condición de nuevo**", "**condición de usado**"],
   ["condición de nuevo", "condición de usado"],
   ["condición nueva", "condición usada"],
-  ["estado nuevo", "condición usado"],
+  ["estado nuevo", "estado usado"],
   [
     "lo que significa que está listo para ofrecer una experiencia de conducción excepcional desde el primer momento.",
     "",

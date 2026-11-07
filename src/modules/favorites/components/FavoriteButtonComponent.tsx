@@ -21,9 +21,12 @@ import {
 export default function FavoriteButtonComponent({
   vehicleId,
   className = "",
+  fit = false,
 }: {
   vehicleId: number;
   className?: string;
+  /** Corazón que llena los 24 x 24, con el trazo más grueso (ficha del vehículo). */
+  fit?: boolean;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -54,7 +57,7 @@ export default function FavoriteButtonComponent({
       title={failed ? "No pudimos guardar el cambio. Inténtalo de nuevo." : undefined}
       className={`cursor-pointer text-orange focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange ${className}`}
     >
-      <HeartIcon className={`size-6 ${active ? "fill-current" : ""}`} />
+      <HeartIcon fit={fit} className={`size-6 ${active ? "fill-current" : ""}`} />
     </button>
   );
 }

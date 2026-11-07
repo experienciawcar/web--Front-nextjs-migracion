@@ -99,7 +99,7 @@ export const CHARACTERISTIC_EXTRA_ORDER = [48, 49, 55, 56];
 export const SAFETY_ITEMS: Record<number, FeatureDefinition> = {
   9: { label: "Airbags", icon: iconAirbags },
   10: { label: "Frenos ABS", icon: iconFrenosAbs },
-  11: { label: "Calificación seguridad", icon: iconCalificacionSeguridad },
+  11: { label: "Calificación de seguridad", icon: iconCalificacionSeguridad },
   50: { label: "Control de tracción", icon: iconControlTraccion },
   58: { label: "Asistencias a la conducción", icon: iconAsistenciasConduccion },
   59: { label: "Sensores", icon: iconSensores },
@@ -117,7 +117,7 @@ export const EQUIPMENT_ITEMS: Record<number, FeatureDefinition> = {
   18: { label: "Cámara trasera", icon: iconCamaraTrasera },
   19: { label: "Cámara 360°", icon: iconCamara360 },
   20: { label: "Alarma", icon: iconAlarma },
-  21: { label: "Asistente anti colisión", icon: iconAnticolision },
+  21: { label: "Asistente anticolisión", icon: iconAnticolision },
   22: { label: "Exploradoras", icon: iconExploradoras },
   23: { label: "Bluetooth", icon: iconBluetooth },
   24: { label: "USB", icon: iconUsb },
