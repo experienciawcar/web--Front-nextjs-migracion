@@ -153,6 +153,24 @@
   }
 }
 
+/* Resumen con Gemini de la ficha (VehicleAiSummaryComponent): la tarjeta aparece
+   desde el botón flotante y las líneas de carga brillan de izquierda a derecha. */
+@keyframes ai-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+}
+
+@keyframes ai-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
 /* Animación de brillo de los botones (ver ButtonComponent): una franja de tres
    rayas diagonales cruza el botón de izquierda a derecha y vuelve, cambiando de
    escala y de opacidad por el camino. */

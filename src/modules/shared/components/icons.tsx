@@ -15,13 +15,20 @@ export function SearchIcon({ className = "" }: { className?: string }) {
 }
 
 /** Corazón de "favoritos" de la tarjeta de vehículo: solo el contorno, sin rellenar (aún no hay estado guardado). */
-export function HeartIcon({ className = "" }: { className?: string }) {
+export function HeartIcon({
+  className = "",
+  fit = false,
+}: {
+  className?: string;
+  /** Recorta el margen del dibujo para que el corazón llene la caja (ficha del vehículo, 24 x 24). */
+  fit?: boolean;
+}) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+    <svg viewBox={fit ? "2.8 3.4 19.4 19.4" : "0 0 24 24"} fill="none" className={className} aria-hidden>
       <path
         d="M12 20.2 5.5 13.9c-2-2-2-5.2 0-7.1 1.9-2 5.1-2 7 0l-.5.5.5-.5c1.9-2 5.1-2 7 0 2 1.9 2 5.1 0 7.1L12 20.2Z"
         stroke="currentColor"
-        strokeWidth="1.6"
+        strokeWidth={fit ? 1.7 : 1.6}
         strokeLinejoin="round"
       />
     </svg>

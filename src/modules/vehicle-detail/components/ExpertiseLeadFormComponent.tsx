@@ -153,7 +153,7 @@ export default function ExpertiseLeadFormComponent({
         label="Nombre"
         required
         autoComplete="name"
-        placeholder="Ingrese su nombre"
+        placeholder="Ingresa tu nombre"
         value={name}
         error={errors.name}
         onChange={(event) => setName(event.target.value)}
@@ -171,11 +171,11 @@ export default function ExpertiseLeadFormComponent({
       />
       <QuoteTextFieldComponent
         id="expertise-email"
-        label="Email"
+        label="Correo"
         required
         type="email"
         autoComplete="email"
-        placeholder="ingrese su email"
+        placeholder="Ingresa tu correo"
         value={email}
         error={errors.email}
         onChange={(event) => setEmail(event.target.value)}

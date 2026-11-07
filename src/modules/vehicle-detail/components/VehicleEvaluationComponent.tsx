@@ -11,12 +11,12 @@ import VehicleExpertiseComponent from "./VehicleExpertiseComponent";
  *
  * Figma "Evaluación del vehículo" (89:4825): 776 x 400, blanca con borde de 1 px `#c2d3ed` y
  * esquinas de 8; cabecera `orange` de 160 con el ícono a 70 del borde, "wcar" de 32 Bold y
- * "Evaluación del vehiculo" de 44 Bold blancos (a 193 del borde); cuerpo con el título de 22
+ * "Evaluación del vehículo" de 44 Bold blancos (a 193 del borde); cuerpo con el título de 22
  * Bold, un párrafo de 16 Medium `gray-dark` en 614 de ancho y el botón cian centrado.
  *
  * TODO: el diseño 89:4207 trae relleno en el párrafo ("Nibh quisque suscipit…"); se usó el texto
- * real del marco hermano 238:4492 ("El peritaje es un dictamen técnico…"). "vehiculo" sin tilde
- * en el título es errata del diseño y se reprodujo. El ícono es un recorte del export de Figma
+ * real del marco hermano 238:4492 ("El peritaje es un dictamen técnico…"). El título lleva la tilde
+ * que le falta al diseño ("vehiculo"). El ícono es un recorte del export de Figma
  * sobre el naranja de la cabecera (un solo bitmap).
  */
 export default function VehicleEvaluationComponent({
@@ -48,7 +48,7 @@ export default function VehicleEvaluationComponent({
             id="evaluacion-title"
             className="text-[28px] leading-tight font-bold xl:text-[44px]"
           >
-            Evaluación del vehiculo
+            Evaluación del vehículo
           </h2>
         </div>
       </div>

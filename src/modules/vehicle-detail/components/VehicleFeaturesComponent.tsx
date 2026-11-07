@@ -134,9 +134,8 @@ function WarrantyColumn({ title, text }: { title: string; text: string }) {
  * la descripción por IA. Solo salen las que tienen datos; abre la primera. Los datos salen del
  * `description_list` de `GET /cars/{id}/`.
  *
- * TODO: erratas del diseño reproducidas: "Garantias" y "Decripción GPT" (sin tilde / sin "s");
- * el texto de "Garantía de felicidad" ("LLeva… cambirlo…, 7  días") es el del sitio anterior. Sin
- * tilde en "Garantias" ni en "Decripción" el `<summary>` no es un título de página (no afecta SEO).
+ * Ortografía corregida respecto al diseño y al sitio anterior: "Garantías" (el diseño: "Garantias"),
+ * "Descripción GPT" ("Decripción GPT") y el texto de "Garantía de felicidad" ("LLeva… cambirlo…").
  * TODO(reclamaciones): el diseño trae una fila "Reporte de Colserauto" desplegable; consultaba el
  * informe por PLACA desde el navegador (`POST /v2/colserauto/inspeccion/`): sin la placa en el
  * cliente no se puede, falta un Route Handler. Tampoco se dibujó el "$" del ícono de monto (se
@@ -168,13 +167,13 @@ export default function VehicleFeaturesComponent({
   if (hasWarranty) {
     sections.push({
       key: "garantias",
-      title: "Garantias",
+      title: "Garantías",
       body: (
         <div className="grid gap-x-8 gap-y-8 xl:grid-cols-2 xl:gap-x-[100px]">
           {vehicle.happinessWarranty && (
             <WarrantyColumn
               title="Garantía de felicidad"
-              text="LLeva tu vehículo y si no estas satisfecho puedes cambirlo, tienes hasta 7  días o 300 km para hacerlo"
+              text="Lleva tu vehículo y, si no estás satisfecho, puedes cambiarlo: tienes hasta 7 días o 300 km para hacerlo."
             />
           )}
           {vehicle.warranty && (
@@ -323,7 +322,7 @@ export default function VehicleFeaturesComponent({
             aria-hidden
             className="size-8 shrink-0"
           />
-          Decripción GPT
+          Descripción GPT
         </>
       ),
       body: (

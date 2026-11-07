@@ -2,7 +2,7 @@ import Image, { type StaticImageData } from "next/image";
 
 import AppLinkComponent from "./AppLinkComponent";
 
-type Variant = "primary" | "secondary" | "tertiary" | "cyan" | "black" | "outline";
+type Variant = "primary" | "secondary" | "tertiary" | "cyan" | "black" | "outline" | "gemini";
 
 /**
  * Cada variante trae su color de borde (transparente o naranja) a propósito:
@@ -20,10 +20,13 @@ const VARIANTS: Record<Variant, string> = {
   // un fondo oscuro (Vende tu Carro), donde `secondary` (fondo blanco) taparía
   // la foto. Es el "btn_orange_transparent" del sitio anterior.
   outline: "justify-center border-orange bg-transparent text-white",
+  // Naranja que se funde en el morado de Gemini a la derecha: "Realizar resumen" de la ficha.
+  gemini:
+    "justify-center border-transparent bg-[linear-gradient(90deg,var(--color-orange)_55%,#a48bfa)] text-white",
 };
 
 /** Variantes de texto blanco: el ícono es oscuro y ahí se pasa a blanco. */
-const LIGHT_TEXT: Variant[] = ["primary", "tertiary", "black", "outline"];
+const LIGHT_TEXT: Variant[] = ["primary", "tertiary", "black", "outline", "gemini"];
 
 const SIZES = {
   big: "h-12 px-8",
@@ -77,7 +80,8 @@ type NativeProps = CommonProps & {
  *   `tertiary` (oscuro con borde naranja y 221px de ancho), `cyan`, `black` y
  *   `outline` (borde naranja, fondo transparente, texto blanco: para un botón
  *   secundario sobre una foto o un fondo oscuro, donde `secondary` taparía lo
- *   de atrás; es el "btn_orange_transparent" del sitio anterior).
+ *   de atrás; es el "btn_orange_transparent" del sitio anterior) y `gemini`
+ *   (naranja que se funde en morado, para las acciones de Gemini).
  *   El naranja es el token del rediseño y no el #FF7300 fijo del sitio anterior.
  *   Solo `primary` reparte el texto y el ícono a los extremos; las demás los
  *   centran.

@@ -1,9 +1,6 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-
-import iconShare from "../assets/summary/icon-compartir.svg";
 
 type Channel = { label: string; href: (url: string, text: string) => string };
 
@@ -99,7 +96,13 @@ export default function VehicleShareComponent({ title }: { title: string }) {
         onClick={handleClick}
         className="grid size-8 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange"
       >
-        <Image src={iconShare} alt="" aria-hidden className="h-6 w-5" />
+        {/* 24 x 24 con trazo de 2: tres nodos unidos, en el naranja del corazón de favoritos. */}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="size-6 text-orange" aria-hidden>
+          <circle cx="5" cy="12" r="3.2" />
+          <circle cx="19" cy="4.5" r="3.2" />
+          <circle cx="19" cy="19.5" r="3.2" />
+          <path d="m7.8 10.4 8.4-4.3M7.8 13.6l8.4 4.3" />
+        </svg>
       </button>
 
       {open && (

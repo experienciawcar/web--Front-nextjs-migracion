@@ -42,8 +42,8 @@ function toSpecs(vehicle: VehicleDetail): Spec[] {
       label: "Ubicación",
       value: vehicle.city,
       icon: iconLocation,
-      // TODO: confirmar con diseño (erratas reproducidas: "Envió", "pais").
-      note: "Envió por todo el pais",
+      // El diseño dice "Envió por todo el pais": corregido a "Envío" (sustantivo) y "país".
+      note: "Envío a todo el país",
     },
   ];
   return specs.filter((spec): spec is Spec => spec !== null);
@@ -58,6 +58,9 @@ function toSpecs(vehicle: VehicleDetail): Spec[] {
  * (opacidad 80 %), etiqueta de 16 Bold `gray` y valor de 18 SemiBold. Reemplaza al bloque
  * "Detalles del Vehículo" del diseño 89:4207.
  *
+ * La cuadrícula ocupa el ancho de la galería más la columna de tarjetas (1304 en 1440), no los
+ * 1205 del Figma: así sus bordes quedan alineados con los de arriba.
+ *
  * Una tarjeta sin dato (sin motor, sin combustible) no se pinta. Mobile (sin diseño): una columna, dos desde 560. La nota de Ubicación va en su propia línea (en el diseño sigue a la ciudad y desborda la tarjeta).
  */
 export default function VehicleSpecsComponent({
@@ -67,7 +70,8 @@ export default function VehicleSpecsComponent({
 }) {
   return (
     <section aria-label="Detalles del vehículo" className="bg-gray-light">
-      <div className="container-wcar pb-10 xl:pb-[49px]">
+      {/* Mismo contenedor que la galería y la columna de tarjetas (`VehicleTopComponent`): ocupa su ancho. */}
+      <div className="mx-auto w-full max-w-[1368px] px-8 pb-10 max-xl:px-4 xl:pb-[49px]">
         <ul className="reveal grid grid-cols-1 gap-3 min-[560px]:grid-cols-2 xl:grid-cols-4 xl:gap-x-[19px] xl:gap-y-6">
           {toSpecs(vehicle).map((spec) => (
             <li
