@@ -1,6 +1,11 @@
 import { getSedes } from "@/modules/catalog/services/sedes";
 import { vehicleHref } from "@/modules/shared/constants/routes";
+import {
+  DOWN_PAYMENT_RATIO,
+  LOAN_TERM_MONTHS,
+} from "@/modules/shared/constants/loan-rates";
 import { apiUrl } from "@/modules/shared/services/api";
+import { calculateMonthlyPayment } from "@/modules/shared/services/loan-calculator";
 import {
   getWarranty,
   toImage,
@@ -314,6 +319,13 @@ export function toVehicleDetail(
     price: formatMoney(hasDiscount ? discountPrice : listPrice),
     previousPrice: hasDiscount ? formatMoney(listPrice) : null,
     priceValue: hasDiscount ? discountPrice : listPrice,
+    monthlyPayment: formatMoney(
+      calculateMonthlyPayment(
+        hasDiscount ? discountPrice : listPrice,
+        (hasDiscount ? discountPrice : listPrice) * DOWN_PAYMENT_RATIO,
+        LOAN_TERM_MONTHS,
+      ),
+    ),
     mileageValue: dto.mileage ?? null,
     brand: dto.brand_car?.brand?.trim() || null,
     stockId: `${dto.type_negotiation ?? ""}${dto.id}`,
@@ -371,21 +383,19 @@ export async function getVehicleDetail(
 }
 
 /**
- * Vehículos relacionados (GET /cars-related/{id}/, con barra final: sin ella el
- * backend redirige). Devuelve las mismas tarjetas del catálogo. Si falla, `[]` y
- * la sección no se pinta.
- * Este es el endpoint que usaba el carrusel "Vehículos relacionados" del sitio
- * anterior; el otro (`POST /v2/brands`) no se usa (`docs/DETALLE_VEHICULO.md` §7.20-21).
+ * Vehículos relacionados (GET /v2/cars/{id}/similar/?limit=8): mismo tipo, precio ±15 %,
+ * solo los campos de la tarjeta, con caché en Redis (~1 s; el viejo /cars-related/ tardaba ~24 s
+ * y pesaba ~400 KB). Si falla, `[]` y la sección no se pinta. Ver `docs/backend-vehiculos-similares.md`.
  */
 export async function getRelatedVehicles(id: number): Promise<Vehicle[]> {
-  const url = apiUrl(`/cars-related/${id}/`);
+  const url = apiUrl(`/v2/cars/${id}/similar/?limit=${RELATED_LIMIT}`);
   try {
     const response = await fetch(url, {
       next: { revalidate: REVALIDATE_SECONDS },
     });
     if (!response.ok)
       throw new Error(`GET ${url} respondió ${response.status}`);
-    const list: VehicleDto[] = await response.json();
+    const { results: list }: { results: VehicleDto[] } = await response.json();
     const vehicles: Vehicle[] = [];
     for (const dto of list) {
       if (dto.id === id) continue;

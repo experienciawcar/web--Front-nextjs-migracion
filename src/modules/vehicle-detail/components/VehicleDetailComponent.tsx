@@ -4,8 +4,9 @@ import { buildVehicleJsonLd } from "../utils/seo";
 import RelatedVehiclesLoaderComponent from "./RelatedVehiclesLoaderComponent";
 import VehicleFeaturesComponent from "./VehicleFeaturesComponent";
 import VehicleFinancingComponent from "./VehicleFinancingComponent";
-import VehicleSpecsComponent from "./VehicleSpecsComponent";
+import { vehicleWhatsappMessage, whatsappHref } from "@/modules/shared/constants/whatsapp";
 import VehicleStickyBarComponent from "./VehicleStickyBarComponent";
+import VehicleSpecsComponent from "./VehicleSpecsComponent";
 import VehicleTopComponent from "./VehicleTopComponent";
 
 /**
@@ -42,7 +43,15 @@ export default function VehicleDetailComponent({
       <VehicleFeaturesComponent vehicle={vehicle} />
       <VehicleFinancingComponent />
       <RelatedVehiclesLoaderComponent vehicleId={vehicle.id} />
-      <VehicleStickyBarComponent tagName={vehicle.tag?.name} />
+      <VehicleStickyBarComponent
+        tagName={vehicle.tag?.name}
+        price={vehicle.price}
+        priceValue={vehicle.priceValue}
+        vehicleId={vehicle.id}
+        vehicleName={vehicle.name}
+        stockId={vehicle.stockId}
+        whatsappHref={whatsappHref(vehicleWhatsappMessage(vehicle))}
+      />
     </main>
   );
 }

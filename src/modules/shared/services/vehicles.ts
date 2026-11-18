@@ -7,6 +7,7 @@ import type {
   VehicleWarrantyTone,
 } from "../types/vehicle";
 import { apiUrl } from "./api";
+import { DOWN_PAYMENT_RATIO, LOAN_TERM_MONTHS } from "../constants/loan-rates";
 import { calculateMonthlyPayment } from "./loan-calculator";
 
 /**
@@ -33,9 +34,6 @@ const DEFAULT_IMAGE_WIDTH = 480;
  * TODO: confirmar con negocio el plazo, la cuota inicial y si esta cuota debe
  * ir en la tarjeta.
  */
-const LOAN_TERM_MONTHS = 60;
-const DOWN_PAYMENT_RATIO = 0.3;
-
 const numberFormat = new Intl.NumberFormat("es-CO", { maximumFractionDigits: 0 });
 
 /** "$ 61.990.000": con un espacio después del signo, como en el sitio anterior. */

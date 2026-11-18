@@ -52,9 +52,10 @@ export default function AccountLinkComponent() {
         <Link
           href={ROUTES.favorites}
           aria-label="Mis favoritos"
-          className="flex size-10 items-center justify-center text-gray-dark transition-colors hover:text-orange xl:size-8"
+          className="flex size-10 items-center justify-center text-gray-dark transition-colors hover:text-orange xl:-mx-3 xl:size-8"
         >
-          <HeartIcon className="size-7 xl:size-6" />
+          {/* `fit` recorta el margen del dibujo: así el corazón llena su caja y pesa como el glifo de cuenta. */}
+          <HeartIcon fit className="size-7 xl:size-6" />
         </Link>
       )}
       <Link

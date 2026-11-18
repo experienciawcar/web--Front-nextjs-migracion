@@ -2,7 +2,7 @@ import Image, { type StaticImageData } from "next/image";
 
 import AppLinkComponent from "./AppLinkComponent";
 
-type Variant = "primary" | "secondary" | "tertiary" | "cyan" | "black" | "outline" | "gemini";
+type Variant = "primary" | "secondary" | "tertiary" | "cyan" | "green" | "black" | "outline" | "gemini";
 
 /**
  * Cada variante trae su color de borde (transparente o naranja) a propósito:
@@ -15,6 +15,8 @@ const VARIANTS: Record<Variant, string> = {
   // Las franjas del brillo son cian por defecto; sobre un botón cian no se
   // verían, así que ahí van naranjas.
   cyan: "justify-center border-transparent bg-blue-neon text-black [--shine-color:var(--color-orange)]",
+  // Verde de WhatsApp: solo para "Pregúntanos por este carro".
+  green: "justify-center border-transparent bg-[#25D366] text-black [--shine-color:var(--color-orange)]",
   black: "justify-center border-transparent bg-black text-white",
   // Borde naranja, sin relleno: para "Contacta a un asesor" sobre una foto o
   // un fondo oscuro (Vende tu Carro), donde `secondary` (fondo blanco) taparía

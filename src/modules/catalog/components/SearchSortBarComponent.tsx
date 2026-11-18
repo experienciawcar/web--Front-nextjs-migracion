@@ -75,7 +75,7 @@ export default function SearchSortBarComponent({
             type="search"
             value={searchDraft}
             onChange={(event) => onSearchDraftChange(event.target.value)}
-            placeholder="Buscar por marca, modelo, color..."
+            placeholder="Busca marca, modelo o cuota..."
             className="ml-3 h-full w-full bg-transparent text-small text-dark-gray placeholder:text-gray focus:outline-none"
           />
         </label>

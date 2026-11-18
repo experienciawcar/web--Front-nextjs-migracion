@@ -14,3 +14,6 @@ export const TAG_IDS = {
 export function isUnavailable(tagName: string | undefined): boolean {
   return tagName === "Reservado" || tagName === "Vendido";
 }
+
+/** Monto fijo de separación ("Sepáralo desde $2M"), confirmado por negocio. */
+export const SEPARATION_AMOUNT_LABEL = "$2M";

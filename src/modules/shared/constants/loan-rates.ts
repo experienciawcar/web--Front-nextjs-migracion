@@ -13,3 +13,10 @@
  * como en el sitio anterior (allí `calculateInsurance` nunca se terminó).
  */
 export const MONTHLY_INTEREST_RATE = 0.0198;
+
+/**
+ * Plazo y cuota inicial con los que se estima la cuota "desde $X/mes" de la tarjeta y de la ficha
+ * del vehículo. TODO: confirmar con negocio (ver el comentario de `services/vehicles.ts`).
+ */
+export const LOAN_TERM_MONTHS = 60;
+export const DOWN_PAYMENT_RATIO = 0.3;

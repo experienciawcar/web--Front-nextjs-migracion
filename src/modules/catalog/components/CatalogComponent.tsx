@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import ButtonComponent from "@/modules/shared/components/ButtonComponent";
-import { FiltersIcon } from "@/modules/shared/components/icons";
+import { maxPriceForPayment, parseQuotaSearch } from "@/modules/shared/services/loan-calculator";
 
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import { getActiveChips, removeChip } from "../services/chips";
@@ -24,12 +24,13 @@ import ChipsBarComponent from "./ChipsBarComponent";
 import FilterBottomSheetComponent from "./FilterBottomSheetComponent";
 import FilterSidebarComponent from "./FilterSidebarComponent";
 import FilterTabsComponent from "./FilterTabsComponent";
+import MobileCatalogBarComponent from "./MobileCatalogBarComponent";
 import PaginationComponent from "./PaginationComponent";
 import SeoAccordionComponent from "./SeoAccordionComponent";
 import SeoBannerComponent from "./SeoBannerComponent";
 import type { Range } from "./RangeFilterComponent";
 import ResultsGridComponent from "./ResultsGridComponent";
-import SearchSortBarComponent, { OrderDropdown } from "./SearchSortBarComponent";
+import SearchSortBarComponent from "./SearchSortBarComponent";
 
 /** Debounce del buscador de texto: mismo valor que usaba la SPA anterior (ver la referencia del plan). */
 const SEARCH_DEBOUNCE_MS = 1000;
@@ -123,16 +124,19 @@ export default function CatalogComponent({
     setLoading(true);
   }
 
+  // "cuota 1.2M" en el buscador no es una palabra a buscar: es un tope de precio.
+  const searchQuota = parseQuotaSearch(debouncedSearch);
+
   const effectiveFilters = useMemo<CatalogFilters>(
     () => ({
       ...filters,
-      search: debouncedSearch || undefined,
+      search: searchQuota ? undefined : debouncedSearch || undefined,
       priceMin: debouncedPrice.min,
-      priceMax: debouncedPrice.max,
+      priceMax: searchQuota ? maxPriceForPayment(searchQuota) : debouncedPrice.max,
       mileageMin: debouncedMileage.min,
       mileageMax: debouncedMileage.max,
     }),
-    [filters, debouncedSearch, debouncedPrice, debouncedMileage],
+    [filters, debouncedSearch, searchQuota, debouncedPrice, debouncedMileage],
   );
 
   // Deep-linking: lee la URL una sola vez al montar (recarga de página o URL
@@ -301,28 +305,17 @@ export default function CatalogComponent({
       </FilterBottomSheetComponent>
 
       <div className="bg-gray-light">
-        {/* Solo mobile: "Ordenar por" a la izquierda y "Filtrar" (abre el bottom
-            sheet) a la derecha; el sidebar de al lado cumple esto en desktop.
-            Va dentro del mismo fondo gris que los resultados para que no haya
-            una costura entre los dos bloques. */}
-        <div className="container-catalog relative z-10 flex items-center justify-between py-4 xl:hidden">
-          <div className="flex items-center gap-3 text-dark-gray">
-            <span className="text-small">Ordenar por:</span>
-            <OrderDropdown
-              tone="light"
-              value={filters.orderBy ?? "relevance"}
-              onChange={handleOrderByChange}
-            />
-          </div>
-          <button
-            type="button"
-            onClick={() => setMobileFiltersOpen(true)}
-            className="flex items-center gap-2 text-body text-dark-gray"
-          >
-            <FiltersIcon className="size-6" />
-            Filtrar
-          </button>
-        </div>
+        <MobileCatalogBarComponent
+          config={config}
+          options={options}
+          filters={filters}
+          onFiltersChange={handleFiltersPatch}
+          priceDraft={priceDraft}
+          onPriceDraftChange={setPriceDraft}
+          count={result?.count ?? 0}
+          loading={loading}
+          onOpenFilters={() => setMobileFiltersOpen(true)}
+        />
 
         <div className="container-catalog grid gap-8 pb-16 xl:grid-cols-[minmax(0,1fr)_3fr] xl:gap-0">
           <aside className="hidden bg-white px-6 xl:block">

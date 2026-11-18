@@ -118,6 +118,8 @@ export type VehicleDetail = {
   city: string;
   price: string;
   previousPrice: string | null;
+  /** Cuota estimada con la calculadora global (no viene del backend); ver `loan-rates.ts`. */
+  monthlyPayment: string;
   /** Lo que se cobra, en pesos, y el kilometraje: para los datos estructurados (JSON-LD). */
   priceValue: number;
   mileageValue: number | null;

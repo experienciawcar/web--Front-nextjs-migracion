@@ -2,8 +2,8 @@ import { getRelatedVehicles } from "@/modules/vehicle-detail/services/vehicle-de
 
 /**
  * `GET /api/vehiculos-relacionados/{id}`: las tarjetas de "Vehículos relacionados" de una ficha.
- * Existe porque `GET /cars-related/{id}/` del backend tarda ~24 s la primera vez: pedido al
- * renderizar la ficha, bloqueaba toda la página. Ahora la ficha sale al instante y esta sección
+ * Existe porque la ficha no debe esperar esta lista (el endpoint viejo `/cars-related/` tardaba ~24 s;
+ * el actual `/v2/cars/{id}/similar/` ~1 s): pedirla al renderizar bloquearía la página. Ahora la ficha sale al instante y esta sección
  * la pide el navegador después. El `fetch` de `getRelatedVehicles` ya cachea una hora en el
  * servidor; el `Cache-Control` deja que también lo cachee el navegador.
  */

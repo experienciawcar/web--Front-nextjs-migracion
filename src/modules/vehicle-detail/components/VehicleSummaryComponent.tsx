@@ -1,9 +1,13 @@
+import { PROMISE_CONDITION, PROMISE_HEADLINE } from "@/modules/financing/constants/promise";
 import Image, { type StaticImageData } from "next/image";
 
 import arrowCircle from "@/modules/shared/assets/icons/arrow-circle.svg";
+import SeparateVehicleButtonComponent from "@/modules/separation/components/SeparateVehicleButtonComponent";
 import ButtonComponent from "@/modules/shared/components/ButtonComponent";
 import WarrantyBadgeComponent from "@/modules/shared/components/WarrantyBadgeComponent";
 import { ROUTES } from "@/modules/shared/constants/routes";
+import { vehicleWhatsappMessage, whatsappHref } from "@/modules/shared/constants/whatsapp";
+import { WhatsAppIcon } from "@/modules/shared/components/icons";
 
 import iconCar from "../assets/summary/n-auto.svg";
 import iconExchange from "../assets/summary/n-cambio.svg";
@@ -35,9 +39,8 @@ import FavoriteButtonComponent from "@/modules/favorites/components/FavoriteButt
  *
  * El ícono de IA (círculo con degradado y estrella, 1542:22590, esquina de la tarjeta) abre el
  * resumen con Gemini (`VehicleAiSummaryComponent`); el SVG está armado a mano (el export del nodo
- * trae el marco entero). El corazón de favoritos usa el backend (`/api/favorites`). Sin hacer, a propósito: "o desde $X /mes*", porque la API no trae la cuota.
- * TODO(negocio): "SEPÁRALO AQUÍ" abría el pago (Wompi/ePayco); lleva a Contacto
- * (`docs/DETALLE_VEHICULO.md` §7.2-3). TODO: "Garantia de 6 meses" del diseño lleva errata; aquí
+ * trae el marco entero). El corazón de favoritos usa el backend (`/api/favorites`). "o desde $X/mes*" es una estimación con la calculadora global (`calculateMonthlyPayment`, 60 meses y 30 % de inicial), no un dato del backend.
+ * "SEPÁRALO AQUÍ" abre el modal de pago (`modules/separation`). TODO: "Garantia de 6 meses" del diseño lleva errata; aquí
  * sale el texto del backend ("Garantía 6 meses").
  */
 export default function VehicleSummaryComponent({
@@ -95,36 +98,51 @@ export default function VehicleSummaryComponent({
                   {vehicle.previousPrice}
                 </p>
               )}
+              <p className="text-small leading-5 text-gray-dark">
+                o desde{" "}
+                <span className="font-bold text-orange">
+                  {vehicle.monthlyPayment}/mes*
+                </span>{" "}
+                ·{" "}
+                <a href="#financiacion" className="underline">
+                  simular
+                </a>
+              </p>
             </div>
           </>
         )}
-
-        {!soldOut && (
-          // TODO(negocio): ver el JSDoc, el pago no está portado.
-          <ButtonComponent
-            href={ROUTES.contact}
-            size="medium"
-            icon={arrowCircle}
-            className="w-full max-w-none! justify-center!"
-          >
-            Sepáralo aquí
-          </ButtonComponent>
-        )}
-        <div className="grid grid-cols-2 gap-4 [&>*]:w-full [&>*]:max-w-none!">
-          <VehicleExpertiseComponent
-            vehicleId={vehicle.id}
-            expertise={vehicle.expertise}
-            vehicleName={vehicle.name}
-            variant="summary"
-          />
-          <ButtonComponent
-            href="#financiacion"
-            variant="secondary"
-            size="medium"
-            className="max-w-none!"
-          >
-            Financiar
-          </ButtonComponent>
+        {/* WhatsApp + Ver peritaje lado a lado y "Sepáralo aquí" debajo. El id lo observa la barra fija. */}
+        <div id="botones-ficha-movil" className="flex flex-col gap-4">
+          <div className="grid grid-cols-2 gap-4 [&>*]:w-full [&>*]:max-w-none!">
+            <ButtonComponent
+              href={whatsappHref(vehicleWhatsappMessage(vehicle))}
+              newTab
+              variant="green"
+              size="medium"
+            >
+              <WhatsAppIcon className="size-5" />
+              WhatsApp
+            </ButtonComponent>
+            <VehicleExpertiseComponent
+              vehicleId={vehicle.id}
+              expertise={vehicle.expertise}
+              vehicleName={vehicle.name}
+              variant="summary"
+            />
+          </div>
+          {!soldOut && (
+            <SeparateVehicleButtonComponent
+              vehicleId={vehicle.id}
+              vehicleName={vehicle.name}
+              price={vehicle.priceValue}
+              priceLabel={vehicle.price}
+              stockId={vehicle.stockId}
+              icon={arrowCircle}
+              className="w-full max-w-none! justify-center!"
+            >
+              Sepáralo aquí
+            </SeparateVehicleButtonComponent>
+          )}
         </div>
 
         <hr className="border-gray/30" />
@@ -172,7 +190,7 @@ export default function VehicleSummaryComponent({
         {vehicle.warranty && (
           <Bullet icon={iconMedal}>{vehicle.warranty.bullet}</Bullet>
         )}
-        <Bullet icon={iconMoney}>Financiación de hasta el 100% del vehículo</Bullet>
+        <Bullet icon={iconMoney}>{PROMISE_HEADLINE}, {PROMISE_CONDITION}</Bullet>
       </ul>
     </div>
   );

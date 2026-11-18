@@ -313,109 +313,113 @@ export default function HeroCarouselComponent({
           (medido en la referencia): acaban en x=1094, antes de las rayas cian de
           la esquina de los slides oscuros. Va justo bajo el arte y sobre la tarjeta
           de búsqueda, que baja lo que ocupa (ver `HeroSearchSectionComponent`). */}
-      <div
-        className="container-wcar absolute inset-x-0 top-[calc(var(--tabs-top)*var(--hero-s))] z-20 hidden md:block md:pl-[calc(124px*var(--hero-s))] xl:top-(--tabs-top) xl:pl-8"
-        style={{ "--tabs-top": `${HERO_TABS_TOP}px` } as React.CSSProperties}
-      >
+      {count > 1 && (
         <div
-          role="group"
-          aria-label="Elegir banner"
-          className="flex items-end gap-6 xl:gap-11"
+          className="container-wcar absolute inset-x-0 top-[calc(var(--tabs-top)*var(--hero-s))] z-20 hidden md:block md:pl-[calc(124px*var(--hero-s))] xl:top-(--tabs-top) xl:pl-8"
+          style={{ "--tabs-top": `${HERO_TABS_TOP}px` } as React.CSSProperties}
         >
-          <CarouselArrowsComponent
-            canPrev
-            canNext
-            onPrev={() => select(index - 1)}
-            onNext={() => select(index + 1)}
-            className="mb-[-10px] ml-1 shrink-0"
-          />
-          <div className="grid min-w-0 max-w-[calc(863px*var(--hero-s))] flex-1 grid-cols-[repeat(4,minmax(0,179px))] gap-x-6 xl:max-w-none xl:flex-none xl:grid-cols-[repeat(4,179px)] xl:gap-x-[49px]">
-            {slides.map((slide, i) => (
-              <button
-                key={slide.id}
-                type="button"
-                aria-label={`Ir al banner ${i + 1} de ${count}: ${slide.label}`}
-                aria-current={i === index}
-                onClick={() => select(i)}
-                className="min-w-0 cursor-pointer text-left"
-              >
-                <span
-                  className={`block truncate text-[14px] leading-6 font-semibold transition-colors xl:text-[16px] duration-300 motion-reduce:transition-none ${
-                    i === index ? tone.active : tone.idle
-                  }`}
+          <div
+            role="group"
+            aria-label="Elegir banner"
+            className="flex items-end gap-6 xl:gap-11"
+          >
+            <CarouselArrowsComponent
+              canPrev
+              canNext
+              onPrev={() => select(index - 1)}
+              onNext={() => select(index + 1)}
+              className="mb-[-10px] ml-1 shrink-0"
+            />
+            <div className="grid min-w-0 max-w-[calc(863px*var(--hero-s))] flex-1 grid-cols-[repeat(4,minmax(0,179px))] gap-x-6 xl:max-w-none xl:flex-none xl:grid-cols-[repeat(4,179px)] xl:gap-x-[49px]">
+              {slides.map((slide, i) => (
+                <button
+                  key={slide.id}
+                  type="button"
+                  aria-label={`Ir al banner ${i + 1} de ${count}: ${slide.label}`}
+                  aria-current={i === index}
+                  onClick={() => select(i)}
+                  className="min-w-0 cursor-pointer text-left"
                 >
-                  {slide.tabTitle}
-                </span>
-                <span
-                  className={`block truncate text-[14px] leading-[22px] font-medium italic transition-colors duration-300 motion-reduce:transition-none ${
-                    i === index ? tone.active : tone.idle
-                  }`}
-                >
-                  {slide.tabSubtitle}
-                </span>
-                <span
-                  aria-hidden
-                  className={`mt-2 block h-[3px] w-full transition-colors duration-300 motion-reduce:transition-none ${
-                    i === index ? tone.lineActive : tone.lineIdle
-                  }`}
-                />
-              </button>
-            ))}
+                  <span
+                    className={`block truncate text-[14px] leading-6 font-semibold transition-colors xl:text-[16px] duration-300 motion-reduce:transition-none ${
+                      i === index ? tone.active : tone.idle
+                    }`}
+                  >
+                    {slide.tabTitle}
+                  </span>
+                  <span
+                    className={`block truncate text-[14px] leading-[22px] font-medium italic transition-colors duration-300 motion-reduce:transition-none ${
+                      i === index ? tone.active : tone.idle
+                    }`}
+                  >
+                    {slide.tabSubtitle}
+                  </span>
+                  <span
+                    aria-hidden
+                    className={`mt-2 block h-[3px] w-full transition-colors duration-300 motion-reduce:transition-none ${
+                      i === index ? tone.lineActive : tone.lineIdle
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Rótulo + rayas (mobile): el título y el subtítulo del slide ACTIVO (los
           mismos `tabTitle`/`tabSubtitle` de la barra de desktop, no los cuatro: no
           caben), con su raya naranja debajo, y a la derecha una raya corta por
           slide para elegir uno. Todo sobre el borde de la tarjeta de búsqueda (que
           se monta 64 px sobre el banner). */}
-      <div className="container-wcar absolute inset-x-0 bottom-24 z-20 flex items-end justify-between gap-4 max-md:px-6 md:hidden">
-        <div className="min-w-0">
-          <p
-            className={`truncate text-[14px] leading-5 font-bold ${mobileTone.active}`}
-          >
-            {slides[index].tabTitle}
-          </p>
-          <p
-            className={`truncate text-[12px] leading-4 font-medium italic ${mobileTone.idle}`}
-          >
-            {slides[index].tabSubtitle}
-          </p>
-          <span
-            aria-hidden
-            className={`mt-1.5 block h-[3px] w-14 ${mobileTone.lineActive}`}
-          />
-        </div>
+      {count > 1 && (
+        <div className="container-wcar absolute inset-x-0 bottom-24 z-20 flex items-end justify-between gap-4 max-md:px-6 md:hidden">
+          <div className="min-w-0">
+            <p
+              className={`truncate text-[14px] leading-5 font-bold ${mobileTone.active}`}
+            >
+              {slides[index].tabTitle}
+            </p>
+            <p
+              className={`truncate text-[12px] leading-4 font-medium italic ${mobileTone.idle}`}
+            >
+              {slides[index].tabSubtitle}
+            </p>
+            <span
+              aria-hidden
+              className={`mt-1.5 block h-[3px] w-14 ${mobileTone.lineActive}`}
+            />
+          </div>
 
-        <div
-          role="group"
-          aria-label="Elegir banner"
-          className="flex shrink-0 gap-2"
-        >
-          {slides.map((slide, i) =>
-            // TEMPORAL (`hiddenOnMobile`): sin raya aquí, así tampoco se puede
-            // elegir a mano en mobile. El selector de desktop no filtra nada.
-            slide.hiddenOnMobile ? null : (
-              <button
-                key={slide.id}
-                type="button"
-                aria-label={`Ir al banner ${i + 1} de ${count}: ${slide.label}`}
-                aria-current={i === index}
-                onClick={() => select(i)}
-                className="flex h-6 w-6 cursor-pointer items-center"
-              >
-                <span
-                  aria-hidden
-                  className={`h-[3px] w-full transition-colors duration-300 motion-reduce:transition-none ${
-                    i === index ? mobileTone.lineActive : mobileTone.lineIdle
-                  }`}
-                />
-              </button>
-            ),
-          )}
+          <div
+            role="group"
+            aria-label="Elegir banner"
+            className="flex shrink-0 gap-2"
+          >
+            {slides.map((slide, i) =>
+              // TEMPORAL (`hiddenOnMobile`): sin raya aquí, así tampoco se puede
+              // elegir a mano en mobile. El selector de desktop no filtra nada.
+              slide.hiddenOnMobile ? null : (
+                <button
+                  key={slide.id}
+                  type="button"
+                  aria-label={`Ir al banner ${i + 1} de ${count}: ${slide.label}`}
+                  aria-current={i === index}
+                  onClick={() => select(i)}
+                  className="flex h-6 w-6 cursor-pointer items-center"
+                >
+                  <span
+                    aria-hidden
+                    className={`h-[3px] w-full transition-colors duration-300 motion-reduce:transition-none ${
+                      i === index ? mobileTone.lineActive : mobileTone.lineIdle
+                    }`}
+                  />
+                </button>
+              ),
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }

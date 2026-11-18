@@ -99,5 +99,6 @@ const SLIDES: HeroSlide[] = [
  * banner.
  */
 export default function HeroComponent() {
-  return <HeroCarouselComponent slides={SLIDES} />;
+  // Un solo slide fijo: sin rotación ni barra de rótulos (a pedido del usuario).
+  return <HeroCarouselComponent slides={SLIDES.slice(0, 1)} />;
 }

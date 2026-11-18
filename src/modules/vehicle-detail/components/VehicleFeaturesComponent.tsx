@@ -7,7 +7,6 @@ import SideLabelComponent from "@/modules/shared/components/SideLabelComponent";
 import ZigZagComponent from "@/modules/shared/components/ZigZagComponent";
 import { ROUTES } from "@/modules/shared/constants/routes";
 
-import iconGuarantee from "../assets/specs/icon-garantia.svg";
 import iconClaimsHelp from "../assets/features/icon-reclamaciones-ayuda.svg";
 import iconClaimsAmount from "../assets/features/icon-reclamaciones-monto.svg";
 import iconClaimsReported from "../assets/features/icon-reclamaciones-reportadas.svg";
@@ -89,33 +88,6 @@ function FeatureGrid({ features }: { features: VehicleFeature[] }) {
   );
 }
 
-function WarrantyColumn({ title, text }: { title: string; text: string }) {
-  return (
-    <div>
-      <div className="flex items-center gap-[19px]">
-        <Image
-          src={iconGuarantee}
-          alt=""
-          aria-hidden
-          className="h-11 w-11 shrink-0 object-contain"
-        />
-        <div>
-          <p className="text-body leading-6 font-medium text-dark-gray">
-            {title}
-          </p>
-          {/* TODO: en el diseño es un enlace a los términos y condiciones; el sitio anterior apuntaba a páginas del CMS (`/Términosycondiciones-garantia-vehículos-usados/65`) que aquí no existen. */}
-          <p className="text-small leading-7 font-bold text-orange">
-            Aplica términos y condiciones
-          </p>
-        </div>
-      </div>
-      <p className="mt-[13px] max-w-[382px] text-body leading-6 font-medium text-gray-dark">
-        {text}
-      </p>
-    </div>
-  );
-}
-
 /**
  * "Características del vehículo": el bloque oscuro de la izquierda (título, "Quiero conocerlo",
  * rayado y zigzag), el acordeón de datos y la tarjeta "Evaluación del vehículo".
@@ -148,7 +120,6 @@ export default function VehicleFeaturesComponent({
 }: {
   vehicle: VehicleDetail;
 }) {
-  const hasWarranty = Boolean(vehicle.warranty) || vehicle.happinessWarranty;
   const hasHistory = vehicle.history.length > 0 || vehicle.plateEnd !== null;
   const historyItems: VehicleFeature[] = [
     ...vehicle.history.slice(0, 3),
@@ -163,29 +134,6 @@ export default function VehicleFeaturesComponent({
     title: React.ReactNode;
     body: React.ReactNode;
   }[] = [];
-
-  if (hasWarranty) {
-    sections.push({
-      key: "garantias",
-      title: "Garantías",
-      body: (
-        <div className="grid gap-x-8 gap-y-8 xl:grid-cols-2 xl:gap-x-[100px]">
-          {vehicle.happinessWarranty && (
-            <WarrantyColumn
-              title="Garantía de felicidad"
-              text="Lleva tu vehículo y, si no estás satisfecho, puedes cambiarlo: tienes hasta 7 días o 300 km para hacerlo."
-            />
-          )}
-          {vehicle.warranty && (
-            <WarrantyColumn
-              title={vehicle.warranty.title}
-              text="Aplica solo para compras y reservas realizadas en la web."
-            />
-          )}
-        </div>
-      ),
-    });
-  }
 
   if (hasHistory) {
     sections.push({

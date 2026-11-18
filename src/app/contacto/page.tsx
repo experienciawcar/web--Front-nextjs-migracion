@@ -17,9 +17,8 @@ export const metadata: Metadata = buildPageMetadata({
  * anterior; no hay node-id de Figma ni diseño mobile.
  *
  * Los tres botones de la página llevan a destinos provisionales (los
- * formularios no existen): ver `contact/constants/options.ts`. La pestaña
- * "Contacta un asesor" ya no va aquí: es global y vive en el layout (ver
- * `ContactAdvisorTabComponent`).
+ * formularios no existen): ver `contact/constants/options.ts`. El botón
+ * flotante de WhatsApp es global y vive en el layout (`WhatsAppFloatingComponent`).
  *
  * Faltan por agregar: los formularios a los que llevan los botones
  * (`/contacta-a-la-empresa`, `/cotizar` y el de reserva del taller). El Navbar y

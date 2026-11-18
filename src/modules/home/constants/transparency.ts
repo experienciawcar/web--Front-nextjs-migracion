@@ -1,3 +1,4 @@
+import { PROMISE_CONDITION, PROMISE_DETAIL } from "@/modules/financing/constants/promise";
 import type { StaticImageData } from "next/image";
 
 import iconCompraOnline from "../assets/transparencia/icon-compra-online.svg";
@@ -50,7 +51,7 @@ export const TRANSPARENCY_FEATURES: TransparencyFeature[] = [
     icon: iconFinanciacion,
     title: "Financiación en unos ",
     titleItalic: "cuantos clicks.",
-    description: "Aplica para un crédito en minutos desde nuestra web.",
+    description: `${PROMISE_DETAIL} ${PROMISE_CONDITION.replace(/^s/, "S")}.`,
   },
   {
     id: "seguros",

@@ -1,3 +1,7 @@
+"use client";
+
+import { useSyncExternalStore } from "react";
+
 import VehicleCardComponent from "@/modules/shared/components/VehicleCardComponent";
 import type { Vehicle } from "@/modules/shared/types/vehicle";
 
@@ -19,9 +23,9 @@ const PROMO_EVERY = 6;
 const BANNER_AFTER = 6;
 
 const GRID_CLASS =
-  "grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:gap-10";
+  "grid grid-cols-2 gap-3 sm:gap-6 xl:grid-cols-3 xl:gap-10";
 /** El ancho real de una tarjeta en esta grilla (3 columnas de `container-wcar`, 1192px con 24px de separación). */
-const CARD_SIZES = "(min-width: 1280px) 340px, (min-width: 640px) 45vw, 100vw";
+const CARD_SIZES = "(min-width: 1280px) 340px, (min-width: 640px) 45vw, 50vw";
 
 /**
  * Grilla de resultados: `VehicleCardComponent` (sin tocar, ya construida y
@@ -52,6 +56,19 @@ const CARD_SIZES = "(min-width: 1280px) 340px, (min-width: 640px) 45vw, 100vw";
  * menos brusco y evita que la paginación "salte" al desaparecer y reaparecer
  * el contenido.
  */
+/** `sm` o más: el servidor y la primera pintura asumen que sí (con promos); en móvil se quitan. */
+function useIsSmUp() {
+  return useSyncExternalStore(
+    (notify) => {
+      const query = window.matchMedia("(min-width: 640px)");
+      query.addEventListener("change", notify);
+      return () => query.removeEventListener("change", notify);
+    },
+    () => window.matchMedia("(min-width: 640px)").matches,
+    () => true,
+  );
+}
+
 export default function ResultsGridComponent({
   vehicles,
   loading,
@@ -63,6 +80,8 @@ export default function ResultsGridComponent({
   hasFilters: boolean;
   onClearFilters: () => void;
 }) {
+  // En móvil no hay promos: ocuparían una celda de las 2 por fila y dejarían una tarjeta sola.
+  const promoLimit = useIsSmUp() ? PROMO_VARIANT_COUNT : 0;
   const isInitialLoad = loading && vehicles.length === 0;
 
   if (isInitialLoad) {
@@ -99,7 +118,7 @@ export default function ResultsGridComponent({
   };
 
   vehicles.forEach((vehicle) => {
-    while ((cell + 1) % PROMO_EVERY === 0 && promoCount < PROMO_VARIANT_COUNT) {
+    while ((cell + 1) % PROMO_EVERY === 0 && promoCount < promoLimit) {
       pushCell(
         <PromoCardComponent
           key={`promo-${promoCount}`}
@@ -112,6 +131,7 @@ export default function ResultsGridComponent({
         key={vehicle.id}
         vehicle={vehicle}
         className="reveal w-full"
+        compact
         sizes={CARD_SIZES}
       />,
     );

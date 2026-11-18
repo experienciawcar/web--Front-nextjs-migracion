@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Urbanist } from "next/font/google";
 
-import ContactAdvisorTabComponent from "@/modules/shared/components/ContactAdvisorTabComponent";
+import WhatsAppFloatingComponent from "@/modules/shared/components/WhatsAppFloatingComponent";
 import FooterComponent from "@/modules/shared/components/FooterComponent";
 import NavbarComponent from "@/modules/shared/components/NavbarComponent";
 import ScrollRevealComponent from "@/modules/shared/components/ScrollRevealComponent";
@@ -40,10 +40,9 @@ export default function RootLayout({
         <NavbarComponent />
         {children}
         <FooterComponent />
-        {/* Después del contenido: es fija y se ve a la derecha, pero para el
-            teclado y los lectores de pantalla va al final, no antes del título
-            de cada página. Está en todas: Contacto y el Inicio la repiten igual. */}
-        <ContactAdvisorTabComponent />
+        {/* Después del contenido: es fija, pero para el teclado y los lectores de
+            pantalla va al final, no antes del título de cada página. */}
+        <WhatsAppFloatingComponent />
         <ScrollRevealComponent />
       </body>
     </html>

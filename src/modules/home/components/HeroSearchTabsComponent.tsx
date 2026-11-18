@@ -3,8 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useState, useSyncExternalStore } from "react";
 
-import arrowCircle from "@/modules/shared/assets/icons/arrow-circle.svg";
-import ButtonComponent from "@/modules/shared/components/ButtonComponent";
 import { SearchIcon } from "@/modules/shared/components/icons";
 import { ROUTES, vehicleHref } from "@/modules/shared/constants/routes";
 
@@ -15,17 +13,15 @@ import {
 import type { CarSuggestion } from "../types/car-suggestion";
 
 import HeroSearchSuggestionsComponent from "./HeroSearchSuggestionsComponent";
-import HeroInstallmentsPanelComponent from "./HeroInstallmentsPanelComponent";
 import HeroSellPanelComponent from "./HeroSellPanelComponent";
-import { TabBriefcaseIcon, TabCarIcon, TabSellIcon } from "./icons";
+import { TabCarIcon, TabSellIcon } from "./icons";
 
 const TAB_ICONS = {
   buy: TabCarIcon,
   sell: TabSellIcon,
-  installments: TabBriefcaseIcon,
 } as const;
 
-type TabId = "buy" | "sell" | "installments";
+type TabId = "buy" | "sell";
 
 const TABS: {
   id: TabId;
@@ -49,13 +45,6 @@ const TABS: {
     placeholder: "Ingresa la placa de tu vehículo",
     mobilePlaceholder: "Ingresa la placa de tu vehículo",
     action: ROUTES.sellCar,
-  },
-  {
-    id: "installments",
-    label: "Compra a cuotas",
-    placeholder: "Busca por marca, modelo, color...",
-    mobilePlaceholder: "Busca por marca",
-    action: ROUTES.financing,
   },
 ];
 
@@ -247,8 +236,6 @@ export default function HeroSearchTabsComponent() {
       >
         {active.id === "sell" ? (
           <HeroSellPanelComponent />
-        ) : active.id === "installments" ? (
-          <HeroInstallmentsPanelComponent />
         ) : (
           <>
             <form
@@ -278,14 +265,6 @@ export default function HeroSearchTabsComponent() {
                 />
               </div>
 
-              <ButtonComponent
-                type="submit"
-                icon={arrowCircle}
-                iconClassName="hidden md:flex"
-                className="h-[54px]! justify-center! md:w-[152px]!"
-              >
-                Go
-              </ButtonComponent>
             </form>
 
             <HeroSearchSuggestionsComponent

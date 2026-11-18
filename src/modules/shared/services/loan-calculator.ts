@@ -1,4 +1,4 @@
-import { MONTHLY_INTEREST_RATE } from "../constants/loan-rates";
+import { DOWN_PAYMENT_RATIO, LOAN_TERM_MONTHS, MONTHLY_INTEREST_RATE } from "../constants/loan-rates";
 
 /** Tope de dígitos que se aceptan en un campo de dinero (hasta $99.999.999.999). */
 export const MAX_MONEY_DIGITS = 11;
@@ -42,4 +42,28 @@ export function parseMoney(text: string): number {
 /** Pesos colombianos con punto de miles y sin decimales (89345990 → "89.345.990"). */
 export function formatThousands(amount: number): string {
   return String(Math.round(amount)).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+/**
+ * Inverso de `calculateMonthlyPayment` con el plazo y la cuota inicial de la tarjeta
+ * (`LOAN_TERM_MONTHS`, `DOWN_PAYMENT_RATIO`): el precio más alto, redondeado hacia abajo a los
+ * $100.000, cuya cuota estimada no pasa de `payment`. Es estimado, como la cuota de la tarjeta.
+ */
+export function maxPriceForPayment(payment: number): number {
+  const financed = (payment * (1 - Math.pow(1 + MONTHLY_INTEREST_RATE, -LOAN_TERM_MONTHS))) / MONTHLY_INTEREST_RATE;
+  return Math.floor(financed / (1 - DOWN_PAYMENT_RATIO) / 100_000) * 100_000;
+}
+
+/**
+ * Si el texto del buscador pide una cuota ("cuota 1.2M", "1500000 al mes", "$1.2M/mes") devuelve
+ * el valor en pesos; si no, `null` y el texto se busca como palabra. Exige una palabra de cuota
+ * ("cuota", "/mes", "al mes", "mensual") para no confundir "Mazda 3 2020" con dinero.
+ */
+export function parseQuotaSearch(text: string): number | null {
+  if (!/cuota|\/\s*mes|al mes|mensual/i.test(text)) return null;
+  const match = text.match(/(\d+(?:[.,]\d+)*)\s*(millones|millon|mm|m|mil|k)?(?![a-z])/i);
+  if (!match) return null;
+  const unit = /^(millones|millon|mm|m)$/i.test(match[2] ?? "") ? 1e6 : match[2] ? 1e3 : 1;
+  const amount = unit > 1 ? Number.parseFloat(match[1].replace(",", ".")) * unit : Number(match[1].replace(/[.,]/g, ""));
+  return amount >= 100_000 ? Math.round(amount) : null;
 }

@@ -1,3 +1,4 @@
+import { PROMISE_HEADLINE } from "./promise";
 import type { FinancingProduct } from "../types/financing-product";
 
 import iconCredifacil from "../assets/productos/icon-credifacil.svg";
@@ -89,13 +90,13 @@ export const FINANCING_PRODUCTS: FinancingProduct[] = [
     nameClassName: "leading-[normal] font-bold",
     nameTailClassName: "font-semibold italic text-white",
     namePosition: { left: 115, top: 16 },
-    subtitle: "Financia hasta el 100% de tu vehículo",
+    subtitle: PROMISE_HEADLINE,
     subtitlePosition: { left: 117, top: 57 },
     linesPosition: { right: -67.68, top: 14 },
     mobile: {
       iconBox: { left: 52, top: 14, width: 48, height: 48 },
       namePosition: { left: 119, top: 15 },
-      subtitle: "Financiación hasta el 100%",
+      subtitle: PROMISE_HEADLINE,
       subtitlePosition: { left: 119, top: 46 },
       linesPosition: { right: -68.68, top: -5 },
     },
@@ -117,7 +118,7 @@ export const FINANCING_PRODUCTS: FinancingProduct[] = [
         rowHeight: 38,
         textTop: 8,
         mainClassName: "text-[16px] leading-6 xl:text-[20px]",
-        main: [{ text: "Pre-aprobado en menos de 15 minutos" }],
+        main: [{ text: "Respuesta en minutos" }],
       },
       {
         id: "atencion",

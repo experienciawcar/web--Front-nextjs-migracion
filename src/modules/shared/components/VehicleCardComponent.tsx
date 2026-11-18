@@ -80,11 +80,15 @@ export default function VehicleCardComponent({
   vehicle,
   sizes = "291px",
   className = "",
+  compact = false,
 }: {
   vehicle: Vehicle;
   sizes?: string;
   className?: string;
+  /** Solo por debajo de `sm`: tarjeta de media columna (catálogo móvil, 2 por fila), sin botón ni cuadrícula de datos. */
+  compact?: boolean;
 }) {
+  const m = (classes: string) => (compact ? ` ${classes}` : "");
   const { tag, warranty } = vehicle;
   const comingSoon = tag?.name === COMING_SOON_TAG;
 
@@ -112,7 +116,7 @@ export default function VehicleCardComponent({
 
         {tag && (
           <span
-            className="absolute top-0 left-0 z-20 rounded-br-2xl px-4 py-2 text-small leading-5 font-medium"
+            className={`absolute top-0 left-0 z-20 rounded-br-2xl px-4 py-2 text-small leading-5 font-medium${m("max-sm:px-2 max-sm:py-1 max-sm:text-caption")}`}
             style={{
               backgroundColor: tag.color,
               color: getTagTextColor(tag.color),
@@ -124,21 +128,21 @@ export default function VehicleCardComponent({
 
         <FavoriteButtonComponent
           vehicleId={vehicle.id}
-          className="absolute right-3 bottom-3 z-20 flex size-9 items-center justify-center rounded-full bg-white shadow"
+          className={`absolute right-3 bottom-3 z-20 flex size-9 items-center justify-center rounded-full bg-white shadow${m("max-sm:hidden")}`}
         />
 
         {warranty && (
           <WarrantyBadgeComponent
             label={warranty.label}
             tone={warranty.tone}
-            className="absolute top-3 right-3 z-20"
+            className={`absolute top-3 right-3 z-20${m("max-sm:top-2 max-sm:right-2 max-sm:h-6 max-sm:gap-1 max-sm:pr-3 max-sm:pl-2 max-sm:text-[11px] max-sm:leading-4")}`}
           />
         )}
       </div>
 
       {/* Datos */}
-      <div className="flex flex-1 flex-col px-4 pt-4 pb-4">
-        <h3 className="line-clamp-2 min-h-11 text-[18px] leading-[22px] font-bold text-dark-gray">
+      <div className={`flex flex-1 flex-col px-4 pt-4 pb-4${m("max-sm:p-3")}`}>
+        <h3 className={`line-clamp-2 min-h-11 text-[18px] leading-[22px] font-bold text-dark-gray${m("max-sm:min-h-9 max-sm:text-[14px] max-sm:leading-[18px]")}`}>
           <AppLinkComponent
             href={vehicle.href}
             className="after:absolute after:inset-0"
@@ -147,11 +151,17 @@ export default function VehicleCardComponent({
           </AppLinkComponent>
         </h3>
 
-        <p className="mt-2 min-h-5 text-small leading-5 font-bold text-gray-dark">
+        <p className={`mt-2 min-h-5 text-small leading-5 font-bold text-gray-dark${m("max-sm:hidden")}`}>
           {vehicle.bodyType}
         </p>
 
-        <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 text-caption leading-[22px] font-medium text-gray">
+        {compact && (
+          <p className="mt-1 truncate text-caption leading-4 text-gray sm:hidden">
+            {[vehicle.year, vehicle.mileage].filter(Boolean).join(" · ")}
+          </p>
+        )}
+
+        <ul className={`mt-5 grid grid-cols-2 gap-x-4 gap-y-3 text-caption leading-[22px] font-medium text-gray${m("max-sm:hidden")}`}>
           {vehicle.year && <InfoItem icon={iconYear}>{vehicle.year}</InfoItem>}
           {vehicle.mileage && (
             <InfoItem icon={iconMileage}>{vehicle.mileage}</InfoItem>
@@ -160,9 +170,9 @@ export default function VehicleCardComponent({
           <InfoItem icon={iconCity}>{vehicle.city}</InfoItem>
         </ul>
 
-        <div className="mt-5 flex min-h-[50px] items-center justify-between gap-3">
+        <div className={`mt-5 flex min-h-[50px] items-center justify-between gap-3${m("max-sm:mt-2 max-sm:min-h-0")}`}>
           <div className="min-w-0">
-            <p className="text-[22px] leading-[30px] font-bold whitespace-nowrap text-dark-gray">
+            <p className={`text-[22px] leading-[30px] font-bold whitespace-nowrap text-dark-gray${m("max-sm:text-[16px] max-sm:leading-6")}`}>
               {vehicle.price}
             </p>
             {vehicle.previousPrice && (
@@ -171,15 +181,20 @@ export default function VehicleCardComponent({
                 {vehicle.previousPrice}
               </p>
             )}
+            {compact && vehicle.monthlyPayment && (
+              <p className="text-caption leading-4 text-gray-dark sm:hidden">
+                desde <span className="font-bold text-orange">{vehicle.monthlyPayment}</span>/mes*
+              </p>
+            )}
           </div>
-          <ButtonComponent href={vehicle.href} size="big" className="shrink-0">
+          <ButtonComponent href={vehicle.href} size="big" className={`shrink-0${m("max-sm:hidden")}`}>
             Ver
             <span className="sr-only"> {vehicle.name}</span>
           </ButtonComponent>
         </div>
 
         {vehicle.viewers > 0 && (
-          <p className="mt-5 flex items-center gap-2 text-small leading-5 text-gray">
+          <p className={`mt-5 flex items-center gap-2 text-small leading-5 text-gray${m("max-sm:hidden")}`}>
             <Image
               src={iconViewers}
               alt=""

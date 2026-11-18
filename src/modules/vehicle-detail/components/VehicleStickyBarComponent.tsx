@@ -2,73 +2,102 @@
 
 import { useEffect, useState } from "react";
 
-import Image from "next/image";
+import SeparateVehicleButtonComponent from "@/modules/separation/components/SeparateVehicleButtonComponent";
+import ButtonComponent from "@/modules/shared/components/ButtonComponent";
+import { WhatsAppIcon } from "@/modules/shared/components/icons";
 
-import AppLinkComponent from "@/modules/shared/components/AppLinkComponent";
-import { ROUTES } from "@/modules/shared/constants/routes";
-
-import rectangleSticky from "../assets/sticky/rectangle-sticky-mobile.svg";
-import { isUnavailable } from "../constants/tags";
+import arrowCircle from "@/modules/shared/assets/icons/arrow-circle.svg";
 
 /**
- * Barra fija "SEPARAR VEHÍCULO" de mobile (`StickyActionMobile` del sitio anterior): pegada al borde
- * inferior de la ventana mientras se lee la ficha. Solo en pantallas menores a 1280.
+ * Barra fija de mobile con dos caminos: "WhatsApp" (verde, para quien aún duda) y "Sepáralo desde
+ * $2M" (naranja, para quien ya está listo), con el precio arriba. Pegada al borde inferior de la
+ * ventana mientras se lee la ficha; solo en pantallas menores a 1280.
  *
- * Se esconde (baja fuera de la ventana) cuando el pie de página entra en pantalla: así no queda
- * una franja oscura suelta entre el contenido y el footer. Sin JavaScript no hay barra (es un
- * atajo, la página tiene su botón "Sepáralo aquí").
+ * Se esconde (baja fuera de la ventana) cuando el pie de página entra en pantalla, para no dejar
+ * una franja suelta entre el contenido y el footer. Sin JavaScript no hay barra (es un atajo, la
+ * página tiene sus botones).
  *
- * A diferencia del sitio anterior, sí respeta las etiquetas "Reservado" y "Vendido" (allí la barra
- * dejaba iniciar la separación de un vehículo ya reservado: `docs/DETALLE_VEHICULO.md` §7.12).
- * TODO(negocio): igual que "SEPÁRALO AQUÍ", lleva a Contacto hasta que se porte el pago.
- * El diseño mobile (89:4840) no dibuja esta barra.
+ * "Vendido": no hay barra. "Reservado": solo WhatsApp y sin precio (como la tarjeta de resumen).
+ * El `id` lo usa el botón flotante global para ocultarse en mobile en esta página (ya hay uno aquí).
+ * La cuota "o desde $X/mes*" del diseño no está: la API no la trae.
  */
 export default function VehicleStickyBarComponent({
   tagName,
+  price,
+  priceValue,
+  vehicleId,
+  vehicleName,
+  stockId,
+  whatsappHref,
 }: {
+  stockId: string;
   tagName: string | undefined;
+  price: string;
+  priceValue: number;
+  vehicleId: number;
+  vehicleName: string;
+  whatsappHref: string;
 }) {
   const [footerVisible, setFooterVisible] = useState(false);
+  const [buttonsVisible, setButtonsVisible] = useState(true);
 
   useEffect(() => {
     const footer = document.querySelector("footer");
-    if (!footer) return;
-    const observer = new IntersectionObserver(([entry]) =>
-      setFooterVisible(entry.isIntersecting),
+    const buttons = document.getElementById("botones-ficha-movil");
+    const observer = new IntersectionObserver((entries) =>
+      entries.forEach((e) =>
+        e.target === footer
+          ? setFooterVisible(e.isIntersecting)
+          : setButtonsVisible(e.isIntersecting),
+      ),
     );
-    observer.observe(footer);
+    if (footer) observer.observe(footer);
+    if (buttons) observer.observe(buttons);
     return () => observer.disconnect();
   }, []);
 
-  if (isUnavailable(tagName)) return null;
+  if (tagName === "Vendido") return null;
+  const reserved = tagName === "Reservado";
+  const hidden = footerVisible || buttonsVisible;
 
   return (
     <div
-      aria-hidden={footerVisible}
-      className={`fixed inset-x-0 bottom-0 z-30 flex justify-center overflow-hidden bg-[#1a1a1a] px-5 py-[15px] transition-transform duration-200 motion-reduce:transition-none xl:hidden ${footerVisible ? "pointer-events-none translate-y-full" : ""}`}
+      id="barra-ficha-movil"
+      aria-hidden={hidden}
+      className={`fixed inset-x-0 bottom-0 z-30 flex flex-col gap-3 bg-white px-5 pt-4 pb-4 shadow-[0_-4px_15px_rgba(0,0,0,0.12)] transition-transform duration-200 motion-reduce:transition-none xl:hidden ${hidden ? "pointer-events-none translate-y-full" : ""}`}
     >
-      <AppLinkComponent
-        href={ROUTES.contact}
-        className="group relative flex h-11 w-full max-w-[450px] rounded-tr-[35px] rounded-bl-[35px] drop-shadow-[0_4px_15px_rgba(0,0,0,0.4)]"
-      >
-        <span aria-hidden className="-mr-[30px] h-11 w-[53px] rounded-bl-[35px] bg-blue-neon" />
-        <span className="relative z-[101] -ml-px flex h-11 grow items-center justify-center gap-3 overflow-hidden rounded-tr-[35px] rounded-bl-[35px] bg-[#f60] text-[15px] font-bold tracking-[0.5px] text-white uppercase">
-          Separar vehículo
-          <svg
-            className="size-6 transition-transform duration-300 group-hover:translate-x-[5px]"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            aria-hidden
+      <div>
+        <p className="text-[16px] leading-6 font-bold text-dark-gray">{vehicleName}</p>
+        <p className="text-[14px] leading-5 text-gray-dark">
+          {!reserved && <span className="font-bold text-dark-gray">{price} · </span>}
+          {stockId}
+        </p>
+      </div>
+      <div className="flex gap-3">
+        <ButtonComponent
+          href={whatsappHref}
+          newTab
+          variant="green"
+          size="medium"
+          className="max-w-none! flex-2 px-2! text-[13px]!"
+        >
+          <WhatsAppIcon className="size-5" />
+          WhatsApp
+        </ButtonComponent>
+        {!reserved && (
+          <SeparateVehicleButtonComponent
+            vehicleId={vehicleId}
+            vehicleName={vehicleName}
+            price={priceValue}
+            priceLabel={price}
+            stockId={stockId}
+            icon={arrowCircle}
+            className="max-w-none! flex-3 justify-center! px-2! text-[13px]!"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </span>
-        <span aria-hidden className="absolute -top-[22px] -right-[23px] z-[100]">
-          <Image src={rectangleSticky} alt="" className="h-[50px] w-auto" />
-        </span>
-      </AppLinkComponent>
+            Sepáralo aquí
+</SeparateVehicleButtonComponent>
+        )}
+      </div>
     </div>
   );
 }

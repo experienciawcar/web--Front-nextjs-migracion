@@ -1,3 +1,4 @@
+import { PROMISE_DETAIL, PROMISE_LEGAL } from "../constants/promise";
 import Image from "next/image";
 
 import logoSantander from "@/modules/shared/assets/hero/logo-santander.png";
@@ -222,11 +223,12 @@ export default function FinancingHeroComponent() {
             id="financiacion-hero-title"
             className="relative z-40 mt-[39px] text-[32px] leading-10 font-semibold text-white md:mt-8 md:leading-9 xl:mt-[31px] xl:w-[465px] xl:text-[50px] xl:leading-[55px]"
           >
-            Financia hasta el <span className="block font-normal text-blue-neon italic">100% de tu vehículo</span>
+            Financia hasta el <span className="block font-normal text-blue-neon italic">100% de tu carro usado</span>
           </h1>
 
           <p className="relative z-40 mt-[25px] max-w-[280px] text-body leading-[22px] font-medium text-gray-light md:mt-5 md:max-w-none md:leading-6 xl:mt-[30px] xl:w-[434px] xl:text-[18px] xl:leading-[22px]">
-            Póngase en contacto con nosotros y le informaremos sin compromiso de nuestras tarifas y servicios.
+            {PROMISE_DETAIL}
+            <span className="mt-2 block text-[12px] leading-4 font-normal text-gray">{PROMISE_LEGAL}</span>
           </p>
 
           <div className="relative z-40 mt-8 max-md:absolute max-md:top-[522px] max-md:left-1/2 max-md:mt-0 max-md:-translate-x-1/2 xl:mt-[41px]">
