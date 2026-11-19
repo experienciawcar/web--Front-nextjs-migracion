@@ -135,7 +135,7 @@ export function buildFilterSections({
       content: (
         <CheckboxGroupComponent
           name="tipo"
-          options={options.vehicleTypes.map((t) => ({
+          options={options.vehicleTypes.filter((t) => String(t.id) !== "18").map((t) => ({
             value: String(t.id),
             label: t.name,
             imageUrl: t.imageUrl,

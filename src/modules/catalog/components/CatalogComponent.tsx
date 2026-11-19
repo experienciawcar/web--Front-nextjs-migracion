@@ -187,7 +187,12 @@ export default function CatalogComponent({
   useEffect(() => {
     if (!hydrated) return;
     let cancelled = false;
-    searchVehicles(effectiveFilters, page, config.bodyTypeId).then(
+    // Sin tipo elegido el backend devuelve todo (motos incluidas): en "carros" se piden todos los tipos menos moto (18).
+    const searchFilters =
+      config.kind === "carros" && !effectiveFilters.bodyTypeIds?.length
+        ? { ...effectiveFilters, bodyTypeIds: options.vehicleTypes.map((t) => String(t.id)).filter((id) => id !== "18") }
+        : effectiveFilters;
+    searchVehicles(searchFilters, page, config.bodyTypeId).then(
       (searchResult) => {
         if (cancelled) return;
         setResult(searchResult);
@@ -197,7 +202,7 @@ export default function CatalogComponent({
     return () => {
       cancelled = true;
     };
-  }, [hydrated, effectiveFilters, page, config.bodyTypeId]);
+  }, [hydrated, effectiveFilters, page, config.bodyTypeId, config.kind, options.vehicleTypes]);
 
   // La contraparte del efecto de deep-linking de arriba: cada vez que los filtros
   // (ya debounced) o la página cambian, reescribe la URL con `replaceState` — nunca

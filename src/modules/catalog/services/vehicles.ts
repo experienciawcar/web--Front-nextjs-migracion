@@ -31,14 +31,14 @@ const EMPTY_RESULT: CatalogSearchResult = { vehicles: [], count: 0, numPages: 0,
  * cuando está definido manda sobre `filters.bodyTypeIds` (el filtro "Tipo" del
  * sidebar no existe en esas variantes).
  */
-function toSearchBody(filters: CatalogFilters, fixedBodyTypeId?: string): Record<string, unknown> {
+function toSearchBody(filters: CatalogFilters, fixedBodyTypeId?: string | string[]): Record<string, unknown> {
   const body: Record<string, unknown> = {};
 
   if (filters.search) body.search_word = filters.search;
   if (filters.brandIds?.length) body.brand = filters.brandIds;
   if (filters.modelIds?.length) body.model = filters.modelIds;
   if (filters.colorNames?.length) body.colors = filters.colorNames;
-  if (fixedBodyTypeId) body.body_type = [fixedBodyTypeId];
+  if (fixedBodyTypeId) body.body_type = [fixedBodyTypeId].flat();
   else if (filters.bodyTypeIds?.length) body.body_type = filters.bodyTypeIds;
   // En la URL y el sidebar es "hibrido"; el backend lo guarda como "hibrida".
   if (filters.fuelTypes?.length) {
@@ -79,7 +79,7 @@ function toSearchBody(filters: CatalogFilters, fixedBodyTypeId?: string): Record
 export async function searchVehicles(
   filters: CatalogFilters,
   page: number,
-  fixedBodyTypeId?: string,
+  fixedBodyTypeId?: string | string[],
 ): Promise<CatalogSearchResult> {
   const url = apiUrl(`/v2/filter-cars/?page=${page}`);
 
