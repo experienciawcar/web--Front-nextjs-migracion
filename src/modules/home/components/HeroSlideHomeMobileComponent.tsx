@@ -18,7 +18,7 @@ import { HERO_MOBILE_HEIGHT } from "../constants/hero-carousel";
  *   Ventas de" naranja, "Autos Usados / 100% Online" gris oscuro y "en Colombia" blanco
  *   sobre un rectángulo #1e1e1e de 174 x 32 en (189, 98).
  * - Cifras centradas (centro en x=193,5), arriba en y=144, separadas 16 por rayas de
- *   2 x 72: "4.5", "+10mil" y "+9mil" en 28 extrabold naranja, con etiquetas de 10.
+ *   2 x 72: "4.8", "+10mil" y "+9mil" en 28 extrabold naranja, con etiquetas de 10.
  *
  * El título es un `<p role="heading" aria-level="1">` y no un `<h1>`: el `<h1>` de la
  * página ya está en el slide de escritorio (`HeroSlideHomeComponent`, oculto en
@@ -66,14 +66,14 @@ export default function HeroSlideHomeMobileComponent() {
       <div className="absolute top-[144px] left-[193.5px] flex h-[78px] -translate-x-1/2 items-end gap-4 text-center text-[10px] font-bold tracking-[0.1px] text-dark-gray">
         <div className="flex h-[68px] w-[96px] flex-col items-center">
           <p className="text-[28px] leading-[34px] font-extrabold tracking-[0.28px] text-orange">
-            4.5
+            4.8
           </p>
           <p className="mt-2 w-[96px] leading-3">
             <span className="font-medium">+2mil Reseña</span> positivas en google
           </p>
           <Image
             src={estrellas}
-            alt="Calificación de 4,5 sobre 5 en Google"
+            alt="Calificación de 4,8 sobre 5 en Google"
             className="mt-2 h-3 w-20 max-w-none"
           />
         </div>

@@ -24,7 +24,7 @@ import { HERO_CANVAS_MARGIN } from "../constants/hero-carousel";
  * - `<h1>` 40/48 bold con tracking 0,4 en (125, 49), 579 de ancho: "La Plataforma #1 en
  *   Ventas de" en naranja, "Autos Usados 100% Online" en negro y "en Colombia" en blanco
  *   sobre un rectángulo negro (121, 146) de 243 x 47.
- * - Cifras (121, 223), separadas 22 por rayas de 2 x 89: "4.5" (+ reseñas y estrellas),
+ * - Cifras (121, 223), separadas 22 por rayas de 2 x 89: "4.8" (+ reseñas y estrellas),
  *   "+10k" y "+9k", en 36 extrabold naranja con la etiqueta de 14 semibold negra.
  */
 export default function HeroSlideHomeComponent() {
@@ -65,14 +65,14 @@ export default function HeroSlideHomeComponent() {
         <div className="absolute top-[223px] left-[121px] flex items-center gap-[22px] tracking-[0.14px] text-black">
           <div className="flex h-[110px] w-[134px] flex-col justify-end">
             <p className="text-[36px] leading-[43px] font-extrabold tracking-[0.36px] text-orange">
-              4.5
+              4.8
             </p>
             <p className="text-[14px] leading-[17px] font-semibold">
               +2k Reseña positivas
             </p>
             <Image
               src={estrellas}
-              alt="Calificación de 4,5 sobre 5 en Google"
+              alt="Calificación de 4,8 sobre 5 en Google"
               className="mt-2 h-4 w-[133px] max-w-none"
             />
           </div>
