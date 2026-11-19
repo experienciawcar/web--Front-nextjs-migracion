@@ -16,8 +16,8 @@ const money = (amount: number) => `$${formatThousands(amount)}`;
 /**
  * "simular" de la ficha: un enlace que abre un `<dialog>` con una versión corta de
  * `calculadora-credito-vehicular.html` (valor, cuota inicial, plazo y tasa → cuota,
- * préstamo, intereses y costo total). Arranca con el precio del vehículo, 20 % de
- * inicial, 60 meses y 1,9 % mensual (`constants/loan-rates.ts`), o sea la misma
+ * préstamo, intereses y costo total). Arranca con el precio del vehículo, 0 % de
+ * inicial, 84 meses y 1,9 % mensual (`constants/loan-rates.ts`), o sea la misma
  * cuota que muestra la ficha. Reusa la fórmula y el campo de dinero del simulador de
  * Financiación; el `<dialog>` cierra con Esc, con la X o al pulsar fuera.
  * shortcut: no trae la tabla de amortización ni la barra de la calculadora; añadirlas si se piden.

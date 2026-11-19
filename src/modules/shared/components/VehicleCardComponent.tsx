@@ -6,6 +6,7 @@ import iconMileage from "../assets/vehicle/icon-mileage.svg";
 import iconTransmission from "../assets/vehicle/icon-transmission.svg";
 import iconViewers from "../assets/vehicle/icon-viewers.svg";
 import iconYear from "../assets/vehicle/icon-year.svg";
+import { LOAN_TERM_MONTHS } from "../constants/loan-rates";
 import type { Vehicle } from "../types/vehicle";
 import AppLinkComponent from "./AppLinkComponent";
 import ButtonComponent from "./ButtonComponent";
@@ -183,7 +184,7 @@ export default function VehicleCardComponent({
             )}
             {vehicle.monthlyPayment && (
               <p className="text-caption leading-4 text-gray-dark">
-                desde <span className="font-bold text-orange">{vehicle.monthlyPayment}</span>/mes*
+                {LOAN_TERM_MONTHS} cuotas de <span className="font-bold text-orange">{vehicle.monthlyPayment}</span>
               </p>
             )}
           </div>

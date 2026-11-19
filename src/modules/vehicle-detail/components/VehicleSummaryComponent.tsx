@@ -5,6 +5,7 @@ import arrowCircle from "@/modules/shared/assets/icons/arrow-circle.svg";
 import SeparateVehicleButtonComponent from "@/modules/separation/components/SeparateVehicleButtonComponent";
 import ButtonComponent from "@/modules/shared/components/ButtonComponent";
 import WarrantyBadgeComponent from "@/modules/shared/components/WarrantyBadgeComponent";
+import { LOAN_TERM_MONTHS } from "@/modules/shared/constants/loan-rates";
 import { ROUTES } from "@/modules/shared/constants/routes";
 import { vehicleWhatsappMessage, whatsappHref } from "@/modules/shared/constants/whatsapp";
 import { WhatsAppIcon } from "@/modules/shared/components/icons";
@@ -41,7 +42,7 @@ import FavoriteButtonComponent from "@/modules/favorites/components/FavoriteButt
  *
  * El ícono de IA (círculo con degradado y estrella, 1542:22590, esquina de la tarjeta) abre el
  * resumen con Gemini (`VehicleAiSummaryComponent`); el SVG está armado a mano (el export del nodo
- * trae el marco entero). El corazón de favoritos usa el backend (`/api/favorites`). "o desde $X/mes*" es una estimación con la calculadora global (`calculateMonthlyPayment`, 60 meses y 20 % de inicial), no un dato del backend.
+ * trae el marco entero). El corazón de favoritos usa el backend (`/api/favorites`). "o desde $X/mes*" es una estimación con la calculadora global (`calculateMonthlyPayment`, 84 meses y 0 % de inicial), no un dato del backend.
  * "SEPÁRALO AQUÍ" abre el modal de pago (`modules/separation`). TODO: "Garantia de 6 meses" del diseño lleva errata; aquí
  * sale el texto del backend ("Garantía 6 meses").
  */
@@ -121,14 +122,10 @@ export default function VehicleSummaryComponent({
                 </p>
               )}
               <p className="text-small leading-5 text-gray-dark">
-                o desde{" "}
-                <span className="font-bold text-orange">
-                  {vehicle.monthlyPayment}/mes*
-                </span>{" "}
-                <span className="max-xl:hidden">
-                  ·{" "}
-                  <LoanSimulatorModalComponent vehiclePrice={vehicle.priceValue} />
-                </span>
+                {LOAN_TERM_MONTHS} cuotas de{" "}
+                <span className="font-bold text-orange">{vehicle.monthlyPayment}</span>{" "}
+                ·{" "}
+                <LoanSimulatorModalComponent vehiclePrice={vehicle.priceValue} />
               </p>
             </div>
           </>

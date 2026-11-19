@@ -12,5 +12,5 @@ export const MONTHLY_INTEREST_RATE = 0.019;
  * Plazo y cuota inicial con los que se estima la cuota "desde $X/mes" de la tarjeta y de la ficha
  * del vehículo. TODO: confirmar con negocio (ver el comentario de `services/vehicles.ts`).
  */
-export const LOAN_TERM_MONTHS = 60;
-export const DOWN_PAYMENT_RATIO = 0.2;
+export const LOAN_TERM_MONTHS = 84;
+export const DOWN_PAYMENT_RATIO = 0;
