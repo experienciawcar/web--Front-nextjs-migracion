@@ -94,7 +94,7 @@ function formatDate(value: string): string {
   return date.toLocaleDateString("es-CO", {
     timeZone: "UTC",
     day: "numeric",
-    month: "short",
+    month: "long",
     year: "numeric",
   });
 }
@@ -167,7 +167,8 @@ function toRowMap(
 ): Map<number, string> {
   const map = new Map<number, string>();
   for (const row of rows ?? []) {
-    const value = row.content?.trim();
+    const raw = row.content?.trim();
+    const value = raw && /^si$/i.test(raw) ? "Sí" : raw;
     if (value && !map.has(row.item)) map.set(row.item, value);
   }
   return map;
@@ -268,7 +269,7 @@ function toClaims(
 ): VehicleClaims {
   const amount = parseAmount(dto.amount_claims) || parseAmount(values.get(6));
   return {
-    reported: values.get(2) ?? (dto.claims ? "Si" : "No"),
+    reported: values.get(2) ?? (dto.claims ? "Sí" : "No"),
     types: parseClaimTypes(dto.types_claims),
     amount: amount ? formatMoney(amount) : null,
   };
@@ -313,7 +314,7 @@ export function toVehicleDetail(
     bodyType,
     year: dto.year || null,
     mileage:
-      dto.mileage != null ? `${numberFormat.format(dto.mileage)} Km` : null,
+      dto.mileage != null ? `${numberFormat.format(dto.mileage)} km` : null,
     transmission,
     city: sedeName || "Bogotá",
     price: formatMoney(hasDiscount ? discountPrice : listPrice),

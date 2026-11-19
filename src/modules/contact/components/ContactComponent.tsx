@@ -62,7 +62,7 @@ export default function ContactComponent() {
           ¡Contáctanos!
         </h1>
         <p className="reveal mx-auto mt-4 max-w-[680px] text-center text-small leading-5 xl:mt-0">
-          ¡Atenderte es nuestra prioridad! Completa el formulario de contacto y experimenta un servicio excepcional
+          ¡Atenderte es nuestra prioridad! Completa el formulario de contacto y experimenta un servicio excepcional.
           Estamos aquí para atenderte.
         </p>
 

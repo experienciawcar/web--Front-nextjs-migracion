@@ -26,11 +26,11 @@ export type HomeService = {
 export const HOME_SERVICES: HomeService[] = [
   {
     id: "seguros",
-    photoTitle: "Seguros para tu Tranquilidad",
+    photoTitle: "Seguros para tu tranquilidad",
     photo: "/assets/home/servicios/seguros.webp",
     name: "Seguros ",
     brand: "wcar",
-    description: "Paga tu seguro en cómodas cuotas mensuales y ajustada a ti",
+    description: "Paga tu seguro en cómodas cuotas mensuales ajustadas a ti",
     href: ROUTES.insurance,
   },
   {
@@ -39,16 +39,16 @@ export const HOME_SERVICES: HomeService[] = [
     photo: "/assets/home/servicios/taller.webp",
     name: "Taller ",
     brand: "wcar",
-    description: "Ofrecemos soluciones  para cualquier problema mecánico",
+    description: "Ofrecemos soluciones para cualquier problema mecánico",
     href: ROUTES.workshop,
   },
   {
     id: "financiacion",
-    photoTitle: "Financia tu vehículo \ncon hasta del 100%",
+    photoTitle: "Financia hasta el 100 %\nde tu vehículo",
     photo: "/assets/home/servicios/financiacion.webp",
     name: "Financiación con ",
     brand: "wcar",
-    description: "Nibh quisque suscipit fermentum netus nulla cras",
+    description: "Solicita tu crédito en minutos desde nuestra web",
     href: ROUTES.financing,
   },
   {
@@ -57,7 +57,7 @@ export const HOME_SERVICES: HomeService[] = [
     photo: "/assets/home/servicios/wcoffee.webp",
     name: "",
     brand: "wcoffee",
-    description: "Nibh quisque suscipit fermentum netus nulla cras",
+    description: "Disfruta un café mientras conoces nuestros vehículos",
     // El sitio anterior no tiene página propia de wcoffee.
     // TODO: confirmar el destino con diseño.
     href: ROUTES.contact,

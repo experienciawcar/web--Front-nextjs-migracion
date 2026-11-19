@@ -3,8 +3,8 @@ import type { Headquarters } from "../types/headquarters";
 const PHOTOS = "/assets/nuestras-sedes/sedes";
 
 /** Horarios que trae el diseño. Se dejan tal cual, con "6 p. m." y "5:30p.m." sin espacio. */
-const SCHEDULE_WEEK = "Lunes a Sábado de 9 a.m. - 6 p. m.";
-const SCHEDULE_FULL_WEEK = "Lunes a Domingo de 8:30 a.m. - 5:30p.m.";
+const SCHEDULE_WEEK = "Lunes a sábado de 9:00 a. m. a 6:00 p. m.";
+const SCHEDULE_FULL_WEEK = "Lunes a domingo de 8:30 a. m. a 5:30 p. m.";
 
 /**
  * Las sedes de las tarjetas de "Nuestras Sedes", en el orden del diseño.
@@ -161,15 +161,15 @@ export const HEADQUARTERS: Headquarters[] = [
   },
   {
     id: "wcoffee-morato",
-    brand: "WCoffee Morato",
-    name: ": Un café con aroma a transparencia",
+    brand: "WCoffee Morato:",
+    name: "un café con aroma a transparencia",
     inlineBrand: true,
     address: "Cl. 98a #69b 35, Bogotá, Colombia",
     coordinates: { lat: 4.6917002, lng: -74.0756522 },
     isDealership: false,
     schedule: SCHEDULE_WEEK,
     description: [
-      "Y como no todo es negocio, creamos WCoffee en Morato: un espacio brutal para que te tomés un café premium mientras decidís tu próxima compra o esperás tu evaluación. Porque los mejores negocios se cierran con un buen café... y mejor aún si es colombiano.",
+      "Y como no todo es negocio, creamos WCoffee en Morato: un espacio brutal para que te tomes un café premium mientras decides tu próxima compra o esperas tu evaluación. Porque los mejores negocios se cierran con un buen café... y mejor aún si es colombiano.",
     ],
     photo: `${PHOTOS}/wcoffee-morato.webp`,
     photoPosition: "85% 50%",
@@ -179,7 +179,7 @@ export const HEADQUARTERS: Headquarters[] = [
     brand: "wcar",
     name: "Puente Aranda",
     inlineBrand: false,
-    address: "Ak. 50 #15-55, Puente Aranda",
+    address: "Carrera 50 #15-55, Bogotá",
     coordinates: { lat: 4.6295216, lng: -74.1057852 },
     mapQuery: "Ak. 50 #15-55, Puente Aranda, Bogotá, Colombia",
     schedule: null,

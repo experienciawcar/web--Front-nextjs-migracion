@@ -17,7 +17,7 @@ export default function BuyOrSellSellComponent() {
             Vende tu carro en Colombia
           </h2>
           <p className="reveal py-3 text-[17.5px] leading-[21px] font-medium text-dark-gray">
-            Cuando te dices ¡Vende tu carro en Colombia! Puede ser un proceso desafiante, especialmente si no tienes
+            Vender tu carro en Colombia puede ser un proceso desafiante, especialmente si no tienes
             experiencia en la venta de vehículos. Es importante tener en cuenta que, en la actualidad, la mayoría de las
             personas buscan información en línea antes de tomar una decisión de compra, por lo que es fundamental que tu
             vehículo tenga una presencia en línea sólida y efectiva.

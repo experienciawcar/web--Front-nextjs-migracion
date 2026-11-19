@@ -54,7 +54,7 @@ export default function ProceduresListComponent() {
       <p className="reveal pb-12 text-small leading-5 text-dark-gray">
         Los trámites de tránsito en Colombia son procesos que requieren el cumplimiento de ciertos requisitos, que
         pueden ser fáciles o difíciles dependiendo del organismo donde se vaya a realizar. En wcar te facilitamos la
-        vida poniendo tu disposición nuestro personal experto para acompañarte en el proceso que necesites hacer:
+        vida poniendo a tu disposición nuestro personal experto para acompañarte en el proceso que necesites hacer:
       </p>
 
       <div className="reveal border-t border-[#cdd6da]">

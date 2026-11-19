@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+import arrowCircle from "@/modules/shared/assets/icons/arrow-circle.svg";
+import ButtonComponent from "@/modules/shared/components/ButtonComponent";
+import { ROUTES } from "@/modules/shared/constants/routes";
+
 import estrellas from "../assets/hero-mobile/estrellas-resena.svg";
 import { HERO_MOBILE_HEIGHT } from "../constants/hero-carousel";
 
@@ -63,42 +67,62 @@ export default function HeroSlideHomeMobileComponent() {
         </span>
       </p>
 
-      <div className="absolute top-[144px] left-[193.5px] flex h-[78px] -translate-x-1/2 items-end gap-4 text-center text-[10px] font-bold tracking-[0.1px] text-dark-gray">
-        <div className="flex h-[68px] w-[96px] flex-col items-center">
+      <div className="absolute top-[144px] left-[193.5px] flex -translate-x-1/2 items-start gap-4 text-center text-[10px] font-bold tracking-[0.1px] text-dark-gray">
+        <div className="flex w-[96px] flex-col items-center">
           <p className="text-[28px] leading-[34px] font-extrabold tracking-[0.28px] text-orange">
             4.8
           </p>
-          <p className="mt-2 w-[96px] leading-3">
-            <span className="font-medium">+2mil Reseña</span> positivas en google
+          <p className="mt-1 w-[96px] leading-3">
+            <span className="font-medium">+2 mil reseñas</span> positivas en Google
           </p>
           <Image
             src={estrellas}
             alt="Calificación de 4,8 sobre 5 en Google"
-            className="mt-2 h-3 w-20 max-w-none"
+            className="mt-1.5 h-3 w-20 max-w-none"
           />
         </div>
         <span
           aria-hidden
           className="h-[72px] w-0.5 shrink-0 rounded-[9px] bg-[#90a3bf]/30"
         />
-        <p className="flex h-[78px] flex-col items-center justify-center leading-3">
+        <p className="flex flex-col items-center leading-3">
           <span className="text-[28px] leading-[34px] font-extrabold tracking-[0.28px] text-orange">
-            +10mil
+            +10 mil
           </span>
-          <span className="font-medium">Vehículos</span>
+          <span className="mt-1 font-medium">Vehículos</span>
           <span>vendidos</span>
         </p>
         <span
           aria-hidden
           className="h-[72px] w-0.5 shrink-0 rounded-[9px] bg-[#90a3bf]/30"
         />
-        <p className="flex h-[78px] flex-col items-center justify-center leading-3">
+        <p className="flex flex-col items-center leading-3">
           <span className="text-[28px] leading-[34px] font-extrabold tracking-[0.28px] text-orange">
-            +9mil
+            +9 mil
           </span>
-          <span className="font-medium">Clientes</span>
+          <span className="mt-1 font-medium">Clientes</span>
           <span>Felices</span>
         </p>
+      </div>
+
+      <div className="absolute inset-x-0 top-[456px] mx-auto grid max-w-[420px] grid-cols-2 gap-3 px-4">
+        <ButtonComponent
+          href={ROUTES.buyCar}
+          icon={arrowCircle}
+          iconClassName="size-5! [&_img]:size-5!"
+          className="h-11! w-full justify-center! gap-1.5! px-3! text-[11px]!"
+        >
+          Compra tu carro
+        </ButtonComponent>
+        <ButtonComponent
+          href={ROUTES.sellCar}
+          variant="secondary"
+          icon={arrowCircle}
+          iconClassName="size-5! [&_img]:size-5!"
+          className="h-11! w-full justify-center! gap-1.5! px-3! text-[11px]!"
+        >
+          Vende tu carro
+        </ButtonComponent>
       </div>
     </div>
   );

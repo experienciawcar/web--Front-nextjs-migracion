@@ -126,7 +126,7 @@ export default function LoginFormComponent({
           <p className="text-small text-dark-gray">
             {step === "register"
               ? "Crea tu cuenta para continuar."
-              : "Por favor, inicie sesión con su correo electrónico."}
+              : "Inicia sesión con tu correo electrónico."}
           </p>
           {step === "register" && (
             <>
@@ -169,7 +169,7 @@ export default function LoginFormComponent({
             htmlFor={`${ids}-email`}
             className="mt-4 block text-small text-dark-gray"
           >
-            Email <span className="text-orange">*</span>
+            Correo electrónico <span className="text-orange">*</span>
           </label>
           <input
             id={`${ids}-email`}
@@ -247,13 +247,13 @@ export default function LoginFormComponent({
           }}
         >
           <p className="text-small text-dark-gray">
-            Por favor, inicie sesión con su correo electrónico.
+            Inicia sesión con tu correo electrónico.
           </p>
           <label
             htmlFor={`${ids}-email`}
             className="mt-6 block text-small text-dark-gray"
           >
-            Email <span className="text-orange">*</span>
+            Correo electrónico <span className="text-orange">*</span>
           </label>
           <input
             id={`${ids}-email`}

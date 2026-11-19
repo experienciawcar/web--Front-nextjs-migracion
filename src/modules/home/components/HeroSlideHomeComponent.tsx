@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+import arrowCircle from "@/modules/shared/assets/icons/arrow-circle.svg";
+import ButtonComponent from "@/modules/shared/components/ButtonComponent";
+import { ROUTES } from "@/modules/shared/constants/routes";
+
 import estrellas from "../assets/hero-decor/estrellas-resena.svg";
 import { HERO_CANVAS_MARGIN } from "../constants/hero-carousel";
 
@@ -63,12 +67,12 @@ export default function HeroSlideHomeComponent() {
         </h1>
 
         <div className="absolute top-[223px] left-[121px] flex items-center gap-[22px] tracking-[0.14px] text-black">
-          <div className="flex h-[110px] w-[134px] flex-col justify-end">
+          <div className="flex h-[110px] w-[160px] flex-col justify-start pt-[20px]">
             <p className="text-[36px] leading-[43px] font-extrabold tracking-[0.36px] text-orange">
               4.8
             </p>
-            <p className="text-[14px] leading-[17px] font-semibold">
-              +2k Reseña positivas
+            <p className="text-[14px] leading-[17px] font-semibold whitespace-nowrap">
+              +2 mil reseñas positivas
             </p>
             <Image
               src={estrellas}
@@ -80,7 +84,7 @@ export default function HeroSlideHomeComponent() {
             aria-hidden
             className="h-[89px] w-0.5 shrink-0 rounded-[9px] bg-[#90a3bf]/30"
           />
-          <p className="flex h-[110px] w-[136px] flex-col justify-center">
+          <p className="flex h-[110px] w-[136px] flex-col justify-start pt-[20px]">
             <span className="text-[36px] leading-[43px] font-extrabold tracking-[0.36px] text-orange">
               +10k
             </span>
@@ -92,7 +96,7 @@ export default function HeroSlideHomeComponent() {
             aria-hidden
             className="h-[89px] w-0.5 shrink-0 rounded-[9px] bg-[#90a3bf]/30"
           />
-          <p className="flex h-[110px] flex-col justify-center">
+          <p className="flex h-[110px] flex-col justify-start pt-[20px]">
             <span className="text-[36px] leading-[43px] font-extrabold tracking-[0.36px] text-orange">
               +9k
             </span>
@@ -100,6 +104,24 @@ export default function HeroSlideHomeComponent() {
               Clientes Felices
             </span>
           </p>
+        </div>
+
+        <div className="absolute top-[375px] left-[121px] flex items-center gap-6">
+          <ButtonComponent
+            href={ROUTES.buyCar}
+            icon={arrowCircle}
+            className="min-w-[235px] justify-center! gap-3"
+          >
+            Compra tu carro
+          </ButtonComponent>
+          <ButtonComponent
+            href={ROUTES.sellCar}
+            variant="secondary"
+            icon={arrowCircle}
+            className="min-w-[235px] justify-center! gap-3"
+          >
+            Vende tu carro
+          </ButtonComponent>
         </div>
       </div>
     </div>

@@ -131,7 +131,7 @@ export default async function StatsComponent() {
           {/* El texto abre comilla y no la cierra: así está en Figma.
               TODO: confirmar con diseño, parece un error de copy. */}
           <p className="reveal mt-3 max-w-[793px] text-body leading-[22px] font-medium text-gray-dark opacity-80 xl:ml-14">
-            {`"Con años de experiencia en el sector, WCAR se ha posicionado como una plataforma de prestigio y confianza. Nuestro mayor aval es nuestro historial de éxito; a continuación, compartimos una muestra de ello`}
+            Con años de experiencia en el sector, WCAR se ha posicionado como una plataforma de prestigio y confianza. Nuestro mayor aval es nuestro historial de éxito; a continuación, compartimos una muestra de ello.
           </p>
 
           <div className="mt-6 flex flex-col gap-6 xl:mt-[22px] xl:ml-[70px] xl:flex-row xl:items-start xl:gap-7">

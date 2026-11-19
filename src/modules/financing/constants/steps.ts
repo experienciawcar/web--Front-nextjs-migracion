@@ -22,7 +22,7 @@ export const FINANCING_STEPS: FinancingStep[] = [
   {
     id: "simulacion",
     title: "Simulación",
-    description: "Haz la simulación de las cuotas del crédito para el carro que estas comprando.",
+    description: "Haz la simulación de las cuotas del crédito para el carro que estás comprando.",
     icon: iconSimulacion,
   },
   {
@@ -46,7 +46,7 @@ export const FINANCING_STEPS: FinancingStep[] = [
   {
     id: "desembolso",
     title: "Desembolso",
-    description: "Espera el desembolso del banco, y empieza a disfrutar de tu nuevo carro.",
+    description: "Espera el desembolso del banco y empieza a disfrutar de tu nuevo carro.",
     icon: iconDesembolso,
   },
 ];

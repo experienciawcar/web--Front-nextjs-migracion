@@ -161,7 +161,7 @@ function TextoColombia() {
           <h3 className="text-heading-1 font-bold text-dark-gray">
             <span className="block">Haciendo rodar a</span>
             {" "}
-            <span className="block text-orange italic">toda colombia</span>
+            <span className="block text-orange italic">toda Colombia</span>
           </h3>
           {/* 194px porque con ese ancho el párrafo parte donde el diseño
               ("...convertirnos" / "...LATAM" / "de la industria..."): el
@@ -220,7 +220,7 @@ export default function FootprintComponent() {
           {/* El encabezado arranca en la columna 2 (302px = una columna más su
               separación), a plomo con la primera foto. */}
           <div className="reveal flex flex-col gap-6 xl:ml-[302px] xl:gap-3">
-            <SectionEyebrowComponent>Nibh quisque suscipit fermentum</SectionEyebrowComponent>
+            <SectionEyebrowComponent>Presencia nacional</SectionEyebrowComponent>
             <h2 id="footprint-title" className="text-subheadline-1 font-bold text-dark-gray">
               Nuestra huella
             </h2>

@@ -23,20 +23,23 @@ export const WARRANTY_FEATURES: FinancingFeature[] = [
     icon: iconCompraGarantia,
     title: "Compra tu garantía",
     titleItalic: "con pocos clics",
-    description: "Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla.",
+    description:
+      "Agrega tu garantía extendida de forma 100 % digital al momento de comprar o financiar tu vehículo.",
   },
   {
     id: "aprobacion",
     icon: iconAprobacion,
     title: "Aprobación en",
     titleItalic: "10 minutos",
-    description: "Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla. Orci,",
+    description:
+      "Proceso ágil y sin trámites innecesarios para que protejas tu carro desde el primer día.",
   },
   {
     id: "cubre",
     icon: iconCubreReparacion,
     title: "Cubre la reparación",
     titleItalic: "o sustitución de piezas",
-    description: "Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla. Orci, dictumst nec aliquet id",
+    description:
+      "Cubre la reparación o sustitución de piezas que presenten defectos por avería fortuita en elementos mecánicos, eléctricos o electrónicos.",
   },
 ];

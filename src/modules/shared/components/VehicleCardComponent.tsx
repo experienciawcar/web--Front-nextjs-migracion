@@ -136,7 +136,8 @@ export default function VehicleCardComponent({
           <WarrantyBadgeComponent
             label={warranty.label}
             tone={warranty.tone}
-            className={`absolute top-3 right-3 z-20${m("max-sm:top-3 max-sm:right-auto max-sm:left-0 max-sm:h-6 max-sm:gap-1 max-sm:pr-3 max-sm:pl-2 max-sm:text-[11px] max-sm:leading-4")}`}
+            iconClassName="max-sm:hidden"
+            className="absolute top-3 right-3 z-20 max-sm:top-3 max-sm:right-auto max-sm:left-1/2 max-sm:h-7 max-sm:min-w-[140px] max-sm:-translate-x-1/2 max-sm:justify-center max-sm:px-5 max-sm:text-center max-sm:text-[10px] max-sm:leading-none"
           />
         )}
       </div>
@@ -184,7 +185,7 @@ export default function VehicleCardComponent({
             )}
             {vehicle.monthlyPayment && (
               <p className="text-caption leading-4 text-gray-dark">
-                {LOAN_TERM_MONTHS} cuotas de <span className="font-bold text-orange">{vehicle.monthlyPayment}</span>
+                {LOAN_TERM_MONTHS} cuotas de <span className="font-bold text-orange">{vehicle.monthlyPayment}*</span>
               </p>
             )}
           </div>
@@ -203,7 +204,7 @@ export default function VehicleCardComponent({
               className="size-6 shrink-0"
             />
             {vehicle.viewers}{" "}
-            {vehicle.viewers === 1 ? "Persona ha visto" : "Personas han visto"}{" "}
+            {vehicle.viewers === 1 ? "persona ha visto" : "personas han visto"}{" "}
             este vehículo
           </p>
         )}

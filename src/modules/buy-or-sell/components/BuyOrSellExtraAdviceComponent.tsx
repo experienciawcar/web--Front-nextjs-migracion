@@ -1,6 +1,5 @@
 import AppLinkComponent from "@/modules/shared/components/AppLinkComponent";
 import { ROUTES } from "@/modules/shared/constants/routes";
-import { TUCARRO_URL } from "../constants/advice";
 
 const CARD = [
   {
@@ -9,15 +8,15 @@ const CARD = [
   },
   {
     title: "No aceptes transacciones en efectivo",
-    text: "Las transacciones en efectivo pueden ser riesgosas tanto para compradores como vendedores. En su lugar, utiliza métodos de pago seguros como transferencias bancarias o pagos electrónicos.",
+    text: "Las transacciones en efectivo pueden ser riesgosas tanto para compradores como para vendedores. En su lugar, utiliza métodos de pago seguros como transferencias bancarias o pagos electrónicos.",
   },
   {
-    title: "No te apresures en tomar una decisión",
-    text: "Comprar o vender un auto usado puede ser una decisión importante, así que no te apresures en tomarla. Tómate tu tiempo para investigar, comparar opciones y considerar todas las posibilidades antes de tomar una decisión.",
+    title: "No te apresures a tomar una decisión",
+    text: "Comprar o vender un auto usado puede ser una decisión importante, así que no te apresures a tomarla. Tómate tu tiempo para investigar, comparar opciones y considerar todas las posibilidades antes de decidir.",
   },
   {
     title: "Busca asesoramiento legal",
-    text: "Si tienes dudas sobre los aspectos legales de comprar o vender un auto usado en Colombia, busca asesoramiento legal. En wcar tenemos todo un equipo de expertos dispuestos a asesorarte en tu proceso de venta o compra de tu vehículo usado.",
+    text: "Si tienes dudas sobre los aspectos legales de comprar o vender un auto usado en Colombia, busca asesoramiento legal. En WCAR tenemos todo un equipo de expertos dispuestos a asesorarte en el proceso de venta o compra de tu vehículo usado.",
   },
 ];
 
@@ -42,9 +41,9 @@ export default function BuyOrSellExtraAdviceComponent() {
         <p className={`reveal ${BODY}`}>
           Nuestra principal razón de ser en{" "}
           <AppLinkComponent href={ROUTES.home} className={LINK}>
-            wcar
+            WCAR
           </AppLinkComponent>{" "}
-          es brindar a compradores y vendedores todas las herramientas informacionales, técnicas y operativas para que
+          es brindar a compradores y vendedores todas las herramientas informativas, técnicas y operativas para que
           puedan realizar una transacción segura y confiable, generando un ambiente comercial vehicular seguro para
           todos los involucrados en la compra o venta de un carro usado en Colombia.
         </p>
@@ -68,16 +67,16 @@ export default function BuyOrSellExtraAdviceComponent() {
           <p className={`${BODY} mt-2`}>
             En conclusión, comprar y vender autos usados en Colombia puede ser una tarea complicada, pero siguiendo estos
             consejos útiles, podrás hacer una transacción exitosa sin preocupaciones. Recuerda hacer tu tarea antes de
-            comprar o vender, buscar en diferentes lugares como en{" "}
-            <AppLinkComponent href={TUCARRO_URL} className={LINK} target="_blank">
-              tucarro.com
+            comprar o vender, buscar en diferentes lugares, como{" "}
+            <AppLinkComponent href={ROUTES.buyCar} className={LINK}>
+              WCAR
             </AppLinkComponent>
             , inspeccionar cuidadosamente el auto, negociar el precio y verificar la documentación.
           </p>
           <p className={`${BODY} mt-2`}>
             Para los vendedores, asegúrate de limpiar y arreglar el auto, anunciar en los lugares correctos, poner un
             precio justo, ofrecer información detallada y ser honesto sobre el estado del auto. Además, no olvides hacer
-            una prueba de manejo, utilizar métodos de pago seguros, tomar tu tiempo para tomar una decisión, buscar
+            una prueba de manejo, utilizar métodos de pago seguros, tomarte tu tiempo para decidir, buscar
             asesoramiento legal y mantener los documentos en orden. Con estos consejos, estarás mejor preparado para
             hacer una transacción exitosa y sin preocupaciones.
           </p>

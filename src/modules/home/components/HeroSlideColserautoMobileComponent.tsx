@@ -100,9 +100,9 @@ export default function HeroSlideColserautoMobileComponent() {
         </div>
 
         <h2 className="mt-[44px] max-w-[329px] text-[28px] leading-[normal] font-semibold tracking-[-0.5px] text-white">
-          Los mejores en registro , documentación y peritaje{" "}
+          Los mejores en registro, documentación y peritaje{" "}
           <span className="font-normal text-orange italic">
-            para tu Vehículo
+            para tu vehículo
           </span>
         </h2>
 

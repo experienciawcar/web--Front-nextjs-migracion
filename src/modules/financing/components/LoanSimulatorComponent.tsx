@@ -66,13 +66,13 @@ export default function LoanSimulatorComponent({ children }: { children: React.R
         aria-label="Simulador de cuota mensual"
         className="order-2 flex flex-col gap-8 rounded-lg border-2 border-gray/30 bg-white px-[38px] pt-[38px] pb-[46px] xl:order-none xl:col-start-1 xl:row-span-2 xl:row-start-1"
       >
-        <MoneyFieldComponent id="loan-vehicle-value" label="Valor del Vehículo" value={vehicleValue} onChange={setVehicleValue} />
+        <MoneyFieldComponent id="loan-vehicle-value" label="Valor del vehículo" value={vehicleValue} onChange={setVehicleValue} />
         <MoneyFieldComponent id="loan-down-payment" label="Cuota inicial" value={downPayment} onChange={setDownPayment} />
 
         <div role="radiogroup" aria-labelledby="loan-months-label" className="flex flex-col gap-4">
           <span id="loan-months-label" className={LABEL}>
             <span>
-              Plazo en Meses<span className="text-[#ed3f3f]">*</span>
+              Plazo en meses<span className="text-[#ed3f3f]">*</span>
             </span>
           </span>
           <div className="flex flex-wrap gap-2">
@@ -130,8 +130,8 @@ export default function LoanSimulatorComponent({ children }: { children: React.R
         </div>
         <span aria-hidden className="-mx-8 h-px w-[calc(100%+4rem)] bg-gray xl:mx-0 xl:w-full" />
         <p className="text-center text-caption font-medium text-gray">
-          *Este simulador es de neto uso interactivo y calcula una cuota aproximada la cual tiene fines informativos y
-          no comporta ofertas o promesas de contratar.
+          *Este simulador calcula una cuota aproximada con fines informativos y no constituye oferta ni promesa de
+          contratación.
         </p>
       </div>
     </div>

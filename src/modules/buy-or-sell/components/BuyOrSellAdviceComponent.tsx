@@ -45,13 +45,13 @@ export default function BuyOrSellAdviceComponent() {
     <section aria-labelledby="advice-title" className="bg-white px-8 py-12">
       <div className="mx-auto max-w-[1224px]">
         <h2 id="advice-title" className="reveal text-[28px] leading-[1.2] font-bold text-orange xl:text-subheadline-1 xl:leading-[43.2px]">
-          Consejos para compra o vende tu carro en Colombia
+          Consejos para comprar o vender tu carro en Colombia
         </h2>
         <p className="reveal text-[17.5px] leading-[21px] font-medium text-dark-gray">
           Comprar y vender autos usados en Colombia puede ser una tarea complicada, especialmente si no se tiene
           experiencia en el tema. Sin embargo, con algunos consejos útiles, se puede hacer una transacción exitosa sin
           caer en estafas o problemas legales. Aquí te presentamos algunos consejos útiles tanto para compradores como
-          vendedores de autos usados en Colombia.
+          para vendedores de autos usados en Colombia.
         </p>
         <div className="mt-12 grid gap-10 xl:grid-cols-2 xl:gap-x-[38px]">
           <AdviceColumn name="advice-buy" verb="comprar" items={BUY_ADVICE} />

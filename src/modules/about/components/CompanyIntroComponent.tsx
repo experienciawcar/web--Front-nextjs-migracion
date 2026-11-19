@@ -11,8 +11,8 @@ import SectionEyebrowComponent from "@/modules/shared/components/SectionEyebrowC
  * blanco mide 22px, igual que el interlineado) pero mejor semánticamente.
  */
 const PARRAFOS = [
-  "Cerca de 12 millones de personas en Latinoamérica frente a la compra y venta de vehículos usados sufren por la debilidad de las legislaciones y la ineficacia institucional, dejando a los consumidores en una vulnerabilidad alarmante. Este desafío trasciende todos los niveles socioeconómicos, forzando a los ciudadanos a enfrentar riesgos significativos en transacciones de vehículos, que a menudo es su segundo activo más preciado. Las empresas tradicionales frecuentemente se limitan a cumplir solo con la legislación básica, descuidando tanto las necesidades del cliente como su responsabilidad social.",
-  "Aquí es donde wcar emerge no solo como una empresa, sino como un movimiento que busca revolucionar la compra-venta de autos usados en Latinoamérica. Nuestro enfoque trasciende la mera venta, enfocándonos en transacciones seguras y empoderadoras para el consumidor. Nos posicionamos en el núcleo de la transformación del sector, fusionando transparencia brutal y tecnología al alcance de todos para otorgar al usuario control total y claridad en cada transacción.",
+  "Cerca de 12 millones de personas en Latinoamérica sufren, al comprar o vender un vehículo usado, por la debilidad de las legislaciones y la ineficacia institucional, dejando a los consumidores en una vulnerabilidad alarmante. Este desafío trasciende todos los niveles socioeconómicos, forzando a los ciudadanos a enfrentar riesgos significativos en transacciones de vehículos, que a menudo son su segundo activo más preciado. Las empresas tradicionales frecuentemente se limitan a cumplir solo con la legislación básica, descuidando tanto las necesidades del cliente como su responsabilidad social.",
+  "Aquí es donde WCAR emerge no solo como una empresa, sino como un movimiento que busca revolucionar la compraventa de autos usados en Latinoamérica. Nuestro enfoque trasciende la mera venta, enfocándonos en transacciones seguras y empoderadoras para el consumidor. Nos posicionamos en el núcleo de la transformación del sector, fusionando transparencia brutal y tecnología al alcance de todos para otorgar al usuario control total y claridad en cada transacción.",
 ];
 
 /**
@@ -65,7 +65,7 @@ export default function CompanyIntroComponent() {
               <SectionEyebrowComponent>¿Por qué nosotros?</SectionEyebrowComponent>
             </div>
 
-            <h1 className="reveal w-full text-subheadline-1 font-bold text-dark-gray">Nuestra Empresa</h1>
+            <h1 className="reveal w-full text-subheadline-1 font-bold text-dark-gray">Nuestra empresa</h1>
 
             <div className="flex w-full flex-col items-center gap-12 xl:items-start xl:gap-8">
               <div className="reveal flex flex-col gap-[22px]">

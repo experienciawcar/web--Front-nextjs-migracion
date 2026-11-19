@@ -34,7 +34,7 @@ export default async function TeamComponent() {
           {/* Texto de relleno: en Figma sigue con lorem ipsum, el mismo de
               Misión & visión.
               TODO: falta el copy real. */}
-          <SectionEyebrowComponent>Nibh quisque suscipit fermentum</SectionEyebrowComponent>
+          <SectionEyebrowComponent>Quiénes somos</SectionEyebrowComponent>
           <h2 id="team-title" className="text-subheadline-1 font-bold text-dark-gray">
             Nuestro Equipo
           </h2>

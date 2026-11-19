@@ -128,8 +128,8 @@ export default function HeroSlideSantanderMobileComponent() {
         </h2>
 
         <p className="absolute top-[200px] left-[68px] max-w-[282px] text-[16px] leading-[22px] font-medium text-white/90">
-          Póngase en contacto con nosotros y le informaremos sin compromiso de
-          nuestras tarifas y servicios.
+          Ponte en contacto con nosotros y te informaremos, sin compromiso,
+          sobre nuestras tarifas y servicios.
         </p>
       </div>
     </div>

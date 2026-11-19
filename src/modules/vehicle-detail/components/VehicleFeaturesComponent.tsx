@@ -30,8 +30,8 @@ const CLAIMS_EXPLANATION = [
 ];
 
 const CREDIFACIL_BENEFITS = [
-  { title: "Solicitud digital", note: "has tu Solicitud desde donde quieras desde nuestra web*" },
-  { title: "Pre-aprobado en menos de 15 minutos" },
+  { title: "Solicitud digital", note: "Haz tu solicitud desde donde quieras en nuestra web*" },
+  { title: "Preaprobado en menos de 15 minutos" },
   { title: "Atención personalizada" },
 ];
 
@@ -83,7 +83,7 @@ function WarrantyCard({ title, text }: { title: string; text: string }) {
       <div className="text-small leading-5 font-medium text-gray-dark">
         <p className="text-dark-gray">{title}</p>
         <a href={ROUTES.buyerPolicies} className="text-[12px] font-bold text-orange">
-          Aplica términos y condiciones
+          Aplican términos y condiciones
         </a>
         <p className="mt-3">{text}</p>
       </div>

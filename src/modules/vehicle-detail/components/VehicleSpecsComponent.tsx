@@ -72,26 +72,26 @@ export default function VehicleSpecsComponent({
     <section aria-label="Detalles del vehículo" className="bg-gray-light">
       {/* Mismo contenedor que la galería y la columna de tarjetas (`VehicleTopComponent`): ocupa su ancho. */}
       <div className="mx-auto w-full max-w-[1368px] px-8 pb-10 max-xl:px-4 xl:pb-[49px]">
-        <ul className="reveal grid grid-cols-1 gap-3 min-[560px]:grid-cols-2 xl:grid-cols-4 xl:gap-x-[19px] xl:gap-y-6">
+        <ul className="reveal grid grid-cols-2 gap-3 xl:grid-cols-4 xl:gap-x-[19px] xl:gap-y-6">
           {toSpecs(vehicle).map((spec) => (
             <li
               key={spec.label}
-              className="flex min-w-0 items-center gap-3 rounded-lg bg-white px-4 py-5 xl:gap-4 xl:py-6 xl:pr-4 xl:pl-6"
+              className="flex min-w-0 items-center gap-2.5 rounded-lg bg-white px-3 py-4 sm:gap-3 sm:px-4 sm:py-5 xl:gap-4 xl:py-6 xl:pr-4 xl:pl-6"
             >
               <Image
                 src={spec.icon}
                 alt=""
                 aria-hidden
-                className="size-10 shrink-0 opacity-80 xl:size-12"
+                className="size-8 shrink-0 opacity-80 sm:size-10 xl:size-12"
               />
               <div className="min-w-0">
-                <p className="text-body leading-6 font-bold text-gray-dark">
+                <p className="text-[13px] leading-5 font-bold text-gray-dark sm:text-body sm:leading-6">
                   {spec.label}
                 </p>
-                <p className="text-[18px] leading-6 font-semibold break-words text-dark-gray">
+                <p className="text-[14px] leading-5 font-semibold break-words text-dark-gray sm:text-[18px] sm:leading-6">
                   {spec.value}
                   {spec.note && (
-                    <span className="block text-[12px] leading-4 font-bold tracking-[-0.2px] text-[#50a628]">
+                    <span className="block text-[11px] leading-4 font-bold tracking-[-0.2px] text-[#50a628] sm:text-[12px]">
                       {spec.note}
                     </span>
                   )}

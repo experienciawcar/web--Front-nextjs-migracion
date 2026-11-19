@@ -45,7 +45,7 @@ export default function FinancingBannerComponent({ className = "" }: { className
       />
       <p className="absolute inset-x-0 top-[70px] text-subheadline-1 leading-11 font-bold whitespace-nowrap text-dark-gray xl:inset-x-auto xl:top-[18px] xl:left-[106px]">
         Financiación <br className="xl:hidden" />
-        hasta <span className="font-normal italic">del 100%</span>
+        hasta <span className="font-normal italic">el 100 %</span>
       </p>
       <div className="absolute top-[192px] left-1/2 -translate-x-1/2 xl:top-4 xl:right-4 xl:left-auto xl:translate-x-0">
         {/* TODO: destino del botón (ver el JSDoc). */}

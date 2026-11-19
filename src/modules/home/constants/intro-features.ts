@@ -38,7 +38,8 @@ export const INTRO_FEATURES: IntroFeature[] = [
     title: "Peritaje gratis ",
     titleItalicDesktopOnly: "disponible ",
     titleItalic: "online",
-    description: "Lorem Ipsum is simply dummy text of the printing",
+    description:
+      "Consulta el peritaje completo de cada vehículo antes de tomar tu decisión.",
   },
 ];
 

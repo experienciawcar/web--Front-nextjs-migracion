@@ -40,13 +40,13 @@ export const ADDITIONAL_SERVICES: AdditionalService[] = [
     title: "Planes de",
     titleItalic: "Mantenimiento",
     description:
-      "Nuestros contratos de mantenimiento prepagos te permiten disfrutar de servicios a precio fijo.",
+      "Nuestros contratos de mantenimiento prepagados te permiten disfrutar de servicios a precio fijo.",
   },
   {
     id: "lavado-y-detailing",
     icon: iconWash,
-    title: "Lavado y Detailing",
+    title: "Lavado y detallado",
     description:
-      "Ofrecemos servicios de lavado y detailing para que tu auto luzca siempre impecable, tanto por dentro como por fuera.",
+      "Ofrecemos servicios de lavado y detallado para que tu auto luzca siempre impecable, tanto por dentro como por fuera.",
   },
 ];

@@ -198,16 +198,14 @@ export default function HeadquartersHeroComponent() {
               >
                 Encuentra el concesionario
                 {" "}
-                <span className="block font-medium text-orange italic">de wcar mas cerca de ti</span>
+                <span className="block font-medium text-orange italic">de WCAR más cerca de ti</span>
               </h1>
 
-              {/* TODO: confirmar con diseño el voseo ("merecés", "descubrí")
-                  mezclado con tuteo ("Conoce"). */}
               <p className="reveal mt-5 text-small leading-6 font-medium text-gray-dark xl:text-justify">
                 En WCAR no solo vendemos carros usados: también vendemos tranquilidad. Por eso, tenemos varias sedes
-                para que siempre tengas un concesionario cerca de mí donde comprar, vender o mantener tu carro con toda
-                la confianza que te merecés. Aquí no hay cuentos: hay datos, calidad y atención brutalmente
-                transparente. Conoce nuestras sedes y descubrí por qué somos la opción número uno en carros usados en
+                para que siempre tengas un concesionario cerca de ti donde comprar, vender o mantener tu carro con toda
+                la confianza que te mereces. Aquí no hay cuentos: hay datos, calidad y atención brutalmente
+                transparente. Conoce nuestras sedes y descubre por qué somos la opción número uno en carros usados en
                 Bogotá y Sabana.
               </p>
 

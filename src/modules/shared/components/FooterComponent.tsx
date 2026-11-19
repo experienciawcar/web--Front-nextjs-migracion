@@ -108,7 +108,7 @@ export default function FooterComponent() {
           <div>
             <Image src={logoIndustriaYComercio} alt="Superintendencia de Industria y Comercio" className="h-10 w-auto" />
             <p className="mt-4 text-small font-medium text-gray">
-              wcar - Todos los derechos reservados © {new Date().getFullYear()}
+              © WCAR. Todos los derechos reservados {new Date().getFullYear()}
             </p>
           </div>
           <ul className="flex flex-col gap-[26px] md:flex-row md:gap-[45px] md:pt-2.5">

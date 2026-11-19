@@ -13,8 +13,8 @@ import ZigZagComponent from "@/modules/shared/components/ZigZagComponent";
  * palabra, así que no es un corte natural. El MCP de Figma lo devuelve como un
  * espacio, se detectó comparando los cortes de línea contra el render.
  */
-const BIOGRAFIA = `Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla. Orci, dictumst nec aliquet id ullamcorper venenatis. Fermentum sulla craspor ttitore  ismod nulla.
-Elit adipiscing proin quis est consectetur. Felis ultricies nisi, quis malesuada sem odio. Potentiмnibh natoque amet amet, tincidunt ultricies et. Et nam rhoncus sit nullam diam tincidunt condimentum nullam.`;
+const BIOGRAFIA = `Con una visión enfocada en transformar la compraventa de vehículos usados en Latinoamérica, Walther Carvajal fundó WCAR para devolverle la confianza y la transparencia al mercado automotriz.
+Su liderazgo combina tecnología, rigor técnico y atención cercana para que cada persona pueda comprar o vender su vehículo con total tranquilidad y respaldo.`;
 
 /** Cargo + nombre, iguales en los dos breakpoints salvo por la alineación. */
 function Identidad({ className = "" }: { className?: string }) {
@@ -25,13 +25,13 @@ function Identidad({ className = "" }: { className?: string }) {
         {/* Separador: gris 200 al 30%. */}
         <span aria-hidden className="h-8 w-[2px] bg-gray/30" />
         <span className="text-small font-bold whitespace-nowrap text-gray-dark">
-          Ceo de la empresa
+          CEO de la empresa
         </span>
       </div>
 
       <p className="mt-6 text-subheadline-1 xl:mt-8">
         <span className="block font-bold text-dark-gray">Walther Carvajal</span>
-        <span className="block italic text-orange">Fundador de wcar</span>
+        <span className="block italic text-orange">Fundador de WCAR</span>
       </p>
     </div>
   );

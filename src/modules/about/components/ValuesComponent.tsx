@@ -40,8 +40,8 @@ function ContactCard() {
       <div className="mt-5 flex items-center gap-4">
         <Image src={iconPhone} alt="" aria-hidden className="size-6 shrink-0" />
         <p className="text-body font-medium text-white">
-          <span className="block">Si tienes alguna pregunta</span>
-          <span className="block">(00) 112 365 489</span>
+          <span className="block">Si tienes alguna pregunta, llámanos al</span>
+          <a href="tel:+573244001212" className="block hover:underline">+57 324 400 1212</a>
         </p>
       </div>
 

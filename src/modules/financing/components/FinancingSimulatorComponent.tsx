@@ -48,7 +48,7 @@ export default function FinancingSimulatorComponent() {
               Calcula tu <span className="font-normal italic">préstamo</span>
             </h2>
             <p className="mt-[22px] text-body font-medium text-gray-dark xl:mt-4">
-              Nada como saber desde el primer momento cuanto debes pagar mensual. Conoce el valor de tu cuota con estos
+              Nada como saber desde el primer momento cuánto debes pagar cada mes. Conoce el valor de tu cuota con estos
               datos, de manera fácil y sencilla.
             </p>
           </LoanSimulatorComponent>

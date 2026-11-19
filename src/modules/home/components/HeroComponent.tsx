@@ -76,8 +76,8 @@ const SLIDES: HeroSlide[] = [
   {
     id: "colserauto",
     label: "Los mejores en registro, documentación y peritaje",
-    tabTitle: "Colserauto",
-    tabSubtitle: "N°1 en peritajes de vehículos",
+    tabTitle: "Colserautos",
+    tabSubtitle: "N.º 1 en peritajes de vehículos",
     // Negro en mobile; en desktop, como el de Santander: la banda negra va en el arte.
     background: "bg-black md:bg-gray-light",
     tone: "dark",

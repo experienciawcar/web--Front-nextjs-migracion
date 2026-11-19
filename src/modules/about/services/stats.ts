@@ -15,14 +15,14 @@ import type { Stats } from "../types/stats";
 export async function getStats(): Promise<Stats> {
   return {
     ratings: [
-      { id: "google", score: "4.5", stars: 4.5, source: "Google", detail: "(1.500 + reseñas)" },
-      { id: "google-2", score: "4.5", stars: 4.5, source: "Google", detail: "(1.500 + reseñas)" },
+      { id: "google", score: "4.5", stars: 4.5, source: "Google", detail: "(+1.500 reseñas)" },
+      { id: "google-2", score: "4.5", stars: 4.5, source: "Google", detail: "(+1.500 reseñas)" },
     ],
     figures: [
-      { id: "ventas", value: "#1", title: "Ventas de vehículos", detail: "En toda colombia" },
+      { id: "ventas", value: "#1", title: "Ventas de vehículos", detail: "En toda Colombia" },
       {
         id: "vendidos",
-        value: "+ 2.900",
+        value: "+2.900",
         title: "Vehículos vendidos",
         detail: "y reservados en 3 años",
       },

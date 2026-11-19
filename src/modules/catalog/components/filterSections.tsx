@@ -122,7 +122,7 @@ export function buildFilterSections({
           step={5_000}
           value={mileageDraft}
           onChange={onMileageDraftChange}
-          formatValue={(n) => `${new Intl.NumberFormat("es-CO").format(n)} Km`}
+          formatValue={(n) => `${new Intl.NumberFormat("es-CO").format(n)} km`}
         />
       ),
     },

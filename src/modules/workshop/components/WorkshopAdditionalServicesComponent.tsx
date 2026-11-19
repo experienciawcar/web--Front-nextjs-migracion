@@ -145,7 +145,7 @@ export default function WorkshopAdditionalServicesComponent() {
         <div className="order-1">
           <div className="container-wcar pt-16 xl:pt-[89px]">
             <div className="xl:ml-[435px]">
-              <SectionEyebrowComponent className="reveal gap-2.5! max-xl:mx-auto max-xl:items-center">Servicios Ofrecidos por wcar</SectionEyebrowComponent>
+              <SectionEyebrowComponent className="reveal gap-2.5! max-xl:mx-auto max-xl:items-center">Servicios ofrecidos por WCAR</SectionEyebrowComponent>
 
               <h2 id="adicionales-title" className="reveal mt-2.5 text-center text-subheadline-1 font-bold text-white min-[375px]:max-xl:whitespace-nowrap xl:mt-[11px] xl:text-left">
                 Servicios adicionales

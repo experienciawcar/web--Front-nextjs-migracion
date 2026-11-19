@@ -90,7 +90,7 @@ export function getActiveChips(
         "Kilometraje",
         filters.mileageMin,
         filters.mileageMax,
-        " Km",
+        " km",
       ),
     });
   }

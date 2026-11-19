@@ -69,7 +69,7 @@ export const HISTORY_ITEMS: Record<number, FeatureDefinition> = {
   42: { label: "Número de llaves", icon: iconLlaves },
   4: { label: "Fecha de vencimiento SOAT", icon: iconGenerico, kind: "date" },
   5: {
-    label: "Fecha de vencimiento revisión tecnicomecánica",
+    label: "Fecha de vencimiento revisión técnico-mecánica",
     icon: iconGenerico,
     kind: "date",
   },
@@ -155,7 +155,7 @@ export const CHARACTERISTIC_ICONS = {
 /** `traction` del backend → texto (mapa del sitio anterior). */
 export const TRACTION_LABELS: Record<number, string> = {
   0: "Trasera",
-  1: "4 x 4",
+  1: "4x4",
   2: "Delantera",
-  3: "4 x 2",
+  3: "4x2",
 };

@@ -71,10 +71,10 @@ export default function FinancingProductsComponent() {
             id="productos-title"
             className="mt-4 text-subheadline-1 leading-11 font-bold text-dark-gray"
           >
-            Financia tu <span className="font-normal text-orange italic">Vehículo</span>
+            Financia tu <span className="font-normal text-orange italic">vehículo</span>
           </h2>
           <p className="mt-4 text-[14px] leading-[17px] font-medium whitespace-pre-wrap text-gray xl:mt-0 xl:w-[882px] xl:text-[18px] xl:leading-11 xl:text-gray-dark">
-            Financia tu garantía y cubre la reparación o sustitución{"  "}de piezas de tu vehículo Con nuestra garantía
+            Financia tu garantía y cubre la reparación o sustitución de piezas de tu vehículo.
           </p>
         </div>
 

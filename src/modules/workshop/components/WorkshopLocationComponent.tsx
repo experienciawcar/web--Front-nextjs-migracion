@@ -65,16 +65,13 @@ export default function WorkshopLocationComponent() {
           <div className="xl:ml-[435px]">
             <SectionEyebrowComponent className="reveal gap-2.5! max-xl:mx-auto max-xl:items-center">Taller wcar</SectionEyebrowComponent>
 
-            {/* TODO: confirmar con diseño: "Donde" sin tilde. */}
             <h2 id="ubicacion-title" className="reveal mt-2.5 text-center text-subheadline-1 font-bold text-dark-gray xl:mt-[11px] xl:text-left">
-              ¿Donde nos <span className="max-xl:block max-xl:font-normal max-xl:capitalize max-xl:italic">ubicamos?</span>
+              ¿Dónde nos <span className="max-xl:block max-xl:font-normal max-xl:capitalize max-xl:italic">ubicamos?</span>
             </h2>
 
-            {/* TODO: confirmar con diseño: es lorem ipsum de relleno. */}
             <p className="reveal mt-8 text-body font-medium text-gray-dark xl:mt-[50px]">
-              Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla. Orci,{" "}
-              <br />
-              dictumst nec aliquet id ullamcorper venenatis. Fermentum sulla craspor ttitore ismod nulla.
+              Visítanos en nuestra sede de taller en Bogotá para diagnósticos, mantenimientos y reparaciones con
+              respaldo WCAR.
             </p>
 
             <div className="reveal mt-16 flex flex-col gap-[33px] text-body font-medium text-gray-dark xl:mt-[29px] xl:flex-row xl:items-center xl:gap-[93px]">

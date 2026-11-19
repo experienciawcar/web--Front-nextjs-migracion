@@ -123,7 +123,7 @@ export default function VehicleSummaryComponent({
               )}
               <p className="text-small leading-5 text-gray-dark">
                 {LOAN_TERM_MONTHS} cuotas de{" "}
-                <span className="font-bold text-orange">{vehicle.monthlyPayment}</span>{" "}
+                <span className="font-bold text-orange">{vehicle.monthlyPayment}*</span>{" "}
                 ·{" "}
                 <LoanSimulatorModalComponent vehiclePrice={vehicle.priceValue} />
               </p>

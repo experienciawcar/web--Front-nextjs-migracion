@@ -187,9 +187,9 @@ export default function HeroSlideColserautoComponent() {
         </div>
 
         <h2 className="mt-6 text-[28px] leading-9 font-semibold tracking-[-0.5px] text-white md:absolute md:top-[107px] md:left-[123px] md:mt-0 md:w-[436px] md:text-[36px] md:leading-[48px]">
-          Los mejores en registro , documentación y peritaje{" "}
+          Los mejores en registro, documentación y peritaje{" "}
           <span className="font-normal text-orange italic">
-            para tu Vehículo
+            para tu vehículo
           </span>
         </h2>
 

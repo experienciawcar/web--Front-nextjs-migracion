@@ -2,10 +2,9 @@ import Image from "next/image";
 
 import ButtonComponent from "@/modules/shared/components/ButtonComponent";
 import { ROUTES } from "@/modules/shared/constants/routes";
-import { TUCARRO_URL } from "../constants/advice";
 
 const INTRO =
-  "Cuando te dices ¡Compra tu carro en Colombia! Los carros usados pueden ser una excelente opción. No solo ofrecen un precio más cómodo que los vehículos nuevos, sino que también puedes encontrar modelos más antiguos o raros que ya no están disponibles en el mercado.";
+  "Si vas a comprar carro en Colombia, los usados pueden ser una excelente opción. No solo ofrecen un precio más cómodo que los vehículos nuevos, sino que también puedes encontrar modelos más antiguos o raros que ya no están disponibles en el mercado.";
 const CAUTION =
   "Sin embargo, al comprar un carro usado, es importante que tomes algunas precauciones para garantizar que estás haciendo una inversión segura y satisfactoria.";
 
@@ -45,14 +44,9 @@ export default function BuyOrSellBuyComponent() {
         </div>
 
         <div className="xl:pt-0">
-          <p className="reveal hidden py-3 text-[17.5px] leading-[21px] font-medium text-dark-gray xl:block">{INTRO}</p>
-          <p className="reveal hidden py-3 text-[17.5px] leading-[21px] font-medium text-dark-gray xl:block">{CAUTION}</p>
           <div className="reveal mt-2 flex flex-wrap gap-4 xl:mt-[8px]">
             <ButtonComponent href={ROUTES.buyCar} variant="primary" size="medium" className="h-10! max-w-none!">
               Compra seguro aquí
-            </ButtonComponent>
-            <ButtonComponent href={TUCARRO_URL} newTab variant="primary" size="medium" className="h-10! max-w-none!">
-              Listado tu carro.com
             </ButtonComponent>
           </div>
         </div>

@@ -24,7 +24,7 @@ const COLUMNAS = [
     title: "Y nuestra visión…",
     descriptionClassName: "leading-6",
     description:
-      "Convertirnos en el referente en LATAM de la industria a través de la transparencia.\nNuestra visión es posicionarnos entre las tres principales compañías en LATAM de la industria automotriz, elevando la consciencia social. Buscamos impactar no solo a nuestros clientes, sino a toda la comunidad involucrada en la compra-venta de vehículos, fomentando la importancia de acceder a información detallada. Nuestro objetivo es disminuir la asimetría de información, reducir fricciones y eliminar costos ocultos, garantizando transacciones transparentes, informadas y justas.",
+      "Convertirnos en el referente en LATAM de la industria a través de la transparencia.\nNuestra visión es posicionarnos entre las tres principales compañías en LATAM de la industria automotriz, elevando la conciencia social. Buscamos impactar no solo a nuestros clientes, sino a toda la comunidad involucrada en la compraventa de vehículos, fomentando la importancia de acceder a información detallada. Nuestro objetivo es disminuir la asimetría de información, reducir fricciones y eliminar costos ocultos, garantizando transacciones transparentes, informadas y justas.",
   },
 ];
 

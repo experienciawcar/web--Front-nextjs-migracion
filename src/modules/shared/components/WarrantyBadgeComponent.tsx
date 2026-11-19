@@ -5,10 +5,10 @@ import type { VehicleWarrantyTone } from "../types/vehicle";
 
 /** Colores de la etiqueta por cobertura. */
 const TONE_STYLES: Record<VehicleWarrantyTone, string> = {
-  // La de 6 meses es la estándar: verde "label" con borde oscuro.
-  standard: "border-dark-gray bg-label-green text-dark-gray",
-  factory: "border-orange bg-orange text-white",
-  oneYear: "border-black bg-label-yellow text-black",
+  // La de 6 meses es la estándar: verde "label" con texto oscuro.
+  standard: "bg-label-green text-dark-gray",
+  factory: "bg-orange text-white",
+  oneYear: "bg-label-yellow text-black",
 };
 
 /**
@@ -21,20 +21,22 @@ export default function WarrantyBadgeComponent({
   label,
   tone = "standard",
   className = "",
+  iconClassName = "",
 }: {
   label: string;
   tone?: VehicleWarrantyTone;
   className?: string;
+  iconClassName?: string;
 }) {
   return (
     <span
-      className={`flex h-[32px] items-center gap-2 rounded-tr-[30px] rounded-bl-[30px] border py-1 pr-5 pl-4 text-caption leading-[22px] font-semibold whitespace-nowrap ${TONE_STYLES[tone]} ${className}`}
+      className={`flex h-[32px] items-center gap-2 rounded-tr-[30px] rounded-bl-[30px] py-1 pr-5 pl-4 text-caption leading-[22px] font-semibold whitespace-nowrap ${TONE_STYLES[tone]} ${className}`}
     >
       <Image
         src={iconWarranty}
         alt=""
         aria-hidden
-        className={`h-6 w-5 ${tone === "factory" ? "brightness-0 invert" : ""}`}
+        className={`h-6 w-5 ${tone === "factory" ? "brightness-0 invert" : ""} ${iconClassName}`}
       />
       {label}
     </span>

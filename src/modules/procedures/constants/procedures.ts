@@ -18,36 +18,36 @@ export const PROCEDURES: Procedure[] = [
     id: "cambio-propietario",
     title: "Traspasos",
     description:
-      "Mediante este trámite se realiza el cambio de propietario de un vehículo usado. Los costos de tramitador y traspaso dependen del organismo de tránsito donde esté registrado el vehículo. El valor de las toma de improntas estará incluido en el valor que se indique y podrán ser tomadas a domicilio en la ciudad de Bogotá sin ningún costo adicional.",
+      "Mediante este trámite se realiza el cambio de propietario de un vehículo usado. Los costos de tramitador y traspaso dependen del organismo de tránsito donde esté registrado el vehículo. El valor de la toma de improntas estará incluido en el valor que se indique y podrán ser tomadas a domicilio en la ciudad de Bogotá sin ningún costo adicional.",
   },
   {
     id: "inscripcion-prenda",
-    title: "Inscripción de Prenda",
+    title: "Inscripción de prenda",
     description:
       "Mediante este trámite se registra un contrato de prenda por parte de un banco, financiera, persona jurídica o persona natural. Los valores se liquidarán específicamente cuando se reciban y revisen los documentos, pues depende del organismo de tránsito en donde se deba registrar la prenda. El valor de la toma de improntas estará incluido en el valor que se indique y podrán ser tomadas a domicilio en la ciudad de Bogotá sin ningún costo adicional.",
   },
   {
     id: "levantamiento-prenda",
-    title: "Levantamiento de Prenda",
+    title: "Levantamiento de prenda",
     description:
       "Mediante este trámite se cancela un contrato de prenda por parte de un banco, financiera, persona jurídica o persona natural. Los valores se liquidarán específicamente cuando se reciban y revisen los documentos, pues depende del organismo de tránsito en donde se deba registrar la prenda. El valor de la toma de improntas estará incluido en el valor que se indique y podrán ser tomadas a domicilio en la ciudad de Bogotá sin ningún costo adicional.",
   },
   {
     id: "liquidacion-impuestos",
-    title: "Liquidación de Impuestos y Comparendos",
+    title: "Liquidación de impuestos y comparendos",
     description:
-      "El impuesto del vehículo es el valor anual que se debe pagar al territorio en donde se tiene registrado el vehículo. Dicho pago debe ser realizado por el propietario. En WCAR Trámites, te ayudamos a liquidar dichos impuestos para que los puedas pagar de forma ágil y sencilla.",
+      "El impuesto del vehículo es el valor anual que se debe pagar al territorio en donde se tiene registrado el vehículo. Dicho pago debe ser realizado por el propietario. En WCAR Trámites te ayudamos a liquidar dichos impuestos y a gestionar el pago de comparendos para que los resuelvas de forma ágil y sencilla.",
   },
   {
     id: "traslado-radicacion-cuenta",
-    title: "Traslado y Radicación de Cuenta",
+    title: "Traslado y radicación de cuenta",
     description:
       "Consiste en trasladar la matrícula de un vehículo desde el organismo de tránsito donde se encuentra radicado, a la ciudad que desees.",
   },
   {
     id: "juicios-sucesion",
-    title: "Juicios de Sucesión",
+    title: "Juicios de sucesión",
     description:
-      "Cuando un vehículo se encuentra a nombre de una persona que tristemente ha fallecido, los herederos deben resolver el traslado de propiedad. Dicho proceso es complejo y requiere la asesoría de abogados expertos en la materia. En WCAR te ayudamos, para que ese duro momento de tu vida sea un poco más llevadero.",
+      "Cuando un vehículo se encuentra a nombre de una persona que tristemente ha fallecido, los herederos deben resolver el traslado de propiedad. Dicho proceso es complejo y requiere la asesoría de abogados expertos en la materia. En WCAR te ayudamos para que ese duro momento de tu vida sea un poco más llevadero.",
   },
 ];

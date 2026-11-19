@@ -178,8 +178,8 @@ export default function HeroSlideMarceloMobileComponent() {
         </h2>
 
         <p className="absolute top-[210px] left-[19px] max-w-[318px] text-[14px] leading-[18px] font-semibold text-gray-dark">
-          Marcelo Cezán se une a la familia wcar para garantizarte el mejor
-          trato , compra o vende de tu vehículo con total seguridad.
+          Marcelo Cezán se une a la familia WCAR para garantizarte el mejor
+          trato: compra o vende tu vehículo con total seguridad.
         </p>
       </div>
     </div>

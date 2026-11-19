@@ -112,18 +112,17 @@ export default function WorkshopWarrantyComponent() {
             </div>
 
             <div className="flex min-w-0 flex-col xl:pt-[60px]">
-              <SectionEyebrowComponent className="reveal gap-2.5! max-xl:mx-auto max-xl:items-center">Servicios Ofrecidos por wcar</SectionEyebrowComponent>
+              <SectionEyebrowComponent className="reveal gap-2.5! max-xl:mx-auto max-xl:items-center">Servicios ofrecidos por WCAR</SectionEyebrowComponent>
 
               <h2 id="garantias-title" className="reveal mt-2.5 text-center text-subheadline-1 font-bold text-dark-gray xl:mt-[11px] xl:text-left">
                 Garantías y seguros
               </h2>
 
-              {/* TODO: confirmar con diseño: "Wcar" con mayúscula y sin punto final. */}
               <p className="reveal mt-8 text-body font-medium text-gray-dark xl:mt-[23px]">
-                En Wcar, garantizamos su tranquilidad ofreciéndole cobertura integral para la reparación o
-                sustitución de piezas defectuosas. Asimismo, al adquirir su póliza con Wcar Seguros, nuestros talleres
-                especializados se encargarán de solventar cualquier daño en su vehículo, brindándole un respaldo
-                absoluto
+                En WCAR garantizamos tu tranquilidad ofreciéndote cobertura integral para la reparación o
+                sustitución de piezas defectuosas. Asimismo, al adquirir tu póliza con WCAR Seguros, nuestros talleres
+                especializados se encargarán de solventar cualquier daño en tu vehículo, brindándote un respaldo
+                absoluto.
               </p>
 
               <div className="reveal mt-16 flex flex-col items-start gap-8 xl:mt-[48px] xl:flex-row xl:gap-11">

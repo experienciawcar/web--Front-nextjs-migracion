@@ -20,7 +20,7 @@ export default function LoginViewComponent({ next, redirectTo }: { next?: string
       <div className="mx-auto grid max-w-[1182px] items-start gap-10 xl:grid-cols-[416px_628px] xl:justify-between xl:gap-0">
         <div className="reveal">
           <h1 id="login-title" className="mb-4 text-heading-1 font-bold text-dark-gray xl:mt-2 xl:text-subheadline-1 xl:leading-11">
-            Inicie sesión
+            Inicia sesión
           </h1>
           <LoginFormComponent next={next} redirectTo={redirectTo} />
         </div>

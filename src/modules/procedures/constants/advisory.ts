@@ -34,5 +34,5 @@ export const ADVISORY_PHONE = {
 export const ADVISORY_ACTIONS = [
   { id: "advisor", label: "Contacta a un asesor", href: ROUTES.contact, newTab: false },
   { id: "insurance", label: "Compra tu seguro", href: ROUTES.insurance, newTab: true },
-  { id: "warranty", label: "Adquiere tu garantia", href: `${ROUTES.workshop}#garantias-title`, newTab: false },
+  { id: "warranty", label: "Adquiere tu garantía", href: `${ROUTES.workshop}#garantias-title`, newTab: false },
 ] as const;

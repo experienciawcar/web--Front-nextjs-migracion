@@ -35,7 +35,7 @@ export const TRANSPARENCY_FEATURES: TransparencyFeature[] = [
   {
     id: "tecnologia",
     icon: iconTecnologia,
-    title: "Tecnología para acercar las personas.",
+    title: "Tecnología para acercar a las personas.",
     description:
       "Obtén atención personalizada a través de WCAR para resolver cualquier duda.",
   },
@@ -50,22 +50,23 @@ export const TRANSPARENCY_FEATURES: TransparencyFeature[] = [
     id: "financiacion",
     icon: iconFinanciacion,
     title: "Financiación en unos ",
-    titleItalic: "cuantos clicks.",
+    titleItalic: "cuantos clics.",
     description: `${PROMISE_DETAIL} ${PROMISE_CONDITION.replace(/^s/, "S")}.`,
   },
   {
     id: "seguros",
     icon: iconSeguros,
-    title: "Seguros Wcar. ",
+    title: "Seguros WCAR. ",
     titleItalic: "confianza y bienestar",
     description:
-      "confianza y bienestar de nuestros clientes es nuestra principal prioridad",
+      "La confianza y el bienestar de nuestros clientes son nuestra principal prioridad",
   },
   {
     id: "taller",
     icon: iconTaller,
     title: "Taller y Servicio ",
-    titleItalic: "Postventa en wcar",
-    description: "Aplica para un crédito en minutos desde nuestra web.",
+    titleItalic: "Postventa en WCAR",
+    description:
+      "Mantenimiento preventivo, reparaciones y respaldo experto para tu vehículo.",
   },
 ];

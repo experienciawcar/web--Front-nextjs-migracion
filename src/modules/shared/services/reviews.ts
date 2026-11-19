@@ -13,18 +13,17 @@ const TIME_ZONE = "America/Bogota";
 
 const dateFormatter = new Intl.DateTimeFormat("es-CO", {
   timeZone: TIME_ZONE,
-  day: "2-digit",
+  day: "numeric",
   month: "long",
   year: "numeric",
 });
 
-/** "Septiembre 26 / 2026", como en el diseño ("Junio 02 / 2023"). */
+/** "16 de noviembre de 2026". */
 function formatDate(date: Date): string {
   const parts = Object.fromEntries(
     dateFormatter.formatToParts(date).map((part) => [part.type, part.value]),
   );
-  const month = parts.month.charAt(0).toUpperCase() + parts.month.slice(1);
-  return `${month} ${parts.day} / ${parts.year}`;
+  return `${parts.day} de ${parts.month} de ${parts.year}`;
 }
 
 function toReview(dto: ReviewDto, id: number): Review {

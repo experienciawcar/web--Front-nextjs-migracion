@@ -25,38 +25,38 @@ const CAMIONETAS: SeoCategory = {
   bannerTitle: "Camionetas usadas",
   left: [
     {
-      title: "Camionetas Usadas Colombia",
+      title: "Camionetas usadas Colombia",
       paragraphs: [
-        "En wcar entendemos que la elección de una camioneta usada de calidad es una decisión importante para nuestros clientes en Colombia. Es por eso que nos enorgullece ofrecer una amplia gama de camionetas de todos los matices, cómodas, de lujo, con platón, híbridas, exclusivas, comerciales que cumplen con los más altos estándares de calidad y confiabilidad. Nuestra selección incluye marcas reconocidas como Chevrolet, Renault, Mercedes Benz, BMW y Toyota entre otras, garantizando que nuestros clientes encuentren la camioneta de sus sueños.",
+        "En WCAR entendemos que la elección de una camioneta usada de calidad es una decisión importante para nuestros clientes en Colombia. Es por eso que nos enorgullece ofrecer una amplia gama de camionetas de todos los estilos: cómodas, de lujo, con platón, híbridas, exclusivas y comerciales, que cumplen con los más altos estándares de calidad y confiabilidad. Nuestra selección incluye marcas reconocidas como Chevrolet, Renault, Mercedes-Benz, BMW y Toyota, entre otras, garantizando que nuestros clientes encuentren la camioneta de sus sueños.",
       ],
-      link: { label: "Compra tu Camioneta", href: SUV_HREF },
+      link: { label: "Compra tu camioneta", href: SUV_HREF },
       image: { file: "camionetas-usadas-colombia.webp", alt: "Camionetas usadas Colombia" },
     },
     {
-      title: "Camionetas SUV Usadas",
+      title: "Camionetas SUV usadas",
       paragraphs: [
-        "Las camionetas SUV usadas son la elección perfecta para quienes buscan combinar estilo, espacio y potencia sin sacrificar la economía. En WCAR, entendemos que cada conductor tiene necesidades únicas, por eso ofrecemos una selección de SUV que destacan por su confiabilidad y rendimiento, garantizando una compra segura y transparente. Navega entre nuestras opciones y encuentra la camioneta SUV que mejor se adapte a tu estilo de vida y necesidades, todo con la tranquilidad de contar con el respaldo de nuestra filosofía de Transparencia Brutal.",
+        "Las camionetas SUV usadas son la elección perfecta para quienes buscan combinar estilo, espacio y potencia sin sacrificar la economía. En WCAR entendemos que cada conductor tiene necesidades únicas, por eso ofrecemos una selección de SUV que destacan por su confiabilidad y rendimiento, garantizando una compra segura y transparente. Navega entre nuestras opciones y encuentra la camioneta SUV que mejor se adapte a tu estilo de vida y necesidades, todo con la tranquilidad de contar con el respaldo de nuestra filosofía de transparencia brutal.",
       ],
       image: { file: "camioneta-suv.webp", alt: "Camionetas SUV usadas" },
     },
     {
       title: "Camioneta Chevrolet y Toyota Colombia: Las mejores opciones en camionetas usadas en Colombia",
       paragraphs: [
-        "En wcar, sabemos que Chevrolet y Toyota son dos de las marcas más populares y confiables en el mercado de camionetas usadas en Colombia. Nuestra colección de camionetas Chevrolet ofrece modelos emblemáticos como la Chevrolet Montana, conocida por su versatilidad y rendimiento excepcional. También contamos con una amplia selección de camionetas Toyota, que son reconocidas por su durabilidad y capacidad todo terreno. Además, ofrecemos modelos 4×4 para aquellos que buscan aventuras fuera de la carretera.",
+        "En WCAR sabemos que Chevrolet y Toyota son dos de las marcas más populares y confiables en el mercado de camionetas usadas en Colombia. Nuestra colección de camionetas Chevrolet ofrece modelos emblemáticos como la Chevrolet Montana, conocida por su versatilidad y rendimiento excepcional. También contamos con una amplia selección de camionetas Toyota, que son reconocidas por su durabilidad y capacidad todoterreno. Además, ofrecemos modelos 4x4 para aquellos que buscan aventuras fuera de la carretera.",
       ],
       image: { file: "toyota-colombia.webp", alt: "Camionetas Toyota en Colombia" },
     },
     {
       title: "Chevrolet Montana",
       paragraphs: [
-        "Una de las camionetas con más crecimiento en ventas en el 2023, una pickup con un diseño y estilo único que enamora a los usuarios clásicos de Chevrolet y cumple a cabalidad con su función utilitaria y más la Chevrolet Montana llega con toda al país.",
+        "Es una de las camionetas con mayor crecimiento en ventas de 2023: una pickup con un diseño y estilo único que enamora a los usuarios clásicos de Chevrolet y cumple a cabalidad con su función utilitaria. La Chevrolet Montana llega con todo al país.",
       ],
       image: { file: "chevrolet-montana.webp", alt: "Chevrolet Montana" },
     },
     {
       title: "Ford en Colombia: Calidad y rendimiento garantizados",
       paragraphs: [
-        "Ford es otra marca de renombre en el mercado de camionetas usadas en Colombia, y en wcar nos aseguramos de ofrecer una variedad de modelos de alta calidad de esta reconocida marca. Si estás buscando una camioneta potente y resistente, las camionetas Ford, incluyendo la popular Ford Raptor, son una opción excelente. Estos vehículos están diseñados para soportar condiciones difíciles y ofrecen un rendimiento excepcional en cualquier terreno.",
+        "Ford es otra marca de renombre en el mercado de camionetas usadas en Colombia, y en WCAR nos aseguramos de ofrecer una variedad de modelos de alta calidad de esta reconocida marca. Si estás buscando una camioneta potente y resistente, las camionetas Ford, incluyendo la popular Ford Raptor, son una opción excelente. Estos vehículos están diseñados para soportar condiciones difíciles y ofrecen un rendimiento excepcional en cualquier terreno.",
       ],
       image: { file: "ford-en-colombia.webp", alt: "Camionetas Ford en Colombia" },
     },
@@ -65,28 +65,28 @@ const CAMIONETAS: SeoCategory = {
     {
       title: "Camionetas con platón: Espacio y versatilidad",
       paragraphs: [
-        "Entendemos que algunos clientes necesitan una camioneta con espacio adicional para transportar carga. En wcar, contamos con una selección de camionetas con platón que ofrecen la combinación perfecta de capacidad de carga y confort. Estos vehículos son ideales para aquellos que necesitan transportar mercancías o equipos, brindando la versatilidad necesaria para enfrentar cualquier desafío.",
+        "Entendemos que algunos clientes necesitan una camioneta con espacio adicional para transportar carga. En WCAR contamos con una selección de camionetas con platón que ofrecen la combinación perfecta de capacidad de carga y confort. Estos vehículos son ideales para aquellos que necesitan transportar mercancías o equipos, brindando la versatilidad necesaria para enfrentar cualquier desafío.",
       ],
       image: { file: "camioneta-con-platon.webp", alt: "Camioneta con platón" },
     },
     {
       title: "Camionetas chinas: Calidad a precios accesibles",
       paragraphs: [
-        "Además de las marcas reconocidas, también ofrecemos camionetas chinas de alta calidad a precios accesibles. Estos vehículos ofrecen una excelente relación calidad-precio y son una opción popular entre aquellos que buscan una opción económica sin comprometer la calidad y el rendimiento. Nuestro equipo de expertos en WCar selecciona cuidadosamente las camionetas chinas disponibles para asegurarse de ofrecer a nuestros clientes solo productos confiables y duraderos.",
+        "Además de las marcas reconocidas, también ofrecemos camionetas chinas de alta calidad a precios accesibles. Estos vehículos ofrecen una excelente relación calidad-precio y son una opción popular entre aquellos que buscan una opción económica sin comprometer la calidad y el rendimiento. Nuestro equipo de expertos en WCAR selecciona cuidadosamente las camionetas chinas disponibles para asegurarse de ofrecer a nuestros clientes solo productos confiables y duraderos.",
       ],
       image: { file: "camioneta-china.webp", alt: "Camioneta china" },
     },
     {
-      title: "Camionetas usadas Bogotá, encuentra la perfecta para ti",
+      title: "Camionetas usadas en Bogotá: encuentra la perfecta para ti",
       paragraphs: [
-        "No importa dónde te encuentres en Colombia, en WCar estamos comprometidos a ayudarte a encontrar la camioneta usada perfecta. Nuestro servicio de ventas abarca todo el país, y si te encuentras en Bogotá, ofrecemos una amplia variedad de camionetas usadas disponibles en la capital. Nuestra página web fácil de usar te permite buscar por ubicación, marca, modelo y más, para que encuentres la camioneta adecuada de manera rápida y sencilla.",
+        "No importa dónde te encuentres en Colombia, en WCAR estamos comprometidos a ayudarte a encontrar la camioneta usada perfecta. Nuestro servicio de ventas abarca todo el país, y si te encuentras en Bogotá, ofrecemos una amplia variedad de camionetas usadas disponibles en la capital. Nuestra página web fácil de usar te permite buscar por ubicación, marca, modelo y más, para que encuentres la camioneta adecuada de manera rápida y sencilla.",
       ],
       image: { file: "camionetas-usadas-bogota.webp", alt: "Camionetas usadas en Bogotá" },
     },
     {
       title: "Experiencia y compromiso en la venta de camionetas usadas",
       paragraphs: [
-        "En wcar, contamos con años de experiencia en la venta de camionetas usadas en Colombia. Nuestro equipo de profesionales está dedicado a brindar un servicio excepcional y asesoramiento experto a nuestros clientes. Nos esforzamos por ofrecer transparencia en cada paso del proceso de compra, desde la selección hasta la entrega. Tu satisfacción es nuestra máxima prioridad.",
+        "En WCAR contamos con años de experiencia en la venta de camionetas usadas en Colombia. Nuestro equipo de profesionales está dedicado a brindar un servicio excepcional y asesoramiento experto a nuestros clientes. Nos esforzamos por ofrecer transparencia en cada paso del proceso de compra, desde la selección hasta la entrega. Tu satisfacción es nuestra máxima prioridad.",
       ],
       image: { file: "experiencia-compromiso.webp", alt: "Experiencia y compromiso en la venta de camionetas" },
     },
@@ -426,9 +426,9 @@ const MOTOS: SeoCategory = {
   key: "motos",
   left: [
     {
-      title: "Compra tu moto usada con total transparencia en wcar",
+      title: "Compra tu moto usada con total transparencia en WCAR",
       paragraphs: [
-        "En wcar creemos que comprar una moto usada no debería ser una apuesta a ciegas. Por eso te acompañamos en todo el proceso para que elijas una motocicleta de segunda en buen estado mecánico, con información clara, precios justos y opciones reales de financiación. Aquí no vendemos ilusiones, vendemos motos revisadas y decisiones bien tomadas.",
+        "En WCAR creemos que comprar una moto usada no debería ser una apuesta a ciegas. Por eso te acompañamos en todo el proceso para que elijas una motocicleta de segunda en buen estado mecánico, con información clara, precios justos y opciones reales de financiación. Aquí no vendemos ilusiones; vendemos motos revisadas y decisiones bien tomadas.",
       ],
     },
     {
@@ -465,7 +465,7 @@ const MOTOS: SeoCategory = {
       title: "Motos deportivas económicas y motos buenas, bonitas y baratas",
       paragraphs: [
         "No todo el mundo busca una moto nueva de vitrina. Muchos quieren motos deportivas económicas o una moto buena, bonita y barata para el día a día.",
-        "En wcar te ayudamos a encontrar opciones que valgan la pena por precio, rendimiento y estado mecánico. No vendemos gangas milagrosas, vendemos motos que cumplen lo que prometen.",
+        "En WCAR te ayudamos a encontrar opciones que valgan la pena por precio, rendimiento y estado mecánico. No vendemos gangas milagrosas; vendemos motos que cumplen lo que prometen.",
       ],
     },
     {
@@ -476,9 +476,9 @@ const MOTOS: SeoCategory = {
       ],
     },
     {
-      title: "Motos Usadas con Peritaje Colserautos",
+      title: "Motos usadas con peritaje Colserautos",
       paragraphs: [
-        'En wcar, además de nuestra revisión técnica interna, todas las motos pasan por Colserautos, una empresa especializada en peritajes en Colombia. Esto nos permite validar de manera independiente el estado estructural, mecánico y legal de cada moto usada. El resultado es simple: información clara, sin conflictos de interés y decisiones de compra con respaldo real. No confiamos solo en "lo que parece estar bien", lo comprobamos.',
+        'En WCAR, además de nuestra revisión técnica interna, todas las motos pasan por Colserautos, una empresa especializada en peritajes en Colombia. Esto nos permite validar de manera independiente el estado estructural, mecánico y legal de cada moto usada. El resultado es simple: información clara, sin conflictos de interés y decisiones de compra con respaldo real. No confiamos solo en "lo que parece estar bien": lo comprobamos.',
       ],
     },
   ],
@@ -486,13 +486,13 @@ const MOTOS: SeoCategory = {
     {
       title: "¿Qué es una motocicleta de segunda?",
       paragraphs: [
-        "Una motocicleta de segunda es una moto que ya tuvo uso previo. En wcar no solo verificamos su funcionamiento, sino que además la enviamos a peritaje con Colserautos, para confirmar su estado real antes de ofrecerla al público. Así evitas sorpresas después de la compra.",
+        "Una motocicleta de segunda es una moto que ya tuvo uso previo. En WCAR no solo verificamos su funcionamiento, sino que además la enviamos a peritaje con Colserautos, para confirmar su estado real antes de ofrecerla al público. Así evitas sorpresas después de la compra.",
       ],
     },
     {
       title: "¿Es seguro comprar motos de segunda mano en Colombia?",
       paragraphs: [
-        "Sí, siempre que exista revisión y respaldo. En wcar combinamos nuestra evaluación técnica con un peritaje independiente de Colserautos, lo que permite confirmar estado mecánico, estructural y legal. Comprar motos de segunda mano sin peritaje es asumir un riesgo innecesario.",
+        "Sí, siempre que exista revisión y respaldo. En WCAR combinamos nuestra evaluación técnica con un peritaje independiente de Colserautos, lo que permite confirmar el estado mecánico, estructural y legal. Comprar motos de segunda mano sin peritaje es asumir un riesgo innecesario.",
       ],
     },
     {
@@ -549,7 +549,7 @@ const MOTOS: SeoCategory = {
     {
       title: "¿Qué gana el comprador con este proceso?",
       paragraphs: [
-        "Gana tranquilidad. Comprar una moto usada con revisión interna + peritaje Colserautos reduce riesgos, evita gastos inesperados y permite tomar una decisión informada desde el día uno.",
+        "Gana tranquilidad. Comprar una moto usada con revisión interna más peritaje Colserautos reduce riesgos, evita gastos inesperados y permite tomar una decisión informada desde el día uno.",
       ],
     },
   ],

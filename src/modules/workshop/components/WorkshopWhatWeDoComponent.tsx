@@ -102,16 +102,16 @@ export default function WorkshopWhatWeDoComponent() {
               id="que-hace-title"
               className="reveal mt-2 text-center text-subheadline-1 font-bold text-dark-gray opacity-90 xl:mt-[30px] xl:text-left xl:text-heading-1"
             >
-              ¿Que hace{" "}
+              ¿Qué hace{" "}
               <span className="xl:hidden">
                 <br />
-                <span className="font-normal text-orange italic">wcar Taller?</span>
+                <span className="font-normal text-orange italic">WCAR Taller?</span>
               </span>
-              <span className="hidden font-medium italic xl:inline">wcar taller ?</span>
+              <span className="hidden font-medium italic xl:inline">WCAR Taller?</span>
             </h2>
 
             <p className="reveal mt-8 text-body font-medium text-gray-dark xl:mt-[30px]">
-              En <strong className="font-bold text-orange">wcar</strong>, ofrecemos un servicio de calidad
+              En <strong className="font-bold text-orange">WCAR</strong>, ofrecemos un servicio de calidad
               superior para tu vehículo. Nuestro taller en Bogotá está equipado con{" "}
               <strong className="font-bold text-[#5d6480]">tecnología de punta</strong> y cuenta con un equipo de
               expertos dedicados a brindarte la mejor atención posible. Creemos en la{" "}

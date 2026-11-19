@@ -193,8 +193,8 @@ export default function HeroSlideSantanderComponent() {
         </h2>
 
         <p className="mt-4 text-[18px] leading-[22px] font-semibold text-white md:absolute md:top-[258px] md:left-[123px] md:mt-0 md:w-[434px]">
-          Póngase en contacto con nosotros y le informaremos sin compromiso de
-          nuestras tarifas y servicios.
+          Ponte en contacto con nosotros y te informaremos, sin compromiso,
+          sobre nuestras tarifas y servicios.
         </p>
       </div>
     </div>

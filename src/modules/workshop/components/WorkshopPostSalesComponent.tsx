@@ -11,7 +11,7 @@ const CARDS: PostSalesCard[] = [
   {
     id: "mantenimiento-preventivo",
     icon: iconTools,
-    title: "Mantenimiento preventivo",
+    title: "Reparaciones y mantenimiento",
     description:
       "Ofrecemos soluciones completas para cualquier problema mecánico, eléctrico o de carrocería. Ya sea que necesites una reparación menor o mayor, estamos preparados para ayudarte.",
     descriptionClassName: "leading-[22px]",
@@ -106,7 +106,7 @@ export default function WorkshopPostSalesComponent() {
 
           <div className="min-w-0 flex-1">
             <SectionEyebrowComponent className="reveal gap-2.5! max-xl:mx-auto max-xl:items-center">
-              Servicios Ofrecidos por wcar
+              Servicios ofrecidos por WCAR
             </SectionEyebrowComponent>
 
             <h2

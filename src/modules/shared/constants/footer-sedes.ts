@@ -63,7 +63,7 @@ export const FOOTER_SEDES: FooterSede[] = [
     city: "Bogotá",
     tab: "Puente Aranda",
     phone: "+57 324 4001212",
-    address: "Carrera. 50 #15-55 Bogotá",
+    address: "Carrera 50 #15-55, Bogotá",
     image: "/assets/shared/footer/sedes/sede-puente-aranda.webp",
   },
   {

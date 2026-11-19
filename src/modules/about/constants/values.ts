@@ -16,7 +16,7 @@ export const COMPANY_VALUES: CompanyValue[] = [
     id: "innovacion-disruptiva",
     title: "Innovación disruptiva",
     description:
-      "Buscamos revolucionar el mercado de autos usados al adoptar y desarrollar tecnologías de vanguardia, como la inteligencia artificial y la blockchain, para ofrecer una experiencia phygital única que transforme la forma en que las personas compran y venden vehículos.",
+      "Buscamos revolucionar el mercado de autos usados al adoptar y desarrollar tecnologías de vanguardia, como la inteligencia artificial y el blockchain, para ofrecer una experiencia phygital única que transforme la forma en que las personas compran y venden vehículos.",
   },
   {
     id: "servicio-personalizado",
@@ -34,7 +34,7 @@ export const COMPANY_VALUES: CompanyValue[] = [
     id: "sostenibilidad-y-responsabilidad",
     title: "Sostenibilidad y responsabilidad",
     description:
-      "Estamos comprometidos con un enfoque consciente y responsable en la industria automotriz, promoviendo prácticas sostenibles, fomentando la reutilización de autos, dándoles una nueva oportunidad, garantizando que nuestro impacto en el medio ambiente sea mínimo.",
+      "Estamos comprometidos con un enfoque consciente y responsable en la industria automotriz, promoviendo prácticas sostenibles, fomentando la reutilización de autos, dándoles una nueva oportunidad y garantizando que nuestro impacto en el medio ambiente sea mínimo.",
   },
   {
     id: "comunidad-y-conexion",
@@ -46,6 +46,6 @@ export const COMPANY_VALUES: CompanyValue[] = [
     id: "bienestar-y-desarrollo-integral",
     title: "Bienestar y desarrollo integral",
     description:
-      "Estamos profundamente comprometidos con el crecimiento y bienestar de nuestros empleados, clientes y otros stakeholders. Fomentamos un ambiente laboral inclusivo, equitativo y colaborativo, donde cada miembro de nuestro equipo pueda desarrollarse y prosperar. Además, nos esforzamos por mejorar continuamente la vida de nuestros clientes, ofreciendo soluciones que simplifiquen y enriquezcan su experiencia en el mercado de autos usados, y generando un impacto positivo en nuestras comunidades a través de nuestras acciones y responsabilidad social.",
+      "Estamos profundamente comprometidos con el crecimiento y bienestar de nuestros empleados, clientes y otros grupos de interés. Fomentamos un ambiente laboral inclusivo, equitativo y colaborativo, donde cada miembro de nuestro equipo pueda desarrollarse y prosperar. Además, nos esforzamos por mejorar continuamente la vida de nuestros clientes, ofreciendo soluciones que simplifiquen y enriquezcan su experiencia en el mercado de autos usados, y generando un impacto positivo en nuestras comunidades a través de nuestras acciones y responsabilidad social.",
   },
 ];

@@ -84,13 +84,13 @@ export default function SellSecurityComponent() {
             </h2>
 
             <p className="reveal mt-6 max-w-[572px] text-body text-white/90">
-              En wcar nos preocupamos por la seguridad en cada servicio, el asesoramiento en cada negocio que un
-              proceso tan tedioso como lo es la venta de carros en Colombia se hace fácil y sencillo
+              En WCAR nos preocupamos por la seguridad en cada servicio y por el asesoramiento en cada negocio, para
+              que un proceso tan tedioso como la venta de un carro en Colombia sea fácil y sencillo.
             </p>
             <p className="reveal mt-4 max-w-[572px] text-body text-white/90">
               Te ayudamos desde el primer contacto y gestionamos todos los procesos que requiere la venta de tu
-              vehículo, el comerciar con carros usados no es una tarea sencilla, pero conocemos el mercado y sabemos
-              como ayudarte.
+              vehículo. Comerciar con carros usados no es tarea sencilla, pero conocemos el mercado y sabemos cómo
+              ayudarte.
             </p>
 
             <div className="reveal mt-8 flex flex-col items-start gap-4 xl:flex-row xl:items-center">

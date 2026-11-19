@@ -36,7 +36,7 @@ function formatDate(iso: string): { short: string; long: string } {
   if (Number.isNaN(date.getTime())) return { short: "", long: "" };
   const parts = Object.fromEntries(dateFormatter.formatToParts(date).map((part) => [part.type, part.value]));
   return {
-    short: `${parts.month} ${parts.day}, ${parts.year}`,
+    short: `${parts.day} de ${parts.month} de ${parts.year}`,
     long: `${parts.day} de ${parts.month} de ${parts.year}`,
   };
 }

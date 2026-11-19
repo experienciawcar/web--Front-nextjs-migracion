@@ -51,7 +51,7 @@ export default function VehicleBenefitsComponent({
       detailTitle: vehicle.warranty.title,
       detail: standard
         ? "Cubre motor, caja, diferencial, dirección, enfriamiento, inyección, módulos y suspensión. Diagnóstico gratis aunque la falla no esté cubierta."
-        : "Aplica términos y condiciones.",
+        : "Aplican términos y condiciones.",
     });
   }
   if (vehicle.happinessWarranty) {

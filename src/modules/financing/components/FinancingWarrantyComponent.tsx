@@ -82,7 +82,7 @@ export default function FinancingWarrantyComponent() {
         <div className="container-wcar py-16 xl:pt-[69px] xl:pb-0">
           <div className="xl:ml-[307px]">
             <SectionEyebrowComponent className="mx-auto items-center gap-6! xl:mx-0 xl:items-stretch xl:gap-4!">
-              Servicios Ofrecidos por wcar
+              Servicios ofrecidos por WCAR
             </SectionEyebrowComponent>
 
             <h2

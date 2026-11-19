@@ -25,7 +25,7 @@ export const CONTACT_OPTIONS: ContactOption[] = [
     id: "company",
     title: "Contactar a la empresa",
     description:
-      "Tienes alguna pregunta, comentario o situación en la que podamos ayudarte, haz clic aquí en el botón de abajo.",
+      "¿Tienes alguna pregunta, comentario o situación en la que podamos ayudarte? Haz clic en el botón de abajo.",
     cta: "Contactar a la empresa",
     href: ROUTES.contactCompany,
     icon: iconLaptop,
@@ -34,7 +34,7 @@ export const CONTACT_OPTIONS: ContactOption[] = [
     id: "sell-vehicle",
     title: "Contactar venta de vehículo",
     description:
-      "¿Estas vendiendo tu vehículo? Te ayudamos desde el primer contacto y gestionamos todos los procesos que requiere la venta de tu vehículo.",
+      "¿Estás vendiendo tu vehículo? Te ayudamos desde el primer contacto y gestionamos todos los procesos que requiere la venta de tu vehículo.",
     cta: "Contacta un asesor",
     href: ROUTES.quote,
     // El glifo de `car.svg` es el recuadro exacto del auto (22,7x20); el del

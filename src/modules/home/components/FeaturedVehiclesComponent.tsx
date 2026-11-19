@@ -73,7 +73,7 @@ export default async function FeaturedVehiclesComponent() {
         <span aria-hidden className="block h-[4px] w-[115px] bg-orange" />
         {/* TODO: confirmar con diseño: el eyebrow va en minúsculas. */}
         <p className="reveal mt-4 text-small font-semibold text-gray">
-          conoce lo mas destacado de nuestro catalogo en esta semana
+          Conoce lo más destacado de nuestro catálogo esta semana
         </p>
         <h2
           id="featured-title"

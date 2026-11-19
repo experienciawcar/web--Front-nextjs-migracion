@@ -391,8 +391,7 @@ export default function TransparencyComponent() {
             id="transparency-title"
             className="reveal px-8 text-center text-subheadline-1 font-bold text-dark-gray md:px-0 md:text-left xl:text-[36px] xl:leading-[44px]"
           >
-            Compra<span className="hidden md:inline">s</span> online con
-            atención{" "}
+            Compras online con atención{" "}
             <span className="font-normal text-orange italic">
               personalizada.
             </span>

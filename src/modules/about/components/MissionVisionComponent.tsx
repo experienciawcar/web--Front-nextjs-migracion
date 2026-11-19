@@ -19,21 +19,17 @@ export default function MissionVisionComponent() {
       <div className="px-8 pt-5 xl:px-0 xl:pt-0 xl:pl-[435px]">
         <SideLabelComponent
           regular="Misión"
-          italic="& visión"
+          italic="y visión"
           className="reveal reveal-left hidden xl:absolute xl:top-[99px] xl:left-[111px] xl:block"
         />
 
-        {/* Texto de relleno: en Figma sigue con lorem ipsum.
-            TODO: falta el copy real. */}
         <p className="reveal text-center text-small font-bold text-gray xl:ml-14 xl:text-left">
-          Nibh quisque suscipit fermentum
+          Nuestro propósito
         </p>
 
-        {/* "¿Que hace wcar?" va sin tilde en Figma.
-            TODO: confirmar con diseño, parece un error de ortografía. */}
         <FeatureCardComponent
           icon={iconCar}
-          title="¿Que hace wcar?"
+          title="¿Qué hace WCAR?"
           titleAs="h3"
           className="reveal mt-[15px] justify-center xl:mt-2 xl:justify-start"
         />

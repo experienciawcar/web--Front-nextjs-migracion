@@ -273,30 +273,10 @@ export default function HeroSearchTabsComponent() {
                 iconClassName="hidden md:flex"
                 className="h-[54px]! justify-center! px-4! md:w-[152px]! md:px-8!"
               >
-                <span className="md:hidden">Go</span>
+                <span className="md:hidden">Buscar</span>
                 <span className="hidden md:inline">Buscar</span>
               </ButtonComponent>
             </form>
-
-            <div className="mt-4 grid grid-cols-2 gap-3 md:mt-6 md:gap-6">
-              <ButtonComponent
-                href={ROUTES.sellCar}
-                variant="secondary"
-                icon={arrowCircle}
-                iconClassName="hidden md:flex"
-                className="w-full px-3! md:px-8!"
-              >
-                Vende tu carro
-              </ButtonComponent>
-              <ButtonComponent
-                href={ROUTES.buyCar}
-                icon={arrowCircle}
-                iconClassName="hidden md:flex"
-                className="w-full justify-center! px-3! md:px-8!"
-              >
-                Compra tu carro
-              </ButtonComponent>
-            </div>
 
             <HeroSearchSuggestionsComponent
               open={showSuggestions}

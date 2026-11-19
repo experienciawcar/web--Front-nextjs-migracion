@@ -159,7 +159,7 @@ export function toVehicle(dto: VehicleDto): Vehicle | null {
     name,
     bodyType,
     year: dto.year || null,
-    mileage: dto.mileage != null ? `${numberFormat.format(dto.mileage)} Km.` : null,
+    mileage: dto.mileage != null ? `${numberFormat.format(dto.mileage)} km` : null,
     transmission: dto.transmission === 1 ? "Automática" : "Manual",
     city: dto.sede_car?.name?.trim() || "Bogotá",
     price: formatPrice(finalPrice),

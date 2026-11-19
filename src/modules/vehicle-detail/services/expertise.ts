@@ -269,7 +269,7 @@ export function toExpertiseReport(dto: AutomasDto): ExpertiseReport {
     insurable: insurable(dto.insurable),
     summary: [
       joined([toTitleCase(dto.body_type), joined([toTitleCase(dto.car_class), clean(dto.model)], " ")]),
-      joined([toTitleCase(dto.color), mileageText ? `${mileageText} Km` : ""]),
+      joined([toTitleCase(dto.color), mileageText ? `${mileageText} km` : ""]),
     ].filter(Boolean),
     service: [
       clean(dto.requested_service)
