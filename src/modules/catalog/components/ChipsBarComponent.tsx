@@ -22,9 +22,7 @@ export default function ChipsBarComponent({
 }) {
   return (
     <div
-      className={`flex-wrap items-center justify-between gap-4 pb-4 xl:flex xl:min-h-[51px] xl:pt-2 xl:pb-0 ${
-        chips.length > 0 ? "flex" : "hidden"
-      }`}
+      className={`flex-wrap items-center justify-between gap-4 pb-4 xl:min-h-[51px] xl:pt-2 xl:pb-0 hidden xl:flex`}
     >
       <div className="flex flex-wrap items-center gap-2">
         {chips.map((chip) => (

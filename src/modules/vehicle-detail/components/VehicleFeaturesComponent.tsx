@@ -12,6 +12,8 @@ import iconClaimsAmount from "../assets/features/icon-reclamaciones-monto.svg";
 import iconClaimsReported from "../assets/features/icon-reclamaciones-reportadas.svg";
 import logoChatGpt from "../assets/features/logo-chatgpt.webp";
 import iconPlate from "../assets/features/generico.webp";
+import iconMedal from "../assets/summary/n-medalla.svg";
+import iconCredifacil from "@/modules/financing/assets/productos/icon-credifacil.svg";
 import type { VehicleDetail, VehicleFeature } from "../types/vehicle-detail";
 
 import VehicleAiDescriptionComponent from "./VehicleAiDescriptionComponent";
@@ -26,6 +28,68 @@ const CLAIMS_EXPLANATION = [
   "Una pérdida total se produce cuando las reparaciones de los daños de un vehículo superan el 75% de su valor asegurable.",
   "Un auto recuperado es aquel que previamente estaba asegurado, fue robado y el propietario recibió una indemnización por parte de la aseguradora. Sin embargo, posteriormente el vehículo fue recuperado por la aseguradora, lo que resulta en un reporte de recuperación asociado al automóvil. Este evento puede afectar el valor comercial del vehículo.",
 ];
+
+const CREDIFACIL_BENEFITS = [
+  { title: "Solicitud digital", note: "has tu Solicitud desde donde quieras desde nuestra web*" },
+  { title: "Pre-aprobado en menos de 15 minutos" },
+  { title: "Atención personalizada" },
+];
+
+/** Tarjeta Credifácil de la barra oscura (solo desktop; Figma 1711:25939). */
+function CredifacilPromo() {
+  return (
+    <div className="absolute top-0 hidden w-[428px] xl:left-0 xl:flex xl:flex-col xl:items-center xl:pt-[60px]">
+      <div className="w-[260px]">
+      <span aria-hidden className="block h-1 w-[77px] bg-blue-neon" />
+      <div className="mt-4 flex items-center gap-2">
+        <Image src={iconCredifacil} alt="" aria-hidden className="h-8 w-auto" />
+        <p className="text-[28px] leading-8 text-blue-neon">
+          <span className="font-bold">Credi</span>
+          <span className="font-bold text-white italic">fácil</span>
+        </p>
+      </div>
+      <p className="mt-1 text-[16px] leading-5 font-semibold text-white">
+        Financiación del 100% hasta 84 meses . Apl. TYC
+      </p>
+      <ul className="mt-10 flex flex-col gap-6">
+        {CREDIFACIL_BENEFITS.map((b) => (
+          <li key={b.title} className="flex items-start gap-2">
+            <svg aria-hidden viewBox="0 0 30 30" className="size-[30px] shrink-0">
+              <circle cx="15" cy="15" r="15" className="fill-blue-neon" />
+              <path d="m8.5 15.5 4 4 9-9" fill="none" stroke="#1e1e1e" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <div className="text-white">
+              <p className="text-[18px] leading-6 font-semibold">{b.title}</p>
+              {b.note && <p className="mt-1 text-[10px] leading-3 font-medium">{b.note}</p>}
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-12">
+        <ButtonComponent href={ROUTES.financing} className="max-w-none!">
+          Solicitar financiamiento
+        </ButtonComponent>
+      </div>
+      </div>
+    </div>
+  );
+}
+
+/** Una tarjeta de garantía del acordeón: medalla, título, "Aplica términos y condiciones" y texto. */
+function WarrantyCard({ title, text }: { title: string; text: string }) {
+  return (
+    <li className="flex gap-3">
+      <Image src={iconMedal} alt="" aria-hidden className="size-8 shrink-0" />
+      <div className="text-small leading-5 font-medium text-gray-dark">
+        <p className="text-dark-gray">{title}</p>
+        <a href={ROUTES.buyerPolicies} className="text-[12px] font-bold text-orange">
+          Aplica términos y condiciones
+        </a>
+        <p className="mt-3">{text}</p>
+      </div>
+    </li>
+  );
+}
 
 /** Una fila del acordeón. `<details name>` los agrupa: solo uno abierto a la vez, sin JavaScript. */
 function AccordionItem({
@@ -134,6 +198,29 @@ export default function VehicleFeaturesComponent({
     title: React.ReactNode;
     body: React.ReactNode;
   }[] = [];
+
+  if (vehicle.warranty || vehicle.happinessWarranty) {
+    sections.push({
+      key: "garantias",
+      title: "Garantías",
+      body: (
+        <ul className="grid gap-8 sm:grid-cols-2">
+          {vehicle.happinessWarranty && (
+            <WarrantyCard
+              title="Garantía de felicidad"
+              text="Lleva tu vehículo y si no estás satisfecho puedes cambiarlo, tienes hasta 7 días o 300 km para hacerlo."
+            />
+          )}
+          {vehicle.warranty && (
+            <WarrantyCard
+              title={vehicle.warranty.title}
+              text="Aplica solo para compras y reservas realizadas en la web."
+            />
+          )}
+        </ul>
+      ),
+    });
+  }
 
   if (hasHistory) {
     sections.push({
@@ -297,10 +384,12 @@ export default function VehicleFeaturesComponent({
           <ZigZagComponent tone="light" />
         </div>
 
+        <CredifacilPromo />
+
         <div className="container-wcar relative py-16 xl:grid xl:grid-cols-[378px_783px] xl:py-0 xl:pb-[70px]">
-          <div className="reveal xl:pt-16">
-            <SideLabel />
-            <div className="mt-8 xl:-ml-1">
+          <div className="reveal xl:pt-0">
+            <SideLabel className="xl:hidden" />
+            <div className="mt-8 xl:hidden">
               <ButtonComponent href={ROUTES.contact} icon={arrowCircle}>
                 Quiero conocerlo
               </ButtonComponent>
@@ -334,9 +423,9 @@ export default function VehicleFeaturesComponent({
 }
 
 /** El título partido de la sección. `SideLabelComponent` ya trae el h2; aquí le damos el id que enlaza la sección. */
-function SideLabel() {
+function SideLabel({ className }: { className?: string }) {
   return (
-    <div id="caracteristicas-title">
+    <div id="caracteristicas-title" className={className}>
       <SideLabelComponent regular="Características" italic="del vehículo" />
     </div>
   );

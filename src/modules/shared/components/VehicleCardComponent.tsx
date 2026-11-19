@@ -64,8 +64,8 @@ function InfoItem({
  *   arriba a la derecha, ambas sobre la imagen. Corazón de favoritos abajo a la derecha de la foto.
  * - Datos en cuadrícula de 2 columnas: año, kilometraje, transmisión y ciudad.
  * - Precio a la izquierda (con el de lista tachado debajo si hay descuento) y
- *   el botón VER dentro del margen, con esquinas opuestas redondeadas. No lleva cuota mensual ni "Envío a
- *   todo el país" (`Vehicle.monthlyPayment` queda disponible, sin uso aquí).
+ *   el botón VER dentro del margen, con esquinas opuestas redondeadas. Debajo del precio lleva "desde $X/mes*"
+ *   (`Vehicle.monthlyPayment`, estimada con `loan-calculator`); no lleva "Envío a todo el país".
  *
  * Toda la tarjeta es clicable con un solo enlace, el del nombre, que se estira
  * sobre ella (`after:absolute after:inset-0`): así el lector de pantalla oye un
@@ -135,7 +135,7 @@ export default function VehicleCardComponent({
           <WarrantyBadgeComponent
             label={warranty.label}
             tone={warranty.tone}
-            className={`absolute top-3 right-3 z-20${m("max-sm:top-2 max-sm:right-2 max-sm:h-6 max-sm:gap-1 max-sm:pr-3 max-sm:pl-2 max-sm:text-[11px] max-sm:leading-4")}`}
+            className={`absolute top-3 right-3 z-20${m("max-sm:top-3 max-sm:right-auto max-sm:left-0 max-sm:h-6 max-sm:gap-1 max-sm:pr-3 max-sm:pl-2 max-sm:text-[11px] max-sm:leading-4")}`}
           />
         )}
       </div>
@@ -181,8 +181,8 @@ export default function VehicleCardComponent({
                 {vehicle.previousPrice}
               </p>
             )}
-            {compact && vehicle.monthlyPayment && (
-              <p className="text-caption leading-4 text-gray-dark sm:hidden">
+            {vehicle.monthlyPayment && (
+              <p className="text-caption leading-4 text-gray-dark">
                 desde <span className="font-bold text-orange">{vehicle.monthlyPayment}</span>/mes*
               </p>
             )}

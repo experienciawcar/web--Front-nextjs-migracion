@@ -24,7 +24,8 @@ export default function SellBenefitsComponent() {
           style={{ clipPath: "polygon(0 0, 100% 0, 55% 100%, 0 100%)" }}
         />
         <p className="reveal relative rounded-md bg-black px-4 py-1.5 text-small font-bold text-white xl:text-body">
-          Vende tu carro fácil y seguro
+          <span className="xl:hidden">Vende tu carro fácil y seguro</span>
+          <span className="hidden xl:inline">Si quieres vender seguro, véndelo en wcar</span>
         </p>
       </div>
 

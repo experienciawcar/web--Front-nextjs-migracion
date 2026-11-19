@@ -17,7 +17,9 @@ import iconEye from "../assets/summary/n-ojo.svg";
 import { isUnavailable } from "../constants/tags";
 import type { VehicleDetail } from "../types/vehicle-detail";
 
+import LoanSimulatorModalComponent from "./LoanSimulatorModalComponent";
 import VehicleAiSummaryComponent from "./VehicleAiSummaryComponent";
+import VehicleLocationComponent from "./VehicleLocationComponent";
 import VehicleExpertiseComponent from "./VehicleExpertiseComponent";
 import VehicleShareComponent from "./VehicleShareComponent";
 import FavoriteButtonComponent from "@/modules/favorites/components/FavoriteButtonComponent";
@@ -39,10 +41,13 @@ import FavoriteButtonComponent from "@/modules/favorites/components/FavoriteButt
  *
  * El ícono de IA (círculo con degradado y estrella, 1542:22590, esquina de la tarjeta) abre el
  * resumen con Gemini (`VehicleAiSummaryComponent`); el SVG está armado a mano (el export del nodo
- * trae el marco entero). El corazón de favoritos usa el backend (`/api/favorites`). "o desde $X/mes*" es una estimación con la calculadora global (`calculateMonthlyPayment`, 60 meses y 30 % de inicial), no un dato del backend.
+ * trae el marco entero). El corazón de favoritos usa el backend (`/api/favorites`). "o desde $X/mes*" es una estimación con la calculadora global (`calculateMonthlyPayment`, 60 meses y 20 % de inicial), no un dato del backend.
  * "SEPÁRALO AQUÍ" abre el modal de pago (`modules/separation`). TODO: "Garantia de 6 meses" del diseño lleva errata; aquí
  * sale el texto del backend ("Garantía 6 meses").
  */
+/** Texto de la tarjeta de financiación (en lugar de "¿Tienes vehículo?"). */
+const PROMISE_FINANCING = "Financiación del 100% a 84 meses. Apl. TYC";
+
 export default function VehicleSummaryComponent({
   vehicle,
 }: {
@@ -59,7 +64,7 @@ export default function VehicleSummaryComponent({
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="relative flex flex-col gap-4 bg-white px-6 py-4 xl:rounded-lg xl:pl-[25px]">
+      <div className="relative flex flex-col gap-4 bg-white px-6 py-4 rounded-lg xl:pl-[25px]">
         <div className="flex items-start justify-between gap-4">
           {vehicle.warranty ? (
             <WarrantyBadgeComponent
@@ -80,14 +85,31 @@ export default function VehicleSummaryComponent({
           <h1 className="text-[18px] leading-[26px] font-bold text-dark-gray">
             {vehicle.name}
           </h1>
-          <p className="text-[12px] leading-4 font-medium text-gray-dark">
-            {typeLine}
-          </p>
+          {/* Mobile (Figma): "año · km · caja"; desktop: "tipo / nombre año". La sede va en ambos. */}
+          <div className="flex items-center justify-between gap-2 text-[12px] leading-4 font-medium text-gray-dark">
+            <p>
+              <span className="max-xl:hidden">{typeLine}</span>
+              <span className="xl:hidden">
+                {[vehicle.year, vehicle.mileage, vehicle.transmission]
+                  .filter(Boolean)
+                  .join(" · ")}
+              </span>
+            </p>
+            <VehicleLocationComponent
+              city={vehicle.city}
+              vehicleId={vehicle.id}
+              vehicleName={vehicle.name}
+              price={vehicle.price}
+              priceValue={vehicle.priceValue}
+              stockId={vehicle.stockId}
+              canReserve={!soldOut && !hidePrice}
+            />
+          </div>
         </div>
 
         {!hidePrice && (
           <>
-            <hr className="border-gray/30" />
+            <hr className="border-gray/30 max-xl:hidden" />
             <div>
               <p className="text-[32px] leading-11 font-bold text-dark-gray">
                 {vehicle.price}
@@ -103,10 +125,10 @@ export default function VehicleSummaryComponent({
                 <span className="font-bold text-orange">
                   {vehicle.monthlyPayment}/mes*
                 </span>{" "}
-                ·{" "}
-                <a href="#financiacion" className="underline">
-                  simular
-                </a>
+                <span className="max-xl:hidden">
+                  ·{" "}
+                  <LoanSimulatorModalComponent vehiclePrice={vehicle.priceValue} />
+                </span>
               </p>
             </div>
           </>
@@ -165,23 +187,23 @@ export default function VehicleSummaryComponent({
         </div>
       </div>
 
-      <div className="flex items-center gap-[17px] bg-white px-6 py-4 xl:rounded-lg">
+      <div className="flex items-center gap-[17px] bg-white px-6 py-4 rounded-lg">
         <Image src={iconCar} alt="" aria-hidden className="size-6 shrink-0" />
         <div>
           <p className="text-small leading-[22px] font-bold text-dark-gray">
-            ¿Tienes vehículo? Úsalo como cuota inicial.
+            {PROMISE_FINANCING}
           </p>
           <a
             href={ROUTES.quote}
             className="mt-[3px] flex items-center gap-[7px] text-small font-bold text-orange underline"
           >
-            Cotizar mi carro ahora
+            Conseguir financiamiento
             <Image src={arrowCircle} alt="" aria-hidden className="size-6" />
           </a>
         </div>
       </div>
 
-      <ul className="flex flex-col gap-4 bg-white px-6 py-4 text-small leading-[22px] font-medium text-gray-dark xl:rounded-lg">
+      <ul className="flex flex-col gap-4 bg-white px-6 py-4 text-small leading-[22px] font-medium text-gray-dark rounded-lg">
         {vehicle.happinessWarranty && (
           <Bullet icon={iconExchange}>
             7 días o te lo cambiamos, sin letra pequeña

@@ -67,7 +67,7 @@ export default function VehicleTopComponent({
               }
             />
           </div>
-          <div className="reveal max-xl:-mx-4 xl:h-full">
+          <div className="reveal xl:h-full">
             <VehicleSummaryComponent vehicle={vehicle} />
           </div>
         </div>

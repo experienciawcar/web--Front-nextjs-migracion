@@ -64,11 +64,11 @@ export default function VehicleStickyBarComponent({
     <div
       id="barra-ficha-movil"
       aria-hidden={hidden}
-      className={`fixed inset-x-0 bottom-0 z-30 flex flex-col gap-3 bg-white px-5 pt-4 pb-4 shadow-[0_-4px_15px_rgba(0,0,0,0.12)] transition-transform duration-200 motion-reduce:transition-none xl:hidden ${hidden ? "pointer-events-none translate-y-full" : ""}`}
+      className={`fixed inset-x-3 bottom-3 z-30 flex flex-col gap-3 rounded-lg bg-white px-4 py-3 shadow-[0_4px_15px_rgba(0,0,0,0.15)] transition-transform duration-200 motion-reduce:transition-none xl:hidden ${hidden ? "pointer-events-none translate-y-[calc(100%+12px)]" : ""}`}
     >
       <div>
-        <p className="text-[16px] leading-6 font-bold text-dark-gray">{vehicleName}</p>
-        <p className="text-[14px] leading-5 text-gray-dark">
+        <p className="text-[14px] leading-5 font-bold text-dark-gray">{vehicleName}</p>
+        <p className="text-[12px] leading-4 text-gray-dark">
           {!reserved && <span className="font-bold text-dark-gray">{price} · </span>}
           {stockId}
         </p>

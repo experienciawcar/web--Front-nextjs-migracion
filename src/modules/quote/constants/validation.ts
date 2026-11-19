@@ -28,3 +28,14 @@ export const YEAR_OPTIONS: number[] = Array.from(
   { length: MAX_YEAR - MIN_YEAR + 1 },
   (_, index) => MAX_YEAR - index,
 );
+
+/** Placa de carro colombiana: 3 letras + 3 números (ej. ABC123). */
+const PLATE_REGEX = /^[A-Z]{3}\d{3}$/;
+
+export function normalizePlate(value: string): string {
+  return value.replace(/[^a-zA-Z0-9]/g, "").toUpperCase().slice(0, 6);
+}
+
+export function isValidPlate(value: string): boolean {
+  return PLATE_REGEX.test(value);
+}

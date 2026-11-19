@@ -164,10 +164,7 @@ export function toVehicle(dto: VehicleDto): Vehicle | null {
     city: dto.sede_car?.name?.trim() || "Bogotá",
     price: formatPrice(finalPrice),
     previousPrice: hasDiscount ? formatPrice(listPrice) : null,
-    // Sin descuento la tarjeta muestra esta cuota en vez del precio tachado.
-    monthlyPayment: hasDiscount
-      ? null
-      : formatPrice(calculateMonthlyPayment(finalPrice, finalPrice * DOWN_PAYMENT_RATIO, LOAN_TERM_MONTHS)),
+    monthlyPayment: formatPrice(calculateMonthlyPayment(finalPrice, finalPrice * DOWN_PAYMENT_RATIO, LOAN_TERM_MONTHS)),
     // "Disponible" (id 6) es el estado normal: no se rotula.
     tag:
       dto.tag_car && dto.tag_car.id !== 6 && dto.tag_car.tag

@@ -26,7 +26,7 @@ export default function VehicleFinancingComponent() {
     <section
       id="financiacion"
       aria-labelledby="financia-title"
-      className="relative overflow-x-clip xl:h-[754px]"
+      className="relative overflow-x-clip xl:hidden"
     >
       <div className="relative mx-auto xl:h-full xl:max-w-[1440px]">
         <div
@@ -62,7 +62,7 @@ export default function VehicleFinancingComponent() {
         </div>
 
         <div className="relative flex flex-col items-center gap-8 px-8 pt-10 pb-16 xl:contents">
-          <div className="reveal w-full max-w-[482px] xl:absolute xl:top-[200px] xl:left-[479px] xl:max-w-none xl:w-[482px]">
+          <div className="reveal w-full max-w-[482px] xl:hidden">
             <FinancingProductCardComponent product={FINANCING_PRODUCTS[1]} />
           </div>
         </div>

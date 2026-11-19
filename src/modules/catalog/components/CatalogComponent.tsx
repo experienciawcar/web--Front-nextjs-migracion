@@ -315,6 +315,8 @@ export default function CatalogComponent({
           count={result?.count ?? 0}
           loading={loading}
           onOpenFilters={() => setMobileFiltersOpen(true)}
+          chips={chips}
+          onRemoveChip={handleRemoveChip}
         />
 
         <div className="container-catalog grid gap-8 pb-16 xl:grid-cols-[minmax(0,1fr)_3fr] xl:gap-0">

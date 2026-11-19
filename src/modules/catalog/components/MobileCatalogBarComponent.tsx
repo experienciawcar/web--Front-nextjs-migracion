@@ -7,6 +7,7 @@ import { FiltersIcon } from "@/modules/shared/components/icons";
 import { ROUTES } from "@/modules/shared/constants/routes";
 import { maxPriceForPayment } from "@/modules/shared/services/loan-calculator";
 
+import type { ActiveChip } from "../services/chips";
 import type { CatalogFilterOptions } from "../services/options";
 import { searchVehicles } from "../services/vehicles";
 import type { CatalogConfig } from "../types/catalog";
@@ -35,7 +36,7 @@ function ChipSelect({
   const active = value !== "";
   return (
     <label
-      className={`relative shrink-0 rounded-full border ${
+      className={`relative shrink-0 rounded-lg border ${
         active ? "border-black bg-black text-white" : "border-gray bg-white text-dark-gray"
       }`}
     >
@@ -43,7 +44,7 @@ function ChipSelect({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="h-9 appearance-none rounded-full bg-transparent pr-8 pl-4 text-small focus:outline-none"
+        className="h-10 w-28 appearance-none rounded-lg bg-transparent pr-8 pl-4 text-small focus:outline-none"
       >
         <option value="" className="text-dark-gray">
           {label}
@@ -66,8 +67,8 @@ function Tab({ href, active, children }: { href: string; active: boolean; childr
   return (
     <AppLinkComponent
       href={href}
-      className={`border-b-2 pb-2 text-body ${
-        active ? "border-orange font-bold text-dark-gray" : "border-transparent text-gray-dark"
+      className={`flex h-12 flex-1 items-center justify-center rounded-t-2xl border border-b-0 text-body ${
+        active ? "border-orange bg-orange font-bold text-white" : "border-gray/40 bg-white text-gray-dark"
       }`}
     >
       <span aria-current={active ? "page" : undefined}>{children}</span>
@@ -83,7 +84,6 @@ function Tab({ href, active, children }: { href: string; active: boolean; childr
  */
 export default function MobileCatalogBarComponent({
   config,
-  options,
   filters,
   onFiltersChange,
   priceDraft,
@@ -91,9 +91,11 @@ export default function MobileCatalogBarComponent({
   count,
   loading,
   onOpenFilters,
+  chips,
+  onRemoveChip,
 }: {
   config: CatalogConfig;
-  options: CatalogFilterOptions;
+  options?: CatalogFilterOptions;
   filters: CatalogFilters;
   onFiltersChange: (patch: Partial<CatalogFilters>) => void;
   priceDraft: Range;
@@ -101,6 +103,8 @@ export default function MobileCatalogBarComponent({
   count: number;
   loading: boolean;
   onOpenFilters: () => void;
+  chips: ActiveChip[];
+  onRemoveChip: (chipId: string) => void;
 }) {
   const hasTabs = config.kind === "carros" || config.kind === "motos";
 
@@ -125,7 +129,7 @@ export default function MobileCatalogBarComponent({
   return (
     <div className="container-catalog flex flex-col gap-3 pt-3 xl:hidden">
       {hasTabs && (
-        <nav aria-label="Tipo de vehículo" className="flex gap-6 border-b border-gray/40">
+        <nav aria-label="Tipo de vehículo" className="flex">
           <Tab href={ROUTES.buyCar} active={config.kind === "carros"}>
             Carros {totals?.cars}
           </Tab>
@@ -135,52 +139,40 @@ export default function MobileCatalogBarComponent({
         </nav>
       )}
 
-      <div className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1">
+      <div className="flex items-center gap-2">
         <button
           type="button"
           onClick={onOpenFilters}
-          className="flex h-9 shrink-0 items-center gap-2 rounded-full border border-gray bg-white px-4 text-small text-dark-gray"
+          className="flex h-10 shrink-0 items-center gap-2 rounded-lg border border-gray bg-white px-4 text-small text-dark-gray"
         >
           <FiltersIcon className="size-4" />
           Filtrar
         </button>
         <ChipSelect
-          label="Cuota"
+          label="Valor"
           value={quotaValue}
           onChange={(value) => onPriceDraftChange({ ...priceDraft, max: value ? maxPriceForPayment(Number(value)) : undefined })}
           options={QUOTA_PRESETS.map((quota) => ({ value: String(quota), label: `Hasta $${millions(quota)}M/mes` }))}
         />
-        <ChipSelect
-          label="Ciudad"
-          value={filters.sedeIds?.[0] ?? ""}
-          onChange={(value) => onFiltersChange({ sedeIds: value ? [value] : undefined })}
-          options={options.sedes.map((sede) => ({ value: sede.id, label: sede.name }))}
-        />
-        {config.showTypeFilter && (
-          <ChipSelect
-            label="Tipo"
-            value={filters.bodyTypeIds?.[0] ?? ""}
-            onChange={(value) => onFiltersChange({ bodyTypeIds: value ? [value] : undefined })}
-            options={options.vehicleTypes.map((type) => ({ value: String(type.id), label: type.name }))}
-          />
-        )}
-        <ChipSelect
-          label="Caja"
-          value={filters.transmission != null ? String(filters.transmission) : ""}
-          onChange={(value) => onFiltersChange({ transmission: value === "" ? undefined : (Number(value) as 0 | 1) })}
-          options={[
-            { value: "1", label: "Automática" },
-            { value: "0", label: "Manual" },
-          ]}
-        />
+        <div className="relative z-10 ml-auto">
+          <OrderDropdown tone="light" fixedLabel="Ordenar por" value={filters.orderBy ?? "relevance"} onChange={(orderBy: CatalogOrderBy) => onFiltersChange({ orderBy })} />
+        </div>
       </div>
 
-      <div className="relative z-10 flex items-center justify-between pb-3 text-small text-dark-gray">
-        <p aria-live="polite">{loading ? "Cargando…" : `${count} ${noun}`}</p>
-        <div className="flex items-center gap-2">
-          <span>Ordenar por:</span>
-          <OrderDropdown tone="light" value={filters.orderBy ?? "relevance"} onChange={(orderBy: CatalogOrderBy) => onFiltersChange({ orderBy })} />
-        </div>
+      <div className="-mx-4 flex items-center gap-3 overflow-x-auto px-4 pb-3 text-small text-dark-gray">
+        <p aria-live="polite" className="shrink-0 border-r border-gray pr-4">
+          {loading ? "Cargando…" : `${count} ${noun}`}
+        </p>
+        {chips.map((chip) => (
+          <span key={chip.id} className="flex shrink-0 items-center gap-2 rounded-md border border-orange bg-white py-1.5 pr-2 pl-3 text-orange">
+            {chip.label}
+            <button type="button" onClick={() => onRemoveChip(chip.id)} aria-label={`Quitar filtro: ${chip.label}`} className="grid size-5 place-items-center text-gray-dark">
+              <svg viewBox="0 0 24 24" className="size-3.5" aria-hidden>
+                <path d="M5 5 19 19M19 5 5 19" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+              </svg>
+            </button>
+          </span>
+        ))}
       </div>
     </div>
   );

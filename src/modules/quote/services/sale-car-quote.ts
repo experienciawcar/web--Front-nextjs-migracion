@@ -3,68 +3,32 @@ import { apiUrl } from "@/modules/shared/services/api";
 import type { QuoteFormValues } from "../types/quote-form";
 
 /**
- * Body de `POST /sale-cars/create/`, confirmado contra registros reales de
- * `GET /sale-cars/` (no solo contra la documentación del sitio anterior):
- * `brand`, `city`, `departament`, `color`, `hour_avaliable`, `date_avaliable`
- * son ids numéricos; `version` es el texto elegido; no se manda `model`
- * (siempre `null` en los registros reales, sin campo en la UI) ni `price`
- * (lo calcula el backend). `departament` y `hour_avaliable`/`date_avaliable`
- * son erratas reales del backend, no de transcripción: se respetan tal cual.
+ * Body de `POST /sale-cars/create/` para el formulario corto (placa + km, luego
+ * contacto). Ver `docs/backend/cotizar-formulario-corto.md`: el endpoint actual
+ * exige marca, versión, año, ciudad, color, fecha y hora, así que este body
+ * NO lo acepta hasta que backend lo cambie. `email` solo viaja si se escribió.
  */
-type SaleCarQuoteBody = {
-  year: number;
-  brand: number;
-  version: string;
-  reference: string;
-  city: number;
-  departament: number;
-  mileage: number;
-  color: number;
-  name: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  company: string;
-  hour_avaliable: number;
-  date_avaliable: number;
-};
-
-function toBody(values: QuoteFormValues): SaleCarQuoteBody {
+function toBody({ car, contact }: QuoteFormValues) {
   return {
-    year: Number(values.car.year),
-    brand: Number(values.car.brandId),
-    version: values.car.version,
-    reference: values.car.reference,
-    city: Number(values.car.cityId),
-    departament: Number(values.car.departmentId),
-    mileage: Number(values.car.kilometers),
-    color: Number(values.car.colorId),
-    name: values.contact.name,
-    lastName: values.contact.lastname,
-    email: values.contact.email,
-    phone: values.contact.phone,
-    company: values.contact.companyName,
-    hour_avaliable: Number(values.book.hourId),
-    date_avaliable: Number(values.book.dateId),
+    plate: car.plate,
+    mileage: Number(car.kilometers),
+    name: contact.fullName.trim(),
+    phone: contact.phone.replace(/\s/g, ""),
+    ...(contact.email.trim() && { email: contact.email.trim() }),
   };
 }
 
 export type CreateSaleCarQuoteResult = { ok: true } | { ok: false; message: string };
 
 /**
- * Crea la cotización de venta real. A diferencia del sitio anterior (ver
- * `docs/planes/cotizar.md`, §3.3 y §5 del documento de referencia), esta
- * llamada se espera ANTES de mostrar cualquier resultado: no hay navegación
- * optimista ni un segundo intento en otra pantalla.
+ * Crea la cotización de venta real y espera la respuesta antes de mostrar nada.
  *
  * ⚠️ No probar contra el backend real durante desarrollo: crea un registro
- * de verdad (ver la nota del plan). Probar solo con un servidor falso local.
+ * de verdad. Probar solo con un servidor falso local.
  */
 export async function createSaleCarQuote(values: QuoteFormValues): Promise<CreateSaleCarQuoteResult> {
-  const url = apiUrl("/sale-cars/create/");
-
   try {
-    const response = await fetch(url, {
+    const response = await fetch(apiUrl("/sale-cars/create/"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(toBody(values)),

@@ -69,13 +69,13 @@ export default function SearchSortBarComponent({
 
       <div className="container-catalog relative flex flex-col gap-4 py-4 xl:flex-row xl:items-center xl:justify-between">
         <label className="relative flex h-12 w-full items-center rounded-full bg-white pl-5 pr-4 xl:max-w-[420px]">
-          <SearchIcon className="size-5 shrink-0 text-gray" />
+          <SearchIcon className="size-5 shrink-0 text-orange" />
           <span className="sr-only">Buscar por marca, modelo, color</span>
           <input
             type="search"
             value={searchDraft}
             onChange={(event) => onSearchDraftChange(event.target.value)}
-            placeholder="Busca marca, modelo o cuota..."
+            placeholder="Buscar vehículo"
             className="ml-3 h-full w-full bg-transparent text-small text-dark-gray placeholder:text-gray focus:outline-none"
           />
         </label>
@@ -99,10 +99,12 @@ export function OrderDropdown({
   value,
   onChange,
   tone = "dark",
+  fixedLabel,
 }: {
   value: CatalogOrderBy;
   onChange: (value: CatalogOrderBy) => void;
   tone?: "dark" | "light";
+  fixedLabel?: string;
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
@@ -134,13 +136,13 @@ export function OrderDropdown({
         aria-expanded={open}
         aria-label={`Ordenar resultados por: ${current.label}`}
         onClick={() => setOpen((prev) => !prev)}
-        className={`flex h-10 items-center gap-4 rounded-md px-4 text-body ${
+        className={`flex h-10 items-center gap-3 rounded-lg px-4 text-small whitespace-nowrap xl:text-body ${
           tone === "light"
             ? "bg-gray/30 text-dark-gray"
             : "bg-dark-gray font-bold text-white"
         }`}
       >
-        {current.label}
+        {fixedLabel ?? current.label}
         <span
           aria-hidden
           className={`border-x-[4px] border-t-[4px] border-x-transparent ${
